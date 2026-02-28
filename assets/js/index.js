@@ -395,19 +395,32 @@ function openModal(record) {
 
     updateModalDisplay();
     const modal = document.getElementById('modal');
+    const container = document.getElementById('modal-container');
     if (modal) {
         modal.classList.remove('hidden');
-        setTimeout(() => { modal.classList.remove('opacity-0'); modal.classList.add('opacity-100'); }, 10);
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100');
+            if (container) {
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            }
+        }, 10);
     }
     document.body.classList.add('modal-open');
 }
 
 function closeModal() {
     const modal = document.getElementById('modal');
+    const container = document.getElementById('modal-container');
     if (modal) {
         modal.classList.remove('opacity-100');
         modal.classList.add('opacity-0');
-        setTimeout(() => { modal.classList.add('hidden'); activeRecord = null; document.body.classList.remove('modal-open'); }, 300);
+        if (container) {
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+        }
+        setTimeout(() => { modal.classList.add('hidden'); activeRecord = null; document.body.classList.remove('modal-open'); }, 400);
     }
 }
 
@@ -431,15 +444,15 @@ function toggleModalView(mode) {
     const btnApp = document.getElementById('btn-view-application');
 
     [btnOrig, btnVec, btnApp].forEach(btn => {
-        if (btn) btn.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl text-white/40 hover:text-white transition-all duration-300 whitespace-nowrap";
+        if (btn) btn.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl text-white/30 hover:text-white transition-all duration-300 whitespace-nowrap";
     });
 
     if (mode === 'original' && btnOrig) {
-        btnOrig.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-2xl transition-all duration-300 whitespace-nowrap";
+        btnOrig.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-xl transition-all duration-300 whitespace-nowrap";
     } else if (mode === 'vector' && btnVec) {
-        btnVec.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-2xl transition-all duration-300 whitespace-nowrap";
+        btnVec.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-xl transition-all duration-300 whitespace-nowrap";
     } else if (mode === 'application' && btnApp) {
-        btnApp.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-2xl transition-all duration-300 whitespace-nowrap";
+        btnApp.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-xl transition-all duration-300 whitespace-nowrap";
     }
 }
 
