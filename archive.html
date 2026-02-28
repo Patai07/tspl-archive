@@ -145,13 +145,32 @@
     <!-- Explorer Grid -->
     <main id="database" class="px-6 lg:px-8 py-16 md:py-20 max-w-[1440px] mx-auto w-full flex-grow reveal">
 
-        <!-- Section Header -->
-        <div class="flex items-center gap-4 mb-10">
-            <div class="w-1 h-10 bg-[#0F2C59] rounded-full shadow-sm"></div>
-            <div>
-                <h2 class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-1 leading-none">Archive
-                    Registry</h2>
-                <p class="text-3xl font-bold text-[#0F2C59] tracking-tighter uppercase">คลังระเบียนลวดลาย</p>
+        <!-- High-Impact Section Header -->
+        <div class="relative mb-24 pt-16 flex flex-col items-center text-center">
+            <!-- Large Decorative Watermark behind -->
+            <div
+                class="absolute -top-8 lg:-top-16 inset-x-0 flex justify-center pointer-events-none opacity-[0.05] overflow-hidden">
+                <span
+                    class="text-[100px] md:text-[180px] font-black uppercase tracking-tighter leading-none select-none">Archive</span>
+            </div>
+
+            <div class="relative z-10 w-full">
+                <div class="flex items-center justify-center gap-3 mb-6">
+                    <div class="w-8 h-px bg-[#0F2C59]/20"></div>
+                    <h2 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.5em] leading-none">
+                        <span class="lang-th">สำรวจคลังข้อมูล</span>
+                    </h2>
+                    <div class="w-8 h-px bg-[#0F2C59]/20"></div>
+                </div>
+
+                <h1
+                    class="text-4xl md:text-5xl lg:text-7xl font-black text-[#0F2C59] tracking-tighter mb-6 leading-tight uppercase">
+                    <span class="lang-th">คลังข้อมูล</span>
+                </h1>
+
+                <p class="text-[15px] md:text-lg text-gray-500 font-medium leading-relaxed max-w-3xl mx-auto">
+                    สรุปผลการรวบรวมและวิเคราะห์สิทธิในการเข้าถึงข้อมูลมรดกวัฒนธรรมลวดลายท้องถิ่นตามมาตรฐานจริยธรรมข้อมูล
+                </p>
             </div>
         </div>
 
@@ -316,137 +335,178 @@
 
     <!-- TSPL Factsheet Modal -->
     <div id="modal"
-        class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-[#030812]/97 backdrop-blur-3xl opacity-0 transition-opacity duration-300 p-4 font-bold uppercase">
+        class="hidden fixed inset-0 z-[200] flex items-center justify-center bg-[#030812]/98 backdrop-blur-3xl opacity-0 transition-opacity duration-300 p-0 lg:p-10">
+
+        <!-- Refined Close Button -->
         <button onclick="closeModal()"
-            class="absolute top-5 right-5 lg:top-6 lg:right-6 z-[120] w-10 h-10 lg:w-11 lg:h-11 bg-white text-[#0F2C59] rounded-full flex items-center justify-center shadow-2xl hover:bg-gray-100 transition-all hover:scale-105 border border-gray-200">
-            <i class="ph-bold ph-x text-lg"></i>
+            class="absolute top-5 right-5 lg:top-10 lg:right-10 z-[300] w-12 h-12 bg-white/10 backdrop-blur-xl text-white rounded-full flex items-center justify-center hover:bg-white/20 transition-all hover:scale-110 border border-white/10 group shadow-2xl">
+            <i class="ph-bold ph-x text-xl group-hover:rotate-90 transition-transform duration-300"></i>
         </button>
 
-        <div
-            class="flex flex-col lg:flex-row w-full max-w-[1600px] h-[90vh] lg:h-[92vh] bg-white rounded-[2rem] lg:rounded-[4rem] overflow-hidden shadow-[0_0_150px_rgba(0,0,0,0.5)] relative text-[#0F2C59] uppercase font-bold">
+        <div class="flex flex-col lg:flex-row w-full max-w-[1700px] h-full lg:h-[92vh] bg-white lg:rounded-[3.5rem] lg:overflow-hidden shadow-[0_40px_100px_rgba(0,0,0,0.6)] relative transform transition-transform duration-500 scale-95 origin-center"
+            id="modal-container">
 
-            <!-- Left Pane: Viewfinder Carousel -->
+            <!-- Left Pane: Visual Archive -->
             <div
-                class="w-full lg:w-[62%] h-[40%] lg:h-full shrink-0 bg-[#030812] relative overflow-hidden flex flex-col items-center justify-center text-white font-bold uppercase">
-                <div class="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none"></div>
-
-                <div class="absolute top-6 lg:top-12 right-16 lg:right-12 z-[100]">
-                    <div id="modal-record-id"
-                        class="text-[9px] lg:text-[12px] font-mono text-[#D4AF37] tracking-[0.2em] lg:tracking-[0.4em] bg-white/10 p-1.5 lg:p-2 px-3 lg:px-5 rounded-lg  border border-white/10 font-bold uppercase shadow-lg">
-                        RECORD_ID</div>
-                </div>
-
-                <div class="absolute top-6 lg:top-12 left-6 lg:left-12 z-[100]">
-                    <span id="modal-confidence-badge"
-                        class="px-3 lg:px-6 py-1.5 lg:py-2.5 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.2em] rounded-full bg-[#B8860B] text-white shadow-lg lg:shadow-2xl font-bold">Validated</span>
-                </div>
-
-                <!-- Slider Arrows -->
-                <button id="slider-prev" onclick="changeSlide(-1)"
-                    class="absolute left-2 lg:left-6 z-[100] p-2 lg:p-4 rounded-full bg-white/10 lg:bg-white/5 text-white/60 lg:text-white/40 hover:text-white hover:bg-white/10 transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 hidden md:block">
-                    <i class="ph ph-caret-left text-3xl font-bold"></i>
-                </button>
-                <button id="slider-next" onclick="changeSlide(1)"
-                    class="absolute right-2 lg:right-6 z-[100] p-2 lg:p-4 rounded-full bg-white/10 lg:bg-white/5 text-white/60 lg:text-white/40 hover:text-white hover:bg-white/10 transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 hidden md:block">
-                    <i class="ph ph-caret-right text-3xl font-bold"></i>
-                </button>
-
-                <div id="modal-counter"
-                    class="absolute bottom-[60px] lg:bottom-12 right-6 lg:right-12 z-[100] text-[9px] lg:text-[10px] font-mono text-gray-400 tracking-widest bg-[#0F2C59]/60 p-1.5 lg:p-2 rounded px-3 lg:px-4  font-bold hidden lg:block">
-                    1 / 1</div>
-
+                class="w-full lg:w-[65%] h-[45%] lg:h-full bg-[#030812] relative overflow-hidden flex items-center justify-center">
+                <!-- Background Decoration -->
+                <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
                 <div
-                    class="absolute bottom-4 lg:bottom-12 left-1/2 -translate-x-1/2 z-[100] flex bg-white/5 lg:bg-white/5 backdrop-blur-2xl p-1 lg:p-1.5 rounded-full border border-white/10 lg:border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] font-bold w-max max-w-[90vw]">
+                    class="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-black/60 to-transparent pointer-events-none">
+                </div>
+
+                <!-- Top Metadata Bar -->
+                <div class="absolute top-6 inset-x-6 lg:top-12 lg:inset-x-12 flex justify-between items-center z-[100]">
+                    <div id="modal-record-id"
+                        class="text-[9px] lg:text-[11px] font-mono text-white/40 tracking-[0.3em] font-black uppercase">
+                        RECORD_ID</div>
+                    <span id="modal-confidence-badge"
+                        class="px-4 py-1.5 lg:px-5 lg:py-2 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 backdrop-blur-md">Validated</span>
+                </div>
+
+                <!-- Slider Navigation -->
+                <div class="absolute inset-y-0 left-0 lg:left-8 flex items-center z-[100] pointer-events-none">
+                    <button id="slider-prev" onclick="changeSlide(-1)"
+                        class="p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all pointer-events-auto border border-white/5 opacity-0 lg:opacity-100 group">
+                        <i class="ph-bold ph-caret-left text-2xl group-hover:-translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+                <div class="absolute inset-y-0 right-0 lg:right-8 flex items-center z-[100] pointer-events-none">
+                    <button id="slider-next" onclick="changeSlide(1)"
+                        class="p-4 rounded-full bg-white/5 hover:bg-white/10 text-white/40 hover:text-white transition-all pointer-events-auto border border-white/5 opacity-0 lg:opacity-100 group">
+                        <i class="ph-bold ph-caret-right text-2xl group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+
+                <!-- View Switcher (Segmented Control) -->
+                <div
+                    class="absolute bottom-6 lg:bottom-12 left-1/2 -translate-x-1/2 z-[100] flex bg-white/5 backdrop-blur-2xl p-1.5 rounded-2xl border border-white/10 shadow-2xl w-[calc(100%-3rem)] lg:w-max max-w-lg">
                     <button id="btn-view-original" onclick="toggleModalView('original')"
-                        class="px-4 lg:px-6 md:px-10 py-2.5 lg:py-4 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.3em] rounded-full bg-white text-[#0F2C59] shadow-lg lg:shadow-2xl transition-all whitespace-nowrap"><span
+                        class="flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] transition-all duration-300 whitespace-nowrap shadow-xl"><span
                             class="lang-th">ภาพต้นฉบับ</span></button>
                     <button id="btn-view-vector" onclick="toggleModalView('vector')"
-                        class="px-4 lg:px-6 md:px-10 py-2.5 lg:py-4 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.3em] rounded-full text-white/40 hover:text-white transition-all whitespace-nowrap"><span
+                        class="flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl text-white/30 hover:text-white transition-all duration-300 whitespace-nowrap"><span
                             class="lang-th">ลายสกัด</span></button>
                     <button id="btn-view-application" onclick="toggleModalView('application')"
-                        class="px-4 lg:px-6 md:px-10 py-2.5 lg:py-4 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.3em] rounded-full text-white/40 hover:text-white transition-all whitespace-nowrap"><span
-                            class="lang-th">การประยุกต์ใช้</span></button>
+                        class="flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl text-white/30 hover:text-white transition-all duration-300 whitespace-nowrap"><span
+                            class="lang-th">ประยุกต์ใข้</span></button>
                 </div>
 
-                <div class="relative w-full h-[78%] flex justify-center items-center mt-16 p-10">
+                <div id="modal-counter"
+                    class="absolute bottom-12 right-12 z-[100] text-[10px] font-mono text-white/30 tracking-widest hidden lg:block">
+                    1 / 1</div>
+
+                <div class="relative w-full h-full flex justify-center items-center p-8 lg:p-20">
                     <img id="modal-image-original" src="" alt="Registry Visual"
-                        class="absolute max-w-[80%] max-h-[100%] object-contain shadow-[0_0_120px_rgba(0,0,0,0.5)] transition-all duration-700">
+                        class="absolute max-w-[95%] max-h-[80%] lg:max-w-[90%] lg:max-h-[85%] object-contain drop-shadow-[0_20px_80px_rgba(0,0,0,1)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] translate-z-0">
                     <img id="modal-image-vector" src="" alt="Vector Overlay"
-                        class="absolute max-w-[80%] max-h-[100%] object-contain transition-all duration-700 opacity-0 pointer-events-none mix-blend-screen"
-                        style="filter: drop-shadow(0 0 15px rgba(212,175,55,1)) contrast(1.5);">
+                        class="absolute max-w-[95%] max-h-[80%] lg:max-w-[90%] lg:max-h-[85%] object-contain transition-all duration-700 opacity-0 pointer-events-none mix-blend-screen ease-[cubic-bezier(0.23,1,0.32,1)] translate-z-0"
+                        style="filter: drop-shadow(0 0 30px rgba(212,175,55,0.8)) contrast(1.8);">
                 </div>
             </div>
 
             <!-- Right Pane: Factsheet -->
-            <div
-                class="w-full lg:w-[38%] flex flex-col h-[60%] lg:h-full bg-white overflow-y-auto custom-scrollbar font-bold text-[#0F2C59] uppercase flex-1">
-                <div class="p-8 lg:p-12 xl:p-24 pt-10">
+            <div class="w-full lg:w-[35%] flex flex-col h-[55%] lg:h-full bg-white overflow-y-auto custom-scrollbar">
+                <div class="p-6 lg:p-16 xl:p-20 pt-10 pb-24 lg:pb-20">
                     <div id="modal-category"
-                        class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-[0.6em] mb-6 leading-none">
+                        class="text-[10px] lg:text-[11px] font-black text-[#D4AF37] uppercase tracking-[0.4em] mb-4">
                         Category</div>
                     <h2 id="modal-title"
-                        class="text-3xl md:text-5xl font-bold text-[#0F2C59] mb-6 tracking-tighter leading-[1.1] uppercase font-bold">
+                        class="text-2xl md:text-5xl font-black text-[#0F2C59] mb-8 tracking-tighter leading-[1.2] lg:leading-[1.1] uppercase">
                         ชื่อระเบียน</h2>
 
-                    <p
-                        class="text-[12px] lg:text-[14px] text-gray-400 font-light flex items-center gap-2 lg:gap-4 mb-8 lg:mb-16 border-b border-gray-50 pb-6 lg:pb-12 font-normal lowercase lg:normal-case">
-                        <i class="ph ph-map-pin-line text-[#D4AF37] text-2xl font-bold"></i> <span
-                            id="modal-location">Provenance Location</span>
-                    </p>
+                    <div class="flex items-center gap-4 mb-12 py-5 lg:py-6 border-y border-gray-50 group">
+                        <div
+                            class="w-10 h-10 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl bg-gray-50 flex items-center justify-center group-hover:bg-[#0F2C59]/10 transition-colors">
+                            <i class="ph ph-map-pin-line text-[#D4AF37] text-xl lg:text-2xl font-bold"></i>
+                        </div>
+                        <div>
+                            <p
+                                class="text-[8px] lg:text-[9px] font-black text-gray-300 uppercase tracking-widest leading-none mb-1.5">
+                                Provenance Location</p>
+                            <span id="modal-location" class="text-xs lg:text-md text-[#0F2C59] font-bold">Location
+                                Name</span>
+                        </div>
+                    </div>
 
-                    <div class="space-y-12 lg:space-y-20 text-[#0F2C59]">
-                        <div class="relative pl-12 border-l-2 border-gray-50 text-[#0F2C59] font-bold uppercase">
+                    <div class="space-y-16">
+                        <!-- 01. Visual Morphemes -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-0 bottom-[-64px] w-px bg-gray-100"></div>
                             <div
-                                class="absolute -left-[9px] top-0 w-4 h-4 bg-[#D4AF37] rounded-full border-4 border-white shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#D4AF37] rounded-full border-2 border-white shadow-[0_0_10px_rgba(212,175,55,0.3)]">
                             </div>
-                            <h4
-                                class="text-[12px] font-bold uppercase tracking-[0.4em] mb-10 font-bold tracking-widest text-[#0F2C59]">
-                                01. Visual Morphemes</h4>
-                            <ul id="modal-morphemes"
-                                class="space-y-8 text-[15px] text-gray-600 font-light font-normal normal-case leading-relaxed">
+
+                            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-8">01.
+                                Visual Morphemes</h4>
+                            <ul id="modal-morphemes" class="space-y-6">
+                                <!-- Populated dynamically -->
                             </ul>
                         </div>
 
-                        <div class="pl-12 border-l-2 border-gray-50 relative text-[#0F2C59] font-bold uppercase">
-                            <div class="absolute -left-[5px] top-0 w-2 h-2 bg-[#F3E5AB] rounded-full"></div>
-                            <h4
-                                class="text-[12px] font-bold uppercase tracking-[0.4em] mb-8 font-bold tracking-widest text-[#0F2C59]">
-                                02. Semiotic Context</h4>
-                            <p id="modal-connotation"
-                                class="text-[15px] text-gray-600 leading-relaxed font-light font-normal normal-case">
+                        <!-- 02. Semiotic Context -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-0 bottom-[-64px] w-px bg-gray-100"></div>
+                            <div
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-200 rounded-full border-2 border-white">
+                            </div>
+
+                            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-8">02.
+                                Semiotic Context</h4>
+                            <p id="modal-connotation" class="text-[15px] text-gray-500 leading-relaxed font-medium">
+                                <!-- Populated dynamically -->
                             </p>
                         </div>
 
-                        <div
-                            class="bg-[#F8FAFC] p-10 rounded-[3.5rem] border border-gray-100 shadow-inner font-bold uppercase">
+                        <!-- 03. Protocols -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-0 bottom-[-64px] w-px bg-gray-100"></div>
+                            <div
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-200 rounded-full border-2 border-white">
+                            </div>
+
                             <h4
-                                class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.5em] mb-10 leading-none tracking-widest text-[#0F2C59]">
+                                class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-10 leading-none">
                                 03. Protocols</h4>
-                            <div class="grid grid-cols-1 gap-12">
-                                <div class="space-y-4">
-                                    <strong
-                                        class="text-[#0F2C59] text-[11px] font-bold uppercase tracking-widest flex items-center gap-4"><i
-                                            class="ph-fill ph-check-circle text-2xl text-emerald-600 font-bold"></i>
-                                        Must Preserve</strong>
-                                    <p id="modal-preserve"
-                                        class="text-[14px] text-gray-600 font-light font-normal normal-case pl-10 border-l border-emerald-100  leading-relaxed">
+                            <div class="space-y-10">
+                                <div class="relative pl-0">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <i class="ph-fill ph-check-circle text-xl text-emerald-500"></i>
+                                        <strong
+                                            class="text-[#0F2C59] text-[11px] font-black uppercase tracking-widest">Must
+                                            Preserve</strong>
+                                    </div>
+                                    <p id="modal-preserve" class="text-sm text-gray-500 font-medium leading-relaxed">
                                     </p>
                                 </div>
-                                <div class="space-y-4">
-                                    <strong
-                                        class="text-[#0F2C59] text-[11px] font-bold uppercase tracking-widest flex items-center gap-4"><i
-                                            class="ph-fill ph-warning-circle text-2xl text-rose-600 font-bold"></i>
-                                        Do
-                                        Not</strong>
-                                    <p id="modal-donot"
-                                        class="text-[14px] text-gray-600 font-light font-normal normal-case pl-10 border-l border-rose-100  leading-relaxed">
-                                    </p>
+                                <div class="relative pl-0">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <i class="ph-fill ph-warning-circle text-xl text-rose-500"></i>
+                                        <strong
+                                            class="text-[#0F2C59] text-[11px] font-black uppercase tracking-widest">Do
+                                            Not</strong>
+                                    </div>
+                                    <p id="modal-donot" class="text-sm text-gray-500 font-medium leading-relaxed"></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="modal-tags"
-                            class="flex flex-wrap gap-4 pt-10 pb-24 text-[#0F2C59] font-bold uppercase tracking-widest text-[9px]">
+                        <!-- 04. Cultural Ethics -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-2 w-px h-full bg-transparent"></div> <!-- Invisible tail -->
+                            <div
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-200 rounded-full border-2 border-white">
+                            </div>
+
+                            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-8">04.
+                                Cultural Ethics</h4>
+                            <div id="modal-ethics-container">
+                                <!-- Dynamics Ethics Card -->
+                            </div>
+                        </div>
+
+                        <div id="modal-tags" class="flex flex-wrap gap-2.5 pt-4 pb-20">
+                            <!-- Tags here -->
                         </div>
                     </div>
                 </div>
@@ -474,7 +534,5 @@
     </script>
     <script src="assets/js/premium.js?v=2.0"></script>
 </body>
-
-</html>
 
 </html>
