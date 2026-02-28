@@ -177,7 +177,7 @@ let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentV
 function init() {
     initParticles();
     initParallax();
-    
+
     renderCategories();
     renderGrid();
     updateLegend();
@@ -515,34 +515,42 @@ function initParallax() {
     const hElements = document.querySelectorAll('.parallax-horizontal');
     const vElements = document.querySelectorAll('.parallax-vertical');
 
-    // Throttle: only run once per RAF, not raw every scroll event
+    if (!hElements.length && !vElements.length) return;
+
     let rafPending = false;
-    let lastScrollY = window.scrollY;
+    let lastScrollY = window.pageYOffset;
+
+    const update = () => {
+        const scrolled = window.pageYOffset;
+        if (scrolled > window.innerHeight * 1.2) {
+            rafPending = false;
+            return;
+        }
+
+        hElements.forEach(el => {
+            const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
+            const x = scrolled * speed;
+            const opacity = Math.max(0, 1 - (scrolled / 600));
+            el.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0)`;
+            el.style.opacity = opacity.toFixed(2);
+        });
+
+        vElements.forEach(el => {
+            const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
+            const y = scrolled * speed;
+            const scaleFactor = Math.max(0.95, 1 - (scrolled / 5000));
+            const opacity = Math.max(0, 1 - (scrolled / 800));
+            el.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${scaleFactor.toFixed(3)})`;
+            el.style.opacity = opacity.toFixed(2);
+        });
+
+        rafPending = false;
+    };
 
     window.addEventListener('scroll', () => {
-        lastScrollY = window.scrollY;
         if (!rafPending) {
             rafPending = true;
-            requestAnimationFrame(() => {
-                rafPending = false;
-                const scrolled = lastScrollY;
-                if (scrolled > window.innerHeight) return;
-
-                hElements.forEach(el => {
-                    const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
-                    el.style.transform = `translate3d(${Math.round(scrolled * speed)}px, 0, 0)`;
-                    el.style.opacity = Math.max(0, 1 - (scrolled / 600));
-                    // NO filter:blur — causes compositor flush on every scroll tick
-                });
-
-                vElements.forEach(el => {
-                    const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
-                    const scaleFactor = Math.max(0.92, 1 - (scrolled / 3000));
-                    el.style.transform = `translate3d(0, ${Math.round(scrolled * speed)}px, 0) scale(${scaleFactor.toFixed(4)})`;
-                    el.style.opacity = Math.max(0, 1 - (scrolled / 700));
-                    // filter:blur REMOVED — was forcing paint + composite every frame
-                });
-            });
+            requestAnimationFrame(update);
         }
     }, { passive: true });
 }
