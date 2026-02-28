@@ -170,7 +170,6 @@
 .perspective-container {
     will-change: transform, opacity;
     backface-visibility: hidden;
-    contain: layout style;
     transition: none !important;
 }
 

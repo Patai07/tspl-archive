@@ -517,52 +517,57 @@ function initParallax() {
 
     if (!hElements.length && !vElements.length) return;
 
-    let rafPending = false;
-    let lastScrolledY = -1;
+    let targetScrollY = window.pageYOffset || document.documentElement.scrollTop;
+    let currentScrollY = targetScrollY;
+    let isUpdating = false;
+
+    window.addEventListener('scroll', () => {
+        targetScrollY = window.pageYOffset || document.documentElement.scrollTop;
+        if (!isUpdating) {
+            isUpdating = true;
+            requestAnimationFrame(update);
+        }
+    }, { passive: true });
 
     const update = () => {
-        const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+        // LERP for smooth dampening (0.1 means 10% towards target every frame)
+        currentScrollY += (targetScrollY - currentScrollY) * 0.1;
 
-        // Skip frame if no meaningful scroll change
-        if (Math.abs(scrolled - lastScrolledY) < 0.5) {
-            rafPending = false;
-            return;
+        // If target reached (within 0.5px), stop looping to save CPU
+        if (Math.abs(targetScrollY - currentScrollY) < 0.5) {
+            currentScrollY = targetScrollY;
+            isUpdating = false;
+        } else {
+            requestAnimationFrame(update);
         }
-        lastScrolledY = scrolled;
 
-        if (scrolled > window.innerHeight * 1.5) {
-            rafPending = false;
-            return;
-        }
+        // Optimization: pause heavy calculations if outside viewport
+        if (currentScrollY > window.innerHeight * 1.5) return;
 
         hElements.forEach(el => {
             const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
-            const x = scrolled * speed;
-            const op = Math.max(0, 1 - (scrolled / 600));
+            const x = currentScrollY * speed;
+            const op = Math.max(0, 1 - (currentScrollY / 600));
 
-            el.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0)`;
-            el.style.opacity = op < 0.99 ? op.toFixed(2) : '1';
+            el.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0)`;
+            el.style.opacity = op < 0.99 ? op.toFixed(3) : '1';
         });
 
         vElements.forEach(el => {
             const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
-            const y = scrolled * speed;
-            const sc = Math.max(0.95, 1 - (scrolled / 5000));
-            const op = Math.max(0, 1 - (scrolled / 800));
+            const y = currentScrollY * speed;
+            const sc = Math.max(0.95, 1 - (currentScrollY / 5000));
+            const op = Math.max(0, 1 - (currentScrollY / 800));
 
-            el.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
-            el.style.opacity = op < 0.99 ? op.toFixed(2) : '1';
+            el.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${sc.toFixed(4)})`;
+            el.style.opacity = op < 0.99 ? op.toFixed(3) : '1';
         });
-
-        rafPending = false;
     };
 
-    window.addEventListener('scroll', () => {
-        if (!rafPending) {
-            rafPending = true;
-            requestAnimationFrame(update);
-        }
-    }, { passive: true });
+    if (targetScrollY > 0) {
+        isUpdating = true;
+        requestAnimationFrame(update);
+    }
 }
 
 
