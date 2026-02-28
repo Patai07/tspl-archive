@@ -518,11 +518,18 @@ function initParallax() {
     if (!hElements.length && !vElements.length) return;
 
     let rafPending = false;
+    let lastScrolledY = -1;
 
     const update = () => {
         const scrolled = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Extended range to handle faster scrolls
+        // Skip frame if no meaningful scroll change
+        if (Math.abs(scrolled - lastScrolledY) < 0.5) {
+            rafPending = false;
+            return;
+        }
+        lastScrolledY = scrolled;
+
         if (scrolled > window.innerHeight * 1.5) {
             rafPending = false;
             return;
@@ -531,19 +538,20 @@ function initParallax() {
         hElements.forEach(el => {
             const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
             const x = scrolled * speed;
-            const opacity = Math.max(0, 1 - (scrolled / 600));
-            // Use 0.01px for Z to avoid rounding issues in some browsers
-            el.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0.01px)`;
-            el.style.opacity = opacity.toFixed(3);
+            const op = Math.max(0, 1 - (scrolled / 600));
+
+            el.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0)`;
+            el.style.opacity = op < 0.99 ? op.toFixed(2) : '1';
         });
 
         vElements.forEach(el => {
             const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
             const y = scrolled * speed;
-            const scaleFactor = Math.max(0.95, 1 - (scrolled / 5000));
-            const opacity = Math.max(0, 1 - (scrolled / 800));
-            el.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0.01px) scale(${scaleFactor.toFixed(4)})`;
-            el.style.opacity = opacity.toFixed(3);
+            const sc = Math.max(0.95, 1 - (scrolled / 5000));
+            const op = Math.max(0, 1 - (scrolled / 800));
+
+            el.style.transform = `translate3d(0, ${y.toFixed(1)}px, 0) scale(${sc.toFixed(3)})`;
+            el.style.opacity = op < 0.99 ? op.toFixed(2) : '1';
         });
 
         rafPending = false;
