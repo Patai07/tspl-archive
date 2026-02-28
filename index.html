@@ -444,88 +444,102 @@
                 <div class="w-16 h-1 bg-[#D4AF37] rounded-full"></div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 relative">
+            <!-- Unified Pipeline Card -->
+            <div
+                class="grid grid-cols-1 lg:grid-cols-3 relative rounded-[2rem] sm:rounded-[2.5rem] bg-white border border-gray-100 shadow-[0_20px_60px_rgba(15,44,89,0.06)] overflow-hidden reveal-up transition-shadow hover:shadow-[0_24px_80px_rgba(15,44,89,0.12)]">
 
                 <!-- Step 01: Capture -->
-                <a href="capture.html" data-reveal-delay="1"
-                    class="reveal-left block relative p-6 md:p-8 bg-white rounded-2xl border border-gray-100 transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(15,44,89,0.10)] hover:border-[#0F2C59]/20">
-                    <!-- Step accent bar -->
+                <a href="capture.html"
+                    class="block relative p-8 md:p-10 transition-all duration-500 group hover:bg-gray-50 border-b lg:border-b-0 lg:border-r border-gray-100">
+                    <!-- Hover overlay gradient -->
                     <div
-                        class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#0F2C59]/60 to-[#0F2C59]/10 rounded-l-2xl">
+                        class="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-[#0F2C59]/5 to-transparent group-hover:h-full transition-all duration-500 opacity-0 group-hover:opacity-100 pointer-events-none">
                     </div>
-                    <div class="absolute top-4 right-5 text-[10px] font-mono font-bold text-gray-200 tracking-widest">01
-                    </div>
+
                     <div
-                        class="w-11 h-11 bg-[#0F2C59]/8 rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#0F2C59] transition-colors duration-300">
+                        class="absolute top-6 right-8 text-[11px] font-mono font-black text-gray-200 tracking-widest group-hover:text-[#0F2C59]/20 transition-colors">
+                        01</div>
+                    <div
+                        class="w-12 h-12 bg-[#0F2C59]/8 rounded-[14px] flex items-center justify-center mb-6 group-hover:bg-[#0F2C59] group-hover:shadow-[0_8px_20px_rgba(15,44,89,0.2)] transition-all duration-300 group-hover:-translate-y-1">
                         <i
-                            class="ph-bold ph-camera text-xl text-[#0F2C59] group-hover:text-white transition-colors"></i>
+                            class="ph-bold ph-camera text-[22px] text-[#0F2C59] group-hover:text-white transition-colors"></i>
                     </div>
-                    <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-300/80 mb-2 pb-1"><span
+                    <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-2"><span
                             class="lang-th">ขั้นที่ 01</span></div>
-                    <h3 class="text-xl font-extrabold mb-2.5 tracking-tight uppercase text-[#0F2C59]">Capture</h3>
-                    <p class="text-[13px] text-gray-400 font-normal leading-relaxed">
+                    <h3 class="text-[22px] font-black mb-3 tracking-tight uppercase text-[#0F2C59]">Capture</h3>
+                    <p
+                        class="text-[14px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors">
                         <span class="lang-th">บันทึกหลักฐานภาคสนาม
                             พร้อมเก็บข้อมูลพิกัดและบริบทสถาปัตยกรรมที่แม่นยำ</span>
-
                     </p>
                     <div
-                        class="mt-4 flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.25em] text-[#0F2C59]/50 group-hover:text-[#0F2C59] transition-colors">
+                        class="mt-6 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#0F2C59]/40 group-hover:text-[#0F2C59] transition-colors translate-y-2 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
                         <span class="lang-th">อ่านระเบียบวิธีภาคสนาม</span>
-                        <i class="ph ph-arrow-right text-xs"></i>
+                        <i class="ph-bold ph-arrow-right text-xs"></i>
                     </div>
                 </a>
 
                 <!-- Step 02: Decode -->
-                <a href="decode.html" data-reveal-delay="2"
-                    class="reveal-up block relative p-6 md:p-8 bg-white rounded-2xl border border-gray-100 transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(15,44,89,0.10)] hover:border-[#D4AF37]/30">
+                <a href="decode.html"
+                    class="block relative p-8 md:p-10 transition-all duration-500 group hover:bg-gray-50 border-b lg:border-b-0 lg:border-r border-gray-100">
+                    <!-- Hover overlay gradient -->
                     <div
-                        class="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#D4AF37]/70 to-[#D4AF37]/15 rounded-l-2xl">
+                        class="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-[#D4AF37]/5 to-transparent group-hover:h-full transition-all duration-500 opacity-0 group-hover:opacity-100 pointer-events-none">
                     </div>
-                    <div class="absolute top-4 right-5 text-[10px] font-mono font-bold text-gray-200 tracking-widest">02
-                    </div>
+
                     <div
-                        class="w-11 h-11 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#D4AF37] transition-colors duration-300">
+                        class="absolute top-6 right-8 text-[11px] font-mono font-black text-gray-200 tracking-widest group-hover:text-[#D4AF37]/30 transition-colors">
+                        02</div>
+                    <div
+                        class="w-12 h-12 bg-[#D4AF37]/10 rounded-[14px] flex items-center justify-center mb-6 group-hover:bg-[#D4AF37] group-hover:shadow-[0_8px_20px_rgba(212,175,55,0.3)] transition-all duration-300 group-hover:-translate-y-1">
                         <i
-                            class="ph-bold ph-fingerprint text-xl text-[#D4AF37] group-hover:text-white transition-colors"></i>
+                            class="ph-bold ph-fingerprint text-[22px] text-[#D4AF37] group-hover:text-white transition-colors"></i>
                     </div>
-                    <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-300/80 mb-2 pb-1"><span
+                    <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400 mb-2"><span
                             class="lang-th">ขั้นที่ 02</span></div>
-                    <h3 class="text-xl font-extrabold mb-2.5 tracking-tight uppercase text-[#0F2C59]">Decode</h3>
-                    <p class="text-[13px] text-gray-400 font-normal leading-relaxed">
+                    <h3 class="text-[22px] font-black mb-3 tracking-tight uppercase text-[#0F2C59]">Decode</h3>
+                    <p
+                        class="text-[14px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors">
                         <span class="lang-th">สกัดและถอดรหัสหน่วยคำย่อย (Morphemes)
                             ผ่านกระบวนการวิเคราะห์เชิงสัญวิทยา</span>
-
                     </p>
                     <div
-                        class="mt-4 flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]/50 group-hover:text-[#D4AF37] transition-colors">
+                        class="mt-6 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]/50 group-hover:text-[#D4AF37] transition-colors translate-y-2 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
                         <span class="lang-th">ดูขั้นตอนการถอดรหัส</span>
-                        <i class="ph ph-arrow-right text-xs"></i>
+                        <i class="ph-bold ph-arrow-right text-xs"></i>
                     </div>
                 </a>
 
                 <!-- Step 03: Digitize -->
-                <a href="digitize.html" data-reveal-delay="3"
-                    class="reveal-right block relative p-6 md:p-8 bg-[#0F2C59] rounded-2xl border border-[#0F2C59] transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,44,89,0.30)] hover:border-[#D4AF37]/40">
-                    <div class="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none"></div>
-                    <div class="absolute top-4 right-5 text-[10px] font-mono font-bold text-white/20 tracking-widest">03
+                <a href="digitize.html"
+                    class="block relative p-8 md:p-10 bg-[#0F2C59] transition-all duration-500 group overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
                     </div>
                     <div
-                        class="w-11 h-11 bg-white/10 rounded-xl flex items-center justify-center mb-5 border border-white/10 group-hover:bg-white/15 transition-colors duration-300">
-                        <i class="ph-bold ph-bezier-curve text-xl text-[#D4AF37]"></i>
+                        class="absolute inset-0 bg-grid-pattern opacity-[0.06] group-hover:opacity-[0.1] transition-opacity duration-500 pointer-events-none">
                     </div>
-                    <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/30 mb-2 pb-1"><span
+
+                    <div
+                        class="absolute top-6 right-8 text-[11px] font-mono font-black text-white/20 tracking-widest group-hover:text-white/40 transition-colors">
+                        03</div>
+                    <div
+                        class="w-12 h-12 bg-white/10 rounded-[14px] flex items-center justify-center mb-6 border-b border-white/20 group-hover:bg-white/20 group-hover:shadow-[0_8px_20px_rgba(0,0,0,0.3)] transition-all duration-300 group-hover:-translate-y-1">
+                        <i
+                            class="ph-bold ph-bezier-curve text-[22px] text-[#D4AF37] group-hover:text-[#FFD200] transition-colors"></i>
+                    </div>
+                    <div class="text-[10px] font-bold uppercase tracking-[0.4em] text-white/40 mb-2"><span
                             class="lang-th">ขั้นที่ 03</span></div>
-                    <h3 class="text-xl font-extrabold mb-2.5 tracking-tight uppercase text-white">Digitize</h3>
+                    <h3 class="text-[22px] font-black mb-3 tracking-tight uppercase text-white">Digitize</h3>
                     <p
-                        class="text-[13px] text-gray-300 font-normal leading-relaxed group-hover:text-white/90 transition-colors">
+                        class="text-[14px] text-gray-300 font-normal leading-relaxed group-hover:text-white/95 transition-colors">
                         <span
                             class="lang-th">สร้างไฟล์เวกเตอร์มาตรฐานและข้อกำหนดการใช้งานเพื่อความยั่งยืนของอัตลักษณ์</span>
-
                     </p>
                     <div
-                        class="mt-4 flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]/50 group-hover:text-[#D4AF37] transition-colors">
+                        class="mt-6 flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-[0.25em] text-[#D4AF37]/60 group-hover:text-[#FFD200] transition-colors translate-y-2 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
                         <span class="lang-th">เปิดดูคลังข้อมูล</span>
-                        <i class="ph ph-arrow-right text-xs"></i>
+                        <i class="ph-bold ph-arrow-right text-xs"></i>
                     </div>
                 </a>
             </div>
