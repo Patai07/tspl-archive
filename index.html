@@ -801,66 +801,104 @@
         </section>
     </div> <!-- END UNIFIED STICKY STACK CONTAINER -->
 
-    <!-- Explorer Grid -->
-    <main id="database" class="px-6 lg:px-8 py-16 md:py-20 max-w-[1440px] mx-auto w-full flex-grow reveal">
+    <!-- Explorer Grid Section -->
+    <section class="relative w-full py-16 md:py-24 border-t border-gray-100 bg-[#fcfcfc] overflow-hidden">
+        <!-- Background Decorative Elements -->
+        <div
+            class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#0F2C59]/[0.02] rounded-full blur-[100px] pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#D4AF37]/[0.02] rounded-full blur-[100px] pointer-events-none">
+        </div>
 
-        <!-- Section Header -->
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
-            <div class="flex items-center gap-4">
-                <div class="w-1 h-10 bg-[#0F2C59] rounded-full shadow-sm"></div>
-                <div>
-                    <h2 class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-1 leading-none">
-                        Archive
-                        Registry</h2>
-                    <p class="text-3xl font-bold text-[#0F2C59] tracking-tighter uppercase">คลังระเบียนลวดลาย</p>
+        <main id="database" class="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
+
+            <!-- Section Header -->
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
+                <div class="relative">
+                    <!-- Title Watermark -->
+                    <div
+                        class="absolute -top-10 -left-4 text-[80px] md:text-[100px] font-black text-[#0F2C59]/[0.03] leading-none select-none pointer-events-none tracking-tighter uppercase whitespace-nowrap">
+                        Artifacts</div>
+
+                    <div class="flex items-start gap-5 relative z-10">
+                        <div
+                            class="w-1.5 h-16 bg-gradient-to-b from-[#0F2C59] to-[#D4AF37] rounded-full shadow-[0_0_15px_rgba(15,44,89,0.1)] shrink-0">
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <i class="ph-bold ph-sketch-logo text-[#D4AF37] text-xs"></i>
+                                <h2
+                                    class="text-[10px] font-black uppercase tracking-[0.4em] text-gray-400 leading-none">
+                                    Archive Registry</h2>
+                            </div>
+                            <h3 class="text-4xl md:text-5xl font-black text-[#0F2C59] tracking-tighter mb-2">
+                                <span class="lang-th">คลังระเบียนลวดลาย</span>
+                            </h3>
+                            <p class="text-[13px] text-gray-400 font-medium max-w-xl leading-relaxed">
+                                <span class="lang-th">สำรวจฐานข้อมูลลวดลายจากโบราณสถานไทย
+                                    ที่ผ่านกระบวนการถอนรหัสสัญวิทยาและแปลงเป็นข้อมูลดิจิทัล</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4 shrink-0">
+                    <div class="hidden sm:flex flex-col items-end gap-1 px-5 border-r border-gray-100">
+                        <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Database Size</span>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xl font-black text-[#0F2C59]">๑๕๔</span>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tighter">Entries</span>
+                        </div>
+                    </div>
+
+                    <a href="archive.html"
+                        class="inline-flex items-center gap-2.5 px-6 py-4 bg-white border border-gray-200 text-[#0F2C59] text-[10px] font-black uppercase tracking-[0.2em] rounded-2xl hover:border-[#0F2C59]/30 hover:bg-[#0F2C59] hover:text-white hover:shadow-xl hover:shadow-[#0F2C59]/10 transition-all duration-300 group">
+                        <span class="lang-th">เข้าสู่คลังระเบียนเต็มรูปแบบ</span>
+                        <i class="ph-bold ph-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                    </a>
                 </div>
             </div>
 
-            <a href="archive.html"
-                class="inline-flex items-center gap-2 px-6 py-3 bg-white border border-gray-200 text-[#0F2C59] text-[10px] font-bold uppercase tracking-[0.2em] rounded-xl hover:border-[#0F2C59]/30 hover:bg-[#0F2C59]/5 transition-all shadow-sm group">
-                <span class="lang-th">ดูคลังระเบียนทั้งหมด</span>
+            <!-- Unified Search + Filter + Legend Control Bar -->
+            <div
+                class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center mb-8 p-3 bg-white border border-gray-100 rounded-2xl shadow-sm">
 
-                <i class="ph ph-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
-            </a>
-        </div>
+                <!-- Search -->
+                <div class="relative flex-1 min-w-0 group">
+                    <i
+                        class="ph-bold ph-magnifying-glass absolute left-5 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-[#060F22] group-focus-within:scale-110 transition-all text-base"></i>
+                    <input type="text" id="search-input" oninput="handleSearch()"
+                        placeholder="ค้นหาโดยชื่อลวดลาย, ยุคสมัย, หรือสถานที่..."
+                        class="w-full pl-12 pr-10 py-4 bg-gray-50/50 border border-gray-100 rounded-2xl focus:bg-white focus:outline-none focus:ring-4 focus:ring-[#0F2C59]/5 focus:border-[#0F2C59]/20 transition-all text-sm font-bold placeholder-gray-400">
+                    <button id="clear-search" onclick="clearSearch()"
+                        class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-red-500 hidden transition-colors">
+                        <i class="ph-bold ph-x-circle text-lg"></i>
+                    </button>
+                </div>
 
-        <!-- Unified Search + Filter + Legend Control Bar -->
-        <div
-            class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center mb-8 p-3 bg-white border border-gray-100 rounded-2xl shadow-sm">
+                <!-- Divider -->
+                <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
 
-            <!-- Search -->
-            <div class="relative flex-1 min-w-0 group">
-                <i
-                    class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#0F2C59] transition-colors text-sm"></i>
-                <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาระเบียน..."
-                    class="w-full pl-10 pr-9 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#0F2C59]/20 focus:border-[#0F2C59]/30 transition-all text-xs font-medium placeholder-gray-400">
-                <button id="clear-search" onclick="clearSearch()"
-                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden transition-colors">
-                    <i class="ph ph-x text-sm"></i>
-                </button>
+                <!-- Category Filter -->
+                <div id="categories-container" class="flex flex-wrap gap-2 items-center shrink-0"></div>
+
+                <!-- Divider -->
+                <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
+
+                <!-- Legend -->
+                <div id="status-legend"
+                    class="flex flex-wrap items-center gap-3 text-[8px] font-bold uppercase tracking-widest text-gray-500 shrink-0">
+                    <!-- Legend JS -->
+                </div>
             </div>
 
-            <!-- Divider -->
-            <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
-
-            <!-- Category Filter -->
-            <div id="categories-container" class="flex flex-wrap gap-2 items-center shrink-0"></div>
-
-            <!-- Divider -->
-            <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
-
-            <!-- Legend -->
-            <div id="status-legend"
-                class="flex flex-wrap items-center gap-3 text-[8px] font-bold uppercase tracking-widest text-gray-500 shrink-0">
-                <!-- Legend JS -->
+            <div id="grid-container"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
+                <!-- Cards JS -->
             </div>
-        </div>
-
-        <div id="grid-container"
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
-            <!-- Cards JS -->
-        </div>
-    </main>
+        </main>
+    </section>
 
     <!-- Footer: REDESIGNED WITH SILA JARUEK AESTHETIC -->
     <footer
