@@ -432,9 +432,9 @@
     <!-- UNIFIED STICKY STACK CONTAINER -->
     <div class="relative overflow-visible pb-32">
         <!-- RESEARCH PIPELINE SECTION (Header) -->
-        <section class="w-full bg-white py-20 border-b border-gray-100 relative z-20">
+        <section class="mb-16">
             <div class="max-w-[1440px] mx-auto px-6 lg:px-8">
-                <div class="flex flex-col items-center text-center mb-16">
+                <div class="flex flex-col items-center text-center">
                     <h2
                         class="text-[9px] font-bold text-[#D4AF37] uppercase tracking-[0.5em] mb-4 underline underline-offset-4">
                         <span class="lang-th">ขั้นตอนการวิจัย</span>
@@ -446,199 +446,204 @@
             </div>
         </section>
 
-        <!-- CARDS CONTAINER (Now part of the stack) -->
-        <div id="pipeline-container" class="flex flex-col gap-16 relative items-center w-full max-w-4xl mx-auto">
+        <!-- Step 01: Capture -->
+        <a href="capture.html"
+            class="sticky top-[5rem] z-10 block w-full max-w-4xl mx-auto p-8 md:p-10 lg:p-12 bg-white rounded-[2.5rem] border border-gray-100 shadow-[0_20px_60px_rgba(15,44,89,0.06)] hover:shadow-[0_24px_80px_rgba(15,44,89,0.12)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-2 group overflow-hidden">
 
-            <!-- Step 01: Capture -->
-            <a href="capture.html"
-                class="sticky top-[5rem] z-10 w-full p-8 md:p-10 lg:p-12 bg-white rounded-[2.5rem] border border-gray-100 shadow-[0_20px_60px_rgba(15,44,89,0.06)] hover:shadow-[0_24px_80px_rgba(15,44,89,0.12)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-2 group overflow-hidden">
+            <!-- Hover overlay gradient -->
+            <div
+                class="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-bl from-[#0F2C59]/20 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none z-0">
+            </div>
 
-                <!-- Hover overlay gradient -->
+            <!-- Subtle Bottom Watermark -->
+            <div
+                class="absolute -bottom-10 -right-6 text-[200px] font-sans font-black text-[#0F2C59]/[0.03] leading-none select-none pointer-events-none group-hover:text-[#0F2C59]/[0.05] transition-colors z-0 tracking-tighter">
+                ๐๑</div>
+
+            <!-- Corner Icon -->
+            <div
+                class="absolute -top-6 -left-6 w-32 h-32 md:w-36 md:h-36 bg-[#0F2C59]/10 rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#0F2C59] group-hover:shadow-[0_8px_30px_rgba(15,44,89,0.3)] transition-all duration-700 group-hover:scale-110 z-0 overflow-hidden">
+
+                <!-- Flash Effect Indicator -->
                 <div
-                    class="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-bl from-[#0F2C59]/20 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none z-0">
+                    class="horizontal-flash absolute top-1/2 left-1/2 h-[3px] bg-white rounded-full opacity-0 pointer-events-none z-10 blur-[1px]">
                 </div>
 
-                <!-- Subtle Bottom Watermark -->
-                <div
-                    class="absolute -bottom-10 -right-6 text-[200px] font-sans font-black text-[#0F2C59]/[0.03] leading-none select-none pointer-events-none group-hover:text-[#0F2C59]/[0.05] transition-colors z-0 tracking-tighter">
-                    ๐๑</div>
+                <i
+                    class="ph-bold ph-camera text-[40px] md:text-[48px] text-[#0F2C59] group-hover:text-white transition-colors relative z-20"></i>
+            </div>
 
-                <!-- Corner Icon -->
-                <div
-                    class="absolute -top-6 -left-6 w-32 h-32 md:w-36 md:h-36 bg-[#0F2C59]/10 rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#0F2C59] group-hover:shadow-[0_8px_30px_rgba(15,44,89,0.3)] transition-all duration-700 group-hover:scale-110 z-0 overflow-hidden">
+            <!-- Content -->
+            <div
+                class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 pl-16 md:pl-20">
 
-                    <!-- Flash Effect Indicator -->
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2 md:mb-3">
+                        <span
+                            class="text-[11px] font-bold uppercase tracking-[0.4em] text-gray-400 group-hover:text-[#0F2C59]/60 transition-colors"><span
+                                class="lang-th">ขั้นที่ 01</span></span>
+                        <span class="w-8 h-[1px] bg-gray-200 group-hover:bg-[#0F2C59]/30 transition-colors"></span>
+                    </div>
+                    <h3
+                        class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-[#0F2C59] leading-none">
+                        Capture</h3>
+                    <p
+                        class="text-[15px] md:text-[16px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors max-w-2xl">
+                        <span class="lang-th">บันทึกหลักฐานภาคสนาม
+                            พร้อมเก็บข้อมูลพิกัดและบริบทสถาปัตยกรรมที่แม่นยำ</span>
+                    </p>
                     <div
-                        class="horizontal-flash absolute top-1/2 left-1/2 h-[3px] bg-white rounded-full opacity-0 pointer-events-none z-10 blur-[1px]">
-                    </div>
-
-                    <i
-                        class="ph-bold ph-camera text-[40px] md:text-[48px] text-[#0F2C59] group-hover:text-white transition-colors relative z-20"></i>
-                </div>
-
-                <!-- Content -->
-                <div
-                    class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 pl-16 md:pl-20">
-
-                    <div class="flex-1">
-                        <div class="flex items-center gap-3 mb-2 md:mb-3">
-                            <span
-                                class="text-[11px] font-bold uppercase tracking-[0.4em] text-gray-400 group-hover:text-[#0F2C59]/60 transition-colors"><span
-                                    class="lang-th">ขั้นที่ 01</span></span>
-                            <span class="w-8 h-[1px] bg-gray-200 group-hover:bg-[#0F2C59]/30 transition-colors"></span>
-                        </div>
-                        <h3
-                            class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-[#0F2C59] leading-none">
-                            Capture</h3>
-                        <p
-                            class="text-[15px] md:text-[16px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors max-w-2xl">
-                            <span class="lang-th">บันทึกหลักฐานภาคสนาม
-                                พร้อมเก็บข้อมูลพิกัดและบริบทสถาปัตยกรรมที่แม่นยำ</span>
-                        </p>
-                        <div
-                            class="mt-6 md:mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#0F2C59]/50 group-hover:text-[#0F2C59] transition-all duration-300 translate-y-1 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
-                            <span class="lang-th">อ่านระเบียบวิธีภาคสนาม</span>
-                            <i class="ph-bold ph-arrow-right text-sm"></i>
-                        </div>
-                    </div>
-
-                    <div class="hidden md:flex shrink-0 w-24 justify-end items-start self-start pt-2 relative z-10">
-                        <div
-                            class="text-[14px] font-mono font-black text-gray-300 tracking-widest group-hover:text-[#0F2C59]/60 transition-colors">
-                            01</div>
+                        class="mt-6 md:mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#0F2C59]/50 group-hover:text-[#0F2C59] transition-all duration-300 translate-y-1 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="lang-th">อ่านระเบียบวิธีภาคสนาม</span>
+                        <i class="ph-bold ph-arrow-right text-sm"></i>
                     </div>
                 </div>
-            </a>
 
-            <!-- Step 02: Decode -->
-            <a href="decode.html"
-                class="sticky top-[9rem] z-20 w-full p-8 md:p-10 lg:p-12 bg-white rounded-[2.5rem] border border-gray-100 shadow-[0_20px_60px_rgba(15,44,89,0.06)] hover:shadow-[0_24px_80px_rgba(15,44,89,0.12)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-2 group overflow-hidden">
-
-                <!-- Hover overlay gradient -->
-                <div
-                    class="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-bl from-[#D4AF37]/20 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none z-0">
-                </div>
-
-                <!-- Subtle Bottom Watermark -->
-                <div
-                    class="absolute -bottom-10 -right-6 text-[200px] font-sans font-black text-[#D4AF37]/[0.03] leading-none select-none pointer-events-none group-hover:text-[#D4AF37]/[0.05] transition-colors z-0 tracking-tighter">
-                    ๐๒</div>
-
-                <!-- Corner Icon -->
-                <div
-                    class="absolute -top-6 -left-6 w-32 h-32 md:w-36 md:h-36 bg-[#D4AF37]/15 rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] group-hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] transition-all duration-700 group-hover:scale-110 z-0 overflow-hidden">
-
-                    <!-- Scanner Laser Line -->
+                <div class="hidden md:flex shrink-0 w-24 justify-end items-start self-start pt-2 relative z-10">
                     <div
-                        class="scan-line absolute left-0 w-full h-[3px] bg-[#FFD200] opacity-0 pointer-events-none z-10 shadow-[0_0_12px_rgba(255,210,0,0.9)]">
+                        class="text-[14px] font-mono font-black text-gray-300 tracking-widest group-hover:text-[#0F2C59]/60 transition-colors">
+                        01</div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Spacer -->
+        <div class="h-16"></div>
+
+        <!-- Step 02: Decode -->
+        <a href="decode.html"
+            class="sticky top-[9rem] z-20 block w-full max-w-4xl mx-auto p-8 md:p-10 lg:p-12 bg-white rounded-[2.5rem] border border-gray-100 shadow-[0_20px_60px_rgba(15,44,89,0.06)] hover:shadow-[0_24px_80px_rgba(15,44,89,0.12)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-2 group overflow-hidden">
+
+            <!-- Hover overlay gradient -->
+            <div
+                class="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-bl from-[#D4AF37]/20 to-transparent rounded-full blur-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-700 pointer-events-none z-0">
+            </div>
+
+            <!-- Subtle Bottom Watermark -->
+            <div
+                class="absolute -bottom-10 -right-6 text-[200px] font-sans font-black text-[#D4AF37]/[0.03] leading-none select-none pointer-events-none group-hover:text-[#D4AF37]/[0.05] transition-colors z-0 tracking-tighter">
+                ๐๒</div>
+
+            <!-- Corner Icon -->
+            <div
+                class="absolute -top-6 -left-6 w-32 h-32 md:w-36 md:h-36 bg-[#D4AF37]/15 rounded-full flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] group-hover:shadow-[0_8px_30px_rgba(212,175,55,0.4)] transition-all duration-700 group-hover:scale-110 z-0 overflow-hidden">
+
+                <!-- Scanner Laser Line -->
+                <div
+                    class="scan-line absolute left-0 w-full h-[3px] bg-[#FFD200] opacity-0 pointer-events-none z-10 shadow-[0_0_12px_rgba(255,210,0,0.9)]">
+                </div>
+
+                <i
+                    class="ph-bold ph-fingerprint text-[40px] md:text-[48px] text-[#D4AF37] group-hover:text-white transition-colors relative z-20"></i>
+            </div>
+
+            <!-- Content -->
+            <div
+                class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 pl-16 md:pl-20">
+
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2 md:mb-3">
+                        <span
+                            class="text-[11px] font-bold uppercase tracking-[0.4em] text-gray-400 group-hover:text-[#D4AF37]/70 transition-colors"><span
+                                class="lang-th">ขั้นที่ 02</span></span>
+                        <span class="w-8 h-[1px] bg-gray-200 group-hover:bg-[#D4AF37]/40 transition-colors"></span>
                     </div>
-
-                    <i
-                        class="ph-bold ph-fingerprint text-[40px] md:text-[48px] text-[#D4AF37] group-hover:text-white transition-colors relative z-20"></i>
-                </div>
-
-                <!-- Content -->
-                <div
-                    class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 pl-16 md:pl-20">
-
-                    <div class="flex-1">
-                        <div class="flex items-center gap-3 mb-2 md:mb-3">
-                            <span
-                                class="text-[11px] font-bold uppercase tracking-[0.4em] text-gray-400 group-hover:text-[#D4AF37]/70 transition-colors"><span
-                                    class="lang-th">ขั้นที่ 02</span></span>
-                            <span class="w-8 h-[1px] bg-gray-200 group-hover:bg-[#D4AF37]/40 transition-colors"></span>
-                        </div>
-                        <h3
-                            class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-[#0F2C59] leading-none">
-                            Decode</h3>
-                        <p
-                            class="text-[15px] md:text-[16px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors max-w-2xl">
-                            <span class="lang-th">สกัดและถอดรหัสหน่วยคำย่อย (Morphemes)
-                                ผ่านกระบวนการวิเคราะห์เชิงสัญวิทยา</span>
-                        </p>
-                        <div
-                            class="mt-6 md:mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]/60 group-hover:text-[#D4AF37] transition-all duration-300 translate-y-1 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
-                            <span class="lang-th">ดูขั้นตอนการถอดรหัส</span>
-                            <i class="ph-bold ph-arrow-right text-sm"></i>
-                        </div>
-                    </div>
-
-                    <div class="hidden md:flex shrink-0 w-24 justify-end items-start self-start pt-2 relative z-10">
-                        <div
-                            class="text-[14px] font-mono font-black text-gray-300 tracking-widest group-hover:text-[#D4AF37]/60 transition-colors">
-                            02</div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Step 03: Digitize -->
-            <a href="digitize.html"
-                class="sticky top-[13rem] z-30 w-full p-8 md:p-10 lg:p-12 bg-[#0F2C59] rounded-[2.5rem] border border-[#0F2C59] shadow-[0_20px_60px_rgba(15,44,89,0.15)] hover:shadow-[0_24px_80px_rgba(15,44,89,0.25)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-2 group overflow-hidden">
-
-                <!-- Hover overlay gradient -->
-                <div
-                    class="absolute -top-32 -right-32 w-96 h-96 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.15),transparent_70%)] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0">
-                </div>
-                <div
-                    class="absolute inset-0 bg-grid-pattern opacity-[0.06] group-hover:opacity-[0.1] transition-opacity duration-500 pointer-events-none z-0">
-                </div>
-
-                <!-- Subtle Bottom Watermark -->
-                <div
-                    class="absolute -bottom-10 -right-6 text-[200px] font-sans font-black text-white/[0.04] leading-none select-none pointer-events-none group-hover:text-[#D4AF37]/[0.08] transition-colors z-0 tracking-tighter">
-                    ๐๓</div>
-
-                <!-- Corner Icon -->
-                <div
-                    class="absolute -top-6 -left-6 w-32 h-32 md:w-36 md:h-36 bg-white/15 rounded-full flex items-center justify-center shrink-0 group-hover:bg-white/20 group-hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)] transition-all duration-700 group-hover:scale-110 z-0 overflow-hidden">
-
-                    <!-- Shimmer Sweep Effect -->
+                    <h3
+                        class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-[#0F2C59] leading-none">
+                        Decode</h3>
+                    <p
+                        class="text-[15px] md:text-[16px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors max-w-2xl">
+                        <span class="lang-th">สกัดและถอดรหัสหน่วยคำย่อย (Morphemes)
+                            ผ่านกระบวนการวิเคราะห์เชิงสัญวิทยา</span>
+                    </p>
                     <div
-                        class="shimmer-effect absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none z-10">
+                        class="mt-6 md:mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]/60 group-hover:text-[#D4AF37] transition-all duration-300 translate-y-1 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="lang-th">ดูขั้นตอนการถอดรหัส</span>
+                        <i class="ph-bold ph-arrow-right text-sm"></i>
                     </div>
-
-                    <i
-                        class="ph-bold ph-bezier-curve text-[40px] md:text-[48px] text-[#D4AF37] group-hover:text-[#FFD200] transition-colors relative z-20"></i>
                 </div>
 
-                <!-- Content -->
+                <div class="hidden md:flex shrink-0 w-24 justify-end items-start self-start pt-2 relative z-10">
+                    <div
+                        class="text-[14px] font-mono font-black text-gray-300 tracking-widest group-hover:text-[#D4AF37]/60 transition-colors">
+                        02</div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Spacer -->
+        <div class="h-16"></div>
+
+        <!-- Step 03: Digitize -->
+        <a href="digitize.html"
+            class="sticky top-[13rem] z-30 block w-full max-w-4xl mx-auto p-8 md:p-10 lg:p-12 bg-[#0F2C59] rounded-[2.5rem] border border-[#0F2C59] shadow-[0_20px_60px_rgba(15,44,89,0.15)] hover:shadow-[0_24px_80px_rgba(15,44,89,0.25)] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-2 group overflow-hidden">
+
+            <!-- Hover overlay gradient -->
+            <div
+                class="absolute -top-32 -right-32 w-96 h-96 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.15),transparent_70%)] rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0">
+            </div>
+            <div
+                class="absolute inset-0 bg-grid-pattern opacity-[0.06] group-hover:opacity-[0.1] transition-opacity duration-500 pointer-events-none z-0">
+            </div>
+
+            <!-- Subtle Bottom Watermark -->
+            <div
+                class="absolute -bottom-10 -right-6 text-[200px] font-sans font-black text-white/[0.04] leading-none select-none pointer-events-none group-hover:text-[#D4AF37]/[0.08] transition-colors z-0 tracking-tighter">
+                ๐๓</div>
+
+            <!-- Corner Icon -->
+            <div
+                class="absolute -top-6 -left-6 w-32 h-32 md:w-36 md:h-36 bg-white/15 rounded-full flex items-center justify-center shrink-0 group-hover:bg-white/20 group-hover:shadow-[0_8px_30px_rgba(255,255,255,0.2)] transition-all duration-700 group-hover:scale-110 z-0 overflow-hidden">
+
+                <!-- Shimmer Sweep Effect -->
                 <div
-                    class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 pl-16 md:pl-20">
+                    class="shimmer-effect absolute top-0 left-0 w-12 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none z-10">
+                </div>
 
-                    <div class="flex-1">
-                        <div class="flex items-center gap-3 mb-2 md:mb-3">
-                            <span
-                                class="text-[11px] font-bold uppercase tracking-[0.4em] text-white/40 group-hover:text-white/70 transition-colors"><span
-                                    class="lang-th">ขั้นที่ 03</span></span>
-                            <span class="w-8 h-[1px] bg-white/20 group-hover:bg-white/40 transition-colors"></span>
-                        </div>
-                        <h3
-                            class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-white leading-none">
-                            Digitize</h3>
-                        <p
-                            class="text-[15px] md:text-[16px] text-gray-300 font-normal leading-relaxed group-hover:text-white/95 transition-colors max-w-2xl">
-                            <span
-                                class="lang-th">สร้างไฟล์เวกเตอร์มาตรฐานและข้อกำหนดการใช้งานเพื่อความยั่งยืนของอัตลักษณ์</span>
-                        </p>
-                        <div
-                            class="mt-6 md:mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]/70 group-hover:text-[#FFD200] transition-all duration-300 translate-y-1 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
-                            <span class="lang-th">เปิดดูคลังข้อมูล</span>
-                            <i class="ph-bold ph-arrow-right text-sm"></i>
-                        </div>
+                <i
+                    class="ph-bold ph-bezier-curve text-[40px] md:text-[48px] text-[#D4AF37] group-hover:text-[#FFD200] transition-colors relative z-20"></i>
+            </div>
+
+            <!-- Content -->
+            <div
+                class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10 pl-16 md:pl-20">
+
+                <div class="flex-1">
+                    <div class="flex items-center gap-3 mb-2 md:mb-3">
+                        <span
+                            class="text-[11px] font-bold uppercase tracking-[0.4em] text-white/40 group-hover:text-white/70 transition-colors"><span
+                                class="lang-th">ขั้นที่ 03</span></span>
+                        <span class="w-8 h-[1px] bg-white/20 group-hover:bg-white/40 transition-colors"></span>
                     </div>
-
-                    <div class="hidden md:flex shrink-0 w-24 justify-end items-start self-start pt-2 relative z-10">
-                        <div
-                            class="text-[14px] font-mono font-black text-white/30 tracking-widest group-hover:text-white/60 transition-colors">
-                            03</div>
+                    <h3
+                        class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-white leading-none">
+                        Digitize</h3>
+                    <p
+                        class="text-[15px] md:text-[16px] text-gray-300 font-normal leading-relaxed group-hover:text-white/95 transition-colors max-w-2xl">
+                        <span
+                            class="lang-th">สร้างไฟล์เวกเตอร์มาตรฐานและข้อกำหนดการใช้งานเพื่อความยั่งยืนของอัตลักษณ์</span>
+                    </p>
+                    <div
+                        class="mt-6 md:mt-8 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]/70 group-hover:text-[#FFD200] transition-all duration-300 translate-y-1 opacity-80 group-hover:translate-y-0 group-hover:opacity-100">
+                        <span class="lang-th">เปิดดูคลังข้อมูล</span>
+                        <i class="ph-bold ph-arrow-right text-sm"></i>
                     </div>
                 </div>
-            </a>
-        </div>
+
+                <div class="hidden md:flex shrink-0 w-24 justify-end items-start self-start pt-2 relative z-10">
+                    <div
+                        class="text-[14px] font-mono font-black text-white/30 tracking-widest group-hover:text-white/60 transition-colors">
+                        03</div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Spacer -->
+        <div class="h-16"></div>
 
         <!-- METHODOLOGY & FRAMEWORK SECTION (Now the 4th layer of the stack) -->
         <section id="methodology-section"
-            class="w-full bg-[#060F22] blueprint-grid-dark py-24 sticky top-[17rem] z-[40] rounded-t-[3rem] lg:rounded-t-[4rem] shadow-[0_-30px_60px_rgba(0,0,0,0.4)] border-t border-white/10">
+            class="w-full bg-[#060F22] blueprint-grid-dark pt-20 pb-24 sticky top-[17rem] z-[40] rounded-t-[3rem] lg:rounded-t-[4rem] shadow-[0_-40px_80px_rgba(0,0,0,0.5)] border-t border-white/10">
             <!-- Background Glow -->
             <div
                 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#0F2C59]/20 rounded-full blur-[120px] pointer-events-none opacity-50">
