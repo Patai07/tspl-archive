@@ -23,7 +23,7 @@ body {
 .lang-th,
 :lang(th) {
     font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif;
-    line-height: 1.8;
+    line-height: 1.4;
     /* CANCEL all wide letter-spacing (kerning) for Thai - Mandatory for legibility */
     letter-spacing: normal !important;
     font-feature-settings: "kern" 0;
@@ -36,7 +36,58 @@ body {
 
 /* paragraph Thai text — breathing room */
 p .lang-th {
-    line-height: 1.85;
+    line-height: 1.45;
+}
+
+/* 🧪 SAFETY FIX: Force Desktop Nav and Solid Mobile Menu */
+@media (min-width: 768px) {
+    #desktop-nav {
+        display: flex !important;
+    }
+
+    #mobile-menu-btn {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    #desktop-nav {
+        display: none !important;
+    }
+
+    #mobile-menu-btn {
+        display: flex !important;
+    }
+
+    /* Fixed: Ensure solid white background when open, but don't force opacity: 1 constant */
+    #mobile-menu {
+        background-color: #ffffff !important;
+        background-image: none !important;
+    }
+
+    /* Enlarge Mobile Menu Text & Spacing */
+    #mobile-menu a,
+    #mobile-menu span {
+        font-size: 1.15rem !important;
+        /* Larger text for mobile */
+        letter-spacing: 0.05em !important;
+    }
+
+    #mobile-menu i {
+        font-size: 1.4rem !important;
+        /* Larger icons */
+    }
+
+    #mobile-menu .flex-col.gap-6 {
+        gap: 1.5rem !important;
+        /* More breathing room */
+    }
+
+    nav {
+        background-color: #ffffff !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
 }
 
 /* Headings: extra line-height only — NO display:inline-block (breaks lang toggle) */
@@ -44,14 +95,15 @@ h1 .lang-th,
 h2 .lang-th,
 h3 .lang-th,
 h4 .lang-th {
-    line-height: 1.6;
+    line-height: 1.15;
     padding-top: 0.1em;
 }
 
 /* Thai hero titles — extra leading for stacked lines */
 .thai-title {
-    line-height: 1.5 !important;
+    line-height: 1.15 !important;
     padding-top: 0.1em;
+    padding-bottom: 0.1em;
 }
 
 /* Small badge / pill elements — ensure Thai vowels not clipped */

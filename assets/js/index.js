@@ -1,4 +1,4 @@
-let currentLang = localStorage.getItem('tspl_lang') || 'th';
+let currentLang = 'th';
 
 const toThaiDigits = (num) => {
     const thaiNumbers = ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'];
@@ -177,7 +177,7 @@ let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentV
 function init() {
     initParticles();
     initParallax();
-    setLanguage(currentLang);
+    
     renderCategories();
     renderGrid();
     updateLegend();
@@ -488,90 +488,7 @@ function updateModalDisplay() {
 }
 
 
-function setLanguage(lang) {
-    const isChanging = currentLang !== lang;
-    currentLang = lang;
-    localStorage.setItem('tspl_currentLang', lang);
-
-    const applyLanguageChanges = () => {
-        document.querySelectorAll('.lang-th, .lang-en').forEach(el => {
-            el.style.opacity = ''; // Clean inline styles from old transition logic if any
-            if (el.classList.contains(`lang-${lang}`)) {
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
-            }
-        });
-
-        // Re-render components with translated texts
-        if (typeof updateLegend === 'function') updateLegend();
-        if (typeof renderCategories === 'function') renderCategories();
-        if (typeof renderGrid === 'function') renderGrid();
-
-        // Update search placeholder
-        const si = document.getElementById('search-input');
-        if (si) si.placeholder = lang === 'th' ? 'ค้นหาระเบียน...' : 'Search registries...';
-
-        // Update language toggle buttons
-        const btnTh = document.getElementById('lang-btn-th'), btnEn = document.getElementById('lang-btn-en');
-        if (btnTh && btnEn) {
-            if (lang === 'en') {
-                btnEn.className = "px-4 py-1 rounded-full bg-[#0F2C59] text-white shadow-sm font-bold transition-all";
-                btnTh.className = "px-4 py-1 rounded-full text-gray-500 font-bold transition-all hover:text-[#0F2C59]";
-            } else {
-                btnTh.className = "px-4 py-1 rounded-full bg-[#0F2C59] text-white shadow-sm font-bold transition-all";
-                btnEn.className = "px-4 py-1 rounded-full text-gray-500 font-bold transition-all hover:text-[#0F2C59]";
-            }
-        }
-
-        // Refresh modal if active
-        if (typeof activeRecord !== 'undefined' && activeRecord) openModal(activeRecord);
-
-        // Update counters if any
-        document.querySelectorAll('.counter').forEach(c => {
-            const target = +c.dataset.target;
-            c.innerText = currentLang === 'th' ? toThaiDigits(target) : target;
-        });
-    };
-
-    if (isChanging) {
-        // 1. Fade out the main containers to avoid jittery individual text layout shifts
-        const fadeTargets = document.querySelectorAll('main, header');
-
-        fadeTargets.forEach(el => {
-            el.style.transition = 'opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)';
-            el.style.opacity = '0';
-            // Slight sinking effect for depth
-            el.style.transform = 'translateY(10px)';
-        });
-
-        // 2. Wait for fade-out to complete, apply changes, and fade-in
-        setTimeout(() => {
-            applyLanguageChanges();
-
-            // Force reflow so the browser acknowledges the newly rendered elements before fading back
-            void document.body.offsetHeight;
-
-            fadeTargets.forEach(el => {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            });
-
-            // Clean up transition styles after it's fully done
-            setTimeout(() => {
-                fadeTargets.forEach(el => {
-                    el.style.transition = '';
-                    el.style.transform = '';
-                    el.style.opacity = '';
-                });
-            }, 300);
-
-        }, 250); // Mapped to the fade-out duration
-    } else {
-        // On initial page load, don't play transition
-        applyLanguageChanges();
-    }
-}
+function setLanguage(lang) { }
 
 const originalRenderGrid = renderGrid;
 renderGrid = function (filterText = "") {

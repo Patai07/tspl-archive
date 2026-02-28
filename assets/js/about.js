@@ -1,24 +1,6 @@
 let currentLang = 'th';
 
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('.lang-th').forEach(el => currentLang === 'en' ? el.classList.add('hidden') : el.classList.remove('hidden'));
-            document.querySelectorAll('.lang-en').forEach(el => currentLang === 'th' ? el.classList.add('hidden') : el.classList.remove('hidden'));
-
-            const btnTh = document.getElementById('lang-btn-th');
-            const btnEn = document.getElementById('lang-btn-en');
-
-            // Apple styling toggle colors
-            if (btnTh && btnEn) {
-                if (currentLang === 'en') {
-                    btnEn.className = "px-3 py-1 rounded-full transition-all bg-[#1d1d1f] text-white shadow-sm font-bold uppercase";
-                    btnTh.className = "px-3 py-1 rounded-full text-[#86868b] font-bold hover:text-[#1d1d1f] transition-all";
-                } else {
-                    btnTh.className = "px-3 py-1 rounded-full transition-all bg-[#1d1d1f] text-white shadow-sm font-bold";
-                    btnEn.className = "px-3 py-1 rounded-full text-[#86868b] font-bold uppercase hover:text-[#1d1d1f] transition-all";
-                }
-            }
-        }
+        function setLanguage(lang) { }
 
         // Add Gimmick: Scroll Reveal
         function revealInit() {

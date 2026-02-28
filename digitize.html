@@ -14,9 +14,10 @@
 <body class="min-h-screen flex flex-col relative overflow-x-hidden blueprint-grid">
 
   <div id="hero-glow"></div>
-  <nav
-        class="sticky top-0 z-[100] w-full bg-white/95 backdrop-blur-md border-b border-gray-100 h-16 transition-all duration-300">
+      <nav
+        class="sticky top-0 z-[100] w-full bg-white border-b border-gray-100 h-16 transition-all duration-300">
         <div class="max-w-[1440px] mx-auto px-6 h-full flex items-center justify-between">
+            <!-- Logo Section -->
             <a href="index.html" class="flex items-center gap-2 group shrink-0"
                 onclick="sessionStorage.removeItem('tspl_preloader_played')">
                 <div
@@ -25,99 +26,88 @@
                 </div>
                 <div class="block">
                     <span
-                        class="font-bold uppercase text-[9px] md:text-[10px] block leading-none mb-0.5 text-[#0F2C59]">TSPL</span>
+                        class="font-extrabold uppercase text-[9px] md:text-[10px] block leading-none mb-0.5 text-[#0F2C59]">TSPL</span>
                     <span class="text-[7px] md:text-[8px] text-gray-400 font-bold uppercase leading-none">Pattern
                         Archive</span>
                 </div>
             </a>
 
-            <!-- Desktop Navigation -->
-            <div class="hidden lg:flex items-center gap-6 text-[10px] font-bold uppercase text-gray-400">
-                <a href="archive.html"
-                    class="nav-link px-4 py-2 bg-[#0F2C59]/5 text-[#0F2C59] hover:bg-[#0F2C59]/10 rounded-full transition-all flex items-center gap-2 border border-[#0F2C59]/10 shadow-[0_2px_10px_rgba(15,44,89,0.05)]">
-                    <i class="ph-fill ph-magnifying-glass text-[#0F2C59]/60"></i>
-                    <span class="lang-th">คลังข้อมูล</span>
-                    
-                </a>
+            <!-- Right-aligned Navigation Group -->
+            <div class="flex items-center gap-8 lg:gap-12">
+                <!-- Desktop Navigation -->
+                <div id="desktop-nav" class="hidden md:flex items-center gap-8 lg:gap-10 text-[11px] font-extrabold uppercase text-[#0F2C59] tracking-wider">
+                    <a href="archive.html"
+                        class="px-5 py-2.5 bg-[#0F2C59] text-white hover:bg-[#0F2C59]/90 rounded-full transition-all flex items-center gap-2.5 shadow-sm">
+                        <i class="ph-fill ph-magnifying-glass text-white/80"></i>
+                        คลังข้อมูล
+                    </a>
 
-                <div class="relative group py-4 -my-4 flex items-center nav-link-group" data-group="pipeline">
-                    <button
-                        class="hover:text-[#0F2C59] transition-colors flex items-center gap-1 uppercase font-bold outline-none">
-                        <span class="lang-th">กระบวนการ</span>
-                        
-                        <i class="ph-bold ph-caret-down text-[10px] transition-transform group-hover:rotate-180"></i>
-                    </button>
-                    <div
-                        class="absolute top-10 left-1/2 -translate-x-1/2 w-48 bg-white/95 backdrop-blur-md border border-gray-100 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 flex flex-col z-[110]">
-                        <a href="capture.html"
-                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
-                            <i class="ph-bold ph-camera text-[#0F2C59]/60 text-sm"></i>
-                            <span class="lang-th">เก็บข้อมูล</span>
-                        </a>
-                        <a href="decode.html"
-                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#D4AF37] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
-                            <i class="ph-bold ph-fingerprint text-[#D4AF37]/60 text-sm"></i>
-                            <span class="lang-th">ถอดรหัส</span>
-                        </a>
-                        <a href="digitize.html"
-                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold">
-                            <i class="ph-bold ph-bezier-curve text-[#0F2C59]/60 text-sm"></i>
-                            <span class="lang-th">แปลงดิจิทัล</span>
-                        </a>
+                    <div class="relative group py-4 -my-4 flex items-center" data-group="pipeline">
+                        <button class="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5 font-extrabold outline-none">
+                            กระบวนการ
+                            <i class="ph-bold ph-caret-down text-[10px] transition-transform group-hover:rotate-180"></i>
+                        </button>
+                        <div class="absolute top-12 left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-3 flex flex-col z-[120]">
+                            <a href="capture.html" class="px-6 py-3 hover:bg-gray-50 text-gray-700 hover:text-[#0F2C59] transition-colors flex items-center gap-4 text-[10px] font-bold border-b border-gray-50">
+                                <i class="ph-bold ph-camera text-[#0F2C59] text-base"></i>
+                                เก็บข้อมูล
+                            </a>
+                            <a href="decode.html" class="px-6 py-3 hover:bg-gray-50 text-gray-700 hover:text-[#D4AF37] transition-colors flex items-center gap-4 text-[10px] font-bold border-b border-gray-50">
+                                <i class="ph-bold ph-fingerprint text-[#D4AF37] text-base"></i>
+                                ถอดรหัส
+                            </a>
+                            <a href="digitize.html" class="px-6 py-3 hover:bg-gray-50 text-gray-700 hover:text-[#0F2C59] transition-colors flex items-center gap-4 text-[10px] font-bold">
+                                <i class="ph-bold ph-bezier-curve text-[#0F2C59] text-base"></i>
+                                แปลงดิจิทัล
+                            </a>
+                        </div>
                     </div>
+
+                    <a href="methodology.html" class="hover:text-[#D4AF37] transition-colors">ระเบียบวิธี</a>
+                    <a href="about.html" class="hover:text-[#D4AF37] transition-colors">ผู้วิจัย</a>
                 </div>
 
-                <a href="methodology.html" class="nav-link hover:text-[#0F2C59] transition-colors">
-                    <span class="lang-th">ระเบียบวิธี</span>
-                </a>
-                <a href="about.html" class="nav-link hover:text-[#0F2C59] transition-colors">
-                    <span class="lang-th">ผู้วิจัย</span>
-                </a>
-            </div>
-
-            <!-- Language and Mobile Menu Toggle -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center bg-gray-100 p-1 rounded-full border border-gray-200 shadow-inner h-8">
-                    <button id="lang-btn-th" onclick="setLanguage('th')"
-                        class="px-3 py-0.5 h-full rounded-full transition-all bg-[#0F2C59] text-white shadow-sm font-bold text-[9px]">TH</button>
-                    <button id="lang-btn-en" onclick="setLanguage('en')"
-                        class="px-3 py-0.5 h-full rounded-full transition-all text-gray-400 font-bold uppercase hover:text-[#0F2C59] text-[9px]">EN</button>
-                </div>
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn"
-                    class="lg:hidden w-8 h-8 flex items-center justify-center text-[#0F2C59] rounded-lg hover:bg-gray-50 transition-colors">
-                    <i class="ph ph-list text-xl"></i>
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobile-menu-btn" class="md:hidden w-11 h-11 flex items-center justify-center text-[#0F2C59] bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all active:scale-90">
+                    <i class="ph-bold ph-list text-2xl"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu Overlay -->
+                <!-- Mobile Menu Overlay (Solid White) -->
         <div id="mobile-menu"
-            class="fixed inset-0 top-16 bg-white/95 backdrop-blur-xl z-[90] flex flex-col p-6 transition-all duration-300 opacity-0 invisible translate-y-2 lg:hidden">
-            <div class="flex flex-col gap-6 text-[14px] font-bold uppercase text-[#0F2C59]">
-                <a href="archive.html" class="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl">
-                    <i class="ph-fill ph-magnifying-glass text-xl"></i>
-                    <span class="lang-th">คลังข้อมูล</span>
+            class="fixed inset-0 top-16 bg-white z-[150] flex flex-col p-8 transition-all duration-300 opacity-0 invisible translate-y-4 md:hidden border-t border-gray-100">
+            <div class="flex flex-col gap-8 text-[22px] font-extrabold uppercase text-[#0F2C59]">
+                <a href="archive.html" class="flex items-center justify-between p-8 bg-gray-50 rounded-[32px] group">
+                    <div class="flex items-center gap-5">
+                        <i class="ph-fill ph-magnifying-glass text-4xl text-[#0F2C59]"></i>
+                        <span class="tracking-widest">คลังข้อมูล</span>
+                    </div>
+                    <i class="ph ph-arrow-right text-3xl text-gray-300 group-hover:translate-x-2 transition-transform"></i>
                 </a>
-                <div class="flex flex-col gap-4 px-4 py-2 border-l-2 border-gray-100 ml-4">
-                    <a href="capture.html" class="flex items-center gap-3 text-gray-500">
-                        <i class="ph ph-camera"></i>
-                        <span class="lang-th">เก็บข้อมูล</span>
+                
+                <div class="flex flex-col gap-8 px-10 py-4 border-l-4 border-gray-100 ml-6">
+                    <a href="capture.html" class="flex items-center gap-5 text-gray-500 hover:text-[#0F2C59]">
+                        <i class="ph ph-camera text-3xl"></i>
+                        <span class="font-bold tracking-wider">เก็บข้อมูล</span>
                     </a>
-                    <a href="decode.html" class="flex items-center gap-3 text-gray-500">
-                        <i class="ph ph-fingerprint"></i>
-                        <span class="lang-th">ถอดรหัส</span>
+                    <a href="decode.html" class="flex items-center gap-5 text-gray-500 hover:text-[#D4AF37]">
+                        <i class="ph ph-fingerprint text-3xl"></i>
+                        <span class="font-bold tracking-wider">ถอดรหัส</span>
                     </a>
-                    <a href="digitize.html" class="flex items-center gap-3 text-gray-500">
-                        <i class="ph ph-bezier-curve"></i>
-                        <span class="lang-th">แปลงดิจิทัล</span>
+                    <a href="digitize.html" class="flex items-center gap-5 text-gray-500 hover:text-[#0F2C59]">
+                        <i class="ph ph-bezier-curve text-3xl"></i>
+                        <span class="font-bold tracking-wider">แปลงดิจิทัล</span>
                     </a>
                 </div>
-                <a href="methodology.html" class="p-4 border-b border-gray-50">
-                    <span class="lang-th">ระเบียบวิธี</span>
+
+                <a href="methodology.html" class="p-8 border-b border-gray-50 flex items-center justify-between">
+                    <span class="tracking-widest">ระเบียบวิธี</span>
+                    <i class="ph ph-caret-right text-gray-400"></i>
                 </a>
-                <a href="about.html" class="p-4 border-b border-gray-50">
-                    <span class="lang-th">ผู้วิจัย</span>
+                <a href="about.html" class="p-8 border-b border-gray-50 flex items-center justify-between">
+                    <span class="tracking-widest">ผู้วิจัย</span>
+                    <i class="ph ph-caret-right text-gray-400"></i>
                 </a>
             </div>
         </div>
@@ -201,7 +191,7 @@
 
               <!-- Ref Info Badge -->
               <div
-                class="absolute bottom-6 left-6 py-2 px-4 bg-[#0F2C59]/80 backdrop-blur-md rounded-full text-white flex items-center gap-2">
+                class="absolute bottom-6 left-6 py-2 px-4 bg-[#0F2C59]/80  rounded-full text-white flex items-center gap-2">
                 <i class="ph-bold ph-bezier-curve text-[10px]"></i>
                 <span class="text-[8px] font-bold uppercase tracking-widest text-white/90">Digital Ref. #03</span>
               </div>

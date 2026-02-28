@@ -26,9 +26,10 @@
     <!-- Navigation Bar -->
 
     <div id="hero-glow"></div>
-    <nav
-        class="sticky top-0 z-[100] w-full bg-white/95 backdrop-blur-md border-b border-gray-100 h-16 transition-all duration-300">
+        <nav
+        class="sticky top-0 z-[100] w-full bg-white border-b border-gray-100 h-16 transition-all duration-300">
         <div class="max-w-[1440px] mx-auto px-6 h-full flex items-center justify-between">
+            <!-- Logo Section -->
             <a href="index.html" class="flex items-center gap-2 group shrink-0"
                 onclick="sessionStorage.removeItem('tspl_preloader_played')">
                 <div
@@ -37,99 +38,88 @@
                 </div>
                 <div class="block">
                     <span
-                        class="font-bold uppercase text-[9px] md:text-[10px] block leading-none mb-0.5 text-[#0F2C59]">TSPL</span>
+                        class="font-extrabold uppercase text-[9px] md:text-[10px] block leading-none mb-0.5 text-[#0F2C59]">TSPL</span>
                     <span class="text-[7px] md:text-[8px] text-gray-400 font-bold uppercase leading-none">Pattern
                         Archive</span>
                 </div>
             </a>
 
-            <!-- Desktop Navigation -->
-            <div class="hidden lg:flex items-center gap-6 text-[10px] font-bold uppercase text-gray-400">
-                <a href="archive.html"
-                    class="nav-link px-4 py-2 bg-[#0F2C59]/5 text-[#0F2C59] hover:bg-[#0F2C59]/10 rounded-full transition-all flex items-center gap-2 border border-[#0F2C59]/10 shadow-[0_2px_10px_rgba(15,44,89,0.05)]">
-                    <i class="ph-fill ph-magnifying-glass text-[#0F2C59]/60"></i>
-                    <span class="lang-th">คลังข้อมูล</span>
-                    
-                </a>
+            <!-- Right-aligned Navigation Group -->
+            <div class="flex items-center gap-8 lg:gap-12">
+                <!-- Desktop Navigation -->
+                <div id="desktop-nav" class="hidden md:flex items-center gap-8 lg:gap-10 text-[11px] font-extrabold uppercase text-[#0F2C59] tracking-wider">
+                    <a href="archive.html"
+                        class="px-5 py-2.5 bg-[#0F2C59] text-white hover:bg-[#0F2C59]/90 rounded-full transition-all flex items-center gap-2.5 shadow-sm">
+                        <i class="ph-fill ph-magnifying-glass text-white/80"></i>
+                        คลังข้อมูล
+                    </a>
 
-                <div class="relative group py-4 -my-4 flex items-center nav-link-group" data-group="pipeline">
-                    <button
-                        class="hover:text-[#0F2C59] transition-colors flex items-center gap-1 uppercase font-bold outline-none">
-                        <span class="lang-th">กระบวนการ</span>
-                        
-                        <i class="ph-bold ph-caret-down text-[10px] transition-transform group-hover:rotate-180"></i>
-                    </button>
-                    <div
-                        class="absolute top-10 left-1/2 -translate-x-1/2 w-48 bg-white/95 backdrop-blur-md border border-gray-100 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 flex flex-col z-[110]">
-                        <a href="capture.html"
-                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
-                            <i class="ph-bold ph-camera text-[#0F2C59]/60 text-sm"></i>
-                            <span class="lang-th">เก็บข้อมูล</span>
-                        </a>
-                        <a href="decode.html"
-                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#D4AF37] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
-                            <i class="ph-bold ph-fingerprint text-[#D4AF37]/60 text-sm"></i>
-                            <span class="lang-th">ถอดรหัส</span>
-                        </a>
-                        <a href="digitize.html"
-                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold">
-                            <i class="ph-bold ph-bezier-curve text-[#0F2C59]/60 text-sm"></i>
-                            <span class="lang-th">แปลงดิจิทัล</span>
-                        </a>
+                    <div class="relative group py-4 -my-4 flex items-center" data-group="pipeline">
+                        <button class="hover:text-[#D4AF37] transition-colors flex items-center gap-1.5 font-extrabold outline-none">
+                            กระบวนการ
+                            <i class="ph-bold ph-caret-down text-[10px] transition-transform group-hover:rotate-180"></i>
+                        </button>
+                        <div class="absolute top-12 left-1/2 -translate-x-1/2 w-56 bg-white border border-gray-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-3 flex flex-col z-[120]">
+                            <a href="capture.html" class="px-6 py-3 hover:bg-gray-50 text-gray-700 hover:text-[#0F2C59] transition-colors flex items-center gap-4 text-[10px] font-bold border-b border-gray-50">
+                                <i class="ph-bold ph-camera text-[#0F2C59] text-base"></i>
+                                เก็บข้อมูล
+                            </a>
+                            <a href="decode.html" class="px-6 py-3 hover:bg-gray-50 text-gray-700 hover:text-[#D4AF37] transition-colors flex items-center gap-4 text-[10px] font-bold border-b border-gray-50">
+                                <i class="ph-bold ph-fingerprint text-[#D4AF37] text-base"></i>
+                                ถอดรหัส
+                            </a>
+                            <a href="digitize.html" class="px-6 py-3 hover:bg-gray-50 text-gray-700 hover:text-[#0F2C59] transition-colors flex items-center gap-4 text-[10px] font-bold">
+                                <i class="ph-bold ph-bezier-curve text-[#0F2C59] text-base"></i>
+                                แปลงดิจิทัล
+                            </a>
+                        </div>
                     </div>
+
+                    <a href="methodology.html" class="hover:text-[#D4AF37] transition-colors">ระเบียบวิธี</a>
+                    <a href="about.html" class="hover:text-[#D4AF37] transition-colors">ผู้วิจัย</a>
                 </div>
 
-                <a href="methodology.html" class="nav-link hover:text-[#0F2C59] transition-colors">
-                    <span class="lang-th">ระเบียบวิธี</span>
-                </a>
-                <a href="about.html" class="nav-link hover:text-[#0F2C59] transition-colors">
-                    <span class="lang-th">ผู้วิจัย</span>
-                </a>
-            </div>
-
-            <!-- Language and Mobile Menu Toggle -->
-            <div class="flex items-center gap-3">
-                <div class="flex items-center bg-gray-100 p-1 rounded-full border border-gray-200 shadow-inner h-8">
-                    <button id="lang-btn-th" onclick="setLanguage('th')"
-                        class="px-3 py-0.5 h-full rounded-full transition-all bg-[#0F2C59] text-white shadow-sm font-bold text-[9px]">TH</button>
-                    <button id="lang-btn-en" onclick="setLanguage('en')"
-                        class="px-3 py-0.5 h-full rounded-full transition-all text-gray-400 font-bold uppercase hover:text-[#0F2C59] text-[9px]">EN</button>
-                </div>
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn"
-                    class="lg:hidden w-8 h-8 flex items-center justify-center text-[#0F2C59] rounded-lg hover:bg-gray-50 transition-colors">
-                    <i class="ph ph-list text-xl"></i>
+                <!-- Mobile Menu Toggle Button -->
+                <button id="mobile-menu-btn" class="md:hidden w-11 h-11 flex items-center justify-center text-[#0F2C59] bg-gray-50 rounded-2xl hover:bg-gray-100 transition-all active:scale-90">
+                    <i class="ph-bold ph-list text-2xl"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Menu Overlay -->
+                <!-- Mobile Menu Overlay (Solid White) -->
         <div id="mobile-menu"
-            class="fixed inset-0 top-16 bg-white/95 backdrop-blur-xl z-[90] flex flex-col p-6 transition-all duration-300 opacity-0 invisible translate-y-2 lg:hidden">
-            <div class="flex flex-col gap-6 text-[14px] font-bold uppercase text-[#0F2C59]">
-                <a href="archive.html" class="flex items-center gap-3 p-4 bg-gray-50 rounded-2xl">
-                    <i class="ph-fill ph-magnifying-glass text-xl"></i>
-                    <span class="lang-th">คลังข้อมูล</span>
+            class="fixed inset-0 top-16 bg-white z-[150] flex flex-col p-8 transition-all duration-300 opacity-0 invisible translate-y-4 md:hidden border-t border-gray-100">
+            <div class="flex flex-col gap-8 text-[22px] font-extrabold uppercase text-[#0F2C59]">
+                <a href="archive.html" class="flex items-center justify-between p-8 bg-gray-50 rounded-[32px] group">
+                    <div class="flex items-center gap-5">
+                        <i class="ph-fill ph-magnifying-glass text-4xl text-[#0F2C59]"></i>
+                        <span class="tracking-widest">คลังข้อมูล</span>
+                    </div>
+                    <i class="ph ph-arrow-right text-3xl text-gray-300 group-hover:translate-x-2 transition-transform"></i>
                 </a>
-                <div class="flex flex-col gap-4 px-4 py-2 border-l-2 border-gray-100 ml-4">
-                    <a href="capture.html" class="flex items-center gap-3 text-gray-500">
-                        <i class="ph ph-camera"></i>
-                        <span class="lang-th">เก็บข้อมูล</span>
+                
+                <div class="flex flex-col gap-8 px-10 py-4 border-l-4 border-gray-100 ml-6">
+                    <a href="capture.html" class="flex items-center gap-5 text-gray-500 hover:text-[#0F2C59]">
+                        <i class="ph ph-camera text-3xl"></i>
+                        <span class="font-bold tracking-wider">เก็บข้อมูล</span>
                     </a>
-                    <a href="decode.html" class="flex items-center gap-3 text-gray-500">
-                        <i class="ph ph-fingerprint"></i>
-                        <span class="lang-th">ถอดรหัส</span>
+                    <a href="decode.html" class="flex items-center gap-5 text-gray-500 hover:text-[#D4AF37]">
+                        <i class="ph ph-fingerprint text-3xl"></i>
+                        <span class="font-bold tracking-wider">ถอดรหัส</span>
                     </a>
-                    <a href="digitize.html" class="flex items-center gap-3 text-gray-500">
-                        <i class="ph ph-bezier-curve"></i>
-                        <span class="lang-th">แปลงดิจิทัล</span>
+                    <a href="digitize.html" class="flex items-center gap-5 text-gray-500 hover:text-[#0F2C59]">
+                        <i class="ph ph-bezier-curve text-3xl"></i>
+                        <span class="font-bold tracking-wider">แปลงดิจิทัล</span>
                     </a>
                 </div>
-                <a href="methodology.html" class="p-4 border-b border-gray-50">
-                    <span class="lang-th">ระเบียบวิธี</span>
+
+                <a href="methodology.html" class="p-8 border-b border-gray-50 flex items-center justify-between">
+                    <span class="tracking-widest">ระเบียบวิธี</span>
+                    <i class="ph ph-caret-right text-gray-400"></i>
                 </a>
-                <a href="about.html" class="p-4 border-b border-gray-50">
-                    <span class="lang-th">ผู้วิจัย</span>
+                <a href="about.html" class="p-8 border-b border-gray-50 flex items-center justify-between">
+                    <span class="tracking-widest">ผู้วิจัย</span>
+                    <i class="ph ph-caret-right text-gray-400"></i>
                 </a>
             </div>
         </div>
@@ -257,11 +247,7 @@
                             <p class="text-[15px] font-normal text-[#86868b]">คณะศิลปกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
                             </p>
                         </div>
-                        <div class="lang-en hidden">
-                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">Ph.D. in Fine and
-                                Applied Arts</h4>
-                            <p class="text-[15px] font-normal text-[#86868b]">Chulalongkorn University</p>
-                        </div>
+                        
                     </div>
                     <div class="flex flex-col">
                         <div class="lang-th">
@@ -269,11 +255,7 @@
                                 (ศิลปศึกษา)</h4>
                             <p class="text-[15px] font-normal text-[#86868b]">คณะครุศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</p>
                         </div>
-                        <div class="lang-en hidden">
-                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">M.Ed. in Art Education
-                            </h4>
-                            <p class="text-[15px] font-normal text-[#86868b]">Chulalongkorn University</p>
-                        </div>
+                        
                     </div>
                     <div class="flex flex-col">
                         <div class="lang-th">
@@ -281,11 +263,7 @@
                                 (ภาพพิมพ์)</h4>
                             <p class="text-[15px] font-normal text-[#86868b]">คณะวิจิตรศิลป์ มหาวิทยาลัยเชียงใหม่</p>
                         </div>
-                        <div class="lang-en hidden">
-                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">B.F.A. in Printmaking
-                            </h4>
-                            <p class="text-[15px] font-normal text-[#86868b]">Chiang Mai University</p>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -514,14 +492,12 @@
                             <div class="flex items-start gap-4">
                                 <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2561</span>
                                 <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
-                                        class="lang-th">เทคนิควาดเส้น. มหาวิทยาลัยนเรศวร.</span><span
-                                        class="lang-en hidden">Drawing Techniques. Naresuan University.</span></p>
+                                        class="lang-th">เทคนิควาดเส้น. มหาวิทยาลัยนเรศวร.</span></p>
                             </div>
                             <div class="flex items-start gap-4">
                                 <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2558</span>
                                 <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
-                                        class="lang-th">องค์ประกอบศิลป์. มหาวิทยาลัยนเรศวร.</span><span
-                                        class="lang-en hidden">Art Composition. Naresuan University.</span></p>
+                                        class="lang-th">องค์ประกอบศิลป์. มหาวิทยาลัยนเรศวร.</span></p>
                             </div>
                             <div class="flex items-start gap-4">
                                 <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2551</span>
@@ -621,68 +597,71 @@
         <div
             class="absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(15,50,160,0.10),transparent_50%)] pointer-events-none">
         </div>
-        <div
-            class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1a3a6e]/60 to-transparent pointer-events-none">
-        </div>
+        
         <div class="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 mb-16 pb-16">
-                <div class="md:col-span-2 text-left text-white font-bold uppercase">
-                    <h3 class="text-white font-bold tracking-[0.5em] uppercase text-xs mb-8 flex items-center gap-3">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 mb-16 pb-16 border-b border-white/5">
+                <!-- Column 1: Mission/Branding -->
+                <div class="space-y-6">
+                    <h3 class="text-white font-bold tracking-[0.5em] uppercase text-xs flex items-center gap-3">
                         TSPL
                     </h3>
-                    <p class="text-[13px] leading-relaxed max-w-sm text-gray-400 font-light normal-case mb-12">
+                    <p class="text-[13px] leading-relaxed max-w-sm text-gray-400 font-light normal-case">
                         Creative research database for cultural heritage management through standardized digital archive
-                        and visual semiotics.</p>
-                    <div class="flex items-center gap-8">
-                        <div
-                            class="bg-white p-3 rounded-2xl hover:scale-105 transition-transform duration-500 shadow-xl border border-gray-100 shrink-0">
+                        and visual semiotics.
+                    </p>
+                    <div class="flex items-center gap-6 pt-4">
+                        <div class="bg-white p-2.5 rounded-xl shadow-xl border border-gray-100 shrink-0">
                             <img src="https://www.ocac.go.th/wp-content/uploads/2021/03/web-logo-ocac2.png" alt="สศร."
-                                class="h-10 w-auto object-contain">
+                                class="h-8 w-auto object-contain">
                         </div>
-                        <div class="leading-snug">
-                            <p class="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37] mb-1">สศร. <span
-                                    class="text-[#D4AF37]/60 font-normal">·</span> OCAC</p>
-                            <p class="text-[10px] font-medium uppercase tracking-tight text-gray-300">Office of
-                                Contemporary Art and Culture</p>
-                            <p class="text-[9px] font-normal text-gray-500 capitalize tracking-wide mt-0.5">Ministry of
-                                Culture, Thailand</p>
+                        <div class="leading-tight">
+                            <p class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#D4AF37]">OCAC</p>
+                            <p class="text-[9px] font-medium text-gray-300">Office of Contemporary Art and Culture</p>
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-white text-[10px] font-bold uppercase tracking-[0.4em] mb-10 border-l border-[#D4AF37] pl-4 leading-none">
-                        Contact</h4>
-                    <p class="text-xs mb-6 hover:text-[#D4AF37] transition-colors cursor-pointer font-light lowercase">
-                        samaporn@example.com</p>
-                    <p class="text-xs tracking-widest font-light lowercase hover:text-[#D4AF37] transition-colors">
-                        www.samaporn.com</p>
+
+                <!-- Column 2: Contact -->
+                <div class="space-y-8">
+                    <h4 class="text-white text-[10px] font-bold uppercase tracking-[0.4em] border-l-2 border-[#D4AF37] pl-4 leading-none">
+                        Contact
+                    </h4>
+                    <div class="space-y-4">
+                        <p class="text-xs text-gray-400 hover:text-[#D4AF37] transition-colors cursor-pointer font-light">
+                            samaporn@example.com
+                        </p>
+                        <p class="text-xs text-gray-400 tracking-widest font-light hover:text-[#D4AF37] transition-colors">
+                            www.samaporn.com
+                        </p>
+                    </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-white text-[10px] font-bold uppercase tracking-[0.4em] mb-10 border-l border-[#D4AF37] pl-4 leading-none">
-                        Institution</h4>
+
+                <!-- Column 3: Institution -->
+                <div class="space-y-8">
+                    <h4 class="text-white text-[10px] font-bold uppercase tracking-[0.4em] border-l-2 border-[#D4AF37] pl-4 leading-none">
+                        Institution
+                    </h4>
                     <div class="flex items-start gap-4">
-                        <div
-                            class="bg-white p-2 rounded-xl shrink-0 border border-gray-100 flex items-center justify-center w-12 h-12 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                        <div class="bg-white p-2 rounded-xl shrink-0 border border-gray-100 flex items-center justify-center w-12 h-12 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                             <img src="assets/nu_logo.png?v=123" alt="NU Logo" class="w-full h-full object-contain">
                         </div>
-                        <div>
-                            <p
-                                class="text-[10px] leading-relaxed font-bold uppercase tracking-widest text-[#D4AF37] mb-0.5">
-                                Naresuan University</p>
-                            <p class="text-[9px] leading-relaxed font-light uppercase text-gray-400 tracking-widest">
-                                Faculty of Architecture<br>Art and Design</p>
+                        <div class="space-y-1">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">
+                                Naresuan University
+                            </p>
+                            <p class="text-[9px] font-light uppercase text-gray-500 tracking-widest leading-relaxed">
+                                Faculty of Architecture<br>Art and Design
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div
-                class="flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.5em] text-gray-600">
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-[9px] font-bold uppercase tracking-[0.5em] text-gray-600">
                 <p>&copy; 2026 THAI SYMBOL PATTERN LAB. ALL RIGHTS RESERVED.</p>
                 <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-                    class="mt-8 md:mt-0 flex items-center gap-3 text-[#D4AF37] hover:text-white transition-all group bg-white/5 px-6 py-2.5 rounded-full border border-[#1a3a6e]/50 uppercase font-bold">
-                    TOP <i class="ph ph-arrow-up text-lg"></i>
+                    class="mt-8 md:mt-0 flex items-center gap-3 text-[#D4AF37] hover:text-white transition-all group bg-white/5 px-6 py-2.5 rounded-full border border-white/5 uppercase font-bold text-[10px]">
+                    TOP <i class="ph ph-arrow-up text-base"></i>
                 </button>
             </div>
         </div>
