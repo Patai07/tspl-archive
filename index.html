@@ -432,21 +432,28 @@
     <!-- UNIFIED STICKY STACK CONTAINER -->
     <div class="relative overflow-visible pb-32">
         <!-- RESEARCH PIPELINE SECTION (Header) -->
-        <section class="pt-32 mb-16 px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto">
-                <div class="flex flex-col items-center text-center">
-                    <div class="flex items-center gap-3 mb-6">
+        <section class="pt-32 mb-16 px-6 lg:px-8 relative">
+            <div class="max-w-4xl mx-auto flex flex-col items-center text-center relative">
+                <!-- Large Decorative Watermark behind -->
+                <div
+                    class="absolute -top-12 inset-x-0 flex justify-center overflow-hidden pointer-events-none opacity-[0.05]">
+                    <span
+                        class="text-[120px] md:text-[160px] font-black uppercase tracking-tighter leading-none select-none">Process</span>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex items-center justify-center gap-3 mb-6">
                         <div class="w-8 h-px bg-[#D4AF37]/30"></div>
                         <h2 class="text-[10px] font-black text-[#D4AF37] uppercase tracking-[0.5em] leading-none">
-                            <span class="lang-th">ขั้นตอนการวิจัย</span>
+                            <span class="lang-th">ขั้นตอนการดำเนินงาน</span>
                         </h2>
                         <div class="w-8 h-px bg-[#D4AF37]/30"></div>
                     </div>
                     <h3
                         class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0F2C59] tracking-tighter mb-8 leading-tight">
-                        <span class="lang-th">Research Pipeline</span>
+                        <span class="lang-th">กระบวนการ</span>
                     </h3>
-                    <p class="text-[15px] md:text-lg text-gray-500 font-medium leading-relaxed max-w-2xl">
+                    <p class="text-[15px] md:text-lg text-gray-500 font-medium leading-relaxed max-w-2xl mx-auto">
                         <span
                             class="lang-th">กระบวนการจัดเก็บและแปรรูปข้อมูลมรดกวัฒนธรรมท้องถิ่นสู่ระบบดิจิทัลที่ได้มาตรฐาน
                             ผ่าน ๓ ขั้นตอนหลักที่เน้นความถูกต้องและลุ่มลึก</span>
@@ -489,7 +496,7 @@
                     </div>
                     <h3
                         class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-[#0F2C59] leading-none">
-                        Capture</h3>
+                        เก็บข้อมูล</h3>
                     <p
                         class="text-[15px] md:text-[16px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors max-w-2xl">
                         <span class="lang-th">บันทึกหลักฐานภาคสนาม
@@ -547,7 +554,7 @@
                     </div>
                     <h3
                         class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-[#0F2C59] leading-none">
-                        Decode</h3>
+                        ถอดรหัส</h3>
                     <p
                         class="text-[15px] md:text-[16px] text-gray-500 font-normal leading-relaxed group-hover:text-gray-700 transition-colors max-w-2xl">
                         <span class="lang-th">สกัดและถอดรหัสหน่วยคำย่อย (Morphemes)
@@ -608,7 +615,7 @@
                     </div>
                     <h3
                         class="text-[32px] md:text-[40px] font-black mb-3 md:mb-4 tracking-tight uppercase text-white leading-none">
-                        Digitize</h3>
+                        แปลงดิจิทัล</h3>
                     <p
                         class="text-[15px] md:text-[16px] text-gray-300 font-normal leading-relaxed group-hover:text-white/95 transition-colors max-w-2xl">
                         <span
@@ -641,25 +648,35 @@
             </div>
 
             <!-- Methodology Header -->
-            <div class="max-w-4xl mx-auto px-6 lg:px-8 mb-20">
-                <div class="flex flex-col items-center text-center">
-                    <!-- Overline Badge -->
+            <div class="max-w-4xl mx-auto px-6 lg:px-8 mb-20 relative">
+                <div class="flex flex-col items-center text-center relative">
+                    <!-- Large Decorative Watermark behind -->
                     <div
-                        class="px-4 py-2 bg-white/5 border border-white/10 rounded-full inline-flex items-center gap-3 mb-8 backdrop-blur-sm">
-                        <span class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-pulse"></span>
-                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Methodology &
-                            Framework</span>
+                        class="absolute -top-12 inset-x-0 flex justify-center overflow-hidden pointer-events-none opacity-[0.05]">
+                        <span
+                            class="text-[120px] md:text-[160px] font-black uppercase tracking-tighter leading-none select-none text-white">Methodology</span>
                     </div>
 
-                    <h2
-                        class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter mb-8 leading-[1.1]">
-                        <span class="lang-th uppercase">ระเบียบวิธีและกรอบการวิเคราะห์</span>
-                    </h2>
+                    <div class="relative z-10 w-full">
+                        <!-- Overline Badge -->
+                        <div
+                            class="px-4 py-2 bg-white/5 border border-white/10 rounded-full inline-flex items-center gap-3 mb-8 backdrop-blur-sm">
+                            <span class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-pulse"></span>
+                            <span class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] font-black">
+                                <span class="lang-th">กรอบแนวคิดการวิจัย</span>
+                            </span>
+                        </div>
 
-                    <p class="text-[15px] md:text-lg text-gray-400 font-medium leading-relaxed max-w-3xl">
-                        <span class="lang-th">โครงสร้างทางวิชาการที่ใช้ในการถอดรหัสและตีความสัญนิยมของลวดลาย
-                            เพื่อเปลี่ยนพิกัดดั้งเดิมสู่ชุดข้อมูลที่สามารถประยุกต์ใช้ในบริบทสมัยใหม่</span>
-                    </p>
+                        <h2
+                            class="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter mb-8 leading-[1.1]">
+                            <span class="lang-th uppercase">ระเบียบวิธี</span>
+                        </h2>
+
+                        <p class="text-[15px] md:text-lg text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
+                            <span class="lang-th">โครงสร้างทางวิชาการที่ใช้ในการถอดรหัสและตีความสัญนิยมของลวดลาย
+                                เพื่อเปลี่ยนพิกัดดั้งเดิมสู่ชุดข้อมูลที่สามารถประยุกต์ใช้ในบริบทสมัยใหม่</span>
+                        </p>
+                    </div>
                 </div>
             </div>
             <!-- Unified Outstanding Methodology Presentation -->
@@ -808,21 +825,21 @@
                 <div
                     class="absolute -top-12 inset-x-0 flex justify-center overflow-hidden pointer-events-none opacity-[0.05]">
                     <span
-                        class="text-[120px] md:text-[160px] font-black uppercase tracking-tighter leading-none select-none">Registry</span>
+                        class="text-[120px] md:text-[160px] font-black uppercase tracking-tighter leading-none select-none">Archive</span>
                 </div>
 
-                <div class="relative z-10">
+                <div class="relative z-10 w-full">
                     <div class="flex items-center justify-center gap-3 mb-6">
                         <div class="w-8 h-px bg-[#0F2C59]/20"></div>
                         <h2 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.5em] leading-none">
-                            <span class="lang-th">Archive Registry</span>
+                            <span class="lang-th">สำรวจคลังข้อมูล</span>
                         </h2>
                         <div class="w-8 h-px bg-[#0F2C59]/20"></div>
                     </div>
 
                     <h3
                         class="text-4xl md:text-5xl lg:text-6xl font-black text-[#0F2C59] tracking-tighter mb-8 leading-tight">
-                        <span class="lang-th">คลังระเบียนลวดลาย</span>
+                        <span class="lang-th">คลังข้อมูล</span>
                     </h3>
 
                     <p class="text-[15px] md:text-lg text-gray-500 font-medium leading-relaxed max-w-3xl mx-auto mb-10">
