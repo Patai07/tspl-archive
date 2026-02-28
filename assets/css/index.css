@@ -487,35 +487,84 @@ html {
     }
 }
 
-/* --- CAMERA FLASH EFFECT --- */
-@keyframes camera-flash {
+/* --- PREMIUM CAPTURE FLASH (Horizontal Lens Flare) --- */
+@keyframes horiz-flash {
     0% {
         opacity: 0;
-        transform: scale(0.5) translate(-50%, -50%);
-        transform-origin: top left;
+        width: 0;
+        transform: translate(-50%, -50%) scaleY(0.2);
     }
 
     15% {
-        opacity: 0.9;
-        transform: scale(1.2) translate(-50%, -50%);
-        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
+        opacity: 1;
+        width: 250%;
+        transform: translate(-50%, -50%) scaleY(3);
+        box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.9), 0 0 10px 2px rgba(15, 44, 89, 0.5);
     }
 
-    25% {
+    40% {
         opacity: 1;
-        transform: scale(1) translate(-50%, -50%);
-        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+        width: 150%;
+        transform: translate(-50%, -50%) scaleY(1);
+        box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.4);
     }
 
     100% {
         opacity: 0;
-        transform: scale(2) translate(-50%, -50%);
+        width: 0;
+        transform: translate(-50%, -50%) scaleY(0.1);
         box-shadow: none;
     }
 }
 
-.group:hover .flash-indicator {
-    animation: camera-flash 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+.group:hover .horizontal-flash {
+    animation: horiz-flash 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- PREMIUM DECODE SCANNER LINE --- */
+@keyframes scan-laser {
+    0% {
+        top: -10%;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    80% {
+        top: 110%;
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0;
+        top: 110%;
+    }
+
+    100% {
+        opacity: 0;
+        top: -10%;
+    }
+}
+
+.group:hover .scan-line {
+    animation: scan-laser 2.5s cubic-bezier(0.65, 0, 0.35, 1) infinite alternate;
+}
+
+/* --- PREMIUM DIGITIZE SHIMMER SWEEP --- */
+@keyframes shimmer-sweep {
+    0% {
+        transform: translateX(-200%) skewX(-20deg);
+    }
+
+    100% {
+        transform: translateX(250%) skewX(-20deg);
+    }
+}
+
+.group:hover .shimmer-effect {
+    animation: shimmer-sweep 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
 /* Ticker Animation */
