@@ -487,6 +487,37 @@ html {
     }
 }
 
+/* --- CAMERA FLASH EFFECT --- */
+@keyframes camera-flash {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translate(-50%, -50%);
+        transform-origin: top left;
+    }
+
+    15% {
+        opacity: 0.9;
+        transform: scale(1.2) translate(-50%, -50%);
+        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.8);
+    }
+
+    25% {
+        opacity: 1;
+        transform: scale(1) translate(-50%, -50%);
+        box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.5);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(2) translate(-50%, -50%);
+        box-shadow: none;
+    }
+}
+
+.group:hover .flash-indicator {
+    animation: camera-flash 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
 /* Ticker Animation */
 @keyframes ticker-scroll {
     0% {
