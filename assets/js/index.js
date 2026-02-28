@@ -586,21 +586,7 @@ function revealInit() {
     }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
 
-    // Pipeline scroll-merge observer
-    const pipelineContainer = document.getElementById('pipeline-container');
-    if (pipelineContainer) {
-        const pipelineObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('is-merged');
-                    }, 300); // Small delay to let user see them separate before merging
-                    pipelineObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.3 }); // Trigger when 30% visible
-        pipelineObserver.observe(pipelineContainer);
-    }
+    // Pipeline scroll-merge observer removed in favor of sticky card stack
 }
 
 // --- 3D TILT EFFECT (REMOVED) ---

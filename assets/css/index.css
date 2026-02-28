@@ -479,57 +479,7 @@ html {
     display: inline-block;
 }
 
-/* --- RESEARCH PIPELINE SCROLL-MERGE --- */
-#pipeline-container.is-merged {
-    gap: 0;
-    background-color: #ffffff;
-    box-shadow: 0 40px 100px rgba(15, 44, 89, 0.08);
-    border-color: #f3f4f6;
-}
-
-#pipeline-container.is-merged .pipeline-card {
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    transform: translateY(0);
-    opacity: 1;
-}
-
-#pipeline-container.is-merged .pipeline-card:first-child {
-    border-top-left-radius: 2.5rem;
-    border-top-right-radius: 2.5rem;
-}
-
-#pipeline-container.is-merged .pipeline-card:last-child {
-    border-bottom-left-radius: 2.5rem;
-    border-bottom-right-radius: 2.5rem;
-}
-
-@media (min-width: 1024px) {
-    #pipeline-container.is-merged .pipeline-card:not(:last-child) {
-        border-right: 1px solid #f3f4f6;
-    }
-
-    #pipeline-container.is-merged .pipeline-card:first-child {
-        border-bottom-left-radius: 2.5rem;
-        border-top-right-radius: 0;
-    }
-
-    #pipeline-container.is-merged .pipeline-card:last-child {
-        border-top-right-radius: 2.5rem;
-        border-bottom-left-radius: 0;
-    }
-}
-
-@media (max-width: 1023px) {
-    #pipeline-container.is-merged .pipeline-card:not(:last-child) {
-        border-bottom: 1px solid #f3f4f6;
-    }
-}
-
-#pipeline-container.is-merged .card-accent {
-    opacity: 0;
-}
+/* Sticky card stack layouts are handled purely by Tailwind classes in HTML */
 
 @media (pointer: fine) {
     input {
