@@ -1,0 +1,100 @@
+:root {
+    --tspl-gold: #D4AF37;
+    --tspl-blue: #0F2C59;
+    --bg-apple: #fbfbfd;
+}
+
+body {
+    font-family: 'Space Grotesk', 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--bg-apple);
+    color: #0F2C59;
+    letter-spacing: -0.01em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: -0.02em;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #e5e7eb;
+    border-radius: 10px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.lang-th,
+.lang-en {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Timeline */
+
+/* Gimmick: เส้น Timeline สำหรับส่วนประวัติการศึกษา */
+.timeline-line::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 24px;
+    bottom: -10px;
+    width: 1px;
+    background-color: #f3f4f6;
+    z-index: 0;
+}
+
+.group:last-child .timeline-line::before {
+    display: none;
+}
+
+/* Advanced Gimmicks */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-glow {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    animation: pulse-glow 8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% {
+        transform: scale(1) translate(0, 0);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.2) translate(-20px, 20px);
+        opacity: 1;
+    }
+}

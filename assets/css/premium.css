@@ -1,0 +1,128 @@
+/**
+ * TSPL Premium CSS
+ * ================
+ * Supporting styles for all premium micro-interactions.
+ * These CANNOT be replicated with Tailwind alone — they rely
+ * on CSS custom properties set by JavaScript at runtime.
+ */
+
+/* ====================================================
+   EFFECT 2: SPECULAR CARD SHEEN
+   A radial gradient "light spot" positioned via --mx / --my
+   CSS custom properties that are updated by JS on mousemove.
+   The after-pseudo-element overlays the gradient independently
+   of the card's own background, preserving glassmorphism.
+   ==================================================== */
+.has-specular {
+    position: relative;
+    overflow: hidden;
+}
+
+.has-specular::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle 160px at var(--mx, 50%) var(--my, 50%),
+            rgba(255, 220, 80, 0.14),
+            rgba(255, 210, 0, 0.04) 40%,
+            transparent 70%);
+    pointer-events: none;
+    border-radius: inherit;
+    transition: opacity 0.2s;
+    z-index: 10;
+}
+
+
+/* ====================================================
+   EFFECT 3: CHAR-BY-CHAR STAGGER REVEAL
+   Each .hero-char starts invisible + blurred + shifted down.
+   The CSS animation brings it to the final resting state.
+   The animation-delay is set inline by JS per character.
+   ==================================================== */
+/* hero-char stagger removed — was animating 100+ spans simultaneously → jank source */
+
+
+/* ====================================================
+   EFFECT 4: GOLD CURSOR TRAIL
+   Each particle is a fixed-positioned div with a gold
+   radial-gradient fill. CSS custom properties --dx, --dy
+   are set per-particle by JS with random values, creating
+   unique trajectories for each.
+   ==================================================== */
+.cursor-trail-dot {
+    position: fixed;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%,
+            rgba(255, 240, 120, 1),
+            rgba(255, 180, 0, 0.6) 50%,
+            rgba(212, 130, 0, 0) 100%);
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    animation: trail-particle 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes trail-particle {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+
+    30% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0;
+        transform:
+            translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, -60px))) rotate(var(--r, 180deg)) scale(0.1);
+    }
+}
+
+
+/* ====================================================
+   HERO GOLD GLOW — Pulsing luminous text effect
+   Applied to the accent headline in the dark hero section.
+   The 3-stop animation creates a breathing glow pattern
+   that cannot be achieved with a simple CSS transition.
+   ==================================================== */
+/* GPU-compositor glow: filter: drop-shadow animates on compositor thread
+   (no paint, no layout) — visually identical to text-shadow but jank-free. */
+@keyframes gold-pulse-glow {
+
+    0%,
+    100% {
+        filter:
+            drop-shadow(0 0 6px rgba(255, 185, 0, 0.55)) drop-shadow(0 0 20px rgba(255, 150, 0, 0.20));
+    }
+
+    50% {
+        filter:
+            drop-shadow(0 0 12px rgba(255, 195, 0, 0.75)) drop-shadow(0 0 32px rgba(255, 155, 0, 0.38)) drop-shadow(0 0 60px rgba(255, 120, 0, 0.15));
+    }
+}
+
+.hero-gold-glow {
+    animation: gold-pulse-glow 4s ease-in-out infinite;
+    will-change: filter;
+}
+
+
+/* ====================================================
+   AURORA CANVAS — no extra CSS needed as styles are
+   set inline in JS. But ensure hero has overflow:hidden.
+   ==================================================== */
+header {
+    overflow: hidden;
+}
+
+/* Ensure content sections sits above the aurora canvas */
+header>.max-w-\[1440px\] {
+    position: relative;
+    z-index: 10;
+}
+
+header>.absolute {
+    z-index: 3;
+}

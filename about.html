@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Asst.Prof.Dr.Samaporn Klayvichien</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- โหลด Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- โหลด Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/premium.css">
+</head>
+
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Navigation Bar (matches index.html) -->
+    <!-- Navigation Bar -->
+
+    <div id="hero-glow"></div>
+    <nav
+        class="sticky top-0 z-[60] w-full bg-white/90 backdrop-blur-sm border-b border-gray-100 h-16 transition-all duration-300">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group"
+                onclick="sessionStorage.removeItem('tspl_preloader_played')">
+                <div
+                    class="w-9 h-9 bg-[#0F2C59] flex items-center justify-center rounded-lg shadow-lg shadow-[#0F2C59]/10 transition-transform group-hover:scale-105">
+                    <i class="ph-fill ph-square-half text-white text-lg"></i>
+                </div>
+                <div class="hidden sm:block">
+                    <span
+                        class="font-bold tracking-[0.3em] uppercase text-[10px] block leading-none mb-0.5 text-[#0F2C59]">TSPL</span>
+                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-widest leading-none">Pattern
+                        Archive</span>
+                </div>
+            </a>
+
+            <div
+                class="flex items-center gap-4 md:gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                <a href="archive.html" data-page="archive.html"
+                    class="nav-link px-4 py-2 bg-[#0F2C59]/5 text-[#0F2C59] hover:bg-[#0F2C59]/10 rounded-full transition-all flex items-center gap-2 border border-[#0F2C59]/10 shadow-[0_2px_10px_rgba(15,44,89,0.05)]"
+                    data-page="archive.html">
+                    <i class="ph-fill ph-magnifying-glass text-[#0F2C59]/60"></i>
+                    <span class="lang-container">
+                        <span class="lang-th">คลังข้อมูล</span>
+                        <span class="lang-en hidden">Explorer</span>
+                    </span>
+                </a>
+
+                <div class="relative group py-4 -my-4 flex items-center nav-link-group" data-group="pipeline">
+                    <button
+                        class="hover:text-[#0F2C59] transition-colors flex items-center gap-1 uppercase tracking-[0.2em] font-bold outline-none">
+                        <span class="lang-container">
+                            <span class="lang-th">กระบวนการ</span>
+                            <span class="lang-en hidden">Pipeline</span>
+                        </span>
+                        <i class="ph-bold ph-caret-down text-[10px] transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <!-- Dropdown -->
+                    <div
+                        class="absolute top-10 left-1/2 -translate-x-1/2 w-48 bg-white/95 backdrop-blur-md border border-gray-100 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 flex flex-col z-[70]">
+                        <a href="capture.html"
+                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
+                            <i class="ph-bold ph-camera text-[#0F2C59]/60 text-sm"></i>
+                            <span class="lang-container">
+                                <span class="lang-th">เก็บข้อมูล</span>
+                                <span class="lang-en hidden">Capture</span>
+                            </span>
+                        </a>
+                        <a href="decode.html"
+                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#D4AF37] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
+                            <i class="ph-bold ph-fingerprint text-[#D4AF37]/60 text-sm"></i>
+                            <span class="lang-container">
+                                <span class="lang-th">ถอดรหัส</span>
+                                <span class="lang-en hidden">Decode</span>
+                            </span>
+                        </a>
+                        <a href="digitize.html"
+                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold">
+                            <i class="ph-bold ph-bezier-curve text-[#0F2C59]/60 text-sm"></i>
+                            <span class="lang-container">
+                                <span class="lang-th">แปลงดิจิทัล</span>
+                                <span class="lang-en hidden">Digitize</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="methodology.html" data-page="methodology.html"
+                    class="nav-link hover:text-[#0F2C59] transition-colors" data-page="methodology.html">
+                    <span class="lang-container">
+                        <span class="lang-th">ระเบียบวิธี</span>
+                        <span class="lang-en hidden">Methodology</span>
+                    </span>
+                </a>
+                <a href="about.html" data-page="about.html" class="nav-link hover:text-[#0F2C59] transition-colors"
+                    data-page="about.html">
+                    <span class="lang-container">
+                        <span class="lang-th">ผู้วิจัย</span>
+                        <span class="lang-en hidden">Biography</span>
+                    </span>
+                </a>
+                <div
+                    class="flex items-center bg-gray-100 p-1 rounded-full border border-gray-200 ml-2 shadow-inner h-8">
+                    <button id="lang-btn-th" onclick="setLanguage('th')"
+                        class="px-3 py-0.5 h-full rounded-full transition-all bg-[#0F2C59] text-white shadow-sm font-bold">TH</button>
+                    <button id="lang-btn-en" onclick="setLanguage('en')"
+                        class="px-3 py-0.5 h-full rounded-full transition-all text-gray-500 font-bold uppercase hover:text-[#0F2C59]">EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Header — White + Blueprint Grid -->
+    <header class="relative w-full pt-20 pb-16 overflow-hidden bg-white border-b border-gray-100">
+        <!-- Blueprint grid pattern at reduced opacity so it doesn't fight content -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute inset-0 bg-grid-pattern opacity-[0.35]"></div>
+            <!-- Radial white vignette — center readable, edges show pattern -->
+            <div
+                class="absolute inset-0 bg-[radial-gradient(ellipse_80%_90%_at_38%_50%,rgba(255,255,255,0.92),rgba(255,255,255,0.6)_55%,transparent)]">
+            </div>
+        </div>
+
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Section label -->
+            <div class="flex items-center gap-3 mb-10">
+                <div class="w-1 h-8 bg-[#0F2C59] rounded-full"></div>
+                <span class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400"><span
+                        class="lang-th">ประวัติ</span><span class="lang-en hidden">Biography</span></span>
+            </div>
+
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-10 md:gap-14">
+
+                <!-- Profile Photo -->
+                <div class="shrink-0">
+                    <div
+                        class="w-36 h-36 md:w-44 md:h-44 rounded-2xl overflow-hidden border border-gray-100 shadow-[0_8px_32px_rgba(15,44,89,0.12)]">
+                        <img src="https://scontent.fbkk22-3.fna.fbcdn.net/v/t39.30808-6/548851850_10213438127783327_1839035333001885217_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=53a332&_nc_eui2=AeFeiVbf5A68g1YrXI8RxVlsg9b29UYELB6D1vb1RgQsHj5WgaCz0R73iBaE-KT9-nCSjDzwRjv7GLLTZ57Tm1hG&_nc_ohc=Y8cG36p9pWYQ7kNvwGq-chc&_nc_oc=AdlWPEt8ERjSGOdZPrIi_Mp0tqX-nO5RQ2exELH7oEVQXeho2iwhCtyCKEZ2T_geE_I&_nc_zt=23&_nc_ht=scontent.fbkk22-3.fna&_nc_gid=bqiUOMIHFiIkB4kd_pv6vg&oh=00_Afv1L3rYemdFEaapU3_tnf8XnjEXu-FS9_-6OUvOkz8fJA&oe=69A4F7BD"
+                            alt="Samaporn Klayvichien" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Text block -->
+                <div class="text-center md:text-left flex-1">
+
+                    <!-- Academic title — eyebrow with gold accent -->
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-3">
+                        <span
+                            class="inline-flex items-center gap-1.5 bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-full px-3 py-1">
+                            <span class="w-1 h-1 rounded-full bg-[#D4AF37]"></span>
+                            <span class="text-[10px] font-bold text-[#0F2C59] tracking-[0.3em] uppercase">
+                                <span class="lang-th">ผศ. ดร.</span>
+                                <span class="lang-en hidden">Asst. Prof. Dr.</span>
+                            </span>
+                        </span>
+                    </div>
+
+                    <!-- Name — h1 primary -->
+                    <h1
+                        class="text-4xl sm:text-5xl md:text-[3.5rem] font-extrabold tracking-tight text-[#0F2C59] mb-2 leading-[1.05]">
+                        <span class="lang-th">สะมาภรณ์ คล้ายวิเชียร</span>
+                        <span class="lang-en hidden">Samaporn Klayvichien</span>
+                    </h1>
+
+                    <!-- Roles — secondary -->
+                    <p
+                        class="text-[13px] text-gray-400 font-medium tracking-widest uppercase mb-7 flex items-center justify-center md:justify-start gap-3">
+                        <span class="lang-th">ศิลปิน</span><span class="lang-en hidden">Artist</span>
+                        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                        <span class="lang-th">นักวิจัย</span><span class="lang-en hidden">Researcher</span>
+                        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                        <span class="lang-th">อาจารย์</span><span class="lang-en hidden">Educator</span>
+                    </p>
+
+                    <!-- Institution + Contact -->
+                    <div
+                        class="flex flex-col sm:flex-row items-center md:items-start gap-5 pt-6 border-t border-gray-100 w-fit mx-auto md:mx-0">
+                        <!-- Affiliation block -->
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="bg-white p-1.5 rounded-xl border border-gray-100 shadow-sm flex items-center justify-center w-10 h-10 shrink-0">
+                                <img src="assets/nu_logo.png?v=123" alt="NU Logo" class="w-full h-full object-contain">
+                            </div>
+                            <div class="text-left">
+                                <p class="text-[11px] font-bold text-[#0F2C59] leading-snug mb-0.5">
+                                    <span class="lang-th">คณะสถาปัตยกรรมศาสตร์ ศิลปะและการออกแบบ</span>
+                                    <span class="lang-en hidden">Faculty of Architecture, Art and Design</span>
+                                </p>
+                                <p class="text-[10px] text-gray-400 font-normal">
+                                    <span class="lang-th">มหาวิทยาลัยนเรศวร</span>
+                                    <span class="lang-en hidden">Naresuan University</span>
+                                </p>
+                                <p class="text-[10px] text-[#D4AF37]/80 font-semibold tracking-wider uppercase mt-0.5">
+                                    <span class="lang-th">สาขาวิชาการออกแบบ</span>
+                                    <span class="lang-en hidden">Department of Design</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="hidden sm:block w-px h-10 bg-gray-200"></div>
+                        <!-- Contact -->
+                        <a href="mailto:samaporn@example.com" class="flex items-center gap-2 group">
+                            <div
+                                class="w-9 h-9 rounded-full bg-[#0F2C59]/5 border border-[#0F2C59]/10 text-[#0F2C59] flex items-center justify-center group-hover:bg-[#0F2C59] group-hover:text-white transition-all duration-300 shrink-0">
+                                <i class="ph ph-envelope-simple text-base"></i>
+                            </div>
+                            <span
+                                class="text-[12px] font-medium text-gray-400 group-hover:text-[#0F2C59] transition-colors">Contact</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Main CV Content -->
+    <main id="biography" style="max-width: 1080px;" class="px-8 md:px-12 pb-32 max-w-[1200px] mx-auto w-full flex-grow">
+        <!-- Education -->
+        <section class="py-12 border-b border-gray-200/60 reveal">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                <div class="w-full md:w-1/4 shrink-0">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#0F2C59]">
+                        <span class="lang-th">การศึกษา</span>
+                        <span class="lang-en hidden">Education</span>
+                    </h2>
+                </div>
+                <div class="w-full md:w-3/4 flex flex-col gap-6">
+                    <div class="flex flex-col">
+                        <div class="lang-th">
+                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">
+                                ศิลปกรรมศาสตรดุษฎีบัณฑิต (ศป.ด)</h4>
+                            <p class="text-[15px] font-normal text-[#86868b]">คณะศิลปกรรมศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย
+                            </p>
+                        </div>
+                        <div class="lang-en hidden">
+                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">Ph.D. in Fine and
+                                Applied Arts</h4>
+                            <p class="text-[15px] font-normal text-[#86868b]">Chulalongkorn University</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="lang-th">
+                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">ครุศาสตรมหาบัณฑิต (คม.)
+                                (ศิลปศึกษา)</h4>
+                            <p class="text-[15px] font-normal text-[#86868b]">คณะครุศาสตร์ จุฬาลงกรณ์มหาวิทยาลัย</p>
+                        </div>
+                        <div class="lang-en hidden">
+                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">M.Ed. in Art Education
+                            </h4>
+                            <p class="text-[15px] font-normal text-[#86868b]">Chulalongkorn University</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="lang-th">
+                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">ศิลปบัณฑิต (ศบ.)
+                                (ภาพพิมพ์)</h4>
+                            <p class="text-[15px] font-normal text-[#86868b]">คณะวิจิตรศิลป์ มหาวิทยาลัยเชียงใหม่</p>
+                        </div>
+                        <div class="lang-en hidden">
+                            <h4 class="font-semibold text-lg text-[#0F2C59] tracking-tight mb-1">B.F.A. in Printmaking
+                            </h4>
+                            <p class="text-[15px] font-normal text-[#86868b]">Chiang Mai University</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grants & Awards -->
+        <section class="py-12 border-b border-gray-200/60 reveal">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                <div class="w-full md:w-1/4 shrink-0">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#0F2C59]">
+                        <span class="lang-th">ทุนและรางวัล</span>
+                        <span class="lang-en hidden">Grants & Awards</span>
+                    </h2>
+                </div>
+                <div class="w-full md:w-3/4 flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8 group">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2562</span><span class="lang-en hidden">2019</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <span class="lang-th">รางวัลที่ 2 STYLE BANGKOK "T-STYLE BIG TOY DESIGN 2019"
+                                (ออกแบบของเล่นสำหรับคุณปู่ คุณย่า)</span>
+                            <span class="lang-en hidden">2nd Prize, STYLE BANGKOK "T-STYLE BIG TOY DESIGN 2019" (Toy
+                                Design for the Elderly)</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8 group">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2551-54</span><span class="lang-en hidden">2008-11</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <span class="lang-th">ทุนสกอ.
+                                (โครงข่ายเชิงกลยุทธ์เพื่อผลิตและพัฒนาอาจารย์ในสถาบันอุดมศึกษา)</span>
+                            <span class="lang-en hidden">CHE Strategic Network for Faculty Development Grant</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8 group">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2545</span><span class="lang-en hidden">2002</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <span class="lang-th">ทุนสนับสนุนการทำวิจัยจากจุฬาลงกรณ์มหาวิทยาลัย</span>
+                            <span class="lang-en hidden">Research Support Grant, Chulalongkorn University</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8 group">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2540-41</span><span class="lang-en hidden">1997-98</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <span class="lang-th">ทุนยามาโมโต้ (เรียนภาษาญี่ปุ่น)</span>
+                            <span class="lang-en hidden">Yamamoto Scholarship (Japanese Language)</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8 group">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2536</span><span class="lang-en hidden">1993</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <span class="lang-th">ทุนสร้างสรรค์งานศิลปะ จาก Art to Swiming</span>
+                            <span class="lang-en hidden">Art Creation Grant from Art to Swimming</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8 group">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2535</span><span class="lang-en hidden">1992</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <span class="lang-th">รางวัลที่ 1 การวาดภาพประกวดงานวันเด็กแห่งชาติ สทท. 11
+                                จังหวัดพิษณุโลก</span>
+                            <span class="lang-en hidden">1st Prize, National Children's Day Painting Competition,
+                                Phitsanulok</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Art Exhibitions -->
+        <section class="py-12 reveal">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                <div class="w-full md:w-1/4 shrink-0">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#0F2C59]">
+                        <span class="lang-th">การแสดงผลงาน</span>
+                        <span class="lang-en hidden">Exhibitions</span>
+                    </h2>
+                </div>
+                <div class="w-full md:w-3/4 flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2559</span><span class="lang-en hidden">2016</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p>“ART PERSONAL” National Conference on Art Research and Creative Works: 2, Naresuan
+                                University.</p>
+                            <p class="mt-2 lang-th">นิทรรศการเทิดพระเกียรติพระบาทสมเด็จพระเจ้าอยู่หัวภูมิพลอดุลยเดช
+                                หอศิลป์มหาวิทยาลัยนเรศวร</p>
+                            <p class="mt-2 lang-en hidden">Tribute Exhibition for HM King Rama IX, NU Art Gallery</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2540</span><span class="lang-en hidden">1997</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p class="lang-th">ร่วมแสดงศิลปกรรมร่วมสมัยของศิลปินรุ่นเยาว์ ครั้งที่ 14 ณ พิพิธภัณฑ์
+                                ธนาคารไทยพาณิชย์</p>
+                            <p class="lang-en hidden">14th Contemporary Art by Young Artists, SCB Museum</p>
+                            <p class="mt-2 lang-th">ร่วมแสดงศิลปกรรมร่วมสมัย เอสวีโอเอ ครั้งที่ 2 ณ อาคาร เอสวีโอ
+                                เอทาวเวอร์ กรุงเทพฯ</p>
+                            <p class="mt-2 lang-en hidden">2nd SVOA Contemporary Art Exhibition, SVOA Tower</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Experience -->
+        <section class="py-12 border-t border-gray-200/60 reveal">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                <div class="w-full md:w-1/4 shrink-0">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#0F2C59]">
+                        <span class="lang-th">งานวิจัย</span>
+                        <span class="lang-en hidden">Research</span>
+                    </h2>
+                </div>
+                <div class="w-full md:w-3/4 flex flex-col gap-6">
+                    <!-- 2559 -->
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2559</span><span class="lang-en hidden">2016</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p class="lang-th font-semibold text-[#0F2C59]">การวิจัยสร้างสรรค์เรื่องตัวแต่งฝัน (Dream
+                                Work)</p>
+                            <p class="lang-en hidden font-semibold text-[#0F2C59]">Creative Research: Dream Work</p>
+                            <p class="mt-1 lang-th">การประชุมวิชาการ นเรศวรวิจัย ครั้งที่ 12</p>
+                            <p class="mt-1 lang-en hidden">12th Naresuan Research Conference</p>
+                        </div>
+                    </div>
+                    <!-- 2549 -->
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2549</span><span class="lang-en hidden">2006</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p class="lang-th font-semibold text-[#0F2C59]">
+                                การพัฒนาแหล่งท่องเที่ยวหมู่บ้านช้างในอีสานใต้ (หัวหน้าโครงการ)</p>
+                            <p class="lang-en hidden font-semibold text-[#0F2C59]">Elephant Village Tourism Development
+                                in Southern Isan (Project Leader)</p>
+                            <span
+                                class="inline-block px-2 py-1 mt-2 mb-2 bg-gray-100 text-gray-500 font-medium text-[11px] rounded uppercase tracking-wider">ทุนจาก
+                                สกว. (TRF Grant)</span>
+                            <p class="lang-th">ศึกษาพัฒนาออกแบบผลิตภัณฑ์ของที่ระลึกโดยประยุกต์สัญลักษณ์ทางพระพุทธศาสนา
+                            </p>
+                            <p class="lang-en hidden">Souvenir Design applying Buddhist Symbols</p>
+                        </div>
+                    </div>
+                    <!-- 2548 -->
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2548</span><span class="lang-en hidden">2005</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p class="lang-th font-semibold text-[#0F2C59]">
+                                โครงการวิจัยเพื่อการพัฒนาท้องถิ่นแบบมีส่วนร่วมด้านการท่องเที่ยว จ.บุรีรัมย์</p>
+                            <p class="lang-en hidden font-semibold text-[#0F2C59]">Participatory Local Tourism
+                                Development, Buriram Province</p>
+                            <span
+                                class="inline-block px-2 py-1 mt-2 mb-2 bg-gray-100 text-gray-500 font-medium text-[11px] rounded uppercase tracking-wider">ทุนจาก
+                                สกอ. (CHE Grant)</span>
+                            <p class="lang-th">รวบรวมบทคัดย่อผลงานวิจัยของอาจารย์ มรภ.บุรีรัมย์ (2537-2547)</p>
+                            <p class="lang-en hidden">Compilation of Research Abstracts, BRU (1994-2004)</p>
+                        </div>
+                    </div>
+                    <!-- 2547 -->
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2547</span><span class="lang-en hidden">2004</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p class="lang-th font-semibold text-[#0F2C59]">การพัฒนาคุณภาพผลิตภัณฑ์ OPC ปี 2547 (ผ้าทอ 5
+                                ผลิตภัณฑ์)</p>
+                            <p class="lang-en hidden font-semibold text-[#0F2C59]">2004 OPC Product Quality Development
+                                (5 Textile Products)</p>
+                            <ul class="mt-2 text-gray-500 space-y-1">
+                                <li class="flex items-center gap-2">- <span class="lang-th">ตุง (ธงประดับ)
+                                        จ.ร้อยเอ็ด</span><span class="lang-en hidden">Tung (Traditional Flag), Roi
+                                        Et</span></li>
+                                <li class="flex items-center gap-2">- <span class="lang-th">ผ้าหางกระรอก บ้านขี้เหล็ก
+                                        จ.ร้อยเอ็ด</span><span class="lang-en hidden">Hang Karok Fabric, Roi Et</span>
+                                </li>
+                                <li class="flex items-center gap-2">- <span class="lang-th">ผ้าไหมมัดหมี่ บ้านหินกอง,
+                                        แวงน้อย, หนองผือ</span><span class="lang-en hidden">Mudmee Silk, various
+                                        communities</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section class="py-12 border-t border-gray-200/60 reveal">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                <div class="w-full md:w-1/4 shrink-0">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#0F2C59]">
+                        <span class="lang-th">ตำราและบทความ</span>
+                        <span class="lang-en hidden">Publications</span>
+                    </h2>
+                </div>
+                <div class="w-full md:w-3/4 flex flex-col gap-10">
+                    <!-- Books -->
+                    <div>
+                        <h3 class="font-semibold text-[#0F2C59] mb-4 text-base tracking-tight"><span
+                                class="lang-th">เอกสาร / ตำรา</span><span class="lang-en hidden">Textbooks</span></h3>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex items-start gap-4">
+                                <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2561</span>
+                                <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
+                                        class="lang-th">เทคนิควาดเส้น. มหาวิทยาลัยนเรศวร.</span><span
+                                        class="lang-en hidden">Drawing Techniques. Naresuan University.</span></p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2558</span>
+                                <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
+                                        class="lang-th">องค์ประกอบศิลป์. มหาวิทยาลัยนเรศวร.</span><span
+                                        class="lang-en hidden">Art Composition. Naresuan University.</span></p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2551</span>
+                                <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
+                                        class="lang-th">ตำราวาดเส้นพื้นฐาน.</span><span class="lang-en hidden">Basic
+                                        Drawing Textbook.</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Articles -->
+                    <div>
+                        <h3 class="font-semibold text-[#0F2C59] mb-4 text-base tracking-tight"><span
+                                class="lang-th">บทความวิชาการ</span><span class="lang-en hidden">Articles</span></h3>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-start gap-4">
+                                <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2561</span>
+                                <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
+                                        class="lang-th">การออกแบบโต๊ะทำครัวสำหรับผู้พิการทางการเคลื่อนไหว
+                                        (งานสัมมนาระดับชาติ ครั้งที่ 10)</span><span class="lang-en hidden">Kitchen
+                                        Table Design for Mobility Impaired (10th National Seminar)</span></p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2560</span>
+                                <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
+                                        class="lang-th">การออกแบบบรรจุภัณฑ์คอนวีเนียนสำหรับโรตีและมะตะบะ (นเรศวรวิจัย
+                                        ครั้งที่ 13)</span><span class="lang-en hidden">Convenience Packaging Design for
+                                        Roti and Mataba (13th Naresuan Research)</span></p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2555</span>
+                                <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
+                                        class="lang-th">Painting Multimedia : Fear in the Way of Life. (Chiang Mai
+                                        University Journal)</span><span class="lang-en hidden">Painting Multimedia: Fear
+                                        in the Way of Life. (Chiang Mai University Journal)</span></p>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <span class="shrink-0 w-16 text-[13px] font-semibold text-[#D4AF37] pt-0.5">2546</span>
+                                <p class="text-[15px] font-normal text-[#515154] leading-relaxed"><span
+                                        class="lang-th">การผสมผสานวัฒนธรรมทวารวดีกับวัฒนธรรมเขมรในชุมชนโบราณ
+                                        (สูจิบัตรศิลปกรรม มรภ.บุรีรัมย์)</span><span class="lang-en hidden">Integration
+                                        of Dvaravati and Khmer Cultures in Ancient Communities (BRU Fine Arts
+                                        Journal)</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other Experiences -->
+        <section class="py-12 border-t border-gray-200/60 reveal">
+            <div class="flex flex-col md:flex-row gap-6 md:gap-16">
+                <div class="w-full md:w-1/4 shrink-0">
+                    <h2 class="text-xl md:text-2xl font-bold tracking-tight text-[#0F2C59]">
+                        <span class="lang-th">ประสบการณ์อื่นๆ</span>
+                        <span class="lang-en hidden">Others</span>
+                    </h2>
+                </div>
+                <div class="w-full md:w-3/4 flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2553</span><span class="lang-en hidden">2010</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p class="mb-2"><span class="lang-th">สัมมนา "เครื่องรางของขลัง วัฒนธรรมชาวพุทธในสุวรรณภูมิ"
+                                    สถาบันพิพิธภัณฑ์การเรียนรู้แห่งชาติ</span><span class="lang-en hidden">Seminar
+                                    "Amulets: Buddhist Culture in Suvarnabhumi", Museum Siam</span></p>
+                            <p><span class="lang-th">อบรมเชิงปฏิบัติการ VTS กลยุทธ์การคิดจากภาพ ณ คณะครุศาสตร์
+                                    จุฬาฯ</span><span class="lang-en hidden">VTS (Visual Thinking Strategies) Workshop,
+                                    Chulalongkorn University</span></p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2552</span><span class="lang-en hidden">2009</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p><span class="lang-th">ศึกษาดูงานศิลปะและศิลปะบำบัด ญี่ปุ่น (โอซาก้า, เกียวโต,
+                                    โกเบ)</span><span class="lang-en hidden">Art and Art Therapy Study Tour in Japan
+                                    (Osaka, Kyoto, Kobe)</span></p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-2 md:gap-8">
+                        <div
+                            class="shrink-0 w-24 font-semibold tracking-tight tabular-nums text-[#0F2C59] text-[15px] mt-0.5">
+                            <span class="lang-th">พ.ศ. 2551</span><span class="lang-en hidden">2008</span>
+                        </div>
+                        <div class="text-[15px] font-normal leading-relaxed text-[#515154]">
+                            <p><span class="lang-th">วิทยากรสอนวาดภาพและภาพพิมพ์ โครงการ Art for All ณ
+                                    เรือนจำกลางคลองเปรม และจุฬาฯ</span><span class="lang-en hidden">Guest Instructor for
+                                    Painting & Printmaking, "Art for All" Project (Klong Prem Prison & CU)</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#060F22] text-gray-400 pt-16 md:pt-24 pb-12 w-full mt-auto relative reveal overflow-hidden">
+        <div class="absolute inset-0 bg-grid-pattern opacity-[0.22] pointer-events-none"></div>
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_0%_100%,rgba(20,70,200,0.18),transparent_50%)] pointer-events-none">
+        </div>
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(15,50,160,0.10),transparent_50%)] pointer-events-none">
+        </div>
+        <div
+            class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1a3a6e]/60 to-transparent pointer-events-none">
+        </div>
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 mb-16 pb-16">
+                <div class="md:col-span-2 text-left text-white font-bold uppercase">
+                    <h3 class="text-white font-bold tracking-[0.5em] uppercase text-xs mb-8 flex items-center gap-3">
+                        TSPL
+                    </h3>
+                    <p class="text-[13px] leading-relaxed max-w-sm text-gray-400 font-light normal-case mb-12">
+                        Creative research database for cultural heritage management through standardized digital archive
+                        and visual semiotics.</p>
+                    <div class="flex items-center gap-8">
+                        <div
+                            class="bg-white p-3 rounded-2xl hover:scale-105 transition-transform duration-500 shadow-xl border border-gray-100 shrink-0">
+                            <img src="https://www.ocac.go.th/wp-content/uploads/2021/03/web-logo-ocac2.png" alt="สศร."
+                                class="h-10 w-auto object-contain">
+                        </div>
+                        <div class="leading-snug">
+                            <p class="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37] mb-1">สศร. <span
+                                    class="text-[#D4AF37]/60 font-normal">·</span> OCAC</p>
+                            <p class="text-[10px] font-medium uppercase tracking-tight text-gray-300">Office of
+                                Contemporary Art and Culture</p>
+                            <p class="text-[9px] font-normal text-gray-500 capitalize tracking-wide mt-0.5">Ministry of
+                                Culture, Thailand</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h4
+                        class="text-white text-[10px] font-bold uppercase tracking-[0.4em] mb-10 border-l border-[#D4AF37] pl-4 leading-none">
+                        Contact</h4>
+                    <p class="text-xs mb-6 hover:text-[#D4AF37] transition-colors cursor-pointer font-light lowercase">
+                        samaporn@example.com</p>
+                    <p class="text-xs tracking-widest font-light lowercase hover:text-[#D4AF37] transition-colors">
+                        www.samaporn.com</p>
+                </div>
+                <div>
+                    <h4
+                        class="text-white text-[10px] font-bold uppercase tracking-[0.4em] mb-10 border-l border-[#D4AF37] pl-4 leading-none">
+                        Institution</h4>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="bg-white p-2 rounded-xl shrink-0 border border-gray-100 flex items-center justify-center w-12 h-12 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            <img src="assets/nu_logo.png?v=123" alt="NU Logo" class="w-full h-full object-contain">
+                        </div>
+                        <div>
+                            <p
+                                class="text-[10px] leading-relaxed font-bold uppercase tracking-widest text-[#D4AF37] mb-0.5">
+                                Naresuan University</p>
+                            <p class="text-[9px] leading-relaxed font-light uppercase text-gray-400 tracking-widest">
+                                Faculty of Architecture<br>Art and Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.5em] text-gray-600">
+                <p>&copy; 2026 THAI SYMBOL PATTERN LAB. ALL RIGHTS RESERVED.</p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                    class="mt-8 md:mt-0 flex items-center gap-3 text-[#D4AF37] hover:text-white transition-all group bg-white/5 px-6 py-2.5 rounded-full border border-[#1a3a6e]/50 uppercase font-bold">
+                    TOP <i class="ph ph-arrow-up text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/about.js"></script>
+    <script src="assets/js/premium.js"></script>
+</body>
+
+</html>

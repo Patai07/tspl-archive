@@ -1,0 +1,656 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --tspl-gold: #D4AF37;
+    --tspl-blue: #0F2C59;
+}
+
+body {
+    font-family: 'IBM Plex Sans Thai', 'Space+Grotesk', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: #fcfcfc;
+    color: var(--tspl-blue);
+    line-height: 1.5;
+    transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
+    /* Force vertical scrollbar to prevent layout shift between pages */
+    overflow-y: scroll;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--tspl-gold);
+    border-radius: 10px;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.lang-th,
+.lang-en {
+    transition: all 0.25s ease-in-out;
+}
+
+/* Blueprint grid — minor grid (20px) + major grid (80px) + crosshair marks at intersections */
+.bg-grid-pattern {
+    background-image:
+        /* SVG crosshair marks at every major-grid intersection */
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg stroke='%234D8EFF' stroke-width='0.7' opacity='0.60'%3E%3Cline x1='-4' y1='0' x2='4' y2='0'/%3E%3Cline x1='0' y1='-4' x2='0' y2='4'/%3E%3C/g%3E%3C/svg%3E"),
+        /* Major grid lines — every 80px */
+        linear-gradient(rgba(60, 130, 255, 0.18) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(60, 130, 255, 0.18) 1px, transparent 1px),
+        /* Minor grid lines — every 20px (exactly ¼ of 80px) */
+        linear-gradient(rgba(35, 90, 210, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(35, 90, 210, 0.08) 1px, transparent 1px);
+    background-size:
+        80px 80px,
+        80px 80px, 80px 80px,
+        20px 20px, 20px 20px;
+    background-position:
+        0 0,
+        0 0, 0 0,
+        0 0, 0 0;
+}
+
+/* NOTE: gold-pulse-glow is defined in premium.css using compositor-safe
+   filter: drop-shadow() — no duplicate needed here. */
+
+/* Cinematic Laser Scan Animation */
+@keyframes laser-sweep {
+    0% {
+        top: -10%;
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+.scan-beam {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 15%;
+    background: linear-gradient(to bottom, transparent, rgba(212, 175, 55, 0.4), var(--tspl-gold), transparent);
+    z-index: 10;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.group:hover .scan-beam {
+    animation: laser-sweep 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* HUD Brackets */
+.bracket {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--tspl-gold);
+    border-width: 0;
+    z-index: 20;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    opacity: 0;
+}
+
+.group:hover .bracket {
+    opacity: 1;
+    border-width: 2px;
+}
+
+.b-tl {
+    top: 12px;
+    left: 12px;
+    border-top-style: solid;
+    border-left-style: solid;
+    transform: translate(-8px, -8px);
+}
+
+.b-tr {
+    top: 12px;
+    right: 12px;
+    border-top-style: solid;
+    border-right-style: solid;
+    transform: translate(8px, -8px);
+}
+
+.b-bl {
+    bottom: 12px;
+    left: 12px;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    transform: translate(-8px, 8px);
+}
+
+.b-br {
+    bottom: 12px;
+    right: 12px;
+    border-bottom-style: solid;
+    border-right-style: solid;
+    transform: translate(8px, 8px);
+}
+
+.group:hover .bracket {
+    transform: translate(0, 0);
+}
+
+.outline-num {
+    -webkit-text-stroke: 1px var(--tspl-gold);
+    color: transparent;
+    font-weight: 700;
+}
+
+.pattern-card {
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 1px solid #f1f1f1;
+}
+
+.pattern-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--tspl-gold);
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.06);
+}
+
+#hero-glow {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 5;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.zoom-container {
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.zoom-container img {
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.zoom-container:hover img {
+    transform: scale(1.6);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.thai-title {
+    line-height: 1.15;
+}
+
+/* --- PRELOADER & EFFECTS --- */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #010509 0%, #040C1A 50%, #060F20 100%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1.8s cubic-bezier(0.86, 0, 0.07, 1), transform 1.8s cubic-bezier(0.86, 0, 0.07, 1), filter 1.8s cubic-bezier(0.86, 0, 0.07, 1), visibility 1.8s;
+    overflow: hidden;
+    will-change: transform, opacity, filter;
+}
+
+.radar-core {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+}
+
+.radar-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.radar-ring.r1 {
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid var(--tspl-gold);
+    animation: radar-spin 2s linear infinite;
+}
+
+.radar-ring.r2 {
+    width: 80%;
+    height: 80%;
+    border: 1px dashed rgba(212, 175, 55, 0.4);
+    animation: radar-spin 3s linear infinite reverse;
+}
+
+.radar-ring.r3 {
+    width: 60%;
+    height: 60%;
+    border-bottom: 2px solid var(--tspl-gold);
+    animation: radar-spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+@keyframes radar-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-percentage {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--tspl-gold);
+    font-family: monospace;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+    z-index: 10;
+}
+
+.scattered-log {
+    position: absolute;
+    color: var(--tspl-gold);
+    font-family: inherit;
+    font-weight: 700;
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    pointer-events: none;
+    z-index: 5;
+    text-transform: uppercase;
+}
+
+.scattered-log.in {
+    opacity: 0.15;
+    transform: scale(1.05);
+}
+
+.binary-rain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><text x="10" y="20" fill="white" font-family="monospace">๐ ๑ ๐ ๑ ๑ ๐ ๑ ๐</text><text x="40" y="70" fill="white" font-family="monospace">ก ข ฃ ค ฅ ฆ ง</text><text x="10" y="120" fill="white" font-family="monospace">๑ ๐ ๑ ๐ ๐ ๑ ๐ ๑</text><text x="80" y="170" fill="white" font-family="monospace">จ ฉ ช ซ ฌ ญ ฎ ฏ</text></svg>');
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform, opacity, filter;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-60px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-up {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scramble-hover {
+    display: inline-block;
+    min-width: 120px;
+}
+
+.parallax-horizontal {
+    will-change: transform;
+    display: inline-block;
+    transition: transform 0.1s ease-out;
+}
+
+@media (pointer: fine) {
+    input {
+        cursor: text !important;
+    }
+}
+
+/* Ticker Animation */
+@keyframes ticker-scroll {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Bilingual Stability Container */
+.lang-container {
+    display: inline-grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.lang-container>span {
+    grid-area: 1 / 1;
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lang-container>span.hidden {
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(5px);
+}
+
+/* Blueprint Pattern - Multi-layered technical grid */
+.blueprint-grid {
+    background-color: #f8fafc;
+    /* Slightly blue-tinted light background */
+    background-image:
+        linear-gradient(rgba(15, 44, 89, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 44, 89, 0.04) 1px, transparent 1px),
+        linear-gradient(rgba(15, 44, 89, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 44, 89, 0.02) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: center center;
+}
+
+.blueprint-grid-dark {
+    position: relative;
+    background-color: #060F22;
+    background-image:
+        linear-gradient(rgba(77, 142, 255, 0.08) 1.5px, transparent 1.5px),
+        linear-gradient(90deg, rgba(77, 142, 255, 0.08) 1.5px, transparent 1.5px),
+        linear-gradient(rgba(77, 142, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77, 142, 255, 0.04) 1px, transparent 1px);
+    background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+    background-position: center center;
+}
+
+.blueprint-grid-dark::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg stroke='%234D8EFF' stroke-width='0.5' opacity='0.25'%3E%3Cline x1='40' y1='36' x2='40' y2='44'/%3E%3Cline x1='36' y1='40' x2='44' y2='40'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 80px;
+    background-position: center center;
+    pointer-events: none;
+}
+
+.ticker-wrapper {
+    animation: ticker-scroll 20s linear infinite;
+    width: max-content;
+}
+
+/* --- PAGE TRANSITIONS --- */
+.page-exit {
+    opacity: 0 !important;
+    transform: translateY(-15px) !important;
+    transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1) !important;
+}
+
+.page-enter {
+    animation: page-enter-anim 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes page-enter-anim {
+    0% {
+        opacity: 0;
+        transform: translateY(15px) scale(0.99);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* --- TECHNICAL INTERFACE (HUD & VIEWPORT) --- */
+.technical-hud {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    opacity: 0.8;
+}
+
+.hud-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-left: 1.5px solid rgba(15, 44, 89, 0.1);
+    padding-left: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.hud-item:hover {
+    border-left-color: #0F2C59;
+    transform: translateX(2px);
+}
+
+.hud-label {
+    font-size: 7px;
+    font-weight: 800;
+    color: rgba(15, 44, 89, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    line-height: 1;
+}
+
+.hud-value {
+    font-size: 9px;
+    font-family: 'Space Grotesk', monospace;
+    color: #0F2C59;
+    font-weight: 500;
+}
+
+/* Tech Viewport Widget - Integrated UX */
+.tech-viewport {
+    position: relative;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(15, 44, 89, 0.05);
+    box-shadow: 0 30px 60px -15px rgba(15, 44, 89, 0.12);
+    background-color: white;
+    padding: 0.5rem;
+}
+
+.tech-viewport-inner {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 2rem;
+    overflow: hidden;
+    background-color: #f9fafb;
+}
+
+.tech-viewport img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.5s ease-out;
+}
+
+.tech-viewport:hover img {
+    transform: scale(1.1);
+}
+
+.tech-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at center, transparent 30%, rgba(15, 44, 89, 0.03) 100%),
+        linear-gradient(rgba(15, 44, 89, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 44, 89, 0.05) 1px, transparent 1px);
+    background-size: 100% 100%, 20px 20px, 20px 20px;
+}
+
+.view-corner {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    border-color: rgba(15, 44, 89, 0.2);
+    pointer-events: none;
+}
+
+.view-corner-tl {
+    top: 1rem;
+    left: 1rem;
+    border-top-width: 2px;
+    border-left-width: 2px;
+    border-style: solid;
+}
+
+.view-corner-br {
+    bottom: 1rem;
+    right: 1rem;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+    border-style: solid;
+}
+
+/* Pipeline Progress Styles */
+.pipeline-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pipeline-nav-item.active .step-ring {
+    border-color: #0F2C59;
+    transform: scale(1.1);
+    background-color: #0F2C59;
+}
+
+.pipeline-nav-item.active .step-dot {
+    background-color: white;
+    transform: scale(1.2);
+}
+
+.pipeline-nav-item.active .step-label {
+    color: #0F2C59;
+    opacity: 1;
+    transform: translate(-50%, -2px);
+}
+
+.pipeline-line {
+    height: 1px;
+    flex-grow: 1;
+    background-color: #e5e7eb;
+    position: relative;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.pipeline-line::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 60px;
+    background: linear-gradient(90deg, transparent, rgba(15, 44, 89, 0.15), transparent);
+    animation: pipelineFlow 2.5s infinite linear;
+}
+
+@keyframes pipelineFlow {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(600%);
+    }
+}
+
+/* Reference Photo Widget */
+.ref-photo-widget {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    width: 200px;
+    background: white;
+    border: 1px solid #eee;
+    padding: 8px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    z-index: 90;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.ref-photo-widget img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 14px;
+}

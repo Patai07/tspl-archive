@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thai Symbol Pattern Lab (TSPL) - Digital Archive</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/premium.css">
+</head>
+
+<body class="min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="binary-rain"></div>
+        <div class="radar-core">
+            <div class="radar-ring r1"></div>
+            <div class="radar-ring r2"></div>
+            <div class="radar-ring r3"></div>
+            <div class="loading-percentage" id="loading-perc">๐%</div>
+        </div>
+    </div>
+
+
+
+    <!-- Navigation Bar -->
+
+    <div id="hero-glow"></div>
+    <nav
+        class="sticky top-0 z-[60] w-full bg-white/90 backdrop-blur-sm border-b border-gray-100 h-16 transition-all duration-300">
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-8 h-full flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-3 group"
+                onclick="sessionStorage.removeItem('tspl_preloader_played')">
+                <div
+                    class="w-9 h-9 bg-[#0F2C59] flex items-center justify-center rounded-lg shadow-lg shadow-[#0F2C59]/10 transition-transform group-hover:scale-105">
+                    <i class="ph-fill ph-square-half text-white text-lg"></i>
+                </div>
+                <div class="hidden sm:block">
+                    <span
+                        class="font-bold tracking-[0.3em] uppercase text-[10px] block leading-none mb-0.5 text-[#0F2C59]">TSPL</span>
+                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-widest leading-none">Pattern
+                        Archive</span>
+                </div>
+            </a>
+
+            <div
+                class="flex items-center gap-4 md:gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400">
+                <a href="archive.html" data-page="archive.html"
+                    class="nav-link px-4 py-2 bg-[#0F2C59]/5 text-[#0F2C59] hover:bg-[#0F2C59]/10 rounded-full transition-all flex items-center gap-2 border border-[#0F2C59]/10 shadow-[0_2px_10px_rgba(15,44,89,0.05)]"
+                    data-page="archive.html">
+                    <i class="ph-fill ph-magnifying-glass text-[#0F2C59]/60"></i>
+                    <span class="lang-container">
+                        <span class="lang-th">คลังข้อมูล</span>
+                        <span class="lang-en hidden">Explorer</span>
+                    </span>
+                </a>
+
+                <div class="relative group py-4 -my-4 flex items-center nav-link-group" data-group="pipeline">
+                    <button
+                        class="hover:text-[#0F2C59] transition-colors flex items-center gap-1 uppercase tracking-[0.2em] font-bold outline-none">
+                        <span class="lang-container">
+                            <span class="lang-th">กระบวนการ</span>
+                            <span class="lang-en hidden">Pipeline</span>
+                        </span>
+                        <i class="ph-bold ph-caret-down text-[10px] transition-transform group-hover:rotate-180"></i>
+                    </button>
+                    <!-- Dropdown -->
+                    <div
+                        class="absolute top-10 left-1/2 -translate-x-1/2 w-48 bg-white/95 backdrop-blur-md border border-gray-100 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 flex flex-col z-[70]">
+                        <a href="capture.html"
+                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
+                            <i class="ph-bold ph-camera text-[#0F2C59]/60 text-sm"></i>
+                            <span class="lang-container">
+                                <span class="lang-th">เก็บข้อมูล</span>
+                                <span class="lang-en hidden">Capture</span>
+                            </span>
+                        </a>
+                        <a href="decode.html"
+                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#D4AF37] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold border-b border-gray-50">
+                            <i class="ph-bold ph-fingerprint text-[#D4AF37]/60 text-sm"></i>
+                            <span class="lang-container">
+                                <span class="lang-th">ถอดรหัส</span>
+                                <span class="lang-en hidden">Decode</span>
+                            </span>
+                        </a>
+                        <a href="digitize.html"
+                            class="px-5 py-2.5 hover:bg-gray-50 hover:text-[#0F2C59] text-gray-500 transition-colors flex items-center gap-3 text-[9px] font-bold">
+                            <i class="ph-bold ph-bezier-curve text-[#0F2C59]/60 text-sm"></i>
+                            <span class="lang-container">
+                                <span class="lang-th">แปลงดิจิทัล</span>
+                                <span class="lang-en hidden">Digitize</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="methodology.html" data-page="methodology.html"
+                    class="nav-link hover:text-[#0F2C59] transition-colors" data-page="methodology.html">
+                    <span class="lang-container">
+                        <span class="lang-th">ระเบียบวิธี</span>
+                        <span class="lang-en hidden">Methodology</span>
+                    </span>
+                </a>
+                <a href="about.html" data-page="about.html" class="nav-link hover:text-[#0F2C59] transition-colors"
+                    data-page="about.html">
+                    <span class="lang-container">
+                        <span class="lang-th">ผู้วิจัย</span>
+                        <span class="lang-en hidden">Biography</span>
+                    </span>
+                </a>
+                <div
+                    class="flex items-center bg-gray-100 p-1 rounded-full border border-gray-200 ml-2 shadow-inner h-8">
+                    <button id="lang-btn-th" onclick="setLanguage('th')"
+                        class="px-3 py-0.5 h-full rounded-full transition-all bg-[#0F2C59] text-white shadow-sm font-bold">TH</button>
+                    <button id="lang-btn-en" onclick="setLanguage('en')"
+                        class="px-3 py-0.5 h-full rounded-full transition-all text-gray-500 font-bold uppercase hover:text-[#0F2C59]">EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Archive Push Down for Nav Spacer -->
+    <div class="h-24 w-full bg-[#051228] hidden"></div>
+
+    <!-- Explorer Grid -->
+    <main id="database" class="px-6 lg:px-8 py-16 md:py-20 max-w-[1440px] mx-auto w-full flex-grow reveal">
+
+        <!-- Section Header -->
+        <div class="flex items-center gap-4 mb-10">
+            <div class="w-1 h-10 bg-[#0F2C59] rounded-full shadow-sm"></div>
+            <div>
+                <h2 class="text-[9px] font-bold uppercase tracking-[0.5em] text-gray-400 mb-1 leading-none">Archive
+                    Registry</h2>
+                <p class="text-3xl font-bold text-[#0F2C59] tracking-tighter uppercase">คลังระเบียนลวดลาย</p>
+            </div>
+        </div>
+
+        <!-- Unified Search + Filter + Legend Control Bar -->
+        <div
+            class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center mb-8 p-3 bg-white border border-gray-100 rounded-2xl shadow-sm">
+
+            <!-- Search -->
+            <div class="relative flex-1 min-w-0 group">
+                <i
+                    class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#0F2C59] transition-colors text-sm"></i>
+                <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาระเบียน..."
+                    class="w-full pl-10 pr-9 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#0F2C59]/20 focus:border-[#0F2C59]/30 transition-all text-xs font-medium placeholder-gray-400">
+                <button id="clear-search" onclick="clearSearch()"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden transition-colors">
+                    <i class="ph ph-x text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
+
+            <!-- Category Filter -->
+            <div id="categories-container" class="flex flex-wrap gap-2 items-center shrink-0"></div>
+
+            <!-- Divider -->
+            <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
+
+            <!-- Legend -->
+            <div id="status-legend"
+                class="flex flex-wrap items-center gap-3 text-[8px] font-bold uppercase tracking-widest text-gray-500 shrink-0">
+                <!-- Legend JS -->
+            </div>
+        </div>
+
+        <div id="grid-container"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 lg:gap-10">
+            <!-- Cards JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#060F22] text-gray-400 pt-16 md:pt-24 pb-12 w-full mt-auto relative reveal overflow-hidden">
+        <!-- Blueprint pattern overlay -->
+        <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none"></div>
+        <!-- Blue radial depth -->
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_0%_100%,rgba(20,70,200,0.20),transparent_50%)] pointer-events-none">
+        </div>
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_100%_0%,rgba(15,50,160,0.12),transparent_50%)] pointer-events-none">
+        </div>
+        <!-- Top border line -->
+        <div
+            class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#1a3a6e]/60 to-transparent pointer-events-none">
+        </div>
+        <div class="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-16 mb-16 pb-16">
+                <h3 class="text-white font-bold tracking-[0.5em] uppercase text-xs mb-8 flex items-center gap-3">
+                    TSPL
+                </h3>
+                <p class="text-[13px] leading-relaxed max-w-sm text-gray-400 font-light  normal-case mb-12">
+                    Creative research database for cultural heritage management through standardized digital archive
+                    and visual semiotics.</p>
+                <div class="flex items-center gap-8">
+                    <div
+                        class="bg-white p-3 rounded-2xl hover:scale-105 transition-transform duration-500 shadow-xl border border-gray-100 shrink-0">
+                        <img src="https://www.ocac.go.th/wp-content/uploads/2021/03/web-logo-ocac2.png" alt="สศร."
+                            class="h-10 w-auto object-contain">
+                    </div>
+                    <div class="leading-snug">
+                        <p class="text-[11px] font-bold uppercase tracking-[0.3em] text-[#D4AF37] mb-1">สศร. <span
+                                class="text-[#D4AF37]/60 font-normal">·</span> OCAC</p>
+                        <p class="text-[10px] font-medium uppercase tracking-tight text-gray-300">Office of
+                            Contemporary Art and Culture</p>
+                        <p class="text-[9px] font-normal text-gray-500 capitalize tracking-wide mt-0.5">Ministry of
+                            Culture, Thailand</p>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4
+                    class="text-white text-[10px] font-bold uppercase tracking-[0.4em] mb-10 border-l border-[#D4AF37] pl-4 leading-none font-bold uppercase">
+                    Contact</h4>
+                <p class="text-xs mb-6 hover:text-[#D4AF37] transition-colors cursor-pointer  font-light lowercase">
+                    samaporn@example.com</p>
+                <p class="text-xs tracking-widest font-light  lowercase hover:text-[#D4AF37] transition-colors">
+                    www.samaporn.com</p>
+            </div>
+            <div>
+                <h4
+                    class="text-white text-[10px] font-bold uppercase tracking-[0.4em] mb-10 border-l border-[#D4AF37] pl-4 leading-none uppercase font-bold text-white">
+                    Institution</h4>
+                <div class="flex items-start gap-4">
+                    <div
+                        class="bg-white p-2 rounded-xl shrink-0 border border-gray-100 flex items-center justify-center w-12 h-12 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                        <img src="assets/nu_logo.png?v=123" alt="NU Logo" class="w-full h-full object-contain">
+                    </div>
+                    <div>
+                        <p
+                            class="text-[10px] leading-relaxed font-bold uppercase tracking-widest text-[#D4AF37] mb-0.5">
+                            Naresuan University
+                        </p>
+                        <p class="text-[9px] leading-relaxed font-light uppercase text-gray-400 tracking-widest">
+                            Faculty of Architecture<br>Art and Design
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="flex flex-col md:flex-row justify-between items-center text-[10px] font-bold uppercase tracking-[0.5em] text-gray-600">
+            <p>&copy; 2026 THAI SYMBOL PATTERN LAB. ALL RIGHTS RESERVED.</p>
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                class="mt-8 md:mt-0 flex items-center gap-3 text-[#D4AF37] hover:text-white transition-all group bg-white/5 px-6 py-2.5 rounded-full border border-[#1a3a6e]/50 uppercase font-bold">
+                TOP <i class="ph ph-arrow-up text-lg"></i>
+            </button>
+        </div>
+        </div>
+    </footer>
+
+    <!-- TSPL Factsheet Modal -->
+    <div id="modal"
+        class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-[#030812]/97 backdrop-blur-3xl opacity-0 transition-opacity duration-300 p-4 font-bold uppercase">
+        <button onclick="closeModal()"
+            class="absolute top-5 right-5 lg:top-6 lg:right-6 z-[120] w-10 h-10 lg:w-11 lg:h-11 bg-white text-[#0F2C59] rounded-full flex items-center justify-center shadow-2xl hover:bg-gray-100 transition-all hover:scale-105 border border-gray-200">
+            <i class="ph-bold ph-x text-lg"></i>
+        </button>
+
+        <div
+            class="flex flex-col lg:flex-row w-full max-w-[1600px] h-[90vh] lg:h-[92vh] bg-white rounded-[2rem] lg:rounded-[4rem] overflow-hidden shadow-[0_0_150px_rgba(0,0,0,0.5)] relative text-[#0F2C59] uppercase font-bold">
+
+            <!-- Left Pane: Viewfinder Carousel -->
+            <div
+                class="w-full lg:w-[62%] h-[40%] lg:h-full shrink-0 bg-[#030812] relative overflow-hidden flex flex-col items-center justify-center text-white font-bold uppercase">
+                <div class="absolute inset-0 bg-grid-pattern opacity-15 pointer-events-none"></div>
+
+                <div class="absolute top-6 lg:top-12 right-16 lg:right-12 z-[100]">
+                    <div id="modal-record-id"
+                        class="text-[9px] lg:text-[12px] font-mono text-[#D4AF37] tracking-[0.2em] lg:tracking-[0.4em] bg-white/10 p-1.5 lg:p-2 px-3 lg:px-5 rounded-lg backdrop-blur-xl border border-white/10 font-bold uppercase shadow-lg">
+                        RECORD_ID</div>
+                </div>
+
+                <div class="absolute top-6 lg:top-12 left-6 lg:left-12 z-[100]">
+                    <span id="modal-confidence-badge"
+                        class="px-3 lg:px-6 py-1.5 lg:py-2.5 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.2em] rounded-full bg-[#B8860B] text-white shadow-lg lg:shadow-2xl font-bold">Validated</span>
+                </div>
+
+                <!-- Slider Arrows -->
+                <button id="slider-prev" onclick="changeSlide(-1)"
+                    class="absolute left-2 lg:left-6 z-[100] p-2 lg:p-4 rounded-full bg-white/10 lg:bg-white/5 text-white/60 lg:text-white/40 hover:text-white hover:bg-white/10 transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 hidden md:block">
+                    <i class="ph ph-caret-left text-3xl font-bold"></i>
+                </button>
+                <button id="slider-next" onclick="changeSlide(1)"
+                    class="absolute right-2 lg:right-6 z-[100] p-2 lg:p-4 rounded-full bg-white/10 lg:bg-white/5 text-white/60 lg:text-white/40 hover:text-white hover:bg-white/10 transition-all opacity-100 lg:opacity-0 lg:group-hover:opacity-100 hidden md:block">
+                    <i class="ph ph-caret-right text-3xl font-bold"></i>
+                </button>
+
+                <div id="modal-counter"
+                    class="absolute bottom-[60px] lg:bottom-12 right-6 lg:right-12 z-[100] text-[9px] lg:text-[10px] font-mono text-gray-400 tracking-widest bg-[#0F2C59]/60 p-1.5 lg:p-2 rounded px-3 lg:px-4 backdrop-blur-md font-bold hidden lg:block">
+                    1 / 1</div>
+
+                <div
+                    class="absolute bottom-4 lg:bottom-12 left-1/2 -translate-x-1/2 z-[100] flex bg-white/5 lg:bg-white/5 backdrop-blur-2xl p-1 lg:p-1.5 rounded-full border border-white/10 lg:border-white/10 shadow-[0_20px_40px_rgba(0,0,0,0.6)] font-bold w-max max-w-[90vw]">
+                    <button id="btn-view-original" onclick="toggleModalView('original')"
+                        class="px-4 lg:px-6 md:px-10 py-2.5 lg:py-4 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.3em] rounded-full bg-white text-[#0F2C59] shadow-lg lg:shadow-2xl transition-all whitespace-nowrap"><span
+                            class="lang-th">ภาพต้นฉบับ</span><span class="lang-en hidden">Original</span></button>
+                    <button id="btn-view-vector" onclick="toggleModalView('vector')"
+                        class="px-4 lg:px-6 md:px-10 py-2.5 lg:py-4 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.3em] rounded-full text-white/40 hover:text-white transition-all whitespace-nowrap"><span
+                            class="lang-th">ลายสกัด</span><span class="lang-en hidden">Vector</span></button>
+                    <button id="btn-view-application" onclick="toggleModalView('application')"
+                        class="px-4 lg:px-6 md:px-10 py-2.5 lg:py-4 text-[8px] lg:text-[10px] font-bold uppercase tracking-[0.1em] lg:tracking-[0.3em] rounded-full text-white/40 hover:text-white transition-all whitespace-nowrap"><span
+                            class="lang-th">การประยุกต์ใช้</span><span
+                            class="lang-en hidden">Application</span></button>
+                </div>
+
+                <div class="relative w-full h-[78%] flex justify-center items-center mt-16 p-10">
+                    <img id="modal-image-original" src="" alt="Registry Visual"
+                        class="absolute max-w-[80%] max-h-[100%] object-contain shadow-[0_0_120px_rgba(0,0,0,0.5)] transition-all duration-700">
+                    <img id="modal-image-vector" src="" alt="Vector Overlay"
+                        class="absolute max-w-[80%] max-h-[100%] object-contain transition-all duration-700 opacity-0 pointer-events-none mix-blend-screen"
+                        style="filter: drop-shadow(0 0 15px rgba(212,175,55,1)) contrast(1.5);">
+                </div>
+            </div>
+
+            <!-- Right Pane: Factsheet -->
+            <div
+                class="w-full lg:w-[38%] flex flex-col h-[60%] lg:h-full bg-white overflow-y-auto custom-scrollbar font-bold text-[#0F2C59] uppercase flex-1">
+                <div class="p-8 lg:p-12 xl:p-24 pt-10">
+                    <div id="modal-category"
+                        class="text-[10px] font-bold text-[#D4AF37] uppercase tracking-[0.6em] mb-6 leading-none">
+                        Category</div>
+                    <h2 id="modal-title"
+                        class="text-3xl md:text-5xl font-bold text-[#0F2C59] mb-6 tracking-tighter leading-[1.1] uppercase font-bold">
+                        ชื่อระเบียน</h2>
+
+                    <p
+                        class="text-[12px] lg:text-[14px] text-gray-400 font-light flex items-center gap-2 lg:gap-4 mb-8 lg:mb-16 border-b border-gray-50 pb-6 lg:pb-12 font-normal lowercase lg:normal-case">
+                        <i class="ph ph-map-pin-line text-[#D4AF37] text-2xl font-bold"></i> <span
+                            id="modal-location">Provenance Location</span>
+                    </p>
+
+                    <div class="space-y-12 lg:space-y-20 text-[#0F2C59]">
+                        <div class="relative pl-12 border-l-2 border-gray-50 text-[#0F2C59] font-bold uppercase">
+                            <div
+                                class="absolute -left-[9px] top-0 w-4 h-4 bg-[#D4AF37] rounded-full border-4 border-white shadow-[0_0_15px_rgba(212,175,55,0.6)]">
+                            </div>
+                            <h4
+                                class="text-[12px] font-bold uppercase tracking-[0.4em] mb-10 font-bold tracking-widest text-[#0F2C59]">
+                                01. Visual Morphemes</h4>
+                            <ul id="modal-morphemes"
+                                class="space-y-8 text-[15px] text-gray-600 font-light font-normal normal-case leading-relaxed">
+                            </ul>
+                        </div>
+
+                        <div class="pl-12 border-l-2 border-gray-50 relative text-[#0F2C59] font-bold uppercase">
+                            <div class="absolute -left-[5px] top-0 w-2 h-2 bg-[#F3E5AB] rounded-full"></div>
+                            <h4
+                                class="text-[12px] font-bold uppercase tracking-[0.4em] mb-8 font-bold tracking-widest text-[#0F2C59]">
+                                02. Semiotic Context</h4>
+                            <p id="modal-connotation"
+                                class="text-[15px] text-gray-600 leading-relaxed font-light font-normal normal-case">
+                            </p>
+                        </div>
+
+                        <div
+                            class="bg-[#F8FAFC] p-10 rounded-[3.5rem] border border-gray-100 shadow-inner font-bold uppercase">
+                            <h4
+                                class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.5em] mb-10 leading-none tracking-widest text-[#0F2C59]">
+                                03. Protocols</h4>
+                            <div class="grid grid-cols-1 gap-12">
+                                <div class="space-y-4">
+                                    <strong
+                                        class="text-[#0F2C59] text-[11px] font-bold uppercase tracking-widest flex items-center gap-4"><i
+                                            class="ph-fill ph-check-circle text-2xl text-emerald-600 font-bold"></i>
+                                        Must Preserve</strong>
+                                    <p id="modal-preserve"
+                                        class="text-[14px] text-gray-600 font-light font-normal normal-case pl-10 border-l border-emerald-100  leading-relaxed">
+                                    </p>
+                                </div>
+                                <div class="space-y-4">
+                                    <strong
+                                        class="text-[#0F2C59] text-[11px] font-bold uppercase tracking-widest flex items-center gap-4"><i
+                                            class="ph-fill ph-warning-circle text-2xl text-rose-600 font-bold"></i>
+                                        Do
+                                        Not</strong>
+                                    <p id="modal-donot"
+                                        class="text-[14px] text-gray-600 font-light font-normal normal-case pl-10 border-l border-rose-100  leading-relaxed">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="modal-tags"
+                            class="flex flex-wrap gap-4 pt-10 pb-24 text-[#0F2C59] font-bold uppercase tracking-widest text-[9px]">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/premium.js"></script>
+</body>
+
+</html>
