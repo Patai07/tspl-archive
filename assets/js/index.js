@@ -356,13 +356,19 @@ function openModal(record) {
     const badge = document.getElementById('modal-confidence-badge');
     if (badge) {
         badge.innerText = statusText;
-        badge.className = `px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full ${statusInfo.bg} text-white shadow-2xl font-bold`;
+        badge.className = `px-5 py-2 text-[9px] font-black uppercase tracking-[0.2em] rounded-full ${statusInfo.bg.replace('bg-', 'bg-')}/10 ${statusInfo.bg.replace('bg-', 'text-')} border ${statusInfo.bg.replace('bg-', 'border-')}/20 backdrop-blur-md`;
     }
     if (document.getElementById('modal-record-id')) document.getElementById('modal-record-id').innerText = `${record.id}`;
     if (document.getElementById('modal-category')) document.getElementById('modal-category').innerText = record.category;
     if (document.getElementById('modal-location')) document.getElementById('modal-location').innerText = record.location;
     if (document.getElementById('modal-title')) document.getElementById('modal-title').innerText = record.title[currentLang];
-    if (document.getElementById('modal-morphemes')) document.getElementById('modal-morphemes').innerHTML = record.morphemes[currentLang].map(m => `<li class="flex items-start gap-4 text-[#0F2C59] font-normal p-2 rounded"><span class="w-2 h-2 bg-[#FFD200] rounded-full mt-2 shrink-0 shadow-[0_0_8px_rgba(255,210,0,0.8)]"></span> ${m}</li>`).join('');
+    if (document.getElementById('modal-morphemes')) {
+        document.getElementById('modal-morphemes').innerHTML = record.morphemes[currentLang].map(m => `
+            <li class="flex items-start gap-4 group/item">
+                <div class="w-2.5 h-2.5 rounded-full bg-[#FFD200] mt-1.5 shrink-0 shadow-[0_0_10px_rgba(255,210,0,0.4)] group-hover/item:scale-125 transition-transform"></div>
+                <p class="text-[15px] text-[#0F2C59] font-medium leading-relaxed">${m}</p>
+            </li>`).join('');
+    }
     if (document.getElementById('modal-connotation')) document.getElementById('modal-connotation').innerText = record.connotation[currentLang];
     if (document.getElementById('modal-preserve')) document.getElementById('modal-preserve').innerText = record.protocol.preserve;
     if (document.getElementById('modal-donot')) document.getElementById('modal-donot').innerText = record.protocol.donot;
@@ -375,17 +381,17 @@ function openModal(record) {
     };
     const ec = ethicsInfo[record.ethics] || ethicsInfo['low'];
     const ethicsHTML = `
-        <div class="p-6 rounded-3xl border border-gray-100 bg-gray-50 flex items-center gap-5">
-            <div class="w-3 h-3 rounded-full ${ec.color} shadow-[0_0_12px_rgba(0,0,0,0.1)] shrink-0"></div>
+        <div class="p-8 rounded-[2rem] border border-gray-100 bg-gray-50 flex items-center gap-6 group hover:border-[#0F2C59]/10 transition-colors">
+            <div class="w-4 h-4 rounded-full ${ec.color} shadow-[0_0_15px_rgba(0,0,0,0.1)] shrink-0 group-hover:scale-110 transition-transform"></div>
             <div>
-                <p class="text-[#0F2C59] text-[13px] font-bold uppercase tracking-tight">${currentLang === 'th' ? ec.th : ec.en}</p>
-                <p class="text-gray-400 text-[11px] font-normal normal-case">${currentLang === 'th' ? ec.desc.th : ec.desc.en}</p>
+                <p class="text-[#0F2C59] text-[15px] font-black uppercase tracking-tight mb-1">${currentLang === 'th' ? ec.th : ec.en}</p>
+                <p class="text-gray-400 text-[12px] font-medium">${currentLang === 'th' ? ec.desc.th : ec.desc.en}</p>
             </div>
         </div>
     `;
     if (document.getElementById('modal-ethics-container')) document.getElementById('modal-ethics-container').innerHTML = ethicsHTML;
 
-    if (document.getElementById('modal-tags')) document.getElementById('modal-tags').innerHTML = record.tags.map(t => `<span class="px-5 py-2 bg-[#f8fafc] text-gray-500 text-[9px] font-bold uppercase rounded border border-gray-200">${t}</span>`).join('');
+    if (document.getElementById('modal-tags')) document.getElementById('modal-tags').innerHTML = record.tags.map(t => `<span class="px-5 py-2.5 bg-[#f8fafc] text-gray-400 text-[10px] font-black uppercase rounded-xl border border-gray-100 hover:border-[#0F2C59]/20 hover:text-[#0F2C59] transition-all cursor-default">${t}</span>`).join('');
 
     updateModalDisplay();
     const modal = document.getElementById('modal');
@@ -425,15 +431,15 @@ function toggleModalView(mode) {
     const btnApp = document.getElementById('btn-view-application');
 
     [btnOrig, btnVec, btnApp].forEach(btn => {
-        if (btn) btn.className = "px-6 md:px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full text-white/40 hover:text-white transition-all";
+        if (btn) btn.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl text-white/40 hover:text-white transition-all duration-300 whitespace-nowrap";
     });
 
     if (mode === 'original' && btnOrig) {
-        btnOrig.className = "px-6 md:px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full bg-white text-[#0F2C59] shadow-2xl transition-all";
+        btnOrig.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-2xl transition-all duration-300 whitespace-nowrap";
     } else if (mode === 'vector' && btnVec) {
-        btnVec.className = "px-6 md:px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full bg-white text-[#0F2C59] shadow-2xl transition-all";
+        btnVec.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-2xl transition-all duration-300 whitespace-nowrap";
     } else if (mode === 'application' && btnApp) {
-        btnApp.className = "px-6 md:px-10 py-4 text-[10px] font-bold uppercase tracking-[0.3em] rounded-full bg-white text-[#0F2C59] shadow-2xl transition-all";
+        btnApp.className = "px-6 lg:px-8 py-3 text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-2xl transition-all duration-300 whitespace-nowrap";
     }
 }
 
