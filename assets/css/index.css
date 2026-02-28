@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap');
 
 :root {
     --tspl-gold: #D4AF37;
@@ -6,15 +6,38 @@
 }
 
 body {
-    font-family: 'IBM Plex Sans Thai', 'Space+Grotesk', sans-serif;
+    /* Thai font first — falls back to Latin for non-Thai chars */
+    font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', 'Space Grotesk', sans-serif;
     -webkit-font-smoothing: antialiased;
     background-color: #fcfcfc;
     color: var(--tspl-blue);
-    line-height: 1.5;
+    /* Thai needs at least 1.75 line-height to avoid sra-loy (สระลอย) clipping */
+    line-height: 1.75;
     transition: opacity 0.4s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 
     /* Force vertical scrollbar to prevent layout shift between pages */
     overflow-y: scroll;
+}
+
+/* ── Thai text fix: สระลอย & วรรณยุกต์ ───────────────────── */
+.lang-th {
+    font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif;
+    line-height: 1.8;
+}
+
+/* Headings in Thai need extra room for upper vowels */
+h1 .lang-th,
+h2 .lang-th,
+h3 .lang-th,
+h4 .lang-th {
+    line-height: 1.6;
+    display: inline-block;
+}
+
+/* Thai hero titles — extra leading for stacked lines */
+.thai-title {
+    line-height: 1.45 !important;
+    padding-top: 0.1em;
 }
 
 /* Custom Scrollbar */
@@ -41,7 +64,8 @@ html {
 
 .lang-th,
 .lang-en {
-    transition: all 0.25s ease-in-out;
+    /* Only animate opacity — prevents height jumps clipping Thai diacritics */
+    transition: opacity 0.25s ease-in-out;
 }
 
 /* Blueprint grid — minor grid (20px) + major grid (80px) + crosshair marks at intersections */
