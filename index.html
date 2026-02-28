@@ -1097,66 +1097,75 @@
                     </div>
 
                     <div class="space-y-16">
-                        <!-- Morphemes Section -->
-                        <div class="relative pl-8">
+                        <!-- 01. Visual Morphemes -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-0 bottom-[-64px] w-px bg-gray-100"></div>
                             <div
-                                class="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-[#D4AF37] via-gray-100 to-transparent">
-                            </div>
-                            <div
-                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#D4AF37] rounded-full shadow-[0_0_10px_rgba(212,175,55,0.6)]">
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-[#D4AF37] rounded-full border-2 border-white shadow-[0_0_10px_rgba(212,175,55,0.3)]">
                             </div>
 
-                            <h4 class="text-[11px] font-black uppercase tracking-[0.3em] text-[#0F2C59]/40 mb-10">01.
+                            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-8">01.
                                 Visual Morphemes</h4>
                             <ul id="modal-morphemes" class="space-y-6">
                                 <!-- Populated dynamically -->
                             </ul>
                         </div>
 
-                        <!-- Connotation Section -->
-                        <div class="relative pl-8">
-                            <div class="absolute left-0 top-0 bottom-0 w-px bg-gray-100"></div>
-                            <div class="absolute -left-1 top-0 w-2 h-2 bg-gray-200 rounded-full"></div>
+                        <!-- 02. Semiotic Context -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-0 bottom-[-64px] w-px bg-gray-100"></div>
+                            <div
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-200 rounded-full border-2 border-white">
+                            </div>
 
-                            <h4 class="text-[11px] font-black uppercase tracking-[0.3em] text-[#0F2C59]/40 mb-8">02.
+                            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-8">02.
                                 Semiotic Context</h4>
                             <p id="modal-connotation" class="text-[15px] text-gray-500 leading-relaxed font-medium">
                                 <!-- Populated dynamically -->
                             </p>
                         </div>
 
-                        <!-- Protocols Card -->
-                        <div class="bg-[#F8FAFC] p-8 lg:p-10 rounded-[3rem] border border-gray-100">
+                        <!-- 03. Protocols -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-0 bottom-[-64px] w-px bg-gray-100"></div>
+                            <div
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-200 rounded-full border-2 border-white">
+                            </div>
+
                             <h4
-                                class="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-10 leading-none">
+                                class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-10 leading-none">
                                 03. Protocols</h4>
-                            <div class="grid grid-cols-1 gap-10">
-                                <div class="relative pl-8">
-                                    <i
-                                        class="ph-fill ph-check-circle text-2xl text-emerald-500 absolute left-0 top-0"></i>
-                                    <strong
-                                        class="block text-[#0F2C59] text-[12px] font-black uppercase tracking-widest mb-3">Must
-                                        Preserve</strong>
+                            <div class="space-y-10">
+                                <div class="relative pl-0">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <i class="ph-fill ph-check-circle text-xl text-emerald-500"></i>
+                                        <strong
+                                            class="text-[#0F2C59] text-[11px] font-black uppercase tracking-widest">Must
+                                            Preserve</strong>
+                                    </div>
                                     <p id="modal-preserve" class="text-sm text-gray-500 font-medium leading-relaxed">
                                     </p>
                                 </div>
-                                <div class="relative pl-8">
-                                    <i
-                                        class="ph-fill ph-warning-circle text-2xl text-rose-500 absolute left-0 top-0"></i>
-                                    <strong
-                                        class="block text-[#0F2C59] text-[12px] font-black uppercase tracking-widest mb-3">Do
-                                        Not</strong>
+                                <div class="relative pl-0">
+                                    <div class="flex items-center gap-3 mb-4">
+                                        <i class="ph-fill ph-warning-circle text-xl text-rose-500"></i>
+                                        <strong
+                                            class="text-[#0F2C59] text-[11px] font-black uppercase tracking-widest">Do
+                                            Not</strong>
+                                    </div>
                                     <p id="modal-donot" class="text-sm text-gray-500 font-medium leading-relaxed"></p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Ethics Section -->
-                        <div class="relative pl-8">
-                            <div class="absolute left-0 top-0 bottom-0 w-px bg-gray-100"></div>
-                            <div class="absolute -left-1 top-0 w-2 h-2 bg-rose-200 rounded-full"></div>
+                        <!-- 04. Cultural Ethics -->
+                        <div class="relative pl-10">
+                            <div class="absolute left-0 top-2 w-px h-full bg-transparent"></div> <!-- Invisible tail -->
+                            <div
+                                class="absolute -left-[5px] top-0 w-2.5 h-2.5 bg-gray-200 rounded-full border-2 border-white">
+                            </div>
 
-                            <h4 class="text-[11px] font-black uppercase tracking-[0.3em] text-[#0F2C59]/40 mb-8">04.
+                            <h4 class="text-[10px] font-black uppercase tracking-[0.4em] text-[#0F2C59]/30 mb-8">04.
                                 Cultural Ethics</h4>
                             <div id="modal-ethics-container">
                                 <!-- Dynamics Ethics Card -->

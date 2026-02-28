@@ -365,7 +365,7 @@ function openModal(record) {
     if (document.getElementById('modal-morphemes')) {
         document.getElementById('modal-morphemes').innerHTML = record.morphemes[currentLang].map(m => `
             <li class="flex items-start gap-4 group/item">
-                <div class="w-2.5 h-2.5 rounded-full bg-[#FFD200] mt-1.5 shrink-0 shadow-[0_0_10px_rgba(255,210,0,0.4)] group-hover/item:scale-125 transition-transform"></div>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#FFD200]/60 mt-2 shrink-0 group-hover/item:scale-125 transition-transform"></div>
                 <p class="text-[15px] text-[#0F2C59] font-medium leading-relaxed">${m}</p>
             </li>`).join('');
     }
@@ -381,11 +381,11 @@ function openModal(record) {
     };
     const ec = ethicsInfo[record.ethics] || ethicsInfo['low'];
     const ethicsHTML = `
-        <div class="p-8 rounded-[2rem] border border-gray-100 bg-gray-50 flex items-center gap-6 group hover:border-[#0F2C59]/10 transition-colors">
-            <div class="w-4 h-4 rounded-full ${ec.color} shadow-[0_0_15px_rgba(0,0,0,0.1)] shrink-0 group-hover:scale-110 transition-transform"></div>
+        <div class="p-6 rounded-2xl border border-[#0F2C59]/5 bg-gray-50/50 flex items-center gap-6 group hover:border-[#0F2C59]/10 transition-colors">
+            <div class="w-3 h-3 rounded-full ${ec.color} shadow-[0_0_15px_rgba(0,0,0,0.1)] shrink-0 group-hover:scale-110 transition-transform border-2 border-white"></div>
             <div>
-                <p class="text-[#0F2C59] text-[15px] font-black uppercase tracking-tight mb-1">${currentLang === 'th' ? ec.th : ec.en}</p>
-                <p class="text-gray-400 text-[12px] font-medium">${currentLang === 'th' ? ec.desc.th : ec.desc.en}</p>
+                <p class="text-[#0F2C59] text-[15px] font-black uppercase tracking-tight mb-0.5">${currentLang === 'th' ? ec.th : ec.en}</p>
+                <p class="text-gray-400 text-[11px] font-medium uppercase tracking-widest">${currentLang === 'th' ? ec.desc.th : ec.desc.en}</p>
             </div>
         </div>
     `;
