@@ -23,33 +23,30 @@ body {
 .lang-th {
     font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif;
     line-height: 1.8;
-    /* Prevent Thai from splitting mid-character on narrow screens */
-    word-break: normal;
-    overflow-wrap: break-word;
-    /* Prevents breaking before certain Thai characters */
-    line-break: strict;
 }
 
-/* paragraph Thai text — wider breathing room */
-p .lang-th,
-p:has(.lang-th) {
+/* CRITICAL: Never let CSS override Tailwind's hidden utility */
+.hidden {
+    display: none !important;
+}
+
+/* paragraph Thai text — breathing room */
+p .lang-th {
     line-height: 1.85;
 }
 
-/* Headings in Thai need extra room for upper vowels */
+/* Headings: extra line-height only — NO display:inline-block (breaks lang toggle) */
 h1 .lang-th,
 h2 .lang-th,
 h3 .lang-th,
 h4 .lang-th {
     line-height: 1.6;
-    display: inline-block;
-    /* Breathing room above for สระบน (sara a, mai ek, etc.) */
-    padding-top: 0.15em;
+    padding-top: 0.1em;
 }
 
 /* Thai hero titles — extra leading for stacked lines */
 .thai-title {
-    line-height: 1.45 !important;
+    line-height: 1.5 !important;
     padding-top: 0.1em;
 }
 
