@@ -20,9 +20,13 @@ body {
 }
 
 /* ── Thai text fix: สระลอย & วรรณยุกต์ ───────────────────── */
-.lang-th {
+.lang-th,
+:lang(th) {
     font-family: 'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif;
     line-height: 1.8;
+    /* CANCEL all wide letter-spacing (kerning) for Thai - Mandatory for legibility */
+    letter-spacing: normal !important;
+    font-feature-settings: "kern" 0;
 }
 
 /* CRITICAL: Never let CSS override Tailwind's hidden utility */
