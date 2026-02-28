@@ -168,9 +168,8 @@
 .parallax-vertical,
 .parallax-horizontal,
 .perspective-container {
-    will-change: transform, opacity !important;
-    backface-visibility: hidden !important;
-    transform: translateZ(0.01px) !important;
+    will-change: transform, opacity;
+    backface-visibility: hidden;
     transition: none !important;
 }
 
