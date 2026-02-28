@@ -168,9 +168,17 @@
 .parallax-vertical,
 .parallax-horizontal,
 .perspective-container {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    will-change: transform, opacity !important;
+    backface-visibility: hidden !important;
+    transform: translateZ(0.01px) !important;
+    transition: none !important;
+}
+
+/* Eliminate any lingering transitions from specific containers */
+.premium-ticker-wrapper,
+.ticker-content,
+.ticker-wrapper {
+    transition: none !important;
 }
 
 .bg-grid-pattern {
