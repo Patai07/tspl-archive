@@ -479,6 +479,62 @@ html {
     display: inline-block;
 }
 
+/* --- RESEARCH PIPELINE SCROLL-MERGE --- */
+#pipeline-container.is-merged {
+    gap: 0;
+    background-color: #ffffff;
+    box-shadow: 0 20px 60px rgba(15, 44, 89, 0.06);
+    border-color: #f3f4f6;
+    /* gray-100 */
+}
+
+@media (max-width: 1023px) {
+    #pipeline-container.is-merged .pipeline-card:first-child {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom-color: transparent;
+    }
+
+    #pipeline-container.is-merged .pipeline-card:nth-child(2) {
+        border-radius: 0;
+        border-bottom-color: transparent;
+    }
+
+    #pipeline-container.is-merged .pipeline-card:last-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    #pipeline-container.is-merged .pipeline-card:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right-color: #f3f4f6;
+    }
+
+    #pipeline-container.is-merged .pipeline-card:nth-child(2) {
+        border-radius: 0;
+        border-right-color: #f3f4f6;
+    }
+
+    #pipeline-container.is-merged .pipeline-card:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}
+
+#pipeline-container.is-merged .pipeline-card {
+    border: none;
+    box-shadow: none;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#pipeline-container.is-merged .card-accent {
+    opacity: 0;
+}
+
 @media (pointer: fine) {
     input {
         cursor: text !important;

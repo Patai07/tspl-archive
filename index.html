@@ -444,13 +444,18 @@
                 <div class="w-16 h-1 bg-[#D4AF37] rounded-full"></div>
             </div>
 
-            <!-- Unified Pipeline Card -->
-            <div
-                class="grid grid-cols-1 lg:grid-cols-3 relative rounded-[2rem] sm:rounded-[2.5rem] bg-white border border-gray-100 shadow-[0_20px_60px_rgba(15,44,89,0.06)] overflow-hidden reveal-up transition-shadow hover:shadow-[0_24px_80px_rgba(15,44,89,0.12)]">
+            <!-- Merge on Scroll Pipeline -->
+            <div id="pipeline-container"
+                class="flex flex-col lg:flex-row gap-6 lg:gap-8 relative transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] rounded-none sm:rounded-[2.5rem] bg-transparent transform-gpu border border-transparent">
 
                 <!-- Step 01: Capture -->
                 <a href="capture.html"
-                    class="block relative p-8 md:p-10 transition-all duration-500 group hover:bg-gray-50 border-b lg:border-b-0 lg:border-r border-gray-100">
+                    class="pipeline-card flex-1 block relative p-8 md:p-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group hover:bg-gray-50 bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] translate-y-8 opacity-0">
+                    <!-- Step accent bar (shows when separate) -->
+                    <div
+                        class="card-accent absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#0F2C59]/60 to-[#0F2C59]/10 rounded-l-2xl transition-opacity duration-500">
+                    </div>
+
                     <!-- Hover overlay gradient -->
                     <div
                         class="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-[#0F2C59]/5 to-transparent group-hover:h-full transition-all duration-500 opacity-0 group-hover:opacity-100 pointer-events-none">
@@ -481,8 +486,11 @@
 
                 <!-- Step 02: Decode -->
                 <a href="decode.html"
-                    class="block relative p-8 md:p-10 transition-all duration-500 group hover:bg-gray-50 border-b lg:border-b-0 lg:border-r border-gray-100">
-                    <!-- Hover overlay gradient -->
+                    class="pipeline-card flex-1 block relative p-8 md:p-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] delay-100 group hover:bg-gray-50 bg-white rounded-2xl border border-gray-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] translate-y-8 opacity-0">
+                    <div
+                        class="card-accent absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-[#D4AF37]/70 to-[#D4AF37]/15 rounded-l-2xl transition-opacity duration-500">
+                    </div>
+
                     <div
                         class="absolute inset-x-0 bottom-0 h-0 bg-gradient-to-t from-[#D4AF37]/5 to-transparent group-hover:h-full transition-all duration-500 opacity-0 group-hover:opacity-100 pointer-events-none">
                     </div>
@@ -512,7 +520,7 @@
 
                 <!-- Step 03: Digitize -->
                 <a href="digitize.html"
-                    class="block relative p-8 md:p-10 bg-[#0F2C59] transition-all duration-500 group overflow-hidden">
+                    class="pipeline-card flex-1 block relative p-8 md:p-10 transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] delay-200 group bg-[#0F2C59] rounded-2xl border border-[#0F2C59] shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden translate-y-8 opacity-0">
                     <div
                         class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,175,55,0.15),transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
                     </div>
