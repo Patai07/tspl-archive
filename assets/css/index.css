@@ -617,7 +617,7 @@ html {
         linear-gradient(rgba(15, 44, 89, 0.02) 1px, transparent 1px),
         linear-gradient(90deg, rgba(15, 44, 89, 0.02) 1px, transparent 1px);
     background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-    background-position: center center;
+    background-position: top center;
 }
 
 .blueprint-grid-dark {
@@ -629,7 +629,7 @@ html {
         linear-gradient(rgba(77, 142, 255, 0.04) 1px, transparent 1px),
         linear-gradient(90deg, rgba(77, 142, 255, 0.04) 1px, transparent 1px);
     background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
-    background-position: center center;
+    background-position: top center;
 }
 
 .blueprint-grid-dark::before {
@@ -848,12 +848,19 @@ html {
     gap: 0.5rem;
     position: relative;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    width: 6rem;
+    /* Fixed width to prevent shifting */
 }
 
 .pipeline-nav-item.active .step-ring {
     border-color: #0F2C59;
     transform: scale(1.1);
     background-color: #0F2C59;
+    box-shadow: 0 10px 25px rgba(15, 44, 89, 0.15);
+}
+
+.pipeline-nav-item.active .step-icon {
+    color: white;
 }
 
 .pipeline-nav-item.active .step-dot {
@@ -861,19 +868,44 @@ html {
     transform: scale(1.2);
 }
 
+.pipeline-nav-item .step-label {
+    position: absolute;
+    top: 3.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    transition: all 0.4s ease;
+}
+
 .pipeline-nav-item.active .step-label {
     color: #0F2C59;
     opacity: 1;
     transform: translate(-50%, -2px);
+    letter-spacing: 0.15em;
+}
+
+.pipeline-nav-item:hover .step-label {
+    color: #0F2C59;
+    opacity: 0.7;
+}
+
+.pipeline-nav-item:hover .step-ring {
+    border-color: #0F2C59;
+    background-color: #f8fafc;
 }
 
 .pipeline-line {
     height: 1px;
     flex-grow: 1;
-    background-color: #e5e7eb;
+    background-color: #f1f1f1;
     position: relative;
     overflow: hidden;
-    margin-top: 20px;
+    margin-top: 24px;
 }
 
 .pipeline-line::after {

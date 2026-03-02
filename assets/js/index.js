@@ -176,8 +176,6 @@ let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentV
 
 function init() {
     initParticles();
-    initParallax();
-
     renderCategories();
     renderGrid();
     updateLegend();
@@ -529,83 +527,39 @@ function initParticles() {
 
 
 
-// --- SCROLL PARALLAX (APPLE STYLE) ---
-function initParallax() {
-    const hElements = document.querySelectorAll('.parallax-horizontal');
-    const vElements = document.querySelectorAll('.parallax-vertical');
-
-    if (!hElements.length && !vElements.length) return;
-
-    let targetScrollY = window.pageYOffset || document.documentElement.scrollTop;
-    let currentScrollY = targetScrollY;
-    let isUpdating = false;
-
-    window.addEventListener('scroll', () => {
-        targetScrollY = window.pageYOffset || document.documentElement.scrollTop;
-        if (!isUpdating) {
-            isUpdating = true;
-            requestAnimationFrame(update);
-        }
-    }, { passive: true });
-
-    const update = () => {
-        // LERP for smooth dampening (0.1 means 10% towards target every frame)
-        currentScrollY += (targetScrollY - currentScrollY) * 0.1;
-
-        // If target reached (within 0.5px), stop looping to save CPU
-        if (Math.abs(targetScrollY - currentScrollY) < 0.5) {
-            currentScrollY = targetScrollY;
-            isUpdating = false;
-        } else {
-            requestAnimationFrame(update);
-        }
-
-        // Optimization: pause heavy calculations if outside viewport
-        if (currentScrollY > window.innerHeight * 1.5) return;
-
-        hElements.forEach(el => {
-            const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
-            const x = currentScrollY * speed;
-            const op = Math.max(0, 1 - (currentScrollY / 600));
-
-            el.style.transform = `translate3d(${x.toFixed(2)}px, 0, 0)`;
-            el.style.opacity = op < 0.99 ? op.toFixed(3) : '1';
-        });
-
-        vElements.forEach(el => {
-            const speed = parseFloat(el.getAttribute('data-parallax-speed') || 0);
-            const y = currentScrollY * speed;
-            const sc = Math.max(0.95, 1 - (currentScrollY / 5000));
-            const op = Math.max(0, 1 - (currentScrollY / 800));
-
-            el.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0) scale(${sc.toFixed(4)})`;
-            el.style.opacity = op < 0.99 ? op.toFixed(3) : '1';
-        });
-    };
-
-    if (targetScrollY > 0) {
-        isUpdating = true;
-        requestAnimationFrame(update);
-    }
-}
+// --- SCROLL PARALLAX (REMOVED - CONSOLIDATED IN PREMIUM.JS) ---
 
 
 // --- SCROLL REVEAL ---
 function revealInit() {
     const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-up');
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
+                const el = entry.target;
+                const delay = parseInt(el.dataset.revealDelay) || 0;
+
                 setTimeout(() => {
-                    entry.target.classList.add('active');
-                }, (entry.target.dataset.revealDelay || i) * 150);
-                observer.unobserve(entry.target);
+                    el.classList.add('active');
+                }, delay);
+
+                observer.unobserve(el);
             }
         });
-    }, { threshold: 0.1 });
-    reveals.forEach(r => observer.observe(r));
+    }, {
+        threshold: 0.05, // Lower threshold for faster trigger
+        rootMargin: '0px 0px -50px 0px' // Trigger slightly before it enters fully
+    });
 
-    // Pipeline scroll-merge observer removed in favor of sticky card stack
+    reveals.forEach(r => {
+        // Initial check for elements already in view
+        const rect = r.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            r.classList.add('active');
+        } else {
+            observer.observe(r);
+        }
+    });
 }
 
 // --- 3D TILT EFFECT (REMOVED) ---

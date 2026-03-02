@@ -36,7 +36,7 @@
                 onclick="sessionStorage.removeItem('tspl_preloader_played')">
                 <div
                     class="w-8 h-8 md:w-9 md:h-9 bg-[#0F2C59] flex items-center justify-center rounded-lg shadow-lg shadow-[#0F2C59]/10 transition-transform group-hover:scale-105">
-                    <i class="ph-fill ph-square-half text-white text-base md:text-lg"></i>
+                    <i class="ph-fill ph-book-open text-[#D4AF37] text-base md:text-lg"></i>
                 </div>
                 <div class="flex flex-col justify-center">
                     <span
@@ -162,91 +162,149 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 
                 <!-- Visual Reading Framework (wide) -->
+                <!-- Visual Reading Framework (wide) -->
                 <div
-                    class="lg:col-span-2 bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100 reveal-up">
-                    <div class="flex flex-col lg:flex-row gap-10">
+                    class="lg:col-span-2 bg-white rounded-3xl p-8 md:p-10 shadow-[0_8px_30px_rgba(15,44,89,0.04)] border border-gray-100 reveal-up overflow-hidden group">
+                    <div class="flex flex-col lg:flex-row items-center gap-12">
+                        <!-- Left Content: Hierarchy -->
                         <div class="w-full lg:w-1/2">
-                            <div class="flex items-start gap-4 mb-7">
-                                <div
-                                    class="w-10 h-10 bg-[#0F2C59]/6 rounded-xl flex items-center justify-center text-[#0F2C59] shrink-0 border border-[#0F2C59]/10">
-                                    <i class="ph-bold ph-scan text-xl"></i>
-                                </div>
-                                <div>
-                                    <p class="text-[9px] font-bold uppercase tracking-[0.4em] text-[#D4AF37] mb-1">
-                                        3-Layer Semiotic Analysis</p>
-                                    <h4 class="text-xl font-bold text-[#0F2C59] tracking-tight">Visual Reading Framework
-                                    </h4>
-                                </div>
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#0F2C59]/5 rounded-full border border-[#0F2C59]/10 mb-6">
+                                <span class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full"></span>
+                                <span
+                                    class="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0F2C59]/60">Semiotic
+                                    Methodology</span>
                             </div>
-                            <div class="space-y-5">
-                                <!-- Layer 01 -->
-                                <div class="relative pl-5 border-l-2 border-[#0F2C59]/20">
-                                    <span
-                                        class="text-[9px] font-bold text-[#0F2C59]/40 uppercase tracking-[0.4em] block mb-2">Layer
-                                        01</span>
-                                    <h5 class="text-[14px] font-bold text-[#0F2C59] mb-2">
-                                        <span class="lang-th">ลักษณะทางกายภาพ <span
-                                                class="font-normal text-gray-400 text-[12px]">(Physical)</span></span>
 
-                                    </h5>
-                                    <p class="text-[12px] text-[#515154] leading-relaxed">
-                                        <span class="lang-th">วิเคราะห์รูปทรงเรขาคณิต เส้นสาย คู่สีดั้งเดิม
-                                            และจำแนก<strong class="font-semibold text-[#0F2C59]">หน่วยคำทัศน์ (Visual
-                                                Morphemes)</strong></span>
+                            <h4 class="text-3xl font-black text-[#0F2C59] tracking-tighter mb-4 leading-tight">
+                                Visual Reading<br />Framework
+                            </h4>
 
-                                    </p>
+                            <p class="text-[14px] text-gray-400 font-medium mb-10 leading-relaxed max-w-sm">
+                                <span class="lang-th">กรอบการวิเคราะห์ ๓
+                                    ระดับเพื่อสกัดอัตลักษณ์วัฒนธรรมสู่สินทรัพย์ดิจิทัลที่แม่นยำ</span>
+                            </p>
+
+                            <div class="space-y-8 relative">
+                                <!-- Connection Line -->
+                                <div
+                                    class="absolute left-[13px] top-6 bottom-6 w-[1.5px] bg-gradient-to-b from-[#D4AF37]/40 via-[#0F2C59]/10 to-[#0F2C59]/40 z-0">
                                 </div>
-                                <!-- Layer 02 -->
-                                <div class="relative pl-5 border-l-2 border-[#D4AF37]/50">
-                                    <span
-                                        class="text-[9px] font-bold text-[#D4AF37]/70 uppercase tracking-[0.4em] block mb-2">Layer
-                                        02</span>
-                                    <h5 class="text-[14px] font-bold text-[#0F2C59] mb-2">
-                                        <span class="lang-th">วากยสัมพันธ์ <span
-                                                class="font-normal text-gray-400 text-[12px]">(Syntactic)</span></span>
 
-                                    </h5>
-                                    <p class="text-[12px] text-[#515154] leading-relaxed">
-                                        <span class="lang-th">วิเคราะห์<strong
-                                                class="font-semibold text-[#0F2C59]">ระบบการจัดวาง (Syntax)</strong>
-                                            ความสมมาตร แกนหลัก และจังหวะ</span>
-
-                                    </p>
+                                <!-- Level 03: Semantic -->
+                                <div class="relative z-10 flex gap-6 group/item">
+                                    <div
+                                        class="w-7 h-7 bg-[#D4AF37] rounded-full flex items-center justify-center text-white text-[10px] font-black shrink-0 shadow-lg shadow-[#D4AF37]/20 group-hover/item:scale-110 transition-transform">
+                                        03</div>
+                                    <div class="pt-0.5">
+                                        <h5 class="text-[15px] font-black text-[#0F2C59] mb-1 uppercase tracking-tight">
+                                            SEMANTIC CORE</h5>
+                                        <p class="text-[12px] text-gray-500 leading-relaxed font-medium">
+                                            <span class="lang-th">วิเคราะห์นัยสัญลักษณ์และบริบทวัฒนธรรมเชิงลึก</span>
+                                        </p>
+                                    </div>
                                 </div>
-                                <!-- Layer 03 -->
-                                <div class="relative pl-5 border-l-2 border-gray-200">
-                                    <span
-                                        class="text-[9px] font-bold text-gray-300 uppercase tracking-[0.4em] block mb-2">Layer
-                                        03</span>
-                                    <h5 class="text-[14px] font-bold text-[#0F2C59] mb-2">
-                                        <span class="lang-th">นัยสัญลักษณ์ <span
-                                                class="font-normal text-gray-400 text-[12px]">(Semantic)</span></span>
 
-                                    </h5>
-                                    <p class="text-[12px] text-[#515154] leading-relaxed">
-                                        <span class="lang-th">วิเคราะห์<strong
-                                                class="font-semibold text-[#0F2C59]">นัยสัญลักษณ์ (Connotation)</strong>
-                                            บริบททางวัฒนธรรม และความอ่อนไหว</span>
+                                <!-- Level 02: Syntactic -->
+                                <div class="relative z-10 flex gap-6 group/item">
+                                    <div
+                                        class="w-7 h-7 bg-[#0F2C59] rounded-full flex items-center justify-center text-white text-[10px] font-black shrink-0 shadow-lg shadow-[#0F2C59]/20 group-hover/item:scale-110 transition-transform">
+                                        02</div>
+                                    <div class="pt-0.5">
+                                        <h5 class="text-[15px] font-black text-[#0F2C59] mb-1 uppercase tracking-tight">
+                                            SYNTACTIC LAYER</h5>
+                                        <p class="text-[12px] text-gray-500 leading-relaxed font-medium">
+                                            <span class="lang-th">วิเคราะห์ระเบียบวิธีจัดวาง แกนสมมาตร และจังหวะ</span>
+                                        </p>
+                                    </div>
+                                </div>
 
-                                    </p>
+                                <!-- Level 01: Physical -->
+                                <div class="relative z-10 flex gap-6 group/item">
+                                    <div
+                                        class="w-7 h-7 bg-[#0F2C59] rounded-full flex items-center justify-center text-white text-[10px] font-black shrink-0 shadow-lg shadow-[#0F2C59]/20 group-hover/item:scale-110 transition-transform">
+                                        01</div>
+                                    <div class="pt-0.5">
+                                        <h5 class="text-[15px] font-black text-[#0F2C59] mb-1 uppercase tracking-tight">
+                                            PHYSICAL LAYER</h5>
+                                        <p class="text-[12px] text-gray-500 leading-relaxed font-medium">
+                                            <span class="lang-th">วิเคราะห์รูปทรงเรขาคณิตและหน่วยคำทัศน์ดั้งเดิม</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="w-full lg:w-1/2">
+
+                        <!-- Right Content: Visual Stack -->
+                        <div class="w-full lg:w-1/2 relative">
                             <div
-                                class="relative rounded-2xl overflow-hidden bg-[#0F2C59]/5 border border-gray-100 group">
-                                <img src="assets/images/research/methodology_ref.png"
-                                    alt="Methodology Framework Visualization"
-                                    class="w-full h-auto opacity-100 transition-transform duration-700 group-hover:scale-105">
-                                <div class="absolute inset-x-0 bottom-0 p-4 flex items-end justify-between z-10">
+                                class="relative aspect-square max-w-[420px] mx-auto bg-gray-50 rounded-[3rem] border border-gray-100 shadow-inner p-6 md:p-10 flex items-center justify-center overflow-hidden">
+                                <!-- Background grid for technical feel -->
+                                <div class="absolute inset-0 tech-grid-bg opacity-[0.3]"></div>
+
+                                <svg viewBox="0 0 400 400" class="w-full h-full relative z-10 pointer-events-none">
+                                    <!-- Connection Lines (Technical) -->
+                                    <path class="draw-path opacity-10" stroke="#0F2C59" stroke-width="0.5"
+                                        stroke-dasharray="4,4" d="M200,80 V320 M100,120 V280 M300,120 V280" />
+
+                                    <!-- Physical Layer (Base) -->
+                                    <g transform="translate(50, 240)">
+                                        <path class="draw-path" stroke="#0F2C59" stroke-width="1.5"
+                                            fill="rgba(15,44,89,0.06)" d="M0,40 L150,0 L300,40 L150,80 Z" />
+                                        <circle cx="150" cy="40" r="3" fill="#0F2C59" opacity="0.2" />
+                                    </g>
+
+                                    <!-- Syntactic Layer (Middle) -->
+                                    <g transform="translate(50, 160)">
+                                        <path class="draw-path" stroke="#0F2C59" stroke-width="2"
+                                            fill="rgba(15,44,89,0.04)" d="M0,40 L150,0 L300,40 L150,80 Z" />
+                                        <circle cx="150" cy="40" r="3" fill="#0F2C59" opacity="0.3" />
+                                    </g>
+
+                                    <!-- Semantic Core (Apex) -->
+                                    <g transform="translate(50, 80)">
+                                        <path class="draw-path" stroke="#D4AF37" stroke-width="2.5"
+                                            fill="rgba(212,175,55,0.12)" d="M0,40 L150,0 L300,40 L150,80 Z" />
+                                        <circle cx="150" cy="40" r="4" fill="#D4AF37" />
+                                    </g>
+
+                                    <!-- Enhanced Scanning Beam -->
+                                    <g class="animate-scan">
+                                        <defs>
+                                            <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" stop-color="#D4AF37" stop-opacity="0" />
+                                                <stop offset="50%" stop-color="#D4AF37" stop-opacity="0.8" />
+                                                <stop offset="100%" stop-color="#D4AF37" stop-opacity="0" />
+                                            </linearGradient>
+                                        </defs>
+                                        <rect x="20" y="0" width="360" height="2" fill="url(#scanGradient)"
+                                            opacity="0.6">
+                                            <animate attributeName="y" values="60;340;60" dur="5s"
+                                                repeatCount="indefinite" />
+                                        </rect>
+                                        <!-- Glow line -->
+                                        <line x1="40" y1="0" x2="360" y2="0" stroke="#D4AF37" stroke-width="0.5"
+                                            stroke-opacity="0.8">
+                                            <animate attributeName="y1" values="60;340;60" dur="5s"
+                                                repeatCount="indefinite" />
+                                            <animate attributeName="y2" values="60;340;60" dur="5s"
+                                                repeatCount="indefinite" />
+                                        </line>
+                                    </g>
+                                </svg>
+
+                                <!-- Floating Data Tags -->
+                                <div
+                                    class="absolute top-10 left-10 py-1.5 px-3 bg-white/80 backdrop-blur-md rounded-lg border border-gray-100 shadow-sm z-20 pointer-events-none">
                                     <span
-                                        class="text-[8px] font-bold text-[#0F2C59]/30 uppercase tracking-[0.3em]">Framework
-                                        Ref Doc. #M-01</span>
-                                    <div class="flex gap-1 opacity-20">
-                                        <span class="w-1 h-1 bg-[#0F2C59] rounded-full"></span>
-                                        <span class="w-1 h-1 bg-[#0F2C59] rounded-full"></span>
-                                        <span class="w-1 h-1 bg-[#0F2C59] rounded-full"></span>
-                                    </div>
+                                        class="text-[8px] font-black text-[#0F2C59]/40 tracking-widest uppercase italic">Diagnostic
+                                        Mode</span>
+                                </div>
+                                <div
+                                    class="absolute bottom-10 right-10 flex items-center gap-2 py-1.5 px-3 bg-[#0F2C59] rounded-lg shadow-xl z-20 pointer-events-none">
+                                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
+                                    <span class="text-[8px] font-black text-white tracking-widest uppercase">System
+                                        Active</span>
                                 </div>
                             </div>
                         </div>
@@ -255,52 +313,83 @@
 
                 <!-- Cultural Sensitivity -->
                 <div
-                    class="bg-[#0F2C59] rounded-2xl p-7 shadow-xl relative overflow-hidden reveal-right text-left flex flex-col">
-                    <div class="absolute inset-0 bg-grid-pattern opacity-[0.05]"></div>
+                    class="bg-[#0F2C59] rounded-3xl p-8 shadow-[0_20px_50px_rgba(15,44,89,0.2)] relative overflow-hidden reveal-right text-left flex flex-col group/cultural">
+                    <div class="absolute inset-0 bg-grid-pattern opacity-[0.08] pointer-events-none"></div>
+                    <div
+                        class="absolute -top-24 -right-24 w-48 h-48 bg-[#D4AF37]/10 rounded-full blur-3xl group-hover/cultural:bg-[#D4AF37]/20 transition-colors duration-1000">
+                    </div>
+
                     <div class="relative z-10 flex flex-col h-full">
-                        <div
-                            class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center text-white mb-5 border border-white/10">
-                            <i class="ph ph-shield-check text-xl"></i>
+                        <div class="flex items-center justify-between mb-8">
+                            <div
+                                class="w-12 h-12 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center text-white border border-white/20 shadow-xl">
+                                <i class="ph-fill ph-shield-check text-2xl text-[#D4AF37]"></i>
+                            </div>
+                            <div class="px-3 py-1 bg-[#D4AF37]/10 rounded-full border border-[#D4AF37]/20">
+                                <span class="text-[9px] font-black uppercase tracking-[0.2em] text-[#D4AF37]">Secured
+                                    Protocol</span>
+                            </div>
                         </div>
-                        <p class="text-[9px] font-bold uppercase tracking-[0.4em] text-[#D4AF37]/80 mb-1.5">Cultural
-                            Ethics</p>
-                        <h4 class="text-lg font-bold text-white mb-2">
+
+                        <h4 class="text-2xl font-black text-white mb-3 tracking-tighter">
                             <span class="lang-th">ความอ่อนไหวทางวัฒนธรรม</span>
-
                         </h4>
-                        <p class="text-[12px] text-white/40 leading-relaxed mb-5">
-                            <span class="lang-th">ระดับการจัดการลวดลายตามบริบทพิธีกรรมและศาสนาในพื้นที่</span>
 
+                        <p class="text-[13px] text-white/50 leading-relaxed font-medium mb-10">
+                            <span class="lang-th">ระดับการจัดการลวดลายตามบริบทสัญวิทยาและศาสนาในพื้นที่</span>
                         </p>
-                        <div class="space-y-2.5 mt-auto">
+
+                        <div class="space-y-4 mt-auto">
+                            <!-- Low Sensitivity -->
                             <div
-                                class="flex items-center gap-3 bg-white/5 rounded-xl px-3.5 py-2.5 border border-white/8">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0"></span>
-                                <div>
-                                    <p class="text-[11px] font-semibold text-white mb-0.5"><span
-                                            class="lang-th">ลวดลายทั่วไป</span></p>
-                                    <p class="text-[10px] text-white/40"><span class="lang-th">ใช้เชิงพาณิชย์ได้ +
-                                            ระบุที่มา</span></p>
+                                class="group/item flex items-center gap-4 bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-sm rounded-2xl p-4 border border-white/10 transition-all duration-500">
+                                <div
+                                    class="w-1.5 h-10 bg-emerald-400 rounded-full shadow-[0_0_15px_rgba(52,211,153,0.4)]">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[12px] font-black text-white uppercase tracking-tight"><span
+                                                class="lang-th">ลวดลายทั่วไป</span></p>
+                                        <span class="text-[8px] font-bold text-emerald-400/80 uppercase">Level 01</span>
+                                    </div>
+                                    <p class="text-[10px] text-white/40 font-medium"><span
+                                            class="lang-th">ใช้เชิงพาณิชย์ได้โดยไม่ต้องขออนุญาต
+                                            แต่ต้องระบุแหล่งที่มา</span></p>
                                 </div>
                             </div>
+
+                            <!-- Mid Sensitivity -->
                             <div
-                                class="flex items-center gap-3 bg-white/5 rounded-xl px-3.5 py-2.5 border border-white/8">
-                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400 shrink-0"></span>
-                                <div>
-                                    <p class="text-[11px] font-semibold text-white mb-0.5"><span
-                                            class="lang-th">ลายพิธีกรรม</span></p>
-                                    <p class="text-[10px] text-white/40"><span
-                                            class="lang-th">ต้องขออนุญาตชุมชนก่อน</span></p>
+                                class="group/item flex items-center gap-4 bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-sm rounded-2xl p-4 border border-white/10 transition-all duration-500">
+                                <div
+                                    class="w-1.5 h-10 bg-yellow-400 rounded-full shadow-[0_0_15px_rgba(250,204,21,0.4)]">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[12px] font-black text-white uppercase tracking-tight"><span
+                                                class="lang-th">ลายพิธีกรรม</span></p>
+                                        <span class="text-[8px] font-bold text-yellow-400/80 uppercase">Level 02</span>
+                                    </div>
+                                    <p class="text-[10px] text-white/40 font-medium"><span
+                                            class="lang-th">สกัดอัตลักษณ์ได้บางส่วน
+                                            และต้องได้รับความยินยอมจากชุมชน</span></p>
                                 </div>
                             </div>
+
+                            <!-- High Sensitivity -->
                             <div
-                                class="flex items-center gap-3 bg-white/5 rounded-xl px-3.5 py-2.5 border border-white/8">
-                                <span class="w-2.5 h-2.5 rounded-full bg-red-400 shrink-0"></span>
-                                <div>
-                                    <p class="text-[11px] font-semibold text-white mb-0.5"><span
-                                            class="lang-th">ลายศักดิ์สิทธิ์</span></p>
-                                    <p class="text-[10px] text-white/40"><span
-                                            class="lang-th">ห้ามนำไปใช้เชิงพาณิชย์</span></p>
+                                class="group/item flex items-center gap-4 bg-white/[0.03] hover:bg-white/[0.08] backdrop-blur-sm rounded-2xl p-4 border border-white/10 transition-all duration-500">
+                                <div class="w-1.5 h-10 bg-red-400 rounded-full shadow-[0_0_15px_rgba(248,113,113,0.4)]">
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <p class="text-[12px] font-black text-white uppercase tracking-tight"><span
+                                                class="lang-th">ลายเกี่ยวกับความเชื่อ</span></p>
+                                        <span class="text-[8px] font-bold text-red-400/80 uppercase">Level 03</span>
+                                    </div>
+                                    <p class="text-[10px] text-white/40 font-medium"><span
+                                            class="lang-th">ห้ามนำไปใช้เชิงพาณิชย์โดยเด็ดขาด
+                                            เก็บรักษาเพื่อการศึกษาเท่านั้น</span></p>
                                 </div>
                             </div>
                         </div>
@@ -309,94 +398,121 @@
 
                 <!-- Design Usage Protocol (full width) -->
                 <div
-                    class="lg:col-span-3 bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-gray-100 reveal-up text-left">
-                    <div class="flex flex-col md:flex-row gap-10 items-start">
-                        <div class="w-full md:w-[26%] shrink-0">
-                            <p class="text-[9px] font-bold uppercase tracking-[0.4em] text-[#D4AF37] mb-1.5">Usage
-                                Protocol</p>
-                            <h4 class="text-lg font-bold text-[#0F2C59] tracking-tight mb-3">Design Ethics &amp;
-                                Protocol</h4>
-                            <p class="text-[12px] text-[#515154] leading-relaxed">
-                                <span
-                                    class="lang-th">ข้อกำหนดเชิงจริยธรรมสำหรับนักออกแบบในการนำคลังลวดลายดิจิทัลไปต่อยอด
-                                    รักษาความสมบูรณ์ของต้นฉบับและไม่บิดเบือนความหมายเชิงสัญลักษณ์</span>
+                    class="lg:col-span-3 bg-white rounded-3xl p-10 md:p-12 shadow-[0_30px_70px_rgba(15,44,89,0.06)] border border-gray-100 reveal-up text-left relative overflow-hidden group/protocol">
+                    <div class="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none"></div>
+                    <div
+                        class="absolute -bottom-24 -left-24 w-64 h-64 bg-[#0F2C59]/[0.02] rounded-full blur-3xl pointer-events-none">
+                    </div>
 
+                    <div class="flex flex-col lg:flex-row gap-16 items-start relative z-10">
+                        <div class="w-full lg:w-[30%] shrink-0">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1.5 bg-[#D4AF37]/5 rounded-xl border border-[#D4AF37]/20 mb-6">
+                                <i class="ph-bold ph-seal-check text-[#D4AF37]"></i>
+                                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-[#D4AF37]">Usage
+                                    Protocol</span>
+                            </div>
+
+                            <h4 class="text-3xl font-black text-[#0F2C59] tracking-tighter mb-4 leading-[1.1]">Design
+                                Ethics<br />& Protocol</h4>
+
+                            <p class="text-[14px] text-gray-400 font-medium leading-relaxed mb-8">
+                                <span class="lang-th">ข้อกำหนดเชิงจริยธรรมสำหรับนักออกแบบ
+                                    เพื่อรักษาความสมบูรณ์ของจิตวิญญาณลวดลายต้นฉบับ</span>
                             </p>
                         </div>
-                        <div class="w-full md:w-[74%] grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+                        <div class="w-full lg:w-[70%] grid grid-cols-1 md:grid-cols-3 gap-6">
                             <!-- Must Preserve -->
-                            <div class="bg-emerald-50/70 rounded-xl p-5 border border-emerald-100/80">
-                                <div class="flex items-center gap-2.5 mb-4">
-                                    <div
-                                        class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
-                                        <i class="ph-bold ph-check text-sm"></i>
-                                    </div>
-                                    <h5 class="text-[12px] font-bold text-emerald-800"><span
-                                            class="lang-th">ต้องคงไว้เสมอ</span></h5>
+                            <div
+                                class="group/p-item flex flex-col bg-gray-50/50 hover:bg-emerald-50/50 rounded-2xl p-7 border border-gray-100 hover:border-emerald-100 transition-all duration-500 shadow-sm hover:shadow-xl">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-emerald-500 mb-6 group-hover/p-item:scale-110 transition-transform">
+                                    <i class="ph-bold ph-check-circle text-2xl"></i>
                                 </div>
-                                <ul class="text-[12px] text-[#515154] space-y-2">
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">แกนสมมาตรหลักของลวดลาย</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">จุดศูนย์กลางและดอกกลาง (Rosette)</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">สัดส่วนระยะห่างของก้านเถา</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">การอ้างอิงแหล่งที่มาทุกชิ้นงาน</span></li>
+                                <h5 class="text-[15px] font-black text-[#0F2C59] mb-4 tracking-tight"><span
+                                        class="lang-th">สิ่งที่ต้องคงไว้</span></h5>
+                                <ul class="space-y-3.5">
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-emerald-900 transition-colors"><span
+                                                class="lang-th">แกนสมมาตรหลักของลวดลาย</span></span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-emerald-900 transition-colors"><span
+                                                class="lang-th">จุดศูนย์กลางต้นทาง (Rosette)</span></span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-emerald-900 transition-colors"><span
+                                                class="lang-th">การอ้างอิงแหล่งที่มาศิลปิน</span></span>
+                                    </li>
                                 </ul>
                             </div>
+
                             <!-- Can Modify -->
-                            <div class="bg-blue-50/50 rounded-xl p-5 border border-blue-100/80">
-                                <div class="flex items-center gap-2.5 mb-4">
-                                    <div
-                                        class="w-7 h-7 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
-                                        <i class="ph-bold ph-faders text-sm"></i>
-                                    </div>
-                                    <h5 class="text-[12px] font-bold text-blue-800"><span
-                                            class="lang-th">ปรับได้ในขอบเขต</span></h5>
+                            <div
+                                class="group/p-item flex flex-col bg-gray-50/50 hover:bg-blue-50/50 rounded-2xl p-7 border border-gray-100 hover:border-blue-100 transition-all duration-500 shadow-sm hover:shadow-xl">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-blue-500 mb-6 group-hover/p-item:scale-110 transition-transform">
+                                    <i class="ph-bold ph-faders-horizontal text-2xl"></i>
                                 </div>
-                                <ul class="text-[12px] text-[#515154] space-y-2">
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-blue-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">น้ำหนักเส้นและการเหลื่อมเงา</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-blue-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">ระบบ Layer การซ้อนทับลวดลาย</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-blue-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">สีภายในพื้นที่ปิดของลวดลาย</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-blue-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">สเกลและขนาดนำไปใช้งาน</span></li>
+                                <h5 class="text-[15px] font-black text-[#0F2C59] mb-4 tracking-tight"><span
+                                        class="lang-th">สิ่งที่ปรับแต่งได้</span></h5>
+                                <ul class="space-y-3.5">
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-blue-900 transition-colors"><span
+                                                class="lang-th">น้ำหนักเส้นและการลดทอนเลเยอร์</span></span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-blue-900 transition-colors"><span
+                                                class="lang-th">คู่สีในพื้นที่ปิดของลวดลาย</span></span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-blue-900 transition-colors"><span
+                                                class="lang-th">สเกลที่สัมพันธ์กับสื่อสิ่งพิมพ์</span></span>
+                                    </li>
                                 </ul>
                             </div>
-                            <!-- Do Not -->
-                            <div class="bg-red-50/50 rounded-xl p-5 border border-red-100/80">
-                                <div class="flex items-center gap-2.5 mb-4">
-                                    <div
-                                        class="w-7 h-7 rounded-lg bg-red-100 text-red-500 flex items-center justify-center shrink-0">
-                                        <i class="ph-bold ph-x text-sm"></i>
-                                    </div>
-                                    <h5 class="text-[12px] font-bold text-red-700"><span
-                                            class="lang-th">ข้อห้ามเด็ดขาด</span></h5>
+
+                            <!-- Forbidden -->
+                            <div
+                                class="group/p-item flex flex-col bg-gray-50/50 hover:bg-red-50/50 rounded-2xl p-7 border border-gray-100 hover:border-red-100 transition-all duration-500 shadow-sm hover:shadow-xl">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-red-500 mb-6 group-hover/p-item:scale-110 transition-transform">
+                                    <i class="ph-bold ph-prohibit text-2xl"></i>
                                 </div>
-                                <ul class="text-[12px] text-[#515154] space-y-2">
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-red-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">ตัดทอนหรือเพิ่มหน่วยคำทัศน์ใหม่</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-red-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">สร้างลายใหม่โดยอ้างว่าดั้งเดิม</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-red-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">อ้างอิงยุคสมัยที่ยังไม่ผ่านการยืนยัน</span></li>
-                                    <li class="flex items-start gap-2"><span
-                                            class="w-1 h-1 rounded-full bg-red-400 mt-1.5 shrink-0"></span><span
-                                            class="lang-th">ใช้ลายศักดิ์สิทธิ์ในบริบทเชิงพาณิชย์</span></li>
+                                <h5 class="text-[15px] font-black text-[#0F2C59] mb-4 tracking-tight"><span
+                                        class="lang-th">ข้อห้ามเด็ดขาด</span></h5>
+                                <ul class="space-y-3.5">
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-red-900 transition-colors"><span
+                                                class="lang-th">การเพิ่มหน่วยคำทัศน์ใหม่โดยพลการ</span></span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-red-900 transition-colors"><span
+                                                class="lang-th">การอ้างอิงยุคสมัยที่ไม่ถูกต้อง</span></span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0"></span>
+                                        <span
+                                            class="text-[12px] font-medium text-gray-500 group-hover/p-item:text-red-900 transition-colors"><span
+                                                class="lang-th">ใช้ลายศักดิ์สิทธิ์ในบริบทที่ไม่สมควร</span></span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>

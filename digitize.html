@@ -21,7 +21,7 @@
         onclick="sessionStorage.removeItem('tspl_preloader_played')">
         <div
           class="w-8 h-8 md:w-9 md:h-9 bg-[#0F2C59] flex items-center justify-center rounded-lg shadow-lg shadow-[#0F2C59]/10 transition-transform group-hover:scale-105">
-          <i class="ph-fill ph-square-half text-white text-base md:text-lg"></i>
+          <i class="ph-fill ph-book-open text-[#D4AF37] text-base md:text-lg"></i>
         </div>
         <div class="flex flex-col justify-center">
           <span
@@ -119,33 +119,50 @@
     </div>
   </nav>
 
-  <main class="flex-grow pt-8 pb-32">
+  <main class="flex-grow pt-8 pb-32 relative overflow-hidden">
+    <!-- Tech Background Gimmicks - Constrained to Hero Area -->
+    <div class="absolute inset-x-0 top-0 pointer-events-none z-0 overflow-hidden h-[900px]">
+      <div id="tech-dots-container" class="absolute inset-0"></div>
+      <div class="scan-line"></div>
+    </div>
     <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
 
-      <!-- Pipeline Progress Navigator (Smaller, cleaner) -->
-      <div class="max-w-[700px] mx-auto mb-16 relative px-4 reveal">
+      <!-- Pipeline Progress Navigator (Enhanced UX) -->
+      <div class="max-w-[700px] mx-auto mb-20 relative px-4 reveal">
         <div class="flex items-center justify-between relative">
+          <!-- Step 01 -->
           <a href="capture.html" class="pipeline-nav-item">
             <div
-              class="step-ring w-8 h-8 rounded-full border border-gray-100 bg-white flex items-center justify-center transition-all">
-              <div class="step-dot w-1.5 h-1.5 rounded-full bg-gray-200 scale-50 transition-all"></div>
+              class="step-ring w-12 h-12 rounded-full border border-gray-100 bg-white flex items-center justify-center transition-all">
+              <i class="ph-bold ph-camera text-gray-300 step-icon transition-all text-xl"></i>
+            </div>
+            <div class="step-label">
+              <span class="lang-th">01. เก็บข้อมูล</span>
             </div>
           </a>
+
           <div class="pipeline-line"></div>
+
+          <!-- Step 02 -->
           <a href="decode.html" class="pipeline-nav-item">
             <div
-              class="step-ring w-8 h-8 rounded-full border border-gray-100 bg-white flex items-center justify-center transition-all">
-              <div class="step-dot w-1.5 h-1.5 rounded-full bg-gray-200 scale-50 transition-all"></div>
+              class="step-ring w-12 h-12 rounded-full border border-gray-100 bg-white flex items-center justify-center transition-all">
+              <i class="ph-bold ph-fingerprint text-gray-300 step-icon transition-all text-xl"></i>
+            </div>
+            <div class="step-label">
+              <span class="lang-th">02. ถอดรหัส</span>
             </div>
           </a>
+
           <div class="pipeline-line"></div>
+
+          <!-- Step 03 -->
           <a href="digitize.html" class="pipeline-nav-item active">
             <div
-              class="step-ring w-8 h-8 rounded-full border border-gray-100 bg-white flex items-center justify-center transition-all">
-              <div class="step-dot w-1.5 h-1.5 rounded-full bg-gray-200 scale-50 transition-all"></div>
+              class="step-ring w-12 h-12 rounded-full border border-gray-100 bg-white flex items-center justify-center transition-all">
+              <i class="ph-bold ph-bezier-curve text-gray-300 step-icon transition-all text-xl"></i>
             </div>
-            <div
-              class="step-label absolute top-10 left-1/2 -translate-x-1/2 whitespace-nowrap text-[8px] font-bold uppercase text-[#0F2C59]">
+            <div class="step-label">
               <span class="lang-th">03. แปลงดิจิทัล</span>
             </div>
           </a>
@@ -163,11 +180,9 @@
 
             </span>
           </div>
-          <h1 class="text-5xl md:text-7xl font-bold text-[#0F2C59] tracking-tight mb-8">Digitization<br>Process</h1>
+          <h1 class="text-5xl md:text-7xl font-bold text-[#0F2C59] tracking-tight mb-8">แปลงดิจิทัล</h1>
           <p class="text-xl text-gray-500 max-w-2xl font-light leading-relaxed mb-10">
-            <span
-              class="lang-th">สร้างมาตรฐานระเบียนข้อมูลดิจิทัลที่สามารถนำไปใช้งานต่อยอดได้ในเศรษฐกิจสร้างสรรค์ระดับสากล
-              โดยยังคงรักษาอัตลักษณ์ไว้อย่างถูกต้อง</span>
+            <span class="lang-th">สร้างไฟล์เวกเตอร์มาตรฐานและข้อกำหนดการใช้งานเพื่อความยั่งยืนของอัตลักษณ์</span>
 
           </p>
 
@@ -391,6 +406,31 @@
 
   <script src="assets/js/index.js?v=2.0"></script>
   <script>
+    // Random Tech-Dots at Grid Intersections (Sync with index.html)
+    function createTechDots() {
+      const container = document.getElementById('tech-dots-container');
+      if (!container) return;
+      const gridSize = 80;
+      const width = window.innerWidth;
+      const height = 800;
+      const cols = Math.floor(width / gridSize);
+      const rows = Math.floor(height / gridSize);
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          if (Math.random() < 0.15) {
+            const dot = document.createElement('div');
+            dot.className = 'tech-dot';
+            dot.style.left = `${i * gridSize}px`;
+            dot.style.top = `${j * gridSize}px`;
+            dot.style.animationDelay = `${Math.random() * 3}s`;
+            dot.style.animationDuration = `${2 + Math.random() * 3}s`;
+            container.appendChild(dot);
+          }
+        }
+      }
+    }
+    createTechDots();
+
     // Mobile menu toggle
     const mobBtn = document.getElementById('mobile-menu-btn');
     const mobMenu = document.getElementById('mobile-menu');
