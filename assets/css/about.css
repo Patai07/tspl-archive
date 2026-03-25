@@ -1,6 +1,6 @@
 :root {
-    --tspl-gold: #D4AF37;
-    --tspl-blue: #0F2C59;
+    --tspl-gold: #FF4E45;
+    --tspl-blue: #0F172A;
     --bg-apple: #fbfbfd;
 }
 
@@ -9,7 +9,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--bg-apple);
-    color: #0F2C59;
+    color: #0F172A;
     letter-spacing: -0.01em;
 }
 
@@ -80,7 +80,7 @@ html {
     right: 10%;
     width: 400px;
     height: 400px;
-    background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 70%);
+    background: radial-gradient(circle, rgba(255, 78, 69, 0.08) 0%, rgba(255, 78, 69, 0) 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
