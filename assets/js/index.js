@@ -348,6 +348,10 @@ function renderGrid(filterText = "") {
             'Architecture / Stucco': { bg: 'from-[#0F2C59] to-[#1a3f7a]', icon: 'ph-building-apartment', accent: '#D4AF37' },
             'Architecture / Stone': { bg: 'from-[#2d1f3d] to-[#4a2f6a]', icon: 'ph-pyramid', accent: '#B8A0D4' },
             'Architecture / Wood': { bg: 'from-[#2d1a0e] to-[#5c3416]', icon: 'ph-tree-evergreen', accent: '#D4A574' },
+            'Thematic / Nature': { bg: 'from-[#0d3322] to-[#1a5c3a]', icon: 'ph-leaf', accent: '#52D68A' },
+            'Thematic / Fauna': { bg: 'from-[#2d2a0a] to-[#5c5212]', icon: 'ph-bird', accent: '#F5D060' },
+            'Thematic / Geometric': { bg: 'from-[#0a1f3d] to-[#0f3060]', icon: 'ph-shapes', accent: '#A8C8FF' },
+            'Thematic / Sacred': { bg: 'from-[#3d0a0a] to-[#700f0f]', icon: 'ph-star-of-david', accent: '#FF9090' },
         };
         const palette = palettes[record.category] || { bg: 'from-[#1a1a2e] to-[#16213e]', icon: 'ph-shapes', accent: '#D4AF37' };
 
@@ -676,9 +680,12 @@ window.onload = () => {
     const conceptKeywords = [
         "ถอดรหัสอัตลักษณ์", "สกัดรอยมรดกไทย", "สู่สินทรัพย์ดิจิทัล",
         "หน่วยคำทัศน์", "สัญวิทยา", "สถาปัตยกรรม", "การวิเคราะห์เชิงโครงสร้าง",
-        "ลายพุ่มข้าวบิณฑ์", "ลานนา", "อยุธยา", "หลักฐานชั้นต้น",
+        "ลายพุ่มข้าวบิณฑ์", "ล้านนา", "อยุธยา", "หลักฐานชั้นต้น",
         "M01", "M02", "M03", "TSPL CORE", "CREATIVE ECONOMY",
-        "ประยุกต์ใช้", "ระบบพิกัด", "ARCHIVE", "VERIFIED", "VECTOR"
+        "ประยุกต์ใช้", "ระบบพิกัด", "ARCHIVE", "VERIFIED", "VECTOR",
+        "กนกเปลว", "ลายหงส์", "ลายนาค", "ลายครุฑ", "ธรรมจักร",
+        "พรรณพฤกษา", "สรรพสัตว์", "เรขาคณิต", "ความเชื่อ",
+        "Vector Readiness", "Connotation", "180 PATTERNS", "TAXONOMY"
     ];
     let scatterInterval;
 
