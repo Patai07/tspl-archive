@@ -162,12 +162,77 @@ const RECORDS = [
         ethics: "low",
         protocol: { preserve: "ความอ่อนช้อยที่ไม่สมมาตรเป๊ะ", donot: "ทำซ้ำ (Duplicate) ให้เหมือนกันทุกกระเบียดนิ้ว" },
         tags: ["#ซุ้มประตู", "#ปูนปั้น", "#น่าน"]
+    },
+    {
+        id: "TSP-LST-NAT-001",
+        title: { th: "ลายกนกเปลว", en: "Kanok Plew Pattern" },
+        category: "Thematic / Nature",
+        location: "Master Registry (Pending Digitization)",
+        confidence: "Hypothetical",
+        images: [{ url: "https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&q=80&w=1200", type: "original" }],
+        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
+        connotation: { th: "สัญลักษณ์ของเปลวไฟและความรุ่งโรจน์", en: "Symbolizes flames and glory." },
+        ethics: "low",
+        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
+        tags: ["#กนกเปลว", "#Nature"]
+    },
+    {
+        id: "TSP-LST-FAU-001",
+        title: { th: "ลายหงส์รำ", en: "Dancing Swan Pattern" },
+        category: "Thematic / Fauna",
+        location: "Master Registry (Pending Digitization)",
+        confidence: "Hypothetical",
+        images: [{ url: "https://images.unsplash.com/photo-1574169208507-84376144848b?auto=format&fit=crop&q=80&w=1200", type: "original" }],
+        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
+        connotation: { th: "สัญลักษณ์ความอ่อนช้อยและชั้นสูง", en: "Symbolizes grace and high status." },
+        ethics: "medium",
+        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
+        tags: ["#หงส์รำ", "#Fauna"]
+    },
+    {
+        id: "TSP-LST-GEO-001",
+        title: { th: "ลายประจำยาม", en: "Prajam Yam Pattern" },
+        category: "Thematic / Geometric",
+        location: "Master Registry (Pending Digitization)",
+        confidence: "Hypothetical",
+        images: [{ url: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200", type: "original" }],
+        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
+        connotation: { th: "สัญลักษณ์การคุ้มครองและระเบียบจักรวาล", en: "Symbolizes protection and cosmic order." },
+        ethics: "low",
+        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
+        tags: ["#ประจำยาม", "#Geometric"]
+    },
+    {
+        id: "TSP-LST-SAC-001",
+        title: { th: "ลายธรรมจักร", en: "Dharmachakra Pattern" },
+        category: "Thematic / Sacred",
+        location: "Master Registry (Pending Digitization)",
+        confidence: "Hypothetical",
+        images: [{ url: "https://images.unsplash.com/photo-1531685250784-7569952593d2?auto=format&fit=crop&q=80&w=1200", type: "original" }],
+        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
+        connotation: { th: "สัญลักษณ์แห่งกงล้อธรรมและปัญญา", en: "The Wheel of Dharma and wisdom." },
+        ethics: "high",
+        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
+        tags: ["#ธรรมจักร", "#Sacred"]
     }
 ];
 
-const CATEGORIES = ["All", "Architecture / Stucco", "Architecture / Stone", "Architecture / Wood"];
+const CATEGORIES = [
+    "All", 
+    "Thematic / Nature", 
+    "Thematic / Fauna", 
+    "Thematic / Geometric", 
+    "Thematic / Sacred",
+    "Architecture / Stucco", 
+    "Architecture / Stone", 
+    "Architecture / Wood"
+];
 const CATEGORY_LABEL = {
     "All": { th: "ทั้งหมด", en: "All" },
+    "Thematic / Nature": { th: "ธรรมชาติและพรรณพฤกษา", en: "Nature & Botany" },
+    "Thematic / Fauna": { th: "สัตว์และอมนุษย์", en: "Fauna & Mythical" },
+    "Thematic / Geometric": { th: "เรขาคณิตและลวดลายประดิษฐ์", en: "Geometric & Synthetic" },
+    "Thematic / Sacred": { th: "สัญลักษณ์ความเชื่อและสิ่งศักดิ์สิทธิ์", en: "Sacred & Belief" },
     "Architecture / Stucco": { th: "สถาปัตย์ / ปูนปั้น", en: "Architecture / Stucco" },
     "Architecture / Stone": { th: "สถาปัตย์ / หิน", en: "Architecture / Stone" },
     "Architecture / Wood": { th: "สถาปัตย์ / ไม้", en: "Architecture / Wood" },
