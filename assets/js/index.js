@@ -29,7 +29,7 @@ async function loadData() {
                     if (row['Image Detail']) images.push({ url: row['Image Detail'], type: 'original' });
 
                     return {
-                        id: row['Symbol ID'] || "Unknown ID",
+                        id: row['Symbol ID'] || Object.values(row)[0] || "Unknown ID",
                         title: { th: row['Title (TH)'] || "", en: row['Title (EN)'] || "" },
                         category: row['Category'] || "Uncategorized",
                         location: row['Location'] || "-",
