@@ -469,7 +469,7 @@ function downloadVector() {
 
     // Build metadata-rich filename
     const id = activeRecord.id;
-    const titleTH = activeRecord.title.th.replace(/[^ก-ฮ0-9a-z]/gi, '_');
+    const titleTH = activeRecord.title.th.replace(/[^\u0E00-\u0E7F0-9a-z]/gi, '_');
     const titleEN = activeRecord.title.en.replace(/[^a-z0-9]/gi, '_');
     const filename = `TSPL_${id}_${titleTH}_${titleEN}.svg`;
 
