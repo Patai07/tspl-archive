@@ -361,9 +361,17 @@
 
                 <!-- Top Metadata Bar -->
                 <div class="absolute top-6 inset-x-6 lg:top-12 lg:inset-x-12 flex justify-between items-center z-[100]">
-                    <div id="modal-record-id"
-                        class="text-[9px] lg:text-[11px] font-mono text-white/40 tracking-[0.3em] font-black uppercase">
-                        RECORD_ID</div>
+                    <div class="flex items-center gap-6">
+                        <div id="modal-record-id"
+                            class="text-[9px] lg:text-[11px] font-mono text-white/40 tracking-[0.3em] font-black uppercase">
+                            RECORD_ID</div>
+                        <!-- Download Button -->
+                        <button id="modal-download-vector" onclick="downloadVector()" 
+                            class="hidden items-center gap-2 px-4 py-1.5 bg-[#FF4E45] text-white rounded-lg text-[9px] font-black uppercase tracking-[0.2em] shadow-lg shadow-[#FF4E45]/20 hover:scale-105 transition-all">
+                            <i class="ph-bold ph-download-simple"></i>
+                            <span class="lang-th">ดาวน์โหลดลายเส้น</span>
+                        </button>
+                    </div>
                     <span id="modal-confidence-badge"
                         class="px-4 py-1.5 lg:px-5 lg:py-2 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 backdrop-blur-md">Validated</span>
                 </div>

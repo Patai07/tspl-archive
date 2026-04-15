@@ -437,7 +437,7 @@ function updateModalDisplay() {
             vecEl.src = vectorSet.length > 0 ? vectorSet[currentSlideIndex % vectorSet.length].url : eviEl.src;
             if (currentViewMode === 'vector') {
                 vecEl.style.opacity = '1';
-                vecEl.style.filter = 'drop-shadow(0px 0px 20px rgba(212,175,55,0.8)) contrast(1.5)';
+                vecEl.style.filter = 'drop-shadow(0px 0px 20px rgba(255,78,69,0.5)) contrast(1.1)';
                 eviEl.style.opacity = '0.15';
                 eviEl.style.filter = 'grayscale(100%) blur(4px)';
             } else {
@@ -447,6 +447,37 @@ function updateModalDisplay() {
             }
         }
     }
+
+    // Toggle Download Button
+    const downloadBtn = document.getElementById('modal-download-vector');
+    if (downloadBtn) {
+        if (currentViewMode === 'vector' && vectorSet.length > 0) {
+            downloadBtn.classList.remove('hidden', 'opacity-0');
+            downloadBtn.classList.add('flex', 'opacity-100');
+        } else {
+            downloadBtn.classList.add('hidden', 'opacity-0');
+            downloadBtn.classList.remove('flex', 'opacity-100');
+        }
+    }
+}
+
+function downloadVector() {
+    if (!activeRecord) return;
+    const vector = activeRecord.images.find(img => img.type === 'vector');
+    if (!vector) return;
+
+    // Build metadata-rich filename
+    const id = activeRecord.id;
+    const titleTH = activeRecord.title.th.replace(/[^ก-ฮ0-9a-z]/gi, '_');
+    const titleEN = activeRecord.title.en.replace(/[^a-z0-9]/gi, '_');
+    const filename = `TSPL_${id}_${titleTH}_${titleEN}.svg`;
+
+    const link = document.createElement('a');
+    link.href = vector.url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 
