@@ -1,57 +1,51 @@
-# 🏛️ Thai Symbol Pattern Lab (TSPL) - Technical Documentation
+# 🏛️ Thai Symbol Pattern Lab (TSPL) - Digital Archive Project
 
-โปรเจกต์คลังข้อมูลลวดลายไทยดิจิทัล พัฒนาเพื่อการบริหารจัดการมรดกทางวัฒนธรรมในรูปแบบ Dynamic Web Application
+โครงการระบบบริหารจัดการและจัดเก็บมรดกทางวัฒนธรรมลายไทยดิจิทัล (180 รายการ)
 
-## 🛠️ ระบบการทำงาน (System Architecture)
-เว็บไซต์นี้ทำงานแบบ **Serverless & Dynamic Database** โดยใช้หลักการดึงข้อมูลจากภายนอก:
-- **Frontend:** Core HTML / Vanilla CSS / JavaScript (No framework dependencies)
-- **Database:** Google Sheets (เชื่อมต่อผ่าน CSV Published URL)
-- **Parsing:** Library **PapaParse** สำหรับแปลงไฟล์ CSV เป็น JSON Data
-
----
-
-## 📊 การบริหารจัดการข้อมูล (Data Management)
-
-### 1. การเชื่อมต่อ Google Sheets
-ข้อมูลลวดลายทั้งหมดถูกควบคุมผ่าน Google Sheets เพื่อให้ผู้ที่ไม่ใช่โปรแกรมเมอร์สามารถแก้ไขได้:
-1.  เปิด Google Sheet ที่ต้องการ
-2.  ไปที่แท็บ `File` > `Share` > `Publish to the web`
-3.  เลือกทั้งเอกสาร (Entire Document) และเลือกรูปแบบเป็น `Comma-separated values (.csv)`
-4.  ก๊อปปี้ลิงก์ที่ได้ไปวางในไฟล์ `assets/js/index.js` ที่ตัวแปร `CSV_URL`
-
-### 2. มาตรฐานคอลัมน์ (Column Headers)
-ห้ามแก้ไขชื่อหัวคอลัมน์ใน Google Sheets เนื่องจากจะส่งผลต่อการดึงข้อมูล ระบบรองรับคอลัมน์หลักดังนี้:
-- `Symbol ID`, `Title (TH)`, `Title (EN)`, `Category`, `Location`, `Confidence`, `Ethics` และลิงก์รูปภาพต่างๆ
+## 📌 มาตรฐานหมวดหมู่ (Master Categories)
+เพื่อให้ข้อมูลสอดคล้องกับงานวิจัยล่าสุด ระบบได้แบ่งหมวดหมู่ลวดลายออกเป็น 4 กลุ่มหลัก:
+1.  **Nature & Botany** (พรรณพฤกษาและธรรมชาติ) - รหัสย่อ: `NAT`
+2.  **Fauna & Mythical** (สรรพสัตว์และสัตว์หิมพานต์) - รหัสย่อ: `FAU`
+3.  **Geometric & Synthetic** (เรขาคณิตและลวดลายประดิษฐ์) - รหัสย่อ: `GEO`
+4.  **Sacred & Belief** (สัญลักษณ์ความเชื่อและสิ่งศักดิ์สิทธิ์) - รหัสย่อ: `SAC`
 
 ---
 
-## 📁 โครงสร้างโฟลเดอร์ไฟล์ (Folder Structure)
+## 📂 การจัดเก็บไฟล์ (Asset Organization)
+ทุกลวดลายจะมีโฟลเดอร์รหัสส่วนตัวอยู่ใน `assets/images/database/` โดยมีโครงสร้างภายในดังนี้:
 
 ```text
-/
-├── index.html          # หน้าแรก (Hero & Showcase)
-├── archive.html        # หน้าคลังข้อมูล (Full Database)
-├── tspl_database.csv   # ไฟล์ฐานข้อมูลสำรอง (Offline Fallback)
-├── assets/
-│   ├── css/
-│   │   └── index.css   # สไตล์หลักและระบบ Design System
-│   ├── js/
-│   │   └── index.js    # หัวใจสำคัญของระบบ (Data Loading, Search, Modal)
-│   └── images/
-│       └── database/   # คลังรูปภาพลวดลายทั้งหมด (แบ่งโฟลเดอร์ตาม ID)
+/assets/images/database/[Pattern-ID]/
+├── main.jpg        # รูปภาพหลักสำหรับแสดงผลหน้าตาราง
+├── context.jpg     # รูปภาพบริบท/สถานที่จริง
+├── detail.jpg      # รูปภาพซูมรายละเอียด
+└── vectors/
+    └── vector.svg  # ไฟล์ลายเส้นเวกเตอร์ (แสดงลายนิ่งและให้ดาวน์โหลด)
 ```
 
 ---
 
-## 🎨 มาตรฐานการออกแบบ (Design System)
-- **Colors:** Red CI: `#FF4E45`, Navy Bg: `#0F172A`
-- **Aspect Ratio:** รูปภาพหน้าปกต้องใช้สัดส่วน **4:3** เท่านั้น เพื่อความเสถียรของ UI
+## ⚡ วิธีการอัปเดตข้อมูล (Workflow)
+
+### 1. การแก้ไขข้อมูล (Data Entry)
+- แก้ไขข้อมูลลวดลายผ่าน **Google Sheets** ที่เชื่อมต่อไว้
+- หมวดหมู่ (Category) ใน Sheets ต้องสะกดให้ตรงกับหน้าเว็บ (Nature & Botany, Fauna & Mythical ฯลฯ)
+- เมื่อแก้ไขเสร็จ เว็บไซต์จะดึงข้อมูลใหม่มาแสดงผลโดยอัตโนมัติ
+
+### 2. การอัปโหลดรูปภาพ (Asset Upload)
+- นำรูปภาพใหม่ไปวางในโฟลเดอร์รหัสลายที่ต้องการ
+- ตรวจสอบชื่อไฟล์ให้ตรงตามมาตรฐานเพื่อให้ระบบดึงไปแสดงผลถูกที่
+
+### 3. การอัปเดตขึ้น Server (Deployment)
+- **วิธีง่าย:** ดับเบิลคลิกไฟล์ **`deploy.command`** ที่หน้าแรกของโปรเจกต์
+- ระบบจะทำการส่งไฟล์ทั้งหมดขึ้น Vercel และเว็บไซต์จะอัปเดตภายใน 1 นาที
 
 ---
 
-## 🚀 การอัปเดตเว็บไซต์ (Deployment)
-1.  แกไขข้อมูลใน Google Sheets -> เว็บอัปเดตทันที
-2.  แก้ไขโค้ด -> Commit & Push ขึ้น GitHub -> Vercel Deploy อัตโนมัติ
+## 🎨 มาตรฐานเชิงเทคนิค
+- **Image Aspect Ratio:** 4:3 (แนะนำ)
+- **Vector Format:** .svg (ต้องวางในโฟลเดอร์ `/vectors/`)
+- **Download System:** หน้าเว็บจะทำการ Rename ไฟล์เวกเตอร์ตอนดาวน์โหลดให้อัตโนมัติเป็น `TSPL_[ID]_[Title].svg`
 
 ---
-*จัดทำโดย: Antigravity AI Assistant*
+*บันทึกโดย: Antigravity AI Assistant*

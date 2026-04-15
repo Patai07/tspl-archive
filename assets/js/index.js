@@ -63,23 +63,17 @@ async function loadData() {
 
 const CATEGORIES = [
     "All", 
-    "Thematic / Nature", 
-    "Thematic / Fauna", 
-    "Thematic / Geometric", 
-    "Thematic / Sacred",
-    "Architecture / Stucco", 
-    "Architecture / Stone", 
-    "Architecture / Wood"
+    "Nature & Botany", 
+    "Fauna & Mythical", 
+    "Geometric & Synthetic", 
+    "Sacred & Belief"
 ];
 const CATEGORY_LABEL = {
-    "All": { th: "ทั้งหมด", en: "All" },
-    "Thematic / Nature": { th: "ธรรมชาติและพรรณพฤกษา", en: "Nature & Botany" },
-    "Thematic / Fauna": { th: "สัตว์และอมนุษย์", en: "Fauna & Mythical" },
-    "Thematic / Geometric": { th: "เรขาคณิตและลวดลายประดิษฐ์", en: "Geometric & Synthetic" },
-    "Thematic / Sacred": { th: "สัญลักษณ์ความเชื่อและสิ่งศักดิ์สิทธิ์", en: "Sacred & Belief" },
-    "Architecture / Stucco": { th: "สถาปัตย์ / ปูนปั้น", en: "Architecture / Stucco" },
-    "Architecture / Stone": { th: "สถาปัตย์ / หิน", en: "Architecture / Stone" },
-    "Architecture / Wood": { th: "สถาปัตย์ / ไม้", en: "Architecture / Wood" },
+    "All": { th: "ทั้งหมด", en: "All Patterns" },
+    "Nature & Botany": { th: "พรรณพฤกษาและธรรมชาติ", en: "Nature & Botany" },
+    "Fauna & Mythical": { th: "สรรพสัตว์และสัตว์หิมพานต์", en: "Fauna & Mythical" },
+    "Geometric & Synthetic": { th: "เรขาคณิตและลวดลายประดิษฐ์", en: "Geometric & Synthetic" },
+    "Sacred & Belief": { th: "ความเชื่อและสิ่งศักดิ์สิทธิ์", en: "Sacred & Belief" }
 };
 let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentViewMode = "original";
 
