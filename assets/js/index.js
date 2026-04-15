@@ -6,7 +6,7 @@ const toThaiDigits = (num) => {
 };
 
 let RECORDS = [];
-const CSV_URL = './tspl_database.csv'; 
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUvalU42uqVFSoJ3O-WkoaQCBVmiawl7DHNO-DNsYL3iiWfxKERjiQI4SpiVqDxzEYLPlLFJTqSFCy/pub?gid=494156669&single=true&output=csv'; 
 
 /**
  * LOAD DATA: หัวใจหลักของระบบ
