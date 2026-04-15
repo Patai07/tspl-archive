@@ -314,6 +314,17 @@ html {
     scrollbar-width: none;
 }
 
+/* Horizontal Scroll Fade Masks */
+.mask-fade-right {
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+.mask-fade-left {
+    mask-image: linear-gradient(to left, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to left, black 85%, transparent 100%);
+}
+
 .thai-title {
     line-height: 1.15;
 }

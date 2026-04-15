@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link rel="stylesheet" href="assets/css/index.css?v=2.0">
     <link rel="stylesheet" href="assets/css/premium.css?v=2.0">
+    <!-- PapaParse for CSV Support -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 </head>
 
 <body class="min-h-screen flex flex-col relative overflow-x-hidden">
@@ -194,7 +196,9 @@
             <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
 
             <!-- Category Filter -->
-            <div id="categories-container" class="flex flex-wrap gap-2 items-center shrink-0"></div>
+            <div class="flex-grow min-w-0 relative">
+                <div id="categories-container" class="flex flex-nowrap gap-3 items-center overflow-x-auto no-scrollbar mask-fade-right py-1"></div>
+            </div>
 
             <!-- Divider -->
             <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>

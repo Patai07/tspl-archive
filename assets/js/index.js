@@ -2,155 +2,56 @@ let currentLang = 'th';
 
 const toThaiDigits = (num) => {
     const thaiNumbers = ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'];
-    return num.toString().split('').map(char => thaiNumbers[char] || char).join('');
-};
+    return num.toString().split('').map(char => thaiNumbers[char] || // --- MASTER DATASET ---
+let RECORDS = [];
+const CSV_URL = './tspl_database.csv'; 
 
-// --- MASTER DATASET ---
-const RECORDS = [
-    {
-        id: "TSP-PLK-CHM-026",
-        title: { th: "ลายหงส์ปูนปั้น (วัดจุฬามณี)", en: "Stucco Hong Pattern" },
-        category: "Architecture / Stucco",
-        location: "วัดจุฬามณี จ.พิษณุโลก (สมัยอยุธยาตอนต้น)",
-        confidence: "Verified",
-        images: [
-            { url: "https://images.unsplash.com/photo-1574169208507-84376144848b?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1590483736622-39854bcbc8b6?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200", type: "vector" },
-            { url: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&q=80&w=1200", type: "application" }
-        ],
-        morphemes: {
-            th: ["M01 ลำตัวหงส์คอเชิดสูง ทรงรีตั้งผสมเส้นโค้ง S", "M02 หางกนกสะบัดพลิ้ว ทรงพุ่มข้าวบิณฑ์", "M03 ปีกหงส์ซ้อนขนาน นูนต่ำสไตล์อยุธยา"],
-            en: ["M01 High neck body, S-curve posture", "M02 Flicked Kanok tail motif", "M03 Parallel wings in bas-relief"]
-        },
-        connotation: {
-            th: "สัญลักษณ์ความเป็นทิพย์และความบริสุทธิ์ ทำหน้าที่แบกรับเขาพระสุเมรุตามคติไตรภูมิ",
-            en: "Symbolizes divinity and purity, supporting the sacred Mount Meru."
-        },
-        ethics: "low",
-        protocol: { preserve: "เอกลักษณ์คอเชิดและหางกนกสัดส่วนเดิม", donot: "ห้ามใช้ประดับในตำแหน่งเท้า หรือสิ่งทอช่วงล่าง" },
-        tags: ["#หงส์", "#วัดจุฬามณี", "#อยุธยา"]
-    },
-    {
-        id: "TSP-UNK-OBS-001",
-        title: { th: "ลายเครือเถาก้านขดดอกกลาง", en: "Floral Scroll with Rosette" },
-        category: "Architecture / Stone",
-        location: "ชิ้นส่วนประดับโบราณสถาน (Unknown Location)",
-        confidence: "Reconstructed",
-        images: [
-            { url: "https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?auto=format&fit=crop&q=80&w=1200", type: "vector" }
-        ],
-        morphemes: {
-            th: ["M01 กรอบแผงสี่เหลี่ยมขอบคู่ขนาน", "M02 ดอกกลางโรเซตซ้อนชั้นศูนย์กลาง", "M03 ก้านเถาโค้งเชื่อมโยงจังหวะ"],
-            en: ["M01 Double-lined horizontal frame", "M02 Layered central rosette motif", "M03 Rhythmic S-curve vine path"]
-        },
-        connotation: { th: "สัญลักษณ์ความงอกงามและความต่อเนื่อง", en: "Symbolizes prosperity and growth continuity." },
-        ethics: "low",
-        protocol: { preserve: "แกนสมมาตรและดอกกลางโรเซต", donot: "ตัดทอนองค์ประกอบศูนย์กลางจนเสียสมดุล" },
-        tags: ["#เครือเถา", "#สมมาตร"]
-    },
-    {
-        id: "TSP-AYT-NGA-001",
-        title: { th: "ลายพญานาคทรงเครื่อง", en: "Regal Naga Motif" },
-        category: "Architecture / Stucco",
-        location: "วัดไชยวัฒนาราม จ.พระนครศรีอยุธยา",
-        confidence: "Fragment",
-        images: [
-            { url: "https://images.unsplash.com/photo-1628032549721-68db0c749b38?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1580130718646-9f694209b207?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200", type: "vector" }
-        ],
-        morphemes: {
-            th: ["M01 เศียรนาคสวมมงกุฎ ทรงสูงสง่า มีครีบหูแผ่", "M02 ลำตัวโค้งงอเป็น S-curve", "M03 หางเป็นปลา มีเกล็ดนูนต่ำเรียงเป็นจังหวะ"],
-            en: ["M01 Crowned naga head with flared hood", "M02 Sinuous S-curve body", "M03 Fishtail end with rhythmic low-relief scales"]
-        },
-        connotation: { th: "ผู้พิทักษ์พระพุทธศาสนาและสิ่งศักดิ์สิทธิ์ สื่อถึงพลังแห่งน้ำ", en: "Guardian of Buddhism and sacred sites, embodying water power." },
-        ethics: "medium",
-        protocol: { preserve: "ความสง่างามของเศียรและครีบหู", donot: "ห้ามทำให้เศียรนาคดูดุร้ายเกินไป" },
-        tags: ["#พญานาค", "#ราวบันได", "#ผู้พิทักษ์"]
-    },
-    {
-        id: "TSP-LNA-WOD-012",
-        title: { th: "ลายหน้าบันไม้จำหลัก", en: "Wooden Gable Pattern" },
-        category: "Architecture / Wood",
-        location: "วัดพระธาตุลำปางหลวง จ.ลำปาง",
-        confidence: "Hypothetical",
-        images: [
-            { url: "https://images.unsplash.com/photo-1583313264627-7ba7f2cb243a?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?auto=format&fit=crop&q=80&w=1200", type: "vector" }
-        ],
-        morphemes: {
-            th: ["M01 ลายพรรณพฤกษาพันเกี่ยว", "M02 การเซาะร่องลึกแบบช่างไม้ล้านนา", "M03 โครงสร้างกรอบสามเหลี่ยมหน้าจั่ว"],
-            en: ["M01 Intertwining botanical motifs", "M02 Deep gouge carving techniques", "M03 Triangular structural framing"]
-        },
-        connotation: { th: "การจำลองป่าหิมพานต์อันเป็นดินแดนศักดิ์สิทธิ์", en: "Representation of the mythical Himmapan forest." },
-        ethics: "high",
-        protocol: { preserve: "ร่องรอยการแกะสลักที่ดูเป็นธรรมชาติ", donot: "ปรับเส้นสายให้แข็งทื่อแบบเรขาคณิต" },
-        tags: ["#หน้าบัน", "#ไม้แกะสลัก", "#ล้านนา"]
-    },
-    {
-        id: "TSP-SUK-LOT-008",
-        title: { th: "ลายดอกบัวตูมสุโขทัย", en: "Sukhothai Lotus Bud" },
-        category: "Architecture / Stucco",
-        location: "อุทยานประวัติศาสตร์สุโขทัย",
-        confidence: "High",
-        images: [
-            { url: "https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1552250575-e508473b090f?auto=format&fit=crop&q=80&w=1200", type: "vector" }
-        ],
-        morphemes: {
-            th: ["M01 รูปทรงดอกบัวตูมแหลม", "M02 กลีบบัวซ้อนชั้น 3 ระดับ", "M03 ฐานรองดอกทรงกลมเรียบ"],
-            en: ["M01 Pointed lotus bud silhouette", "M02 Three-tiered overlapping petals", "M03 Smooth circular base support"]
-        },
-        connotation: { th: "ความบริสุทธิ์และการตรัสรู้ตามคติพุทธศาสนาเถรวาท", en: "Purity and enlightenment in Theravada Buddhism." },
-        ethics: "low",
-        protocol: { preserve: "สัดส่วนความโค้งของกลีบบัว", donot: "ห้ามปรับสัดส่วนจนคล้ายหยดน้ำ" },
-        tags: ["#บัวตูม", "#สุโขทัย", "#พุทธศิลป์"]
-    },
-    {
-        id: "TSP-KHM-LIN-044",
-        title: { th: "ลายทับหลังนารายณ์", en: "Narayana Lintel Carving" },
-        category: "Architecture / Stone",
-        location: "ปราสาทหินพนมรุ้ง จ.บุรีรัมย์",
-        confidence: "High",
-        images: [
-            { url: "https://images.unsplash.com/photo-1531685250784-7569952593d2?auto=format&fit=crop&q=80&w=1200", type: "original" },
-            { url: "https://images.unsplash.com/photo-1571781526291-c477eb31405e?auto=format&fit=crop&q=80&w=1200", type: "vector" }
-        ],
-        morphemes: {
-            th: ["M01 องค์ประธานตรงกลาง (นารายณ์)", "M02 ลายหน้ากาลคายพวงอุบะ", "M03 ลายก้านขดแบ่งระนาบซ้ายขวา"],
-            en: ["M01 Central presiding deity", "M02 Kala face spewing garlands", "M03 Symmetrical scrolling vines"]
-        },
-        connotation: { th: "การปกปักรักษาศาสนสถานและพลังอำนาจแห่งเทพเจ้า", en: "Protection of the sanctuary and divine authority." },
-        ethics: "medium",
-        protocol: { preserve: "ความสมมาตรและรายละเอียดของหน้ากาล", donot: "ดัดแปลงองค์ประกอบจนผิดหลักเทววิทยา" },
-        tags: ["#ทับหลัง", "#พนมรุ้ง", "#ขอม"]
-    },
-    {
-        id: "TSP-RAT-KBT-001",
-        title: { th: "ลายกนกใบเทศ (กาบใบโพธิ์)", en: "Kranok Bai Tet Motif" },
-        category: "Architecture / Stucco",
-        location: "วัดพระศรีรัตนศาสดาราม กรุงเทพฯ",
-        confidence: "Medium",
-        images: [
-            { url: "https://images.unsplash.com/photo-1563492065599-3520f775eeed?auto=format&fit=crop&q=80&w=1200", type: "original" }
-        ],
-        morphemes: {
-            th: ["M01 ใบโพธิ์แหลมยาว", "M02 ก้านกลางหนานูนต่ำ", "M03 ขอบใบประดับกนกเล็กๆ"],
-            en: ["M01 Elongated pointed Bodhi leaf", "M02 Thick central vein", "M03 Leaf edges with miniature kanoks"]
-        },
-        connotation: { th: "สัญลักษณ์แห่งการตรัสรู้และปัญญา", en: "Symbol of enlightenment and wisdom." },
-        ethics: "low",
-        protocol: { preserve: "รูปทรงใบแหลมยาว", donot: "ห้ามทำให้ใบกลมหรือสั้นเกินไป" },
-        tags: ["#กนกใบเทศ", "#ใบโพธิ์", "#รัตนโกสินทร์"]
-    },
-    {
-        id: "TSP-LAN-MUR-009",
-        title: { th: "ลายปูนปั้นประดับซุ้มประตู", en: "Stucco Arch Motif" },
-        category: "Architecture / Stucco",
-        location: "วัดภูมินทร์ จ.น่าน",
-        confidence: "High",
+async function loadData() {
+    return new Promise((resolve) => {
+        Papa.parse(CSV_URL, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function (results) {
+                const mappedData = results.data.map(row => {
+                    const images = [];
+                    if (row['Image Main']) images.push({ url: row['Image Main'], type: 'original' });
+                    if (row['Image Vector']) images.push({ url: row['Image Vector'], type: 'vector' });
+                    if (row['Image Context']) images.push({ url: row['Image Context'], type: 'original' }); // Default to original for display
+                    if (row['Image Mid']) images.push({ url: row['Image Mid'], type: 'original' });
+                    if (row['Image Detail']) images.push({ url: row['Image Detail'], type: 'original' });
+
+                    return {
+                        id: row['Symbol ID'] || "Unknown ID",
+                        title: { th: row['Title (TH)'] || "", en: row['Title (EN)'] || "" },
+                        category: row['Category'] || "Uncategorized",
+                        location: row['Location'] || "-",
+                        confidence: row['Confidence'] || "Verified",
+                        ethics: row['Ethics'] || "low",
+                        connotation: { th: row['Connotation (TH)'] || "", en: row['Connotation (EN)'] || "" },
+                        protocol: { preserve: row['Protocol Preserve'] || "", donot: row['Protocol Do Not'] || "" },
+                        morphemes: {
+                            th: (row['Morphemes (TH)'] || "").split('|').map(s => s.trim()).filter(s => s),
+                            en: (row['Morphemes (EN)'] || "").split('|').map(s => s.trim()).filter(s => s)
+                        },
+                        tags: (row['Tags'] || "").split(',').map(s => s.trim()).filter(s => s),
+                        images: images.length > 0 ? images : [{ url: "https://placehold.co/800x600/0F2C59/D4AF37?text=No+Image", type: "original" }]
+                    };
+                });
+                RECORDS = mappedData;
+                resolve(mappedData);
+            },
+            error: function (err) {
+                console.warn("CSV Loading failed, using fallback data. Error:", err);
+                // Fallback can be defined here if needed
+                resolve([]);
+            }
+        });
+    });
+}
+
+const CATEGORIES = [
+gh",
         images: [
             { url: "https://images.unsplash.com/photo-1580130718646-9f694209b207?auto=format&fit=crop&q=80&w=1200", type: "original" }
         ],
@@ -239,12 +140,46 @@ const CATEGORY_LABEL = {
 };
 let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentViewMode = "original";
 
-function init() {
+async function init() {
     initParticles();
+    await loadData(); // Load CSV data before rendering
+
+    updateCounters(); // Sync totals to UI
     renderCategories();
     renderGrid();
     updateLegend();
     setupHeroGlow();
+
+    // Clear preloader once data is loaded
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        setTimeout(() => {
+            preloader.classList.add('opacity-0');
+            setTimeout(() => preloader.style.display = 'none', 500);
+        }, 300);
+    }
+}
+
+function updateCounters() {
+    const totalRecords = RECORDS.length;
+    let totalMorphemes = 0;
+    RECORDS.forEach(r => {
+        totalMorphemes += (r.morphemes.th ? r.morphemes.th.length : 0);
+    });
+
+    // Update Hero Stats
+    const morphemeCounter = document.querySelector('.counter[data-target="180"]');
+    const recordCounter = document.querySelector('.counter[data-target="45"]');
+
+    if (morphemeCounter) morphemeCounter.dataset.target = totalMorphemes;
+    if (recordCounter) recordCounter.dataset.target = totalRecords;
+
+    // Update Ticker values if they exist
+    document.querySelectorAll('.ticker-item-value').forEach(el => {
+        if (el.innerText.includes('ระเบียนข้อมูล') && el.innerText.includes('+')) {
+            el.innerText = (currentLang === 'th' ? toThaiDigits(totalRecords) : totalRecords) + "+ ระเบียนข้อมูล";
+        }
+    });
 }
 
 function setupHeroGlow() {
@@ -305,8 +240,13 @@ function renderGrid(filterText = "") {
 
     let filtered = RECORDS.filter(r => {
         const matchesCat = activeCategory === "All" || r.category === activeCategory;
-        const titleText = (currentLang === 'th' ? r.title.th : r.title.en) || "";
-        return matchesCat && (titleText.toLowerCase().includes(filterText.toLowerCase()) || r.id.toLowerCase().includes(filterText.toLowerCase()));
+        const titleText = ((r.title.th || "") + (r.title.en || "")).toLowerCase();
+        const idText = (r.id || "").toLowerCase();
+        const locationText = (r.location || "").toLowerCase();
+        const tagsText = (r.tags || []).join(" ").toLowerCase();
+        
+        const searchTarget = `${titleText} ${idText} ${locationText} ${tagsText}`;
+        return matchesCat && searchTarget.includes(filterText.toLowerCase());
     });
 
     // Limit to 8 items on index.html
@@ -343,35 +283,19 @@ function renderGrid(filterText = "") {
         let statusText = currentLang === 'th' ? statusInfo.th : statusInfo.en;
         let statusColor = statusInfo.color;
 
-        // Category-based placeholder palette
-        const palettes = {
-            'Architecture / Stucco': { bg: 'from-[#0F2C59] to-[#1a3f7a]', icon: 'ph-building-apartment', accent: '#D4AF37' },
-            'Architecture / Stone': { bg: 'from-[#2d1f3d] to-[#4a2f6a]', icon: 'ph-pyramid', accent: '#B8A0D4' },
-            'Architecture / Wood': { bg: 'from-[#2d1a0e] to-[#5c3416]', icon: 'ph-tree-evergreen', accent: '#D4A574' },
-            'Thematic / Nature': { bg: 'from-[#0d3322] to-[#1a5c3a]', icon: 'ph-leaf', accent: '#52D68A' },
-            'Thematic / Fauna': { bg: 'from-[#2d2a0a] to-[#5c5212]', icon: 'ph-bird', accent: '#F5D060' },
-            'Thematic / Geometric': { bg: 'from-[#0a1f3d] to-[#0f3060]', icon: 'ph-shapes', accent: '#A8C8FF' },
-            'Thematic / Sacred': { bg: 'from-[#3d0a0a] to-[#700f0f]', icon: 'ph-star-of-david', accent: '#FF9090' },
-        };
-        const palette = palettes[record.category] || { bg: 'from-[#1a1a2e] to-[#16213e]', icon: 'ph-shapes', accent: '#D4AF37' };
-
         item.innerHTML = `
-                    <div class="relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${palette.bg} flex items-center justify-center">
-                        <div class="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none"></div>
-                        <!-- Decorative Pattern Placeholder -->
-                        <div class="flex flex-col items-center gap-3 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
-                            <i class="ph-thin ${palette.icon} text-7xl" style="color:${palette.accent}"></i>
-                            <div class="w-12 h-px" style="background:${palette.accent}"></div>
-                            <span class="text-[8px] font-bold tracking-[0.4em] uppercase" style="color:${palette.accent}">${currentLang === "th" ? "ตัวอย่างลวดลาย" : "Pattern Specimen"}</span>
-                        </div>
-                        <!-- Status Badge -->
-                        <div class="absolute top-5 left-5 z-20">
-                            <span class="px-3 py-1 text-[7px] font-bold uppercase tracking-[0.2em] rounded bg-black/30 backdrop-blur-sm border border-white/10">
-                                <span class="${statusColor}">${statusText}</span>
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <img src="${record.images[0].url}" alt="${record.title[currentLang]}" 
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-60"></div>
+                        
+                        <!-- Confidence Marker -->
+                        <div class="absolute top-5 left-5">
+                            <span class="px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 text-[7px] font-black uppercase tracking-[0.2em] text-white flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full ${statusColor} shadow-[0_0_8px_currentColor]"></span>
+                                <span class="opacity-80">${statusText}</span>
                             </span>
                         </div>
-                        <!-- Hover CTA -->
-                        <div class="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                             <div class="bg-white/15 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[8px] font-bold uppercase tracking-[0.3em] flex items-center gap-2 border border-white/20">
                                 ${currentLang === "th" ? "วิเคราะห์" : "Analysis"} <i class="ph ph-arrow-right" style="color:${palette.accent}"></i>
                             </div>
@@ -382,8 +306,9 @@ function renderGrid(filterText = "") {
                     <div class="p-6 md:p-8">
                         <div class="text-[9px] text-gray-400 font-mono mb-2 uppercase tracking-[0.2em] font-bold"><span class="scramble-hover" data-text="${record.id}">${record.id}</span></div>
                         <h3 class="text-base font-bold text-[#0F2C59] mb-3 leading-[1.25] tracking-tight uppercase">${record.title[currentLang]}</h3>
-                        <div class="flex items-center gap-2 text-[9px] text-gray-400 font-normal mt-4 pt-4 border-t border-gray-100 group-hover:text-[#0F2C59] transition-colors">
-                            <i class="ph-fill ph-map-pin text-[#FFD200] shrink-0"></i><span class="truncate">${record.location}</span>
+                        <div class="flex items-center gap-2 text-[8px] text-gray-400 font-bold mt-2 pt-4 border-t border-gray-50 group-hover:text-[#FF4E45] transition-colors">
+                            <i class="ph-fill ph-map-pin text-[#FF4E45] shrink-0"></i>
+                            <span class="truncate uppercase tracking-wider">${record.location}</span>
                         </div>
                     </div>`;
         container.appendChild(item);
@@ -432,8 +357,8 @@ function openModal(record) {
     if (document.getElementById('modal-morphemes')) {
         document.getElementById('modal-morphemes').innerHTML = record.morphemes[currentLang].map(m => `
             <li class="flex items-start gap-4 group/item">
-                <div class="w-1.5 h-1.5 rounded-full bg-[#FFD200]/60 mt-2 shrink-0 group-hover/item:scale-125 transition-transform"></div>
-                <p class="text-[15px] text-[#0F2C59] font-medium leading-relaxed">${m}</p>
+                <div class="w-1.5 h-1.5 rounded-full bg-[#FF4E45]/60 mt-2 shrink-0 group-hover/item:scale-125 transition-transform"></div>
+                <p class="text-[15px] text-[#0F172A] font-medium leading-relaxed">${m}</p>
             </li>`).join('');
     }
     if (document.getElementById('modal-connotation')) document.getElementById('modal-connotation').innerText = record.connotation[currentLang];
@@ -451,7 +376,7 @@ function openModal(record) {
         <div class="p-6 rounded-2xl border border-[#0F2C59]/5 bg-gray-50/50 flex items-center gap-6 group hover:border-[#0F2C59]/10 transition-colors">
             <div class="w-3 h-3 rounded-full ${ec.color} shadow-[0_0_15px_rgba(0,0,0,0.1)] shrink-0 group-hover:scale-110 transition-transform border-2 border-white"></div>
             <div>
-                <p class="text-[#0F2C59] text-[15px] font-black uppercase tracking-tight mb-0.5">${currentLang === 'th' ? ec.th : ec.en}</p>
+                <p class="text-[#0F172A] text-[15px] font-black uppercase tracking-tight mb-0.5">${currentLang === 'th' ? ec.th : ec.en}</p>
                 <p class="text-gray-400 text-[11px] font-medium uppercase tracking-widest">${currentLang === 'th' ? ec.desc.th : ec.desc.en}</p>
             </div>
         </div>
