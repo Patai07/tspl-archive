@@ -8,6 +8,11 @@ const toThaiDigits = (num) => {
 let RECORDS = [];
 const CSV_URL = './tspl_database.csv'; 
 
+/**
+ * LOAD DATA: หัวใจหลักของระบบ
+ * ทำการดึงข้อมูลจากไฟล์ CSV (หรือ Google Sheets) 
+ * และแปลงข้อมูลให้อยู่ในรูปแบบที่เว็บไซต์เข้าใจ
+ */
 async function loadData() {
     return new Promise((resolve) => {
         Papa.parse(CSV_URL, {
@@ -157,6 +162,10 @@ function updateLegend() {
     container.innerHTML = items.map(i => `<div class="flex items-center gap-3"><span class="w-2.5 rounded-full h-2.5 ${i.color}"></span><span class="text-[#0F2C59] font-bold uppercase tracking-widest text-[8px]">${currentLang === 'th' ? i.th : i.en}</span></div>`).join('');
 }
 
+/**
+ * RENDER CATEGORIES: สร้างแถบเลือกหมวดหมู่ด้านบน
+ * ดึงชื่อหมวดหมู่ที่ใช้ได้มาจาก CSV และสร้างปุ่มกรองข้อมูล
+ */
 function renderCategories() {
     const container = document.getElementById('categories-container');
     if (!container) return;
@@ -171,6 +180,10 @@ function renderCategories() {
     });
 }
 
+/**
+ * RENDER GRID: ส่วนที่ทำหน้าที่ "วาด" ลวดลายลงบนหน้าเว็บ
+ * มีการจัดการเรื่องสัดส่วนรูปภาพ 4:3 และการค้นหาแบบ Real-time
+ */
 function renderGrid(filterText = "") {
     const container = document.getElementById('grid-container');
     if (!container) return;
