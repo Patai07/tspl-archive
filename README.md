@@ -12,15 +12,17 @@
 ---
 
 ## 📂 การจัดเก็บไฟล์ (Asset Organization)
-ทุกลวดลายจะมีโฟลเดอร์รหัสส่วนตัวอยู่ใน `assets/images/database/` โดยมีโครงสร้างภายในดังนี้:
+ทุกลวดลายจะมีโฟลเดอร์รหัสส่วนตัวอยู่ใน `assets/images/database/` โดยจะแยกตามโฟลเดอร์หมวดหมู่หลักดังนี้:
 
 ```text
-/assets/images/database/[Pattern-ID]/
+/assets/images/database/[Category_Folder]/[Pattern-ID]/
 ├── main.jpg        # รูปภาพหลักสำหรับแสดงผลหน้าตาราง
 ├── context.jpg     # รูปภาพบริบท/สถานที่จริง
 ├── detail.jpg      # รูปภาพซูมรายละเอียด
 └── vectors/
     └── vector.svg  # ไฟล์ลายเส้นเวกเตอร์ (แสดงลายนิ่งและให้ดาวน์โหลด)
+
+ตัวอย่างพาธ: assets/images/database/01_Nature/TSP-LST-NAT-001/main.jpg
 ```
 
 ---
@@ -48,4 +50,4 @@
 - **Download System:** หน้าเว็บจะทำการ Rename ไฟล์เวกเตอร์ตอนดาวน์โหลดให้อัตโนมัติเป็น `TSPL_[ID]_[Title].svg`
 
 ---
-*บันทึกโดย: Antigravity AI Assistant*
+*บันทึกโดย: Phu Thongyan +66 62 635 5629
