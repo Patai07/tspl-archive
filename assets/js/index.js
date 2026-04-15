@@ -728,5 +728,13 @@ window.addEventListener('pageshow', function (event) {
     }
 });
 
+// Start the application
+document.addEventListener('DOMContentLoaded', () => {
+    // Only init if we are on a page that needs data
+    if (document.getElementById('grid-container')) {
+        init();
+    }
+});
+
 // Run page transitions right away (no waiting for images/onload)
 initPageTransitions();
