@@ -2,7 +2,9 @@ let currentLang = 'th';
 
 const toThaiDigits = (num) => {
     const thaiNumbers = ['๐', '๑', '๒', '๓', '๔', '๕', '๖', '๗', '๘', '๙'];
-    return num.toString().split('').map(char => thaiNumbers[char] || // --- MASTER DATASET ---
+    return num.toString().split('').map(char => thaiNumbers[char] || char).join('');
+};
+
 let RECORDS = [];
 const CSV_URL = './tspl_database.csv'; 
 
@@ -50,73 +52,9 @@ async function loadData() {
     });
 }
 
-const CATEGORIES = [
-gh",
-        images: [
-            { url: "https://images.unsplash.com/photo-1580130718646-9f694209b207?auto=format&fit=crop&q=80&w=1200", type: "original" }
-        ],
-        morphemes: {
-            th: ["M01 ลายเครือล้านนาแบบอิสระ", "M02 การเว้นช่องไฟที่โปร่งตา", "M03 เทคนิคปั้นสดไม่ใช้แม่พิมพ์"],
-            en: ["M01 Free-form Lanna flora", "M02 Breathable negative space", "M03 Free-hand stucco techniques"]
-        },
-        connotation: { th: "ความเรียบง่ายและศรัทธาของช่างพื้นบ้านล้านนา", en: "Simplicity and devotion of local Lanna artisans." },
-        ethics: "low",
-        protocol: { preserve: "ความอ่อนช้อยที่ไม่สมมาตรเป๊ะ", donot: "ทำซ้ำ (Duplicate) ให้เหมือนกันทุกกระเบียดนิ้ว" },
-        tags: ["#ซุ้มประตู", "#ปูนปั้น", "#น่าน"]
-    },
-    {
-        id: "TSP-LST-NAT-001",
-        title: { th: "ลายกนกเปลว", en: "Kanok Plew Pattern" },
-        category: "Thematic / Nature",
-        location: "Master Registry (Pending Digitization)",
-        confidence: "Hypothetical",
-        images: [{ url: "https://images.unsplash.com/photo-1516961642265-531546e84af2?auto=format&fit=crop&q=80&w=1200", type: "original" }],
-        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
-        connotation: { th: "สัญลักษณ์ของเปลวไฟและความรุ่งโรจน์", en: "Symbolizes flames and glory." },
-        ethics: "low",
-        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
-        tags: ["#กนกเปลว", "#Nature"]
-    },
-    {
-        id: "TSP-LST-FAU-001",
-        title: { th: "ลายหงส์รำ", en: "Dancing Swan Pattern" },
-        category: "Thematic / Fauna",
-        location: "Master Registry (Pending Digitization)",
-        confidence: "Hypothetical",
-        images: [{ url: "https://images.unsplash.com/photo-1574169208507-84376144848b?auto=format&fit=crop&q=80&w=1200", type: "original" }],
-        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
-        connotation: { th: "สัญลักษณ์ความอ่อนช้อยและชั้นสูง", en: "Symbolizes grace and high status." },
-        ethics: "medium",
-        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
-        tags: ["#หงส์รำ", "#Fauna"]
-    },
-    {
-        id: "TSP-LST-GEO-001",
-        title: { th: "ลายประจำยาม", en: "Prajam Yam Pattern" },
-        category: "Thematic / Geometric",
-        location: "Master Registry (Pending Digitization)",
-        confidence: "Hypothetical",
-        images: [{ url: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&q=80&w=1200", type: "original" }],
-        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
-        connotation: { th: "สัญลักษณ์การคุ้มครองและระเบียบจักรวาล", en: "Symbolizes protection and cosmic order." },
-        ethics: "low",
-        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
-        tags: ["#ประจำยาม", "#Geometric"]
-    },
-    {
-        id: "TSP-LST-SAC-001",
-        title: { th: "ลายธรรมจักร", en: "Dharmachakra Pattern" },
-        category: "Thematic / Sacred",
-        location: "Master Registry (Pending Digitization)",
-        confidence: "Hypothetical",
-        images: [{ url: "https://images.unsplash.com/photo-1531685250784-7569952593d2?auto=format&fit=crop&q=80&w=1200", type: "original" }],
-        morphemes: { th: ["M01 รอการสกัดหน่วยคำทัศน์"], en: ["M01 Awaiting Morpheme Extraction"] },
-        connotation: { th: "สัญลักษณ์แห่งกงล้อธรรมและปัญญา", en: "The Wheel of Dharma and wisdom." },
-        ethics: "high",
-        protocol: { preserve: "รอการกำหนด", donot: "รอการกำหนด" },
-        tags: ["#ธรรมจักร", "#Sacred"]
-    }
-];
+
+
+
 
 const CATEGORIES = [
     "All", 
