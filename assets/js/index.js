@@ -45,8 +45,8 @@ async function loadData() {
                         images: images.length > 0 ? images : [{ url: "https://placehold.co/800x600/0F2C59/D4AF37?text=No+Image", type: "original" }]
                     };
                 });
-                RECORDS = mappedData;
-                resolve(mappedData);
+                RECORDS = mappedData.filter(item => item.id !== "Unknown ID" && item.id.trim() !== "");
+                resolve(RECORDS);
             },
             error: function (err) {
                 console.warn("CSV Loading failed, using fallback data. Error:", err);
