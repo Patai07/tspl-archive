@@ -242,7 +242,7 @@ function renderGrid(filterText = "") {
                             </span>
                         </div>
                             <div class="bg-white/15 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[8px] font-bold uppercase tracking-[0.3em] flex items-center gap-2 border border-white/20">
-                                ${currentLang === "th" ? "วิเคราะห์" : "Analysis"} <i class="ph ph-arrow-right" style="color:${palette.accent}"></i>
+                                ${currentLang === "th" ? "วิเคราะห์" : "Analysis"} <i class="ph ph-arrow-right text-[#FF4E45]"></i>
                             </div>
                         </div>
                         <!-- ID Watermark -->
