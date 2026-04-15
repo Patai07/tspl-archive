@@ -148,12 +148,17 @@ function updateLegend() {
     const container = document.getElementById('status-legend');
     if (!container) return;
     const items = [
-        { color: 'bg-emerald-500', th: 'ตรวจสอบแล้ว', en: 'Verified' },
-        { color: 'bg-blue-500', th: 'สันนิษฐานรูปแบบ', en: 'Reconstructed' },
-        { color: 'bg-amber-500', th: 'ส่วนชิ้นส่วน', en: 'Fragment' },
-        { color: 'bg-purple-500', th: 'สมมติฐาน', en: 'Hypothetical' }
+        { color: 'text-emerald-500', bg: 'bg-emerald-500', th: 'ตรวจสอบแล้ว', en: 'Verified' },
+        { color: 'text-blue-500', bg: 'bg-blue-500', th: 'สันนิษฐานรูปแบบ', en: 'Reconstructed' },
+        { color: 'text-amber-500', bg: 'bg-amber-500', th: 'ส่วนชิ้นส่วน', en: 'Fragment' },
+        { color: 'text-purple-500', bg: 'bg-purple-500', th: 'สมมติฐาน', en: 'Hypothetical' }
     ];
-    container.innerHTML = items.map(i => `<div class="flex items-center gap-3"><span class="w-2.5 rounded-full h-2.5 ${i.color}"></span><span class="text-[#0F2C59] font-bold uppercase tracking-widest text-[8px]">${currentLang === 'th' ? i.th : i.en}</span></div>`).join('');
+    container.innerHTML = items.map(i => `
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gray-50/80 border border-gray-100 shadow-sm cursor-default hover:bg-gray-100 transition-colors">
+            <span class="w-1.5 h-1.5 rounded-full ${i.bg} shadow-[0_0_8px_currentColor] ${i.color}"></span>
+            <span class="text-gray-500 font-bold uppercase tracking-[0.2em] text-[8px] pt-0.5">${currentLang === 'th' ? i.th : i.en}</span>
+        </div>
+    `).join('');
 }
 
 /**
@@ -381,15 +386,17 @@ function toggleModalView(mode) {
     const btnApp = document.getElementById('btn-view-application');
 
     [btnOrig, btnVec, btnApp].forEach(btn => {
-        if (btn) btn.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl text-white/30 hover:text-white transition-all duration-300 whitespace-nowrap";
+        if (btn) btn.className = "flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl text-gray-500 hover:text-[#0F172A] hover:bg-white/50 transition-all duration-300 whitespace-nowrap";
     });
 
+    const activeClass = "flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F172A] transition-all duration-300 whitespace-nowrap shadow-[0_2px_10px_rgba(0,0,0,0.1)] border border-gray-100";
+
     if (mode === 'original' && btnOrig) {
-        btnOrig.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-xl transition-all duration-300 whitespace-nowrap";
+        btnOrig.className = activeClass;
     } else if (mode === 'vector' && btnVec) {
-        btnVec.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-xl transition-all duration-300 whitespace-nowrap";
+        btnVec.className = activeClass;
     } else if (mode === 'application' && btnApp) {
-        btnApp.className = "flex-1 lg:flex-none px-4 lg:px-8 py-3.5 lg:py-3 text-[8px] lg:text-[9px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F2C59] shadow-xl transition-all duration-300 whitespace-nowrap";
+        btnApp.className = activeClass;
     }
 }
 

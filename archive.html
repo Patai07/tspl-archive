@@ -383,10 +383,10 @@
                 </div>
 
                 <!-- View Switcher -->
-                <div class="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 z-[100] flex bg-white/80 backdrop-blur-2xl p-1.5 rounded-2xl border border-gray-200 shadow-lg w-[calc(100%-3rem)] lg:w-max max-w-lg">
-                    <button id="btn-view-original" onclick="toggleModalView('original')" class="flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl bg-[#0F172A] text-white transition-all duration-300 whitespace-nowrap shadow-md"><span class="lang-th">ภาพต้นฉบับ</span></button>
-                    <button id="btn-view-vector" onclick="toggleModalView('vector')" class="flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl text-[#0F172A]/50 hover:text-[#0F172A] hover:bg-gray-100 transition-all duration-300 whitespace-nowrap"><span class="lang-th">ลายสกัด</span></button>
-                    <button id="btn-view-application" onclick="toggleModalView('application')" class="flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl text-[#0F172A]/50 hover:text-[#0F172A] hover:bg-gray-100 transition-all duration-300 whitespace-nowrap"><span class="lang-th">ประยุกต์ใข้</span></button>
+                <div class="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 z-[100] flex bg-gray-100/80 backdrop-blur-2xl p-1.5 rounded-2xl border border-gray-200/60 shadow-lg w-[calc(100%-3rem)] lg:w-max max-w-lg">
+                    <button id="btn-view-original" onclick="toggleModalView('original')" class="flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F172A] transition-all duration-300 whitespace-nowrap shadow-[0_2px_10px_rgba(0,0,0,0.1)] border border-gray-100"><span class="lang-th">ภาพต้นฉบับ</span></button>
+                    <button id="btn-view-vector" onclick="toggleModalView('vector')" class="flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl text-gray-500 hover:text-[#0F172A] hover:bg-white/50 transition-all duration-300 whitespace-nowrap"><span class="lang-en">VECTOR</span></button>
+                    <button id="btn-view-application" onclick="toggleModalView('application')" class="flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl text-gray-500 hover:text-[#0F172A] hover:bg-white/50 transition-all duration-300 whitespace-nowrap"><span class="lang-th">ประยุกต์ใช้</span></button>
                 </div>
 
                 <div id="modal-counter" class="absolute bottom-10 right-10 z-[100] text-[11px] font-mono font-bold text-[#0F172A]/30 tracking-widest hidden lg:block">1 / 1</div>
@@ -452,7 +452,7 @@
         </div>
     </div>
 
-    <script src="assets/js/index.js?v=6.0"></script>
+    <script src="assets/js/index.js?v=6.3"></script>
     <script>
         // Mobile menu toggle
         const mobBtn = document.getElementById('mobile-menu-btn');
