@@ -187,147 +187,31 @@
           </p>
 
           <!-- Quick Specs HUD -->
-          <div class="flex flex-wrap gap-8 items-start border-t border-gray-100 pt-8 w-full mt-4">
-            <div class="technical-hud flex-row gap-10">
-              <div class="hud-item">
-                <span class="hud-label">Semiotics Engine</span>
-                <span class="hud-value">Semio_v1.4</span>
-              </div>
-              <div class="hud-item !border-[#FF4E45]/30">
-                <span class="hud-label text-gray-400">Analysis Target</span>
-                <span class="hud-value text-[#0F172A]">Structural_Morpheme</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Right: Technical Viewport -->
-        <div class="lg:col-span-5 xl:col-span-4 lg:pl-4">
-          <div class="tech-viewport group">
-            <div class="tech-viewport-inner">
-              <img src="assets/images/research/decode_ref.png" alt="Reference semiotic analysis">
-              <div class="tech-overlay"></div>
-              <div class="view-corner view-corner-tl"></div>
-              <div class="view-corner view-corner-br"></div>
-
-              <!-- Ref Info Badge -->
-              <div
-                class="absolute bottom-6 left-6 py-2 px-4 bg-[#FF4E45]/80  rounded-full text-white flex items-center gap-2">
-                <i class="ph-bold ph-pencil-line text-[10px]"></i>
-                <span class="text-[8px] font-bold uppercase tracking-widest text-white/90">Theoretical Ref. #02</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Card 01 -->
-        <div
-          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2">
-          <div
-            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
-            <i class="ph-bold ph-leaf text-2xl text-[#0F172A]"></i>
-          </div>
-          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
-            <span class="lang-th">สกัดลักษณะกายภาพ</span>
-
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed font-normal">
-            <span class="lang-th">จำแนกองค์ประกอบทางรูปทรงเรขาคณิต เส้นโค้ง
-              และส่วนประกอบยิบย่อยทางกายภาพของลวดลาย</span>
-
-          </p>
-        </div>
-
-        <!-- Card 02 -->
-        <div
-          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2">
-          <div
-            class="w-14 h-14 bg-[#FF4E45]/10 rounded-2xl flex items-center justify-center mb-6 border border-[#FF4E45]/20">
-            <i class="ph-bold ph-intersect text-2xl text-[#FF4E45]"></i>
-          </div>
-          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
-            <span class="lang-th">วากยสัมพันธ์ลวดลาย</span>
-
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed font-normal">
-            <span class="lang-th">วิเคราะห์ตรรกะความสัมพันธ์ (Syntax) การจัดวาง จังหวะช่องไฟ และโครงสร้างสมมาตร</span>
-
-          </p>
-        </div>
-
-        <!-- Card 03 -->
-        <div
-          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2">
-          <div
-            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
-            <i class="ph-bold ph-shield-check text-2xl text-[#0F172A]"></i>
-          </div>
-          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
-            <span class="lang-th">นัยทางความหมาย</span>
-
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed font-normal">
-            <span class="lang-th">ถอดรหัสความหมายแฝง นัยสัญลักษณ์ที่ซ่อนเร้น
-              และบริบทเชิงวัฒนธรรมที่ลวดลายต้องการสื่อ</span>
-
-          </p>
-        </div>
-      </div>
-
-      <div class="mt-16 flex justify-center">
-        <a href="digitize.html"
-          class="inline-flex items-center gap-4 px-10 py-5 bg-[#0F172A] text-white text-sm font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-[#0F172A]/90 hover:shadow-2xl transition-all group">
-          <span class="lang-th">ขั้นตอนต่อไป: ดิจิทัลไลซ์</span>
-
-          <i class="ph ph-arrow-right group-hover:translate-x-2 transition-transform"></i>
-        </a>
-      </div>
-    </div>
-  </main>
-
-    <footer class="bg-sila-jaruek text-gray-400 pt-10 md:pt-14 pb-8 relative overflow-hidden mt-20">
-    <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 pb-6 border-b border-white/5">
-        <!-- Mission: Thai Focus -->
-        <div class="space-y-4">
-          <div class="flex items-center gap-4">
-            <div class="w-10 h-10 bg-[#FF4E45]/20 rounded-lg flex items-center justify-center border border-[#FF4E45]/40 shadow-[0_0_15px_rgba(255,78,69,0.2)]">
-              <i class="ph-fill ph-book-open text-[#FF4E45] text-xl"></i>
-            </div>
-            <h3 class="text-white font-bold tracking-wide text-sm">พันธกิจระดับมรดก</h3>
-          </div>
-          <p class="text-[13px] leading-relaxed text-gray-400 font-light font-th">
-            คลังข้อมูลการวิจัยเชิงสร้างสรรค์เพื่อการบริหารจัดการมรดกทางวัฒนธรรม เพื่อสืบสานอัตลักษณ์ไทยสู่เศรษฐกิจสร้างสรรค์
-          </p>
-          <div class="flex flex-wrap gap-6 mt-4">
+                              <div class="flex flex-wrap gap-x-10 gap-y-8 mt-6">
                         <!-- Supporter 1: OCAC -->
-                        <div class="flex flex-col gap-2 w-fit">
-                            <div class="w-fit flex items-center gap-x-3 bg-white/5 p-2.5 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
-                                <img src="https://www.ocac.go.th/wp-content/uploads/2021/03/web-logo-ocac2.png" alt="สศร." class="h-7 w-auto">
-                                <div class="flex flex-col">
+                        <div class="flex flex-col items-center gap-3 w-fit max-w-[160px]">
+                            <div class="w-full flex items-center justify-center gap-x-4 bg-white/5 p-3 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
+                                <img src="https://www.ocac.go.th/wp-content/uploads/2021/03/web-logo-ocac2.png" alt="สศร." class="h-8 w-auto grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100">
+                                <div class="flex flex-col items-start text-left">
                                     <span class="text-[7px] font-bold text-[#FF4E45] tracking-wide block leading-none mb-1">สนับสนุนโดย</span>
-                                    <span class="text-[12px] text-white font-black leading-none">สศร.</span>
+                                    <span class="text-[13px] text-white font-black leading-none">สศร.</span>
                                 </div>
                             </div>
-                            <span class="text-[9px] text-gray-500 font-medium leading-[1.4] pl-2 max-w-[140px]">สำนักงานศิลปวัฒนธรรมร่วมสมัย</span>
+                            <span class="text-[10px] text-gray-500 font-medium leading-tight text-center px-1">สำนักงานศิลปวัฒนธรรมร่วมสมัย</span>
                         </div>
                         
                         <!-- Supporter 2: GSR -->
-                        <div class="flex flex-col gap-2 w-fit">
-                            <div class="w-fit flex items-center gap-x-3 bg-white/5 p-2.5 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
-                                <img src="assets/กศร.svg" alt="กศร." class="h-7 w-auto">
-                                <div class="flex flex-col">
+                        <div class="flex flex-col items-center gap-3 w-fit max-w-[160px]">
+                            <div class="w-full flex items-center justify-center gap-x-4 bg-white/5 p-3 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
+                                <img src="assets/กศร.svg" alt="กศร." class="h-8 w-auto grayscale group-hover:grayscale-0 transition-all opacity-80 group-hover:opacity-100">
+                                <div class="flex flex-col items-start text-left">
                                     <span class="text-[7px] font-bold text-[#FF4E45] tracking-wide block leading-none mb-1">สนับสนุนโดย</span>
-                                    <span class="text-[12px] text-white font-black leading-none">กศร.</span>
+                                    <span class="text-[13px] text-white font-black leading-none">กศร.</span>
                                 </div>
                             </div>
-                            <span class="text-[9px] text-gray-500 font-medium leading-[1.4] pl-2 max-w-[140px]">กองทุนส่งเสริมศิลปะร่วมสมัย</span>
+                            <span class="text-[10px] text-gray-500 font-medium leading-tight text-center px-1">กองทุนส่งเสริมศิลปะร่วมสมัย</span>
                         </div>
                     </div>
-          </div>
-        </div>
 
         <!-- Contact: Premium Layout -->
         <div class="space-y-4">
