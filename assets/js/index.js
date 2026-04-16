@@ -319,7 +319,7 @@ function openModal(record) {
     const ethicsInfo = {
         'low': { th: 'ลวดลายทั่วไป', en: 'General Pattern', desc: { th: 'ใช้เชิงพาณิชย์ได้ + ระบุที่มา', en: 'Commercial Use Allowed + Attribution' }, color: 'bg-emerald-400' },
         'medium': { th: 'ลายพิธีกรรม', en: 'Ritual Pattern', desc: { th: 'ต้องขออนุญาตชุมชนก่อน', en: 'Community Permission Required' }, color: 'bg-amber-400' },
-        'high': { th: 'ลายศักดิ์สิทธิ์', en: 'Sacred Pattern', desc: { th: 'ห้ามนำไปใช้เชิงพาณิชย์', en: 'No Commercial Use' }, color: 'bg-[#D4AF37]' }
+        'high': { th: 'ลายศักดิ์สิทธิ์', en: 'Sacred Pattern', desc: { th: 'ห้ามนำไปใช้เชิงพาณิชย์', en: 'No Commercial Use' }, color: 'bg-rose-400' }
     };
     const ec = ethicsInfo[record.ethics] || ethicsInfo['low'];
     const ethicsHTML = `
