@@ -83,7 +83,7 @@
     <!-- Mobile Menu Overlay (Solid White) -->
     <div id="mobile-menu"
       class="fixed inset-0 top-16 bg-white z-[150] flex flex-col p-8 transition-all duration-300 opacity-0 invisible translate-y-4 md:hidden border-t border-gray-100">
-      <div class="flex flex-col gap-4 lg:gap-6 text-[22px] font-extrabold uppercase text-[#0F172A]">
+      <div class="flex flex-row flex-wrap gap-6 lg:gap-10 text-[22px] font-extrabold uppercase text-[#0F172A]">
         <a href="archive.html" class="flex items-center justify-between p-8 bg-gray-50 rounded-[32px] group">
           <div class="flex items-center gap-5">
             <i class="ph-fill ph-magnifying-glass text-4xl text-[#0F172A]"></i>
@@ -92,7 +92,7 @@
           <i class="ph ph-arrow-right text-3xl text-gray-300 group-hover:translate-x-2 transition-transform"></i>
         </a>
 
-        <div class="flex flex-col gap-4 lg:gap-6 px-10 py-4 border-l-4 border-gray-100 ml-6">
+        <div class="flex flex-row flex-wrap gap-6 lg:gap-10 px-10 py-4 border-l-4 border-gray-100 ml-6">
           <a href="capture.html" class="flex items-center gap-5 text-gray-500 hover:text-[#0F172A]">
             <i class="ph ph-camera text-3xl"></i>
             <span class="font-bold tracking-wider">เก็บข้อมูล</span>
@@ -220,177 +220,76 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-20">
-        <!-- Card 01 -->
-        <div
-          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 text-left">
-          <div
-            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
-            <i class="ph-bold ph-bezier-curve text-2xl text-[#0F172A]"></i>
-          </div>
-          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
-            <span class="lang-th">มาตรฐานเวกเตอร์</span>
-
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed font-normal">
-            <span class="lang-th">สกัดรูปทรงจากภาพถ่ายสู่รูปแบบ Vector (SVG)
-              โดยอ้างอิงตามระเบียบที่สอดคล้องกับความจริงทางประวัติศาสตร์</span>
-
-          </p>
-        </div>
-
-        <!-- Card 02 -->
-        <div
-          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 text-left">
-          <div
-            class="w-14 h-14 bg-[#FF4E45]/10 rounded-2xl flex items-center justify-center mb-6 border border-[#FF4E45]/20">
-            <i class="ph-bold ph-database text-2xl text-[#FF4E45]"></i>
-          </div>
-          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
-            <span class="lang-th">ระเบียนอภิพันธุ์ข้อมูล</span>
-
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed font-normal">
-            <span class="lang-th">จัดลำดับระเบียนข้อมูล (JSON) ที่ระบุประวัติ แหล่งที่มา
-              และเงื่อนไขจริยธรรมการใช้งานมรดกวัฒนธรรม</span>
-
-          </p>
-        </div>
-
-        <!-- Card 03 -->
-        <div
-          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 text-left">
-          <div
-            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
-            <i class="ph-bold ph-cloud-arrow-up text-2xl text-[#0F172A]"></i>
-          </div>
-          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
-            <span class="lang-th">การบูรณาการคลัง</span>
-
-          </h3>
-          <p class="text-gray-400 text-sm leading-relaxed font-normal">
-            <span class="lang-th">เชื่อมโยงระบบเข้ากับคลังข้อมูลส่วนกลาง
-              เพื่อการสืบค้นและเผยแพร่อัตลักษณ์ไทยสู่สากล</span>
-
-          </p>
-        </div>
-        </p>
-      </div>
-    </div>
-
-    <div class="flex justify-center">
-      <a href="archive.html"
-        class="inline-flex items-center gap-4 px-10 py-5 bg-[#0F172A] text-white text-sm font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-[#0F172A]/90 hover:shadow-2xl transition-all group">
-        <span class="lang-th">เข้าสู่คลังระเบียนลวดลาย</span>
-
-        <i class="ph ph-database group-hover:translate-x-2 transition-transform"></i>
-      </a>
-    </div>
-    </div>
-  </main>
-
-  <footer
-    class="bg-sila-jaruek text-gray-400 pt-10 md:pt-14 pb-8 w-full mt-auto relative reveal overflow-hidden border-t-2 border-[#FF4E45]/20">
-    <!-- Blueprint overlay -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
-
-    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-10 pb-10 border-b border-white/5">
-
-        <!-- Mission: Thai Focus -->
-        <div class="space-y-4">
-          <div class="flex items-center gap-4">
-            <div
-              class="w-10 h-10 bg-[#FF4E45]/20 rounded-lg flex items-center justify-center border border-[#FF4E45]/40 shadow-[0_0_15px_rgba(255,78,69,0.2)]">
-              <i class="ph-fill ph-book-open text-[#FF4E45] text-xl"></i>
-            </div>
-            <h3 class="text-white font-bold tracking-wide text-sm">พันธกิจระดับมรดก</h3>
-          </div>
-          <p class="text-[14px] leading-relaxed text-gray-400 font-light font-th">
-            คลังข้อมูลการวิจัยเชิงสร้างสรรค์เพื่อการบริหารจัดการมรดกทางวัฒนธรรม
-            ผ่านระเบียนข้อมูลดิจิทัลมาตรฐานสากลและกระบวนการถอดรหัสสัญวิทยาทางทัศน์
-            เพื่อสืบสานอัตลักษณ์ไทยสู่เศรษฐกิจสร้างสรรค์
-          </p>
-          <!-- Partner Logo: OCAC -->
-                                                                      <div class="bg-white/5 p-4 rounded-2xl border border-white/5 w-fit">
-                        <div class="flex flex-wrap items-center gap-x-8 gap-y-4">
-                            <!-- Support 1 -->
-                            <div class="flex items-center gap-4">
-                                <img src="https://www.ocac.go.th/wp-content/uploads/2021/03/web-logo-ocac2.png" alt="สศร." class="h-8 lg:h-9 w-auto">
-                                <div class="flex flex-col">
-                                    <span class="text-[9px] font-bold text-[#FF4E45] tracking-wide block leading-none mb-1">สนับสนุนโดย</span>
-                                    <span class="text-[10px] text-gray-300 font-medium leading-tight">สศร.</span>
-                                </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 pb-6 border-b border-white/5"><!-- Mission: Thai Focus -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 bg-[#FF4E45]/20 rounded-lg flex items-center justify-center border border-[#FF4E45]/40 shadow-[0_0_15px_rgba(255,78,69,0.2)]">
+                            <i class="ph-fill ph-book-open text-[#FF4E45] text-xl"></i>
+                        </div>
+                        <h3 class="text-white font-bold tracking-wide text-sm">พันธกิจระดับมรดก</h3>
+                    </div>
+                    <p class="text-[13px] leading-relaxed text-gray-400 font-light font-th">
+                        คลังข้อมูลการวิจัยเชิงสร้างสรรค์เพื่อการบริหารจัดการมรดกทางวัฒนธรรม เพื่อสืบสานอัตลักษณ์ไทยสู่เศรษฐกิจสร้างสรรค์
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <div class="w-fit flex items-center gap-x-3 bg-white/5 p-2.5 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
+                            <img src="https://www.ocac.go.th/wp-content/uploads/2021/03/web-logo-ocac2.png" alt="สศร." class="h-7 w-auto">
+                            <div class="flex flex-col">
+                                <span class="text-[7px] font-bold text-[#FF4E45] tracking-wide block leading-none mb-1">สนับสนุนโดย</span>
+                                <span class="text-[9px] text-gray-300 font-medium leading-tight">สศร.</span>
                             </div>
-                            <!-- Support 2 -->
-                            <div class="w-px h-6 bg-white/10 hidden sm:block"></div>
-                            <div class="flex items-center gap-4">
-                                <img src="assets/กศร.svg" alt="กศร." class="h-8 lg:h-9 w-auto">
-                                <div class="flex flex-col">
-                                    <span class="text-[9px] font-bold text-[#FF4E45] tracking-wide block leading-none mb-1">สนับสนุนโดย</span>
-                                    <span class="text-[10px] text-gray-300 font-medium leading-tight">กศร.</span>
-                                </div>
+                        </div>
+                        <div class="w-fit flex items-center gap-x-3 bg-white/5 p-2.5 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
+                            <img src="assets/กศร.svg" alt="กศร." class="h-7 w-auto">
+                            <div class="flex flex-col">
+                                <span class="text-[7px] font-bold text-[#FF4E45] tracking-wide block leading-none mb-1">สนับสนุนโดย</span>
+                                <span class="text-[9px] text-gray-300 font-medium leading-tight">กศร.</span>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Contact: Premium Layout -->
+                <div class="space-y-4">
+                    <h4 class="text-white text-[10px] font-bold tracking-wide border-l-2 border-[#FF4E45] pl-6 leading-none py-1">ช่องทางการติดต่อ</h4>
+                    <div class="flex flex-row flex-wrap gap-8 items-center bg-white/5 p-4 rounded-3xl border border-white/5">
+                        <div class="flex items-center gap-4 group cursor-pointer">
+                            <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-[#FF4E45]/10 group-hover:border-[#FF4E45]/30 transition-all">
+                                <i class="ph-fill ph-envelope-simple text-gray-500 group-hover:text-[#FF4E45] text-lg"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[12px] text-gray-300 group-hover:text-white transition-colors">samaporn@example.com</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 group cursor-pointer">
+                            <div class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-[#FF4E45]/10 group-hover:border-[#FF4E45]/30 transition-all">
+                                <i class="ph-fill ph-globe text-gray-500 group-hover:text-[#FF4E45] text-lg"></i>
+                            </div>
+                            <div class="flex flex-col">
+                                <span class="text-[12px] text-gray-300 group-hover:text-white transition-colors">www.samaporn.com</span>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Institution: Subtler Style -->
+                <div class="space-y-4">
+                    <h4 class="text-white text-[10px] font-bold tracking-wide border-l-2 border-[#FF4E45] pl-6 leading-none py-1">หน่วยงานร่วมวิจัย</h4>
+                    <div class="flex flex-row flex-wrap gap-6 items-center bg-white/5 p-4 rounded-3xl border border-white/5">
+                        <div class="flex items-center gap-4 group transition-all">
+                            <img src="assets/nu_logo.png" alt="NU Logo" class="h-9 w-auto object-contain">
+                            <span class="text-[11px] text-gray-200 font-bold leading-tight">คณะสถาปัตยกรรมศาสตร์ฯ มหาวิทยาลัยนเรศวร</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-l border-white/10 pl-6">
+                            <i class="ph-fill ph-map-pin text-[#FF4E45]/60 text-sm"></i>
+                            <span class="text-[8px] font-bold text-gray-500 tracking-wide uppercase">Phitsanulok, Thailand</span>
+                        </div>
                     </div>
-        </div>
+                </div>
+            </div>
 
-        <!-- Contact: Premium Layout -->
-        <div class="space-y-4">
-          <h4 class="text-white text-[10px] font-bold tracking-wide border-l-2 border-[#FF4E45] pl-6 leading-none py-1">
-            ช่องทางการติดต่อ</h4>
-          <div class="flex flex-col gap-4 lg:gap-6">
-            <div class="flex items-center gap-5 group cursor-pointer">
-              <div
-                class="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-[#FF4E45]/10 group-hover:border-[#FF4E45]/30 transition-all">
-                <i class="ph-fill ph-envelope-simple text-gray-500 group-hover:text-[#FF4E45] text-xl"></i>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[8px] text-gray-600 tracking-wide font-bold">Email
-                  Address</span>
-                <span class="text-sm text-gray-300 group-hover:text-white transition-colors">samaporn@example.com</span>
-              </div>
-            </div>
-            <div class="flex items-center gap-5 group cursor-pointer">
-              <div
-                class="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-[#FF4E45]/10 group-hover:border-[#FF4E45]/30 transition-all">
-                <i class="ph-fill ph-globe text-gray-500 group-hover:text-[#FF4E45] text-xl"></i>
-              </div>
-              <div class="flex flex-col">
-                <span class="text-[8px] text-gray-600 tracking-wide font-bold">Research
-                  Portal</span>
-                <span class="text-sm text-gray-300 group-hover:text-white transition-colors">www.samaporn.com</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Institution: Subtler Style -->
-        <div class="space-y-4">
-          <h4 class="text-white text-[10px] font-bold tracking-wide border-l-2 border-[#FF4E45] pl-6 leading-none py-1">
-            หน่วยงานร่วมวิจัย</h4>
-          <div
-            class="flex items-center gap-6 bg-white/5 p-4 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
-            <div class="w-12 h-12 flex items-center justify-center shrink-0">
-              <img src="assets/nu_logo.png" alt="NU Logo" class="w-full h-full object-contain">
-            </div>
-            <div class="flex flex-col">
-              <span class="text-[9px] font-bold text-[#FF4E45] tracking-wide">ร่วมวิจัยโดย</span>
-              <span class="text-[11px] text-gray-200 font-bold leading-tight">คณะสถาปัตยกรรมศาสตร์
-                ศิลปะและการออกแบบ<br>มหาวิทยาลัยนเรศวร</span>
-            </div>
-          </div>
-          <div class="flex items-center gap-3 px-2">
-            <i class="ph-fill ph-map-pin text-[#FF4E45]/60 text-sm"></i>
-            <span class="text-[8px] font-bold text-gray-500 tracking-wide">Phitsanulok,
-              Thailand</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bottom Copyright & Sila Jaruek Gimmick -->
+            <!-- Bottom Copyright & Sila Jaruek Gimmick -->
+            
       <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5">
         <div class="flex items-center gap-4 mb-8 md:mb-0">
           <span class="text-[#FF4E45] text-[10px] font-serif opacity-30 select-none">ก ข ค ง จ</span>
