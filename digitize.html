@@ -32,10 +32,10 @@
       </a>
 
       <!-- Right-aligned Navigation Group -->
-      <div class="flex items-center gap-4 lg:gap-6 lg:gap-12">
+      <div class="flex items-center gap-8 lg:gap-12">
         <!-- Desktop Navigation -->
         <div id="desktop-nav"
-          class="hidden md:flex items-center gap-4 lg:gap-6 lg:gap-10 text-[11px] font-extrabold uppercase text-[#0F172A] tracking-wider">
+          class="hidden md:flex items-center gap-8 lg:gap-10 text-[11px] font-extrabold uppercase text-[#0F172A] tracking-wider">
           <a href="archive.html"
             class="px-5 py-2.5 bg-[#0F172A] text-white hover:bg-[#0F172A]/90 rounded-full transition-all flex items-center gap-2.5 shadow-sm">
             <i class="ph-fill ph-magnifying-glass text-white/80"></i>
@@ -83,7 +83,7 @@
     <!-- Mobile Menu Overlay (Solid White) -->
     <div id="mobile-menu"
       class="fixed inset-0 top-16 bg-white z-[150] flex flex-col p-8 transition-all duration-300 opacity-0 invisible translate-y-4 md:hidden border-t border-gray-100">
-      <div class="flex flex-row flex-wrap gap-6 lg:gap-10 text-[22px] font-extrabold uppercase text-[#0F172A]">
+      <div class="flex flex-col gap-8 text-[22px] font-extrabold uppercase text-[#0F172A]">
         <a href="archive.html" class="flex items-center justify-between p-8 bg-gray-50 rounded-[32px] group">
           <div class="flex items-center gap-5">
             <i class="ph-fill ph-magnifying-glass text-4xl text-[#0F172A]"></i>
@@ -92,7 +92,7 @@
           <i class="ph ph-arrow-right text-3xl text-gray-300 group-hover:translate-x-2 transition-transform"></i>
         </a>
 
-        <div class="flex flex-row flex-wrap gap-6 lg:gap-10 px-10 py-4 border-l-4 border-gray-100 ml-6">
+        <div class="flex flex-col gap-8 px-10 py-4 border-l-4 border-gray-100 ml-6">
           <a href="capture.html" class="flex items-center gap-5 text-gray-500 hover:text-[#0F172A]">
             <i class="ph ph-camera text-3xl"></i>
             <span class="font-bold tracking-wider">เก็บข้อมูล</span>
@@ -187,7 +187,7 @@
           </p>
 
           <!-- Quick Specs HUD -->
-          <div class="flex flex-wrap gap-4 lg:gap-6 items-start border-t border-gray-100 pt-8 w-full mt-4">
+          <div class="flex flex-wrap gap-8 items-start border-t border-gray-100 pt-8 w-full mt-4">
             <div class="technical-hud flex-row gap-10">
               <div class="hud-item">
                 <span class="hud-label">Asset Module</span>
@@ -220,11 +220,76 @@
           </div>
         </div>
       </div>
-      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+        <!-- Card 01 -->
+        <div
+          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 text-left">
+          <div
+            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
+            <i class="ph-bold ph-bezier-curve text-2xl text-[#0F172A]"></i>
+          </div>
+          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
+            <span class="lang-th">มาตรฐานเวกเตอร์</span>
+
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed font-normal">
+            <span class="lang-th">สกัดรูปทรงจากภาพถ่ายสู่รูปแบบ Vector (SVG)
+              โดยอ้างอิงตามระเบียบที่สอดคล้องกับความจริงทางประวัติศาสตร์</span>
+
+          </p>
+        </div>
+
+        <!-- Card 02 -->
+        <div
+          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 text-left">
+          <div
+            class="w-14 h-14 bg-[#FF4E45]/10 rounded-2xl flex items-center justify-center mb-6 border border-[#FF4E45]/20">
+            <i class="ph-bold ph-database text-2xl text-[#FF4E45]"></i>
+          </div>
+          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
+            <span class="lang-th">ระเบียนอภิพันธุ์ข้อมูล</span>
+
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed font-normal">
+            <span class="lang-th">จัดลำดับระเบียนข้อมูล (JSON) ที่ระบุประวัติ แหล่งที่มา
+              และเงื่อนไขจริยธรรมการใช้งานมรดกวัฒนธรรม</span>
+
+          </p>
+        </div>
+
+        <!-- Card 03 -->
+        <div
+          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2 text-left">
+          <div
+            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
+            <i class="ph-bold ph-cloud-arrow-up text-2xl text-[#0F172A]"></i>
+          </div>
+          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
+            <span class="lang-th">การบูรณาการคลัง</span>
+
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed font-normal">
+            <span class="lang-th">เชื่อมโยงระบบเข้ากับคลังข้อมูลส่วนกลาง
+              เพื่อการสืบค้นและเผยแพร่อัตลักษณ์ไทยสู่สากล</span>
+
+          </p>
+        </div>
+        </p>
+      </div>
+    </div>
+
+    <div class="flex justify-center">
+      <a href="archive.html"
+        class="inline-flex items-center gap-4 px-10 py-5 bg-[#0F172A] text-white text-sm font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-[#0F172A]/90 hover:shadow-2xl transition-all group">
+        <span class="lang-th">เข้าสู่คลังระเบียนลวดลาย</span>
+
+        <i class="ph ph-database group-hover:translate-x-2 transition-transform"></i>
+      </a>
+    </div>
     </div>
   </main>
 
-  <footer class="bg-sila-jaruek text-gray-400 pt-10 md:pt-14 pb-8 relative overflow-hidden mt-20">
+    <footer class="bg-sila-jaruek text-gray-400 pt-10 md:pt-14 pb-8 relative overflow-hidden mt-20">
     <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
     <div class="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 pb-6 border-b border-white/5">
@@ -321,7 +386,6 @@
     </div>
   </footer>
 
-
   <script src="assets/js/index.js?v=6.11"></script>
   <script>
     // Random Tech-Dots at Grid Intersections (Sync with index.html)
@@ -367,5 +431,7 @@
   </script>
   <script src="assets/js/premium.js?v=6.11"></script>
 </body>
+
+</html>
 
 </html>
