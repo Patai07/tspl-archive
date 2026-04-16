@@ -187,7 +187,119 @@
           </p>
 
           <!-- Quick Specs HUD -->
-                              <div class="flex flex-wrap gap-6">
+          <div class="flex flex-wrap gap-8 items-start border-t border-gray-100 pt-8 w-full mt-4">
+            <div class="technical-hud flex-row gap-10">
+              <div class="hud-item">
+                <span class="hud-label">System Module</span>
+                <span class="hud-value">Capture_v2.0</span>
+              </div>
+              <div class="hud-item !border-[#0F172A]/30">
+                <span class="hud-label text-gray-400">Coordinate Mode</span>
+                <span class="hud-value text-[#0F172A]">WGS-84 / UTM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Technical Viewport -->
+        <div class="lg:col-span-5 xl:col-span-4 lg:pl-4">
+          <div class="tech-viewport group">
+            <div class="tech-viewport-inner">
+              <img src="assets/images/research/capture_ref.png" alt="Reference documentation setup">
+              <div class="tech-overlay"></div>
+              <div class="view-corner view-corner-tl"></div>
+              <div class="view-corner view-corner-br"></div>
+
+              <!-- Ref Info Badge -->
+              <div
+                class="absolute bottom-6 left-6 py-2 px-4 bg-[#0F172A]/80  rounded-full text-white flex items-center gap-2">
+                <i class="ph-bold ph-info text-[10px]"></i>
+                <span class="text-[8px] font-bold uppercase tracking-widest text-white/90">Ref Doc. #01/Capture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div
+          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2">
+          <div
+            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
+            <i class="ph-bold ph-camera text-2xl text-[#0F172A]"></i>
+          </div>
+          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
+            <span class="lang-th">การถ่ายภาพละเอียด</span>
+
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed font-normal">
+            <span class="lang-th">การถ่ายภาพความละเอียดสูงในมุมมอง Orthographic ปรับแก้ระนาบให้ตรงแนวระเบียบวิธี
+              เพื่อลดความเพี้ยนของสถาปนิกรูปทรง</span>
+
+          </p>
+        </div>
+        <!-- Add other cards -->
+        <div
+          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2">
+          <div
+            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
+            <i class="ph-bold ph-map-pin text-2xl text-[#0F172A]"></i>
+          </div>
+          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
+            <span class="lang-th">บันทึกพิกัดและบริบท</span>
+
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed font-normal">
+            <span class="lang-th">ระบุพิกัดสากล (WGS84) และตำแหน่งของลวดลายภายในโครงสร้างอาคาร
+              เพื่อจัดลำดับความสำคัญของชุดข้อมูล</span>
+
+          </p>
+        </div>
+        <div
+          class="bg-white p-10 rounded-[2.5rem] border border-gray-100 shadow-sm transition-all hover:shadow-xl hover:-translate-y-2">
+          <div
+            class="w-14 h-14 bg-[#0F172A]/5 rounded-2xl flex items-center justify-center mb-6 border border-[#0F172A]/10">
+            <i class="ph-bold ph-selection-all text-2xl text-[#0F172A]"></i>
+          </div>
+          <h3 class="text-xl font-extrabold text-[#0F172A] mb-3 tracking-tight uppercase">
+            <span class="lang-th">การวิเคราะห์เทคนิค</span>
+
+          </h3>
+          <p class="text-gray-400 text-sm leading-relaxed font-normal">
+            <span class="lang-th">วิเคราะห์ประเภทวัสดุและเทคนิคช่างโบราณ ทั้งงานสลัก งานปั้น และงานเขียน
+              เพื่อให้ได้รูปทรงที่ตรงตามจิตวิญญาณดั้งเดิม</span>
+
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-16 flex justify-center">
+        <a href="decode.html"
+          class="inline-flex items-center gap-4 px-10 py-5 bg-[#0F172A] text-white text-sm font-bold uppercase tracking-[0.2em] rounded-2xl hover:bg-[#0F172A]/90 hover:shadow-2xl transition-all group">
+          <span class="lang-th">ขั้นตอนต่อไป: ถอดรหัส</span>
+
+          <i class="ph ph-arrow-right group-hover:translate-x-2 transition-transform"></i>
+        </a>
+      </div>
+    </div>
+  </main>
+
+    <footer class="bg-sila-jaruek text-gray-400 pt-10 md:pt-14 pb-8 relative overflow-hidden mt-20">
+    <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+    <div class="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6 pb-6 border-b border-white/5">
+        <!-- Mission: Thai Focus -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-[#FF4E45]/20 rounded-lg flex items-center justify-center border border-[#FF4E45]/40 shadow-[0_0_15px_rgba(255,78,69,0.2)]">
+              <i class="ph-fill ph-book-open text-[#FF4E45] text-xl"></i>
+            </div>
+            <h3 class="text-white font-bold tracking-wide text-sm">พันธกิจระดับมรดก</h3>
+          </div>
+          <p class="text-[13px] leading-relaxed text-gray-400 font-light font-th">
+            คลังข้อมูลการวิจัยเชิงสร้างสรรค์เพื่อการบริหารจัดการมรดกทางวัฒนธรรม เพื่อสืบสานอัตลักษณ์ไทยสู่เศรษฐกิจสร้างสรรค์
+          </p>
+          <div class="flex flex-wrap gap-6 mt-4">
                         <!-- Supporter 1: OCAC -->
                         <div class="flex flex-col gap-2 w-fit">
                             <div class="w-fit flex items-center gap-x-3 bg-white/5 p-2.5 rounded-2xl border border-white/5 group transition-all hover:bg-white/[0.08]">
@@ -212,6 +324,7 @@
                             <span class="text-[9px] text-gray-500 font-medium leading-[1.4] pl-2 max-w-[140px]">กองทุนส่งเสริมศิลปะร่วมสมัย</span>
                         </div>
                     </div>
+          </div>
         </div>
 
         <!-- Contact: Premium Layout -->
