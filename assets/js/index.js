@@ -45,7 +45,7 @@ async function loadData() {
                         images: images.length > 0 ? images : [{ url: "https://placehold.co/800x600/0F2C59/D4AF37?text=No+Image", type: "original" }]
                     };
                 });
-                RECORDS = mappedData.filter(item => item.id !== "Unknown ID" && item.id.trim() !== "");
+                RECORDS = mappedData.filter(item => item.id !== "Unknown ID" && item.id.trim() !== "" && !item.id.trim().startsWith('#'));
                 resolve(RECORDS);
             },
             error: function (err) {
@@ -469,8 +469,8 @@ function downloadVector() {
 
     // Build metadata-rich filename
     const id = activeRecord.id;
-    const titleTH = activeRecord.title.th.replace(/[^\u0E00-\u0E7F0-9a-z]/gi, '_');
-    const titleEN = activeRecord.title.en.replace(/[^a-z0-9]/gi, '_');
+    const titleTH = activeRecord.title.th.replace(/\s+/g, '_').replace(/[\/\\:*?"<>|]/g, '');
+    const titleEN = activeRecord.title.en.replace(/\s+/g, '_').replace(/[\/\\:*?"<>|]/g, '');
     const filename = `TSPL_${id}_${titleTH}_${titleEN}.svg`;
 
     const link = document.createElement('a');
