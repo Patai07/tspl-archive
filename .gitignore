@@ -1,1 +1,6 @@
-.vercel
+service-account.json
+processing_log.json
+config.json
+.env
+__pycache__/
+*.pyc
