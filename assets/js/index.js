@@ -87,14 +87,7 @@ async function init() {
     updateLegend();
     setupHeroGlow();
 
-    // Clear preloader once data is loaded
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        setTimeout(() => {
-            preloader.classList.add('opacity-0');
-            setTimeout(() => preloader.style.display = 'none', 500);
-        }, 300);
-    }
+    // Preloader is handled in window.onload
 }
 
 function updateCounters() {
@@ -578,7 +571,10 @@ function initScramble() {
 
 
 window.onload = () => {
-    init();
+    // Ensure init() is only called once if grid-container doesn't exist (since DOMContentLoaded handles it otherwise)
+    if (!document.getElementById('grid-container')) {
+        init();
+    }
 
     // --- CINEMATIC PRELOADER ---
     const p = document.getElementById('preloader');
@@ -662,13 +658,14 @@ window.onload = () => {
                     p.style.opacity = '0';
                     p.style.transform = 'scale(1.1)';
                     p.style.filter = 'blur(10px)';
+                    p.style.pointerEvents = 'none';
 
                     setTimeout(() => {
                         revealInit();
                         animateCounters();
                     }, 400);
 
-                    setTimeout(() => p.style.visibility = 'hidden', 1800);
+                    setTimeout(() => p.style.display = 'none', 1800);
                 }, 800);
             } else {
                 percEl.innerText = toThaiDigits(perc) + "%";
@@ -676,7 +673,12 @@ window.onload = () => {
         }, 35);
     } else {
         if (p) {
-            p.style.display = 'none';
+            // Smooth fast fade for subsequent visits
+            p.style.transition = 'opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease';
+            p.style.opacity = '0';
+            p.style.transform = 'scale(1.05)';
+            p.style.pointerEvents = 'none';
+            setTimeout(() => p.style.display = 'none', 800);
         }
         revealInit();
         animateCounters();
