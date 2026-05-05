@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="1100" viewBox="0 0 1600 1100">
+<!-- BACKGROUND -->
+<rect width="100%" height="100%" fill="#FCFCFC"/>
+
+<!-- TITLE -->
+<text x="80" y="80" font-family="sans-serif" font-size="24" fill="#FF4E45" font-weight="700">01</text>
+<text x="120" y="80" font-family="sans-serif" font-size="24" fill="#0F172A" font-weight="700">BRAND IDENTITY</text>
+
+<!-- LOGO -->
+<g transform="translate(80,120)">
+<rect x="0" y="0" width="80" height="80" fill="none" stroke="#FF4E45" stroke-width="3"/>
+<text x="110" y="55" font-family="sans-serif" font-size="56" font-weight="700" fill="#0F172A">TSPL</text>
+<text x="300" y="55" font-family="sans-serif" font-size="56" font-weight="700" fill="#FF4E45">LAB</text>
+<text x="110" y="95" font-family="sans-serif" font-size="16" fill="#9CA3AF">COMMUNITY &bull; KNOWLEDGE &bull; DESIGN</text>
+</g>
+
+<!-- COLOR -->
+<g transform="translate(900,120)">
+<text x="0" y="0" font-family="sans-serif" font-size="20" fill="#0F172A" font-weight="700">02 COLOR PALETTE</text>
+<rect x="0" y="30" width="100" height="100" fill="#FF4E45"/>
+<text x="0" y="150" font-family="Arial, sans-serif" font-size="12" fill="#0F172A">#FF4E45</text>
+<rect x="120" y="30" width="100" height="100" fill="#0F172A"/>
+<text x="120" y="150" font-family="Arial, sans-serif" font-size="12" fill="#0F172A">#0F172A</text>
+<rect x="240" y="30" width="100" height="100" fill="#D4AF37"/>
+<text x="240" y="150" font-family="Arial, sans-serif" font-size="12" fill="#0F172A">#D4AF37</text>
+</g>
+
+<!-- TYPOGRAPHY -->
+<g transform="translate(900,300)">
+<text x="0" y="0" font-family="sans-serif" font-size="20" fill="#0F172A" font-weight="700">03 TYPOGRAPHY</text>
+<text x="0" y="60" font-family="sans-serif" font-size="40" fill="#0F172A">ABC123</text>
+<text x="0" y="120" font-family="sans-serif" font-size="40" fill="#0F172A" font-weight="700">&#xE01;&#xE02;&#xE04;&#xE07;123</text>
+</g>
+
+<!-- BRAND CONCEPT -->
+<g transform="translate(80,350)">
+<text x="0" y="0" font-family="sans-serif" font-size="20" fill="#0F172A" font-weight="700">04 BRAND CONCEPT</text>
+<text x="0" y="60" font-family="sans-serif" font-size="24" fill="#0F172A">KNOWLEDGE &rarr; SYSTEM &rarr; DESIGN</text>
+</g>
+
+<!-- ICON SECTION -->
+<g transform="translate(80,500)">
+<text x="0" y="0" font-family="sans-serif" font-size="20" fill="#0F172A" font-weight="700">05 ICON SYSTEM</text>
+<circle cx="40" cy="60" r="10" fill="#FF4E45"/>
+<circle cx="80" cy="60" r="10" fill="#0F172A"/>
+<circle cx="120" cy="60" r="10" fill="#9CA3AF"/>
+</g>
+
+<!-- APPLICATION -->
+<g transform="translate(80,650)">
+<text x="0" y="0" font-family="sans-serif" font-size="20" fill="#0F172A" font-weight="700">06 APPLICATION</text>
+<rect x="0" y="40" width="200" height="120" fill="#0F172A"/>
+<rect x="220" y="40" width="200" height="120" fill="#0F2C59"/>
+<rect x="440" y="40" width="200" height="120" fill="#F1F1F1"/>
+</g>
+
+<!-- GRID -->
+<g stroke="#E5E7EB" stroke-width="1">
+<line x1="800" y1="0" x2="800" y2="1100"/>
+<line x1="0" y1="550" x2="1600" y2="550"/>
+</g>
+
+<!-- FOOTER -->
+<text x="80" y="1050" font-family="sans-serif" font-size="14" fill="#9CA3AF">TSPL Corporate Identity System v1.0</text>
+</svg>

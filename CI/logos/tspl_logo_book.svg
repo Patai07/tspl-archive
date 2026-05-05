@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- LEFT PAGE -->
+  <path d="
+    M15 20
+    Q15 15 20 15
+    L45 15
+    Q50 15 50 20
+    L50 80
+    Q50 85 45 85
+    L20 85
+    Q15 85 15 80
+    Z
+  " fill="none" stroke="#FF4E45" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- RIGHT PAGE -->
+  <path d="
+    M50 20
+    Q50 15 55 15
+    L80 15
+    Q85 15 85 20
+    L85 80
+    Q85 85 80 85
+    L55 85
+    Q50 85 50 80
+    Z
+  " fill="none" stroke="#FF4E45" stroke-width="3" stroke-linejoin="round"/>
+  
+  <!-- INNER LINES (Symbolizing script) -->
+  <line x1="20" y1="30" x2="40" y2="30" stroke="#FF4E45" stroke-width="1.5" opacity="0.4"/>
+  <line x1="20" y1="45" x2="45" y2="45" stroke="#FF4E45" stroke-width="1.5" opacity="0.4"/>
+  <line x1="20" y1="60" x2="35" y2="60" stroke="#FF4E45" stroke-width="1.5" opacity="0.4"/>
+  
+  <line x1="60" y1="30" x2="80" y2="30" stroke="#FF4E45" stroke-width="1.5" opacity="0.4"/>
+  <line x1="55" y1="45" x2="80" y2="45" stroke="#FF4E45" stroke-width="1.5" opacity="0.4"/>
+  <line x1="65" y1="60" x2="80" y2="60" stroke="#FF4E45" stroke-width="1.5" opacity="0.4"/>
+</svg>

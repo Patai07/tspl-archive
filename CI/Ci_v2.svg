@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<!-- BACKGROUND -->
+<rect width="100%" height="100%" fill="#FCFCFC"/>
+<!-- GRID -->
+<g stroke="#E5E7EB" stroke-width="1">
+<line x1="700" y1="0" x2="700" y2="900"/>
+<line x1="0" y1="300" x2="1400" y2="300"/>
+<line x1="0" y1="600" x2="1400" y2="600"/>
+</g>
+<!-- HEADER LOGO BLOCK -->
+<g transform="translate(80,80)">
+<rect x="0" y="0" width="80" height="80" fill="none" stroke="#FF4E45" stroke-width="3" rx="8"/>
+<text x="110" y="55" font-family="Space Grotesk, sans-serif" font-size="48" font-weight="700" fill="#0F172A">TSPL</text>
+<text x="280" y="55" font-family="Space Grotesk, sans-serif" font-size="48" font-weight="700" fill="#FF4E45">LAB</text>
+<text x="110" y="80" font-family="IBM Plex Sans Thai, sans-serif" font-size="12" fill="#9CA3AF">THAI SYMBOL PATTERN LAB &bull; CORPORATE IDENTITY v1.0</text>
+</g>
+<!-- RIGHT SECTION: COLOR PALETTE -->
+<g transform="translate(750, 80)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0F172A">COLOR PALETTE</text>
+<text x="0" y="20" font-family="IBM Plex Sans Thai, sans-serif" font-size="10" fill="#9CA3AF">Primary &amp; Secondary Colors</text>
+<!-- Primary Colors -->
+<g transform="translate(0, 40)">
+<rect x="0" y="0" width="50" height="50" fill="#FF4E45" rx="4"/>
+<text x="0" y="68" font-family="IBM Plex Sans Thai, sans-serif" font-size="9" fill="#0F172A" font-weight="700">TSPL Red</text>
+<text x="0" y="82" font-family="monospace" font-size="8" fill="#9CA3AF">#FF4E45</text>
+<rect x="70" y="0" width="50" height="50" fill="#0F172A" rx="4"/>
+<text x="70" y="68" font-family="IBM Plex Sans Thai, sans-serif" font-size="9" fill="#0F172A" font-weight="700">Dark Navy</text>
+<text x="70" y="82" font-family="monospace" font-size="8" fill="#9CA3AF">#0F172A</text>
+<rect x="140" y="0" width="50" height="50" fill="#D4AF37" rx="4"/>
+<text x="140" y="68" font-family="IBM Plex Sans Thai, sans-serif" font-size="9" fill="#0F172A" font-weight="700">Heritage Gold</text>
+<text x="140" y="82" font-family="monospace" font-size="8" fill="#9CA3AF">#D4AF37</text>
+<rect x="210" y="0" width="50" height="50" fill="#0F2C59" rx="4"/>
+<text x="210" y="68" font-family="IBM Plex Sans Thai, sans-serif" font-size="9" fill="#0F172A" font-weight="700">Navy Variant</text>
+<text x="210" y="82" font-family="monospace" font-size="8" fill="#9CA3AF">#0F2C59</text>
+</g>
+<!-- Backgrounds & Neutrals -->
+<text x="0" y="115" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700" fill="#0F172A">Backgrounds &amp; Neutrals</text>
+<g transform="translate(0, 128)">
+<rect x="0" y="0" width="20" height="20" fill="#FCFCFC" rx="2" stroke="#E5E7EB" stroke-width="1"/>
+<text x="28" y="14" font-family="monospace" font-size="8" fill="#9CA3AF">#FCFCFC</text>
+<rect x="100" y="0" width="20" height="20" fill="#FBFBFD" rx="2" stroke="#E5E7EB" stroke-width="1"/>
+<text x="128" y="14" font-family="monospace" font-size="8" fill="#9CA3AF">#FBFBFD</text>
+<rect x="200" y="0" width="20" height="20" fill="#F8FAFC" rx="2" stroke="#E5E7EB" stroke-width="1"/>
+<text x="228" y="14" font-family="monospace" font-size="8" fill="#9CA3AF">#F8FAFC</text>
+<rect x="300" y="0" width="20" height="20" fill="#060F22" rx="2"/>
+<text x="328" y="14" font-family="monospace" font-size="8" fill="#9CA3AF">#060F22</text>
+</g>
+</g>
+<!-- TYPOGRAPHY SECTION -->
+<g transform="translate(750, 290)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0F172A">TYPOGRAPHY</text>
+<text x="0" y="25" font-family="IBM Plex Sans Thai, sans-serif" font-size="12" fill="#0F172A" font-weight="700">Primary Thai:</text>
+<text x="0" y="45" font-family="IBM Plex Sans Thai, sans-serif" font-size="24" fill="#0F172A">IBM Plex Sans Thai กขคง</text>
+<text x="0" y="65" font-family="IBM Plex Sans Thai, sans-serif" font-size="10" fill="#9CA3AF">Includes: 4 weights (Thin, Regular, Medium, Bold) in woff2 + TTF</text>
+<text x="0" y="90" font-family="IBM Plex Sans Thai, sans-serif" font-size="12" fill="#0F172A" font-weight="700">Secondary Thai:</text>
+<text x="0" y="110" font-family="Noto Sans Thai, sans-serif" font-size="24" fill="#0F172A">Noto Sans Thai จฉชซ</text>
+<text x="0" y="135" font-family="IBM Plex Sans Thai, sans-serif" font-size="12" fill="#0F172A" font-weight="700">Primary English:</text>
+<text x="0" y="155" font-family="Space Grotesk, sans-serif" font-size="24" fill="#0F172A">Space Grotesk ABC123</text>
+<text x="0" y="175" font-family="IBM Plex Sans Thai, sans-serif" font-size="10" fill="#9CA3AF">5 weights: Light, Regular, Medium, Bold, Variable</text>
+</g>
+<!-- ASSET INVENTORY -->
+<g transform="translate(750, 490)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0F172A">ASSET INVENTORY</text>
+<g transform="translate(0, 25)">
+<text x="0" y="0" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Web Fonts:</text>
+<text x="0" y="16" font-family="monospace" font-size="9" fill="#9CA3AF">CI/fonts/*.woff2 &mdash; 27 files (production)</text>
+<text x="0" y="34" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Desktop Fonts:</text>
+<text x="0" y="50" font-family="monospace" font-size="9" fill="#9CA3AF">CI/fonts/TTF_for_PC_Mac/ &mdash; 9 TTF files</text>
+<text x="0" y="68" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Icons:</text>
+<text x="0" y="84" font-family="monospace" font-size="9" fill="#9CA3AF">CI/icons/ &mdash; 91 SVG files (Phosphor Icons)</text>
+<text x="0" y="102" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Patterns:</text>
+<text x="0" y="118" font-family="monospace" font-size="9" fill="#9CA3AF">CI/patterns/ &mdash; 6 SVG patterns (blueprint, radar, scan, etc.)</text>
+<text x="0" y="136" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Logos:</text>
+<text x="0" y="152" font-family="monospace" font-size="9" fill="#9CA3AF">CI/logos/ &mdash; กศร.svg (primary), nu_logo.png (institutional)</text>
+</g>
+</g>
+<!-- LEFT SECTION: BRAND CONCEPT + MOTION -->
+<g transform="translate(80, 320)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0F172A">BRAND CONCEPT</text>
+<text x="0" y="30" font-family="IBM Plex Sans Thai, sans-serif" font-size="20" fill="#0F172A">KNOWLEDGE &rarr; SYSTEM &rarr; DESIGN</text>
+<text x="0" y="55" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#9CA3AF">A semiotic approach to Thai ornamental pattern preservation,</text>
+<text x="0" y="70" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#9CA3AF">combining archival rigor with modern design methodology.</text>
+</g>
+<!-- MOTION & INTERACTION -->
+<g transform="translate(80, 440)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0F172A">MOTION &amp; INTERACTION</text>
+<g transform="translate(0, 25)">
+<text x="0" y="0" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Hover Transitions:</text>
+<text x="0" y="16" font-family="monospace" font-size="9" fill="#9CA3AF">0.3s Ease-out &mdash; buttons &amp; cards</text>
+<text x="0" y="34" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Page Transitions:</text>
+<text x="0" y="50" font-family="monospace" font-size="9" fill="#9CA3AF">0.5s Ease-in-out &mdash; editorial fade</text>
+<text x="0" y="68" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Cinematic Pulse:</text>
+<text x="0" y="84" font-family="monospace" font-size="9" fill="#9CA3AF">1.2s Linear &mdash; scanning lines / radar</text>
+<text x="0" y="102" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Feedback:</text>
+<text x="0" y="118" font-family="monospace" font-size="9" fill="#9CA3AF">0.6s Ease-out &mdash; glowing status indicators</text>
+</g>
+</g>
+<!-- VISUAL HIERARCHY & OPACITY -->
+<g transform="translate(80, 610)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0F172A">VISUAL HIERARCHY</text>
+<g transform="translate(0, 25)">
+<rect x="0" y="0" width="220" height="16" fill="#060F22" opacity="0.05" rx="8"/>
+<text x="10" y="12" font-family="monospace" font-size="9" fill="#0F172A">Background Layer (Blueprint): 5% opacity</text>
+<rect x="0" y="22" width="220" height="16" fill="#FF4E45" opacity="0.15" rx="8"/>
+<text x="10" y="34" font-family="monospace" font-size="9" fill="#0F172A">Overlay Layer (Scan Lines): 10-20%</text>
+<rect x="0" y="44" width="220" height="16" fill="#0F172A" opacity="0.85" rx="8"/>
+<text x="10" y="56" font-family="monospace" font-size="9" fill="#FFFFFF">Focus Layer (Data): 80-100%</text>
+<rect x="0" y="66" width="220" height="16" fill="#4D8EFF" opacity="0.2" rx="8"/>
+<text x="10" y="78" font-family="monospace" font-size="9" fill="#0F172A">Ambient Layer (Particles): 20%</text>
+</g>
+</g>
+<!-- RESPONSIVE LAYOUT -->
+<g transform="translate(530, 610)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700" fill="#0F172A">RESPONSIVE GRID</text>
+<g transform="translate(0, 25)">
+<text x="0" y="0" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Desktop:</text>
+<text x="0" y="16" font-family="monospace" font-size="9" fill="#9CA3AF">12 columns &bull; 80px margin &bull; 24px gutter</text>
+<text x="0" y="34" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Tablet:</text>
+<text x="0" y="50" font-family="monospace" font-size="9" fill="#9CA3AF">8 columns &bull; 40px margin &bull; 20px gutter</text>
+<text x="0" y="68" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#0F172A" font-weight="700">Mobile:</text>
+<text x="0" y="84" font-family="monospace" font-size="9" fill="#9CA3AF">4 columns &bull; 24px margin &bull; 16px gutter</text>
+</g>
+</g>
+<!-- APPLICATION MOCK BLOCK -->
+<g transform="translate(80, 510)">
+<rect x="0" y="0" width="500" height="80" fill="#0F172A" rx="8"/>
+<text x="250" y="35" font-family="Space Grotesk, sans-serif" font-size="14" fill="#FFFFFF" text-anchor="middle" font-weight="700" letter-spacing="4">DARK NAVY APPLICATION</text>
+<text x="250" y="58" font-family="monospace" font-size="9" fill="#4D8EFF" text-anchor="middle" opacity="0.6">#0F172A &bull; Primary backgrounds &amp; text</text>
+</g>
+<!-- ICON STYLES SECTION -->
+<g transform="translate(80, 730)">
+<text x="0" y="0" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700" fill="#0F172A">ICON STYLES</text>
+<g transform="translate(0, 15)">
+<text x="0" y="0" font-family="IBM Plex Sans Thai, sans-serif" font-size="10" fill="#0F172A">Regular/Line</text>
+<circle cx="120" cy="-4" r="6" fill="none" stroke="#0F172A" stroke-width="1.5"/>
+<text x="140" y="0" font-family="IBM Plex Sans Thai, sans-serif" font-size="10" fill="#0F172A">Bold</text>
+<circle cx="190" cy="-4" r="6" fill="#FF4E45"/>
+<text x="210" y="0" font-family="IBM Plex Sans Thai, sans-serif" font-size="10" fill="#0F172A">Fill</text>
+<rect x="140" y="15" width="160" height="14" fill="#F1F1F1" rx="7"/>
+<text x="220" y="26" font-family="monospace" font-size="8" fill="#9CA3AF" text-anchor="middle">91 icons &bull; 3 styles each</text>
+</g>
+</g>
+<!-- ICON LIBRARY PREVIEW -->
+<g transform="translate(300, 720)">
+<g opacity="0.5">
+<text x="0" y="0" font-family="monospace" font-size="8" fill="#9CA3AF">Lab: flask, database, microscope, chart-pie</text>
+<text x="0" y="15" font-family="monospace" font-size="8" fill="#9CA3AF">Heritage: flower-lotus, sparkle</text>
+<text x="0" y="30" font-family="monospace" font-size="8" fill="#9CA3AF">Social: facebook-logo, instagram-logo</text>
+<text x="0" y="45" font-family="monospace" font-size="8" fill="#9CA3AF">Actions: download-simple, share-network</text>
+</g>
+</g>
+<!-- FOOTER -->
+<g transform="translate(80, 850)">
+<line x1="0" y1="0" x2="1240" y2="0" stroke="#E5E7EB" stroke-width="1"/>
+<text x="0" y="18" font-family="IBM Plex Sans Thai, sans-serif" font-size="11" fill="#9CA3AF">TSPL Design System v1.0 &mdash; Thai Symbol Pattern Lab &mdash; Digital Archive Project</text>
+<text x="1240" y="18" font-family="monospace" font-size="10" fill="#D4AF37" text-anchor="end">CI_v2 &bull; 2026</text>
+</g>
+</svg>

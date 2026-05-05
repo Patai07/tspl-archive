@@ -7,13 +7,14 @@ import anthropic
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import gspread
+from datetime import datetime
 
 # --- 1. CONFIGURATION ---
 with open('config.json', 'r') as f: config = json.load(f)
 
 # Anthropic API Key will be read from config.json
 ANTHROPIC_API_KEY = config.get('ANTHROPIC_API_KEY')
-CLAUDE_MODEL = "claude-3-5-haiku-latest"
+CLAUDE_MODEL = "claude-haiku-4-5-20251001"
 
 SERVICE_ACCOUNT_FILE = 'service-account.json'
 DRIVE_FOLDER_ID = config['DRIVE_FOLDER_ID']
@@ -128,7 +129,7 @@ def main():
                 data.get('tags', 'N/A'),
                 f"{base_path}/main.jpg", f"{base_path}/vectors/vector.svg", f"{base_path}/context.jpg",
                 f_name,  # col_18 = source_filename (ใช้ตรวจ dedup)
-                "",      # col_19 = สำรองไว้ใช้ภายหลัง
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),  # col_19 = Timestamp (ช่วยแยกข้อมูลใหม่)
                 file.get('webViewLink', 'N/A')
             ]
             worksheet.append_row(row)

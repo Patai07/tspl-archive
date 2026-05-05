@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+<!-- OUTER FRAME -->
+<path d="M20 30 L20 170 L180 170 L180 30" 
+stroke="#FF4E45" stroke-width="6" stroke-linejoin="round"/>
+<!-- BOOK LEFT -->
+<path d="M30 40 Q70 30 95 40 L95 150 Q70 140 30 150 Z" 
+stroke="#FF4E45" stroke-width="6" fill="none" stroke-linejoin="round"/>
+<!-- BOOK RIGHT -->
+<path d="M170 40 Q130 30 105 40 L105 150 Q130 140 170 150 Z" 
+stroke="#FF4E45" stroke-width="6" fill="none" stroke-linejoin="round"/>
+<!-- CENTER SPINE -->
+<line x1="100" y1="40" x2="100" y2="150" 
+stroke="#FF4E45" stroke-width="6"/>
+<!-- BOTTOM CURVE -->
+<path d="M60 150 Q100 170 140 150" 
+stroke="#FF4E45" stroke-width="6" fill="none"/>
+<!-- TEXT LINES LEFT -->
+<line x1="45" y1="70" x2="75" y2="70" stroke="#FF4E45" stroke-width="5" stroke-linecap="round"/>
+<line x1="45" y1="90" x2="75" y2="90" stroke="#FF4E45" stroke-width="5" stroke-linecap="round"/>
+<line x1="45" y1="110" x2="75" y2="110" stroke="#FF4E45" stroke-width="5" stroke-linecap="round"/>
+<!-- TEXT LINES RIGHT -->
+<line x1="125" y1="70" x2="155" y2="70" stroke="#FF4E45" stroke-width="5" stroke-linecap="round"/>
+<line x1="125" y1="90" x2="155" y2="90" stroke="#FF4E45" stroke-width="5" stroke-linecap="round"/>
+<line x1="125" y1="110" x2="155" y2="110" stroke="#FF4E45" stroke-width="5" stroke-linecap="round"/>
+</svg>

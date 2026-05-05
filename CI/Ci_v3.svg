@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100">
+
+  <!-- BACKGROUND -->
+  <rect width="100%" height="100%" fill="#FCFCFC"/>
+
+  <!-- STRUCTURAL GRID (Subtle) -->
+  <g stroke="#E5E7EB" stroke-width="1" opacity="0.5">
+    <line x1="800" y1="0" x2="800" y2="1100"/>
+    <line x1="0" y1="550" x2="1600" y2="550"/>
+  </g>
+
+  <!-- 01 BRAND IDENTITY -->
+  <text x="80" y="80" font-family="sans-serif" font-size="24" font-weight="900" fill="#FF4E45">01</text>
+  <text x="125" y="80" font-family="sans-serif" font-size="24" font-weight="900" fill="#0F172A">BRAND IDENTITY</text>
+
+  <g transform="translate(80,130)">
+    <!-- TSPL FRAMED BOOK LOGO (V2 MASTER) -->
+    <g transform="translate(0,-10) scale(0.6)">
+      <path d="M20 30 L20 170 L180 170 L180 30" stroke="#FF4E45" stroke-width="6" stroke-linejoin="round" fill="none"/>
+      <path d="M30 40 Q70 30 95 40 L95 150 Q70 140 30 150 Z" stroke="#FF4E45" stroke-width="6" fill="none" stroke-linejoin="round"/>
+      <path d="M170 40 Q130 30 105 40 L105 150 Q130 140 170 150 Z" stroke="#FF4E45" stroke-width="6" fill="none" stroke-linejoin="round"/>
+      <line x1="100" y1="40" x2="100" y2="150" stroke="#FF4E45" stroke-width="6"/>
+      <path d="M60 150 Q100 170 140 150" stroke="#FF4E45" stroke-width="6" fill="none"/>
+      <g stroke="#FF4E45" stroke-width="5" stroke-linecap="round">
+        <line x1="45" y1="70" x2="75" y2="70"/><line x1="45" y1="90" x2="75" y2="90"/><line x1="45" y1="110" x2="75" y2="110"/>
+        <line x1="125" y1="70" x2="155" y2="70"/><line x1="125" y1="90" x2="155" y2="90"/><line x1="125" y1="110" x2="155" y2="110"/>
+      </g>
+    </g>
+    
+    <text x="140" y="65" font-family="sans-serif" font-size="72" font-weight="900" fill="#0F172A" letter-spacing="-3">TSPL <tspan fill="#FF4E45">LAB</tspan></text>
+    <text x="140" y="105" font-family="sans-serif" font-size="16" font-weight="bold" fill="#9CA3AF" letter-spacing="8">COMMUNITY • KNOWLEDGE • DESIGN</text>
+    
+    <g transform="translate(0, 160)">
+      <text x="0" y="0" font-family="sans-serif" font-size="16" fill="#0F172A" font-weight="bold">โครงการบริการวิชาการแบบมีส่วนร่วมกับชุมชน มหาวิทยาลัยนเรศวร</text>
+      <text x="0" y="30" font-family="sans-serif" font-size="14" fill="#64748B">ได้รับงบประมาณสนับสนุนจาก กองทุนส่งเสริมศิลปะร่วมสมัย (สศร.)</text>
+    </g>
+  </g>
+
+  <!-- 02 COLOR PALETTE -->
+  <g transform="translate(900,80)">
+    <text x="0" y="0" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0F172A">02 COLOR PALETTE</text>
+    <g transform="translate(0,40)">
+      <rect x="0" y="0" width="100" height="100" fill="#FF4E45" rx="6"/><text x="0" y="125" font-family="monospace" font-size="11" fill="#0F172A" font-weight="bold">#FF4E45</text>
+      <rect x="125" y="0" width="100" height="100" fill="#0F172A" rx="6"/><text x="125" y="125" font-family="monospace" font-size="11" fill="#0F172A" font-weight="bold">#0F172A</text>
+      <rect x="250" y="0" width="100" height="100" fill="#D4AF37" rx="6"/><text x="250" y="125" font-family="monospace" font-size="11" fill="#0F172A" font-weight="bold">#D4AF37</text>
+      <rect x="375" y="0" width="100" height="100" fill="#0F2C59" rx="6"/><text x="375" y="125" font-family="monospace" font-size="11" fill="#0F172A" font-weight="bold">#0F2C59</text>
+    </g>
+  </g>
+
+  <!-- 03 TYPOGRAPHY -->
+  <g transform="translate(900,340)">
+    <text x="0" y="0" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0F172A">03 TYPOGRAPHY</text>
+    <g transform="translate(0,60)">
+      <text x="0" y="0" font-family="sans-serif" font-size="11" fill="#9CA3AF" font-weight="bold">ENGLISH / SPACE GROTESK</text>
+      <text x="0" y="45" font-family="sans-serif" font-size="48" font-weight="bold" fill="#0F172A">ABC123</text>
+    </g>
+    <g transform="translate(250,60)">
+      <text x="0" y="0" font-family="sans-serif" font-size="11" fill="#9CA3AF" font-weight="bold">THAI / IBM PLEX SANS THAI</text>
+      <text x="0" y="45" font-family="sans-serif" font-size="48" font-weight="bold" fill="#0F172A">กขค๑๒๓</text>
+    </g>
+  </g>
+
+  <!-- 04 BRAND CONCEPT -->
+  <g transform="translate(80,410)">
+    <text x="0" y="0" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0F172A">04 BRAND CONCEPT</text>
+    <g transform="translate(0,60)">
+      <text x="0" y="0" font-family="sans-serif" font-size="28" font-weight="bold" fill="#0F172A">KNOWLEDGE → SYSTEM → DESIGN</text>
+      <text x="0" y="35" font-family="sans-serif" font-size="14" fill="#64748B">กระบวนการวิจัยและออกแบบสัญวิทยาไทยสู่สากล</text>
+    </g>
+  </g>
+
+  <!-- 05 ICON SYSTEM -->
+  <g transform="translate(80,590)">
+    <text x="0" y="0" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0F172A">05 ICON SYSTEM</text>
+    <g transform="translate(0,50)">
+      <g transform="translate(0,0)"><rect x="0" y="0" width="50" height="50" fill="#F1F1F1" rx="8"/><path d="M15,15 L35,15 L35,35 L15,35 Z" fill="none" stroke="#0F172A" stroke-width="2"/></g>
+      <g transform="translate(80,0)"><rect x="0" y="0" width="50" height="50" fill="#F1F1F1" rx="8"/><path d="M15,15 L35,15 L35,35 L15,35 Z" fill="none" stroke="#FF4E45" stroke-width="4"/></g>
+      <g transform="translate(160,0)"><rect x="0" y="0" width="50" height="50" fill="#F1F1F1" rx="8"/><path d="M15,15 L35,15 L35,35 L15,35 Z" fill="#FF4E45"/></g>
+    </g>
+  </g>
+
+  <!-- 06 APPLICATION -->
+  <g transform="translate(80,780)">
+    <text x="0" y="0" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0F172A">06 APPLICATION</text>
+    <g transform="translate(0,50)">
+      <rect x="0" y="0" width="220" height="140" fill="#0F172A" rx="10"/><text x="20" y="30" font-family="sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF">CARD NAVY</text>
+      <rect x="245" y="0" width="220" height="140" fill="#0F2C59" rx="10"/><text x="265" y="30" font-family="sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF">ID VARIANT</text>
+      <rect x="490" y="0" width="220" height="140" fill="#F1F1F1" rx="10" stroke="#E5E7EB"/><text x="510" y="30" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0F172A">LIGHT DOC</text>
+      <rect x="735" y="0" width="220" height="140" fill="#FF4E45" rx="10"/><text x="755" y="30" font-family="sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF">CTA BLOCK</text>
+    </g>
+  </g>
+
+  <!-- FOOTER -->
+  <g transform="translate(80,1030)">
+    <line x1="0" y1="0" x2="1440" y2="0" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="0" y="30" font-family="sans-serif" font-size="14" fill="#9CA3AF">TSPL Corporate Identity System <tspan font-weight="bold" fill="#0F172A">v4.0 Master Sheet</tspan></text>
+  </g>
+
+</svg>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4E45" stop-opacity="0" />
+      <stop offset="50%" stop-color="#FF4E45" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#FF4E45" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Connection Lines (Technical) -->
+  <path opacity="0.1" stroke="#0F172A" stroke-width="0.5" stroke-dasharray="4,4" d="M200,80 V320 M100,120 V280 M300,120 V280" />
+
+  <!-- Physical Layer (Base) -->
+  <g transform="translate(50, 240)">
+    <path stroke="#0F172A" stroke-width="1.5" fill="rgba(15,44,89,0.06)" d="M0,40 L150,0 L300,40 L150,80 Z" />
+    <circle cx="150" cy="40" r="3" fill="#0F172A" opacity="0.2" />
+    <text x="150" y="95" font-family="sans-serif" font-size="10" text-anchor="middle" fill="#0F172A" opacity="0.5">PHYSICAL LAYER</text>
+  </g>
+
+  <!-- Syntactic Layer (Middle) -->
+  <g transform="translate(50, 160)">
+    <path stroke="#0F172A" stroke-width="2" fill="rgba(15,44,89,0.04)" d="M0,40 L150,0 L300,40 L150,80 Z" />
+    <circle cx="150" cy="40" r="3" fill="#0F172A" opacity="0.3" />
+    <text x="310" y="45" font-family="sans-serif" font-size="10" fill="#0F172A" opacity="0.5">SYNTACTIC LAYER</text>
+  </g>
+
+  <!-- Semantic Core (Apex) -->
+  <g transform="translate(50, 80)">
+    <path stroke="#FF4E45" stroke-width="2.5" fill="rgba(255,78,69,0.12)" d="M0,40 L150,0 L300,40 L150,80 Z" />
+    <circle cx="150" cy="40" r="4" fill="#FF4E45" />
+    <text x="150" y="-15" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#FF4E45">SEMANTIC CORE</text>
+  </g>
+
+  <!-- Scanning Beam Placeholder -->
+  <rect x="20" y="200" width="360" height="2" fill="url(#scanGradient)" opacity="0.6"/>
+</svg>

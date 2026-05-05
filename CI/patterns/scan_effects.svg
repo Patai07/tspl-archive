@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <!-- Laser Scan Gradient -->
+    <linearGradient id="scan-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF4E45" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#FF4E45" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#FF4E45" stop-opacity="1"/>
+      <stop offset="55%" stop-color="#FF4E45" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FF4E45" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Horizontal Lens Flare / Flash Gradient -->
+    <radialGradient id="flash-grad" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="1"/>
+      <stop offset="20%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0F2C59" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="laser-glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background for preview -->
+  <rect width="800" height="400" fill="#0F172A"/>
+
+  <!-- 1. Scan Line Beam -->
+  <text x="20" y="40" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold">1. SCAN BEAM (Laser Effect)</text>
+  <rect x="20" y="60" width="760" height="40" fill="url(#scan-grad)" filter="url(#laser-glow)"/>
+  
+  <!-- 2. Horizontal Lens Flare / Flash -->
+  <text x="20" y="160" fill="#FFFFFF" font-family="sans-serif" font-size="14" font-weight="bold">2. HORIZONTAL FLASH (Lens Flare)</text>
+  <ellipse cx="400" cy="220" rx="400" ry="10" fill="url(#flash-grad)" filter="url(#laser-glow)"/>
+  <ellipse cx="400" cy="220" rx="200" ry="2" fill="#FFFFFF" filter="url(#laser-glow)"/>
+
+  <!-- Guide Text -->
+  <text x="20" y="320" fill="#94A3B8" font-family="sans-serif" font-size="12">
+    * Drag these elements over symbols or images to create a "Scanning" or "High-Tech" look.
+  </text>
+  <text x="20" y="340" fill="#94A3B8" font-family="sans-serif" font-size="12">
+    * Use "Screen" or "Linear Dodge (Add)" blending mode in Photoshop/Illustrator for best results.
+  </text>
+</svg>
