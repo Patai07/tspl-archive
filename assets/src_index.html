@@ -60,9 +60,19 @@
     <nav class="sticky top-0 z-[100] w-full bg-white border-b border-gray-100 h-16 transition-all duration-300">
         <div class="max-w-[1440px] mx-auto px-6 h-full flex items-center justify-between">
             <!-- Logo Section -->
-            <a href="index.html" class="flex items-center group shrink-0"
+            <a href="index.html" class="flex items-center gap-2 group shrink-0"
                 onclick="sessionStorage.removeItem('tspl_preloader_played')">
-                <img src="assets/SVG/Main Logo.svg" alt="TSPL Logo" class="h-9 md:h-11 w-auto transition-transform group-hover:scale-105">
+                <div
+                    class="w-8 h-8 md:w-9 md:h-9 bg-[#0F172A] flex items-center justify-center rounded-lg shadow-lg shadow-[#0F172A]/10 transition-transform group-hover:scale-105">
+                    <i class="ph-fill ph-book-open text-[#FF4E45] text-base md:text-lg"></i>
+                </div>
+                <div class="flex flex-col justify-center">
+                    <span
+                        class="font-black uppercase text-[15px] md:text-[18px] leading-[0.8] text-[#0F172A] tracking-tighter">TSPL</span>
+                    <span
+                        class="text-[6px] md:text-[7px] text-[#FF4E45] font-extrabold uppercase tracking-[0.15em] mt-1.5">Thai
+                        Symbol Pattern Lab</span>
+                </div>
             </a>
 
             <!-- Right-aligned Navigation Group -->
