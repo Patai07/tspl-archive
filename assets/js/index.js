@@ -47,7 +47,16 @@ async function loadData() {
                         images: images.length > 0 ? images : [{ url: "https://placehold.co/800x600/0F2C59/D4AF37?text=No+Image", type: "original" }]
                     };
                 });
-                RECORDS = mappedData.filter(item => item.id !== "Unknown ID" && item.id.trim() !== "" && !item.id.trim().startsWith('#'));
+                // 🚨 [TEMPORARY FILTER] แสดงเฉพาะลายที่ทำ Vector เสร็จแล้ว (หากเสร็จหมดแล้วให้เปลี่ยนค่าเป็น false ได้เลยครับ)
+                const TEMP_FILTER_ONLY_VECTOR = true; 
+                RECORDS = mappedData.filter(item => {
+                    const isValid = item.id !== "Unknown ID" && item.id.trim() !== "" && !item.id.trim().startsWith('#');
+                    if (!isValid) return false;
+                    if (TEMP_FILTER_ONLY_VECTOR) {
+                        return item.images.some(img => img.type === 'vector');
+                    }
+                    return true;
+                });
                 resolve(RECORDS);
             },
             error: function (err) {
