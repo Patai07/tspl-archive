@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TSPL Archive | Central Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050505; --surf: #0a0a0a; --surf-hover: #111111;
+  --card: rgba(15, 15, 15, 0.7);
+  --border: rgba(255, 255, 255, 0.06); 
+  --border-glow: rgba(255, 255, 255, 0.15);
+  --accent: #a78bfa; --accent-dark: #7c3aed;
+  --green: #10b981; --red: #ef4444; --yellow: #f59e0b; --blue: #3b82f6;
+  --text: #ffffff; --muted: #888888;
+  --font-sans: 'Outfit', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { 
+  background-color: var(--bg); 
+  color: var(--text); 
+  font-family: var(--font-sans); 
+  min-height: 100vh; 
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Dynamic Ambient Background */
+.ambient-bg {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  background: radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.08), transparent 50%),
+              radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.08), transparent 50%);
+  filter: blur(60px);
+  animation: breathe 15s ease-in-out infinite alternate;
+}
+@keyframes breathe { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+
+/* Header */
+header {
+  background: rgba(5,5,5,0.8); backdrop-filter: blur(24px); 
+  border-bottom: 1px solid var(--border);
+  padding: 20px 48px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
+}
+.brand { display: flex; align-items: center; gap: 16px; }
+.logo { 
+  font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em;
+  background: linear-gradient(to right, #fff, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+}
+.badge { 
+  background: rgba(167,139,250,0.1); color: #a78bfa; padding: 4px 12px; border-radius: 20px; 
+  font-size: 0.75rem; font-family: var(--font-mono); font-weight: 600; border: 1px solid rgba(167,139,250,0.2); 
+}
+
+/* Layout */
+.container { max-width: 1400px; margin: 0 auto; padding: 40px; display: grid; gap: 32px; }
+.main-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; }
+
+/* Cards */
+.card { 
+  background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 32px; 
+  backdrop-filter: blur(20px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative; overflow: hidden;
+}
+.card:hover { border-color: var(--border-glow); transform: translateY(-2px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+.card-title-wrap { display: flex; align-items: center; gap: 12px; }
+.card-icon { width: 40px; height: 40px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.card-title { font-family: var(--font-mono); font-size: 0.9rem; font-weight: 600; color: #fff; text-transform: uppercase; letter-spacing: 0.1em; }
+.card-desc { font-size: 0.9rem; color: var(--muted); font-weight: 300; }
+
+/* Hero Stat Card */
+.hero-card { 
+  background: linear-gradient(180deg, rgba(167,139,250,0.05) 0%, rgba(0,0,0,0) 100%); 
+  border: 1px solid rgba(167,139,250,0.2);
+}
+.hero-card::before { 
+  content:''; position:absolute; top:0; left:0; right:0; height:1px; 
+  background: linear-gradient(90deg, transparent, var(--accent), transparent); 
+}
+
+/* Stats */
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-top: 24px; }
+.stat-box { 
+  background: rgba(255,255,255,0.01); border: 1px solid var(--border); border-radius: 16px; 
+  padding: 24px; text-align: center; transition: all 0.3s;
+}
+.stat-box:hover { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1); transform: scale(1.02); }
+.stat-val { 
+  font-family: var(--font-mono); font-size: 3rem; font-weight: 700; line-height: 1; margin-bottom: 12px; 
+  background: linear-gradient(to bottom, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.stat-lbl { font-size: 0.85rem; color: var(--muted); font-weight: 400; text-transform: uppercase; letter-spacing: 0.05em; }
+.c-accent .stat-val { background: linear-gradient(to bottom, #d8b4fe, #a78bfa); -webkit-background-clip: text; }
+.c-green .stat-val { background: linear-gradient(to bottom, #6ee7b7, #10b981); -webkit-background-clip: text; }
+.c-yellow .stat-val { background: linear-gradient(to bottom, #fcd34d, #f59e0b); -webkit-background-clip: text; }
+.c-red .stat-val { background: linear-gradient(to bottom, #fca5a5, #ef4444); -webkit-background-clip: text; }
+
+/* Pipeline Flow */
+.pipeline-flow { display: flex; flex-direction: column; gap: 24px; position: relative; padding-left: 24px; margin-top: 16px; }
+.pipeline-line { 
+  position: absolute; left: 48px; top: 30px; bottom: 30px; width: 2px; 
+  background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(167,139,250,0.5), rgba(255,255,255,0.05)); z-index: 1; 
+}
+.step-item { position: relative; z-index: 2; display: flex; align-items: stretch; gap: 24px; }
+.step-num { 
+  width: 50px; height: 50px; border-radius: 50%; background: #0a0a0a; border: 1px solid var(--border); 
+  display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-weight: 600; 
+  font-size: 1.2rem; flex-shrink: 0; color: var(--muted); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  box-shadow: 0 0 0 4px #050505;
+}
+.step-item:hover .step-num { 
+  border-color: var(--accent); color: #fff; background: rgba(167,139,250,0.1); 
+  box-shadow: 0 0 0 4px #050505, 0 0 20px rgba(167,139,250,0.4); transform: scale(1.1);
+}
+
+/* Buttons */
+.btn { 
+  flex: 1; padding: 20px 24px; border: 1px solid var(--border); border-radius: 16px; 
+  font-family: var(--font-sans); cursor: pointer; display: flex; align-items: center; justify-content: space-between; 
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(255,255,255,0.02); color: var(--text); text-align: left; 
+}
+.btn-content { display: flex; flex-direction: column; gap: 6px; }
+.btn-content strong { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.02em; }
+.btn-content span { font-size: 0.85rem; color: var(--muted); font-weight: 300; }
+.btn-icon { font-size: 1.4rem; opacity: 0.5; transition: all 0.3s; }
+.btn:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+.btn:hover .btn-icon { opacity: 1; transform: translateX(4px); }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; pointer-events: none; }
+
+.btn-primary { background: linear-gradient(135deg, rgba(167,139,250,0.1), rgba(124,58,237,0.05)); border-color: rgba(167,139,250,0.3); }
+.btn-primary:hover { border-color: var(--accent); box-shadow: 0 8px 24px rgba(124,58,237,0.15); }
+.btn-outline { background: transparent; border-color: rgba(255,255,255,0.1); }
+.btn-outline:hover { background: #fff; color: #000; border-color: #fff; }
+.btn-outline:hover .btn-content span { color: #555; }
+.btn-danger { background: rgba(239,68,68,0.05); border-color: rgba(239,68,68,0.2); color: #fca5a5; }
+.btn-danger:hover { background: rgba(239,68,68,0.1); border-color: var(--red); color: #fff; }
+
+/* Compact Buttons */
+.btn-compact { padding: 14px 20px; flex-direction: row; justify-content: center; gap: 8px; font-size: 0.95rem; border-radius: 12px; }
+.btn-compact .btn-content { display: block; }
+.btn-compact .btn-content strong { font-size: 0.95rem; }
+.btn-compact span { display: none; }
+
+/* Log Box */
+.terminal-wrapper { background: #000; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.terminal-header { background: #111; border-bottom: 1px solid var(--border); padding: 8px 16px; display: flex; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-r { background: #ff5f56; } .dot-y { background: #ffbd2e; } .dot-g { background: #27c93f; }
+.log-box { height: 260px; overflow-y: auto; padding: 16px; font-family: 'SF Mono', Consolas, monospace; font-size: 0.85rem; color: #a0a0c0; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+.log-line { padding: 4px 0; line-height: 1.6; border-bottom: 1px solid rgba(255,255,255,0.02); }
+.log-done { color: var(--green); } .log-err { color: var(--red); }
+
+/* Progress */
+.progress-container { margin-top: 24px; }
+.progress-bar { height: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #a78bfa, #c084fc, #38bdf8); border-radius: 10px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 10px rgba(167,139,250,0.5); }
+.progress-labels { display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.8rem; color: var(--muted); font-family: var(--font-mono); }
+
+/* Modal */
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); backdrop-filter: blur(12px); display: flex; align-items: center; justify-content: center; z-index: 100; opacity: 0; pointer-events: none; transition: all 0.3s; }
+.modal.active { opacity: 1; pointer-events: auto; }
+.modal-content { background: var(--surf); border: 1px solid rgba(255,255,255,0.1); border-radius: 32px; padding: 48px; width: 480px; max-width: 90%; text-align: center; transform: translateY(40px) scale(0.95); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 32px 64px rgba(0,0,0,0.6); }
+.modal.active .modal-content { transform: translateY(0) scale(1); }
+.modal-icon { font-size: 4rem; margin-bottom: 24px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); }
+.modal-title { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 600; margin-bottom: 16px; color: var(--text); letter-spacing: -0.02em; }
+.modal-message { font-size: 1rem; color: var(--muted); margin-bottom: 40px; line-height: 1.6; white-space: pre-line; }
+.modal-actions { display: flex; gap: 16px; }
+.modal-actions .btn-compact { flex: 1; padding: 16px; border-radius: 16px; }
+
+@media(max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="ambient-bg"></div>
+
+<header>
+  <div class="brand">
+    <div class="logo">TSPL ARCHIVE</div>
+    <div class="badge">SYSTEM CONTROL</div>
+  </div>
+  <button class="btn btn-compact btn-outline" style="width:auto; padding: 10px 20px;" onclick="window.open('https://tspl-archive.vercel.app/', '_blank')">
+    <div class="btn-content"><strong>↗ เปิดดูเว็บไซต์จริง</strong></div>
+  </button>
+</header>
+
+<div class="container">
+  
+  <!-- HERO STATS: Master Database -->
+  <div class="card hero-card top-row">
+    <div class="card-header">
+      <div class="card-title-wrap">
+        <div class="card-icon" style="color: var(--accent); border-color: rgba(167,139,250,0.3)">🏛️</div>
+        <div>
+          <div class="card-title" style="color:var(--accent)">Master Intelligence Database</div>
+          <div class="card-desc">คลังข้อมูลองค์ความรู้สัญศาสตร์และลวดลายไทยที่สมบูรณ์แล้ว (ข้อมูลหลักของโปรเจกต์)</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="stat-grid">
+      <div class="stat-box c-accent" style="border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.03)">
+        <div class="stat-val" id="db-total">—</div>
+        <div class="stat-lbl">ลวดลายทั้งหมด (Patterns)</div>
+      </div>
+      <div class="stat-box c-green">
+        <div class="stat-val" id="db-scanned">—</div>
+        <div class="stat-lbl">เอกสารที่แสกนแล้ว</div>
+      </div>
+      <div class="stat-box c-red">
+        <div class="stat-val" id="db-pending">—</div>
+        <div class="stat-lbl">รอแสกนจากไฟล์ (MD/Docs)</div>
+      </div>
+      <div class="stat-box c-blue">
+        <div class="stat-val" id="db-categories" style="font-size: 1.5rem; margin-top: 10px;">—</div>
+        <div class="stat-lbl" style="margin-top: 15px;">แบ่งตามหมวดหมู่หลัก</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    
+    <!-- LEFT: Core Pipeline & Logs -->
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      
+      <!-- Core Workflow -->
+      <div class="card">
+        <div class="card-header" style="margin-bottom: 32px;">
+          <div class="card-title-wrap">
+            <div class="card-icon">⚡</div>
+            <div>
+              <div class="card-title">Core Workflow</div>
+              <div class="card-desc">กระบวนการทำงานหลัก (กรุณาทำตามลำดับ 1-5)</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="pipeline-flow">
+          <div class="pipeline-line"></div>
+          
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <button class="btn btn-primary" id="btn-extract" onclick="confirmStep('extract', 'Semiotic Extractor\nสกัดข้อมูลความรู้จากเอกสารใหม่')">
+              <div class="btn-content">
+                <strong>✍️ Semiotic Extractor</strong>
+                <span>สกัดความหมายจากแบบฟอร์มเอกสารใน Google Drive</span>
+              </div>
+              <div class="btn-icon">🧠</div>
+            </button>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <button class="btn btn-primary" style="background:linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.05)); border-color:rgba(59,130,246,0.3);" id="btn-link_assets" onclick="confirmStep('link_assets','Link Drive Images\nจับคู่โฟล์เดอร์ Drive กับชื่อลายใน Sheet 2 เติม URL รูปอัตโนมัติ')">
+              <div class="btn-content">
+                <strong style="color:#60a5fa">🔗 Link Drive Images</strong>
+                <span>เชื่อมลิงก์รูปภาพจากโฟลเดอร์ให้ตรงกับชื่อลาย</span>
+              </div>
+              <div class="btn-icon">🔗</div>
+            </button>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <button class="btn btn-primary" style="background:linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.05)); border-color:rgba(16,185,129,0.3);" id="btn-download_assets" onclick="confirmStep('download_assets','Download Assets\nดาวน์โหลดรูปจาก Drive ลงโฟล์เดอร์ assets/')">
+              <div class="btn-content">
+                <strong style="color:#34d399">📥 Download Assets</strong>
+                <span>ดาวน์โหลดรูปลงเครื่องเซิร์ฟเวอร์เฉพาะที่ขาด</span>
+              </div>
+              <div class="btn-icon">📥</div>
+            </button>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">4</div>
+            <button class="btn btn-primary" style="background:linear-gradient(135deg, rgba(236,72,153,0.1), rgba(219,39,119,0.05)); border-color:rgba(236,72,153,0.3);" id="btn-optimize_images" onclick="confirmStep('optimize_images','Optimize Images\nบีบอัดภาพและปรับสัดส่วนภาพแนวตั้งเป็น 4:3')">
+              <div class="btn-content">
+                <strong style="color:#f472b6">📉 Optimize Images</strong>
+                <span>ลดขนาดรูปภาพให้เบา &lt; 500KB เพื่อให้โหลดเว็บไว</span>
+              </div>
+              <div class="btn-icon">📉</div>
+            </button>
+          </div>
+
+          <div class="step-item">
+            <div class="step-num">5</div>
+            <button class="btn btn-primary" style="background:linear-gradient(135deg, rgba(245,158,11,0.1), rgba(217,119,6,0.05)); border-color:rgba(245,158,11,0.3);" id="btn-deploy" onclick="confirmStep('deploy', 'Deploy to Vercel\nอัปเดตเว็บไซต์ขึ้น Production')">
+              <div class="btn-content">
+                <strong style="color:#fbbf24">🚀 Deploy to Production</strong>
+                <span>อัปเดตข้อมูลและรูปภาพทั้งหมดขึ้นเว็บไซต์ Vercel</span>
+              </div>
+              <div class="btn-icon">🚀</div>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Live Log -->
+      <div class="card" style="padding: 0; background: transparent; border: none;">
+        <div class="terminal-wrapper">
+          <div class="terminal-header" style="justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 6px;">
+              <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+            </div>
+            <button id="btn-cancel" onclick="cancelCurrentProcess()" style="background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; font-size: 0.75rem; padding: 4px 12px; border-radius: 8px; cursor: pointer; display: none; font-family: var(--font-mono);">🛑 Cancel Process</button>
+          </div>
+          <div class="log-box" id="logBox"><div class="log-line">ระบบพร้อมทำงาน...</div></div>
+        </div>
+      </div>
+      
+    </div>
+
+    <!-- RIGHT: Stats & Maintenance -->
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      
+      <!-- Review & Map Stats -->
+      <div class="card">
+         <div class="card-header">
+          <div class="card-title-wrap">
+            <div class="card-icon">📊</div>
+            <div>
+              <div class="card-title">Database Integrity</div>
+              <div class="card-desc">สถานะความสมบูรณ์ของการจับคู่รูปภาพ (Asset Map)</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+            <div class="stat-grid" style="margin-top:0; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="stat-box c-green" style="padding:16px"><div class="stat-val" style="font-size:1.8rem" id="a-complete">-</div><div class="stat-lbl" style="font-size:0.7rem">ลวดลายที่มีรูปภาพสมบูรณ์</div></div>
+              <div class="stat-box c-red" style="padding:16px; position:relative;">
+                <div class="stat-val" style="font-size:1.8rem" id="a-missing">-</div>
+                <div class="stat-lbl" style="font-size:0.7rem">ขาดรูปภาพประกอบ</div>
+                <button onclick="showMissingModal()" style="position:absolute; top:8px; right:8px; background:rgba(239,68,68,0.2); border:1px solid rgba(239,68,68,0.4); color:#fff; border-radius:8px; width:28px; height:28px; cursor:pointer; font-size:0.8rem;">🔍</button>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- Maintenance Tools -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-wrap">
+            <div class="card-icon">🛠️</div>
+            <div>
+              <div class="card-title">Maintenance & Safety</div>
+              <div class="card-desc">เครื่องมือจัดการข้อมูลขั้นสูงและการกู้คืน</div>
+            </div>
+          </div>
+        </div>
+        
+        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom: 24px;">
+          <button class="btn btn-outline" onclick="openDuplicateScanner()">
+            <div class="btn-content">
+              <strong>🔍 Duplicate Scanner</strong>
+              <span>วิเคราะห์ลายซ้ำหรือเอกสารข้อมูลใกล้เคียงกัน</span>
+            </div>
+          </button>
+          
+          <button class="btn btn-outline" id="btn-confirm_assets" onclick="confirmStep('confirm_assets','Confirm Sheet 1\nเปรียบเทียบข้อมูลใน Sheet 1 กับโฟล์เดอร์ใน Drive เพิ่มคอลัมน์ Drive_Confirmed')">
+            <div class="btn-content">
+              <strong>✅ Confirm Sheet 1 vs Drive</strong>
+              <span>ตรวจสอบโฟลเดอร์ใน Drive ว่ามีครบตามฐานข้อมูลหรือไม่</span>
+            </div>
+          </button>
+          
+          <button class="btn btn-outline" onclick="openCheckAssets()">
+            <div class="btn-content">
+              <strong>🔎 Check Missing Assets</strong>
+              <span>รายงานลายไหนในระบบที่ยังไม่มีรูปภาพเลย</span>
+            </div>
+          </button>
+        </div>
+
+        <div class="card-desc" style="margin-bottom:12px;">Safety & Recovery Tools</div>
+        <div class="stat-grid" style="margin-top:0; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+          <button class="btn btn-compact btn-outline" id="btn-backup" onclick="confirmStep('backup', 'Backup DB\nสำรองข้อมูล')">
+            <div class="btn-content"><strong>💾 Backup DB</strong></div>
+          </button>
+          <button class="btn btn-compact btn-outline" id="btn-fix_links" onclick="confirmStep('fix_links', 'Fix Links\nซ่อมลิงก์ Footer')">
+            <div class="btn-content"><strong>🔗 Fix Links</strong></div>
+          </button>
+        </div>
+        
+        <button class="btn btn-compact btn-outline" style="width:100%; border-color:rgba(251,191,36,0.4); color:var(--yellow); margin-bottom: 12px;" id="btn-rollback_assets" onclick="confirmRollback()">
+          <div class="btn-content"><strong>↩️ Rollback Image Links</strong></div>
+        </button>
+        
+        <button class="btn btn-compact btn-danger" id="btn-clear" style="width:100%" onclick="confirmClear()">
+          <div class="btn-content"><strong>🗑️ Reset Master Database</strong></div>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-icon" id="modalIcon">⚙️</div>
+    <div class="modal-title" id="modalTitle">System Confirmation</div>
+    <div class="modal-message" id="modalMessage">คุณต้องการรันคำสั่งนี้หรือไม่?</div>
+    <div class="modal-actions">
+      <button class="btn btn-compact btn-outline" onclick="closeModal()"><div class="btn-content"><strong>ยกเลิก</strong></div></button>
+      <button class="btn btn-compact btn-primary" id="modalConfirmBtn" onclick="executeConfirm()"><div class="btn-content"><strong>ยืนยันการทำงาน</strong></div></button>
+    </div>
+  </div>
+</div>
+
+<!-- Missing Modal -->
+<div id="missingModal" class="modal">
+  <div class="modal-content" style="max-height: 80vh; display: flex; flex-direction: column;">
+    <div class="modal-icon" style="font-size: 2.5rem; margin-bottom: 10px;">🚨</div>
+    <div class="modal-title" style="color:var(--red);">รายงานลวดลายที่ขาดรูปภาพ</div>
+    <div class="modal-message" style="margin-bottom: 16px;">กรุณาตรวจสอบโฟลเดอร์เหล่านี้ใน assets/images/database/</div>
+    
+    <div style="flex: 1; overflow-y: auto; background: #000; border: 1px solid var(--border); border-radius: 12px; padding: 16px; text-align: left; font-family: var(--font-mono); font-size: 0.85rem; color: #fca5a5; margin-bottom: 24px;" id="missingListContainer">
+      <!-- list injected here -->
+    </div>
+    
+    <button class="btn btn-compact btn-outline" onclick="closeMissingModal()"><div class="btn-content"><strong>ปิดหน้าต่าง</strong></div></button>
+  </div>
+</div>
+
+<!-- Check Assets Modal -->
+<div id="checkAssetsModal" class="modal">
+  <div class="modal-content" style="width:760px;max-width:95%;max-height:85vh;display:flex;flex-direction:column;">
+    <div class="modal-icon" style="font-size:2.5rem;margin-bottom:10px;">🔎</div>
+    <div class="modal-title">รายงานสถานะรูปภาพในระบบ</div>
+    <div class="modal-message" style="margin-bottom:16px;">ตรวจสอบว่าลายไหนใน Sheet 2 ตรงกับโฟล์เดอร์ Drive และมีไฟล์ดาวน์โหลดไว้ในเครื่องแล้วหรือยังไม่</div>
+    <div style="flex:1;overflow-y:auto;background:#000;border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:24px;" id="checkAssetsContainer">
+      <div style="text-align:center;padding:40px;color:var(--muted)">⏳ กำลังสแกน...</div>
+    </div>
+    <button class="btn btn-compact btn-outline" onclick="document.getElementById('checkAssetsModal').classList.remove('active')"><div class="btn-content"><strong>ปิดหน้าต่าง</strong></div></button>
+  </div>
+</div>
+
+<!-- Rollback Confirm Modal -->
+<div id="rollbackModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-icon" style="font-size:2.5rem;">↩️</div>
+    <div class="modal-title" style="color:var(--yellow);">Rollback Image Links</div>
+    <div class="modal-message" id="rollbackMsg">กำลังโหลดรายชื่อ Backup...</div>
+    <div style="text-align:left;background:#000;border:1px solid var(--border);border-radius:12px;padding:12px;margin:16px 0;font-family:var(--font-mono);font-size:0.8rem;color:var(--muted);" id="backupList">⏳</div>
+    <div class="modal-actions">
+      <button class="btn btn-compact btn-outline" onclick="document.getElementById('rollbackModal').classList.remove('active')"><div class="btn-content"><strong>ยกเลิก</strong></div></button>
+      <button class="btn btn-compact" style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.4);color:var(--yellow)" onclick="doRollback()"><div class="btn-content"><strong>↩️ ยืนยัน Rollback</strong></div></button>
+    </div>
+  </div>
+</div>
+<div id="duplicateModal" class="modal">
+  <div class="modal-content" style="width: 720px; max-width: 95%; max-height: 85vh; display: flex; flex-direction: column;">
+    <div class="modal-icon" style="font-size: 2.5rem; margin-bottom: 10px;">🔍</div>
+    <div class="modal-title" style="color:var(--blue);">วิเคราะห์ลวดลายและเอกสารซ้ำซ้อน</div>
+    <div class="modal-message" style="margin-bottom: 16px;">
+      ระบบพบรายการที่มีชื่อลายคล้ายคลึงกัน <strong style="color:var(--yellow)">⚠️ กรุณาเหลือรายการที่ถูกต้องที่สุดไว้ 1 รายการเสมอ</strong> เพื่อไม่ให้ข้อมูลลายนั้นหายไปจากระบบ
+    </div>
+    
+    <div style="flex: 1; overflow-y: auto; background: #000; border: 1px solid var(--border); border-radius: 16px; padding: 16px; text-align: left; margin-bottom: 24px;" id="duplicateListContainer">
+      <div style="text-align:center; padding: 40px; color:var(--muted)">⏳ กำลังสแกนฐานข้อมูล Master Database...</div>
+    </div>
+    
+    <button class="btn btn-compact btn-outline" onclick="closeDuplicateModal()"><div class="btn-content"><strong>ปิดหน้าต่าง</strong></div></button>
+  </div>
+</div>
+
+<script>
+let globalMissingList = [];
+async function loadStats() {
+  // Empty since we removed the review stats UI
+}
+async function loadAsset() {
+  try {
+    const r = await fetch('/api/asset_stats'); const d = await r.json();
+    document.getElementById('a-complete').textContent = d.complete;
+    document.getElementById('a-missing').textContent = d.missing;
+    globalMissingList = d.missing_list || [];
+  } catch(e){}
+}
+function showMissingModal() {
+  const container = document.getElementById('missingListContainer');
+  if(globalMissingList.length === 0) {
+    container.innerHTML = '<span style="color:var(--green)">✅ ข้อมูลครบถ้วนสมบูรณ์ ไม่ขาดรูปเลย!</span>';
+  } else {
+    container.innerHTML = globalMissingList.map(id => `<div>❌ ${id}</div>`).join('');
+  }
+  document.getElementById('missingModal').classList.add('active');
+}
+function closeMissingModal() {
+  document.getElementById('missingModal').classList.remove('active');
+}
+async function loadDB() {
+  try {
+    const r = await fetch('/api/db_stats'); const d = await r.json();
+    document.getElementById('db-total').textContent = d.total;
+    document.getElementById('db-scanned').textContent = d.scanned;
+    document.getElementById('db-pending').textContent = d.pending;
+    document.getElementById('db-categories').innerHTML = `<span style="color:var(--green)">NAT:${d.nature}</span> | <span style="color:var(--yellow)">FAU:${d.fauna}</span> | <span style="color:var(--blue)">GEO/SAC:${d.geo+d.sacred}</span>`;
+  } catch(e){}
+}
+
+let pendingAction = null;
+let currentRunningStep = null;
+
+function confirmStep(step, name) {
+  document.getElementById('modalTitle').textContent = "System Confirmation";
+  document.getElementById('modalMessage').textContent = `คุณต้องการรันคำสั่ง:\n${name}\nใช่หรือไม่?`;
+  document.getElementById('modalIcon').textContent = '⚡';
+  document.getElementById('modalConfirmBtn').className = 'btn btn-compact btn-primary';
+  pendingAction = () => doRunStep(step);
+  document.getElementById('confirmModal').classList.add('active');
+}
+function confirmReview(url) {
+  document.getElementById('modalTitle').textContent = "Start Review Server";
+  document.getElementById('modalMessage').textContent = "ระบบจะเปิด Review Server ให้โดยอัตโนมัติ และจะพาคุณไปยังหน้า Review UI";
+  document.getElementById('modalIcon').textContent = '🖼️';
+  document.getElementById('modalConfirmBtn').className = 'btn btn-compact btn-primary';
+  pendingAction = () => doStartReview(url);
+  document.getElementById('confirmModal').classList.add('active');
+}
+function confirmClear() {
+  document.getElementById('modalTitle').textContent = "Danger Zone";
+  document.getElementById('modalMessage').textContent = `คุณกำลังจะล้างข้อมูลทั้งหมดใน Google Sheets TSPL Archive!\n\nข้อมูลองค์ความรู้จะหายทั้งหมดและระบบจะใส่แค่ Header กลับคืนมา\nยืนยันการทำลายข้อมูลหรือไม่?`;
+  document.getElementById('modalIcon').textContent = '🚨';
+  document.getElementById('modalConfirmBtn').className = 'btn btn-compact btn-danger';
+  pendingAction = () => doClearSheet();
+  document.getElementById('confirmModal').classList.add('active');
+}
+function closeModal() { document.getElementById('confirmModal').classList.remove('active'); pendingAction = null; }
+function executeConfirm() { if(pendingAction) pendingAction(); closeModal(); }
+
+async function doStartReview(url) {
+  const btn = document.getElementById('btn-review');
+  if(btn) { btn.disabled = true; const orig = btn.innerHTML; btn.innerHTML = '<div class="btn-content"><strong>⏳ Starting Server...</strong></div>'; btn.dataset.orig = orig; }
+  try {
+    const res = await fetch('/api/start_review', {method:'POST'}); const data = await res.json();
+    if(data.ok) {
+        setTimeout(() => { window.open(url, '_blank'); }, 1000);
+    } else {
+        alert(data.error || "Failed to start review server");
+    }
+  } catch(e) {
+      alert("Connection error starting review server");
+  } finally {
+      if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; }
+  }
+}
+
+async function doRunStep(step) {
+  const btn = document.getElementById('btn-'+step);
+  currentRunningStep = step;
+  document.getElementById('btn-cancel').style.display = 'block';
+  
+  if(btn) { btn.disabled = true; const orig = btn.innerHTML; btn.innerHTML = '<div class="btn-content"><strong>⏳ Processing...</strong></div>'; btn.dataset.orig = orig; }
+  try {
+    const res = await fetch('/api/run/'+step, {method:'POST'}); const data = await res.json();
+    if(!data.ok) {
+      if(btn) btn.innerHTML = `<div class="btn-content"><strong>❌ ${data.error || 'Error'}</strong></div>`;
+      setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+      document.getElementById('btn-cancel').style.display = 'none';
+      currentRunningStep = null;
+    }
+  } catch(e) {
+    if(btn) btn.innerHTML = '<div class="btn-content"><strong>❌ Connection Error</strong></div>';
+    setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+    document.getElementById('btn-cancel').style.display = 'none';
+    currentRunningStep = null;
+  }
+}
+
+async function cancelCurrentProcess() {
+    if(!currentRunningStep) return;
+    try {
+        const res = await fetch('/api/cancel/' + currentRunningStep, {method:'POST'});
+        const data = await res.json();
+        if(!data.ok) alert(data.error);
+    } catch(e) {}
+}
+
+async function doClearSheet() {
+  const btn = document.getElementById('btn-clear');
+  if(btn) { btn.disabled = true; const orig = btn.innerHTML; btn.innerHTML = '<div class="btn-content"><strong>⏳ กำลังล้างข้อมูล...</strong></div>'; btn.dataset.orig = orig; }
+  try {
+    const res = await fetch('/api/clear_sheet', {method:'POST'}); const data = await res.json();
+    if(!data.ok) {
+      if(btn) btn.innerHTML = `<div class="btn-content"><strong>❌ ${data.error || 'Error'}</strong></div>`;
+      setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+    }
+  } catch(e) {
+    if(btn) btn.innerHTML = '<div class="btn-content"><strong>❌ Connection Error</strong></div>';
+    setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+  }
+}
+
+const es = new EventSource('/api/logs');
+const box = document.getElementById('logBox');
+es.onmessage = e => {
+  const d = JSON.parse(e.data);
+  const line = document.createElement('div');
+  line.className = 'log-line' + (d.done ? ' log-done' : d.line.includes('❌')||d.line.includes('Error') ? ' log-err' : '');
+  line.textContent = d.line;
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+  if(d.done) {
+    const btn = document.getElementById('btn-'+d.name);
+    if(btn && btn.dataset.orig) { btn.disabled = false; btn.innerHTML = btn.dataset.orig; }
+    if(d.name === currentRunningStep) {
+        document.getElementById('btn-cancel').style.display = 'none';
+        currentRunningStep = null;
+    }
+    loadStats(); loadAsset(); loadDB();
+  }
+};
+loadStats(); loadAsset(); loadDB();
+setInterval(()=>{ loadStats(); loadAsset(); loadDB(); }, 20000);
+
+async function openDuplicateScanner() {
+  document.getElementById('duplicateModal').classList.add('active');
+  const container = document.getElementById('duplicateListContainer');
+  container.innerHTML = '<div style="text-align:center; padding: 40px; color:var(--muted)">⏳ กำลังสแกนฐานข้อมูล Master Database (อาจใช้เวลาสักครู่)...</div>';
+  try {
+    const res = await fetch('/api/scan_duplicates');
+    const data = await res.json();
+    if(!data.groups || data.groups.length === 0) {
+      container.innerHTML = '<div style="text-align:center; padding: 40px; color:var(--green)">✅ ไม่พบข้อมูลซ้ำซ้อนในฐานข้อมูล! ยอดเยี่ยมมากครับ</div>';
+      return;
+    }
+    
+    let html = '';
+    data.groups.forEach((grp, gidx) => {
+      html += `<div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; margin-bottom: 16px;">`;
+      html += `<div style="font-family:var(--font-mono); font-weight:600; color:var(--accent); margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">กลุ่มที่ ${gidx+1}: ตรวจพบชื่อใกล้เคียงกัน</div>`;
+      grp.forEach(item => {
+        html += `<div style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:#050505; padding:12px; border-radius:8px; margin-bottom:8px; border:1px solid rgba(255,255,255,0.02);">`;
+        html += `<div style="font-size:0.85rem;">`;
+        html += `<strong style="color:#fff; font-family:var(--font-mono)">${item.symbol_id}</strong> &nbsp;|&nbsp; <span style="color:var(--yellow)">${item.title_th}</span><br>`;
+        html += `<span style="color:var(--muted); font-size:0.75rem;">ไฟล์: ${item.filename} &nbsp;|&nbsp; สร้าง: ${item.timestamp}</span>`;
+        html += `</div>`;
+        html += `<button onclick="deleteDuplicateEntry('${item.symbol_id}', '${item.timestamp}')" style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); color:#fca5a5; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:0.75rem; flex-shrink:0;">🗑️ เอาออก</button>`;
+        html += `</div>`;
+      });
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+  } catch(e) {
+    container.innerHTML = '<div style="text-align:center; padding: 40px; color:var(--red)">❌ เกิดข้อผิดพลาดในการเชื่อมต่อดึงข้อมูล</div>';
+  }
+}
+
+function closeDuplicateModal() {
+  document.getElementById('duplicateModal').classList.remove('active');
+}
+
+async function deleteDuplicateEntry(sid, ts) {
+  if(!confirm(`ยืนยันการลบข้อมูลรหัส ${sid} ออกจากตารางหลักหรือไม่?`)) return;
+  try {
+    const res = await fetch('/api/delete_row', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({symbol_id: sid, timestamp: ts})
+    });
+    const data = await res.json();
+    if(data.ok) {
+      alert("✅ ลบรายการสำเร็จแล้ว!");
+      openDuplicateScanner();
+      loadStats(); loadAsset(); loadDB();
+    } else {
+      alert("❌ ลบไม่สำเร็จ: " + (data.error || 'unknown'));
+    }
+  } catch(e) {
+    alert("❌ Connection error");
+  }
+}
+
+// ─── Asset Manager JS ──────────────────────────────────────────────────────
+async function openCheckAssets() {
+  document.getElementById('checkAssetsModal').classList.add('active');
+  const c = document.getElementById('checkAssetsContainer');
+  c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)">⏳ กำลังสแกน Drive และ Sheet 2 (อาจใช้เวลา 30-60 วินาที)...</div>';
+  try {
+    const res  = await fetch('/api/check_assets');
+    const data = await res.json();
+    if (!data.items || data.items.length === 0) {
+      c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)">ไม่พบข้อมูล</div>'; return;
+    }
+    const ok      = data.items.filter(x => x.in_drive && x.local_downloaded > 0);
+    const partial = data.items.filter(x => x.in_drive && x.local_downloaded === 0);
+    const missing = data.items.filter(x => !x.in_drive);
+    let html = `<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;font-size:0.8rem;text-align:center;">
+      <div style="background:rgba(16,185,129,0.1);border-radius:8px;padding:10px;"><strong style="color:var(--green)">${ok.length}</strong><br>✅ พร้อมใช้</div>
+      <div style="background:rgba(59,130,246,0.1);border-radius:8px;padding:10px;"><strong style="color:var(--blue)">${partial.length}</strong><br>🔗 มีใน Drive<br>แต่ยังไม่ได้ดาวน์โหลด</div>
+      <div style="background:rgba(239,68,68,0.1);border-radius:8px;padding:10px;"><strong style="color:var(--red)">${missing.length}</strong><br>❌ ไม่พบโฟลเดอร์</div>
+    </div>`;
+    [...partial, ...missing].forEach(it => {
+      const color = it.in_drive ? 'var(--blue)' : 'var(--red)';
+      const icon  = it.in_drive ? '🔗' : '❌';
+      const info  = it.in_drive ? `${it.drive_images} รูปใน Drive` : 'ไม่พบโฟลเดอร์ตรงกัน';
+      html += `<div style="background:#050505;border:1px solid rgba(255,255,255,0.04);border-radius:8px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;">
+        <div><strong style="color:#fff;font-size:0.82rem;">${it.symbol_id}</strong> <span style="color:var(--muted);font-size:0.78rem;">— ${it.title_th}</span></div>
+        <span style="color:${color};font-size:0.78rem;white-space:nowrap;margin-left:12px;">${icon} ${info}</span>
+      </div>`;
+    });
+    c.innerHTML = html;
+  } catch(e) {
+    c.innerHTML = '<div style="text-align:center;padding:40px;color:var(--red)">❌ เชื่อมต่อไม่ได้</div>';
+  }
+}
+
+async function confirmRollback() {
+  document.getElementById('rollbackModal').classList.add('active');
+  document.getElementById('rollbackMsg').textContent = 'กำลังโหลดรายชื่อ Backup...';
+  document.getElementById('backupList').textContent  = '⏳';
+  try {
+    const res  = await fetch('/api/list_backups');
+    const data = await res.json();
+    if (!data.backups || data.backups.length === 0) {
+      document.getElementById('rollbackMsg').textContent = '❌ ยังไม่มี Backup — กด "Link Drive Images" ก่อนครับ';
+      document.getElementById('backupList').textContent  = 'ไม่พบไฟล์ Backup';
+    } else {
+      document.getElementById('rollbackMsg').textContent = '⚠️ จะกู้คืน Col 15-19 ของ Sheet 2 ทั้งหมด จาก Backup ล่าสุด:';
+      document.getElementById('backupList').textContent  = data.backups.join('\n');
+    }
+  } catch(e) { document.getElementById('backupList').textContent = 'Error: ' + e; }
+}
+
+function doRollback() {
+  document.getElementById('rollbackModal').classList.remove('active');
+  confirmStep('rollback_assets', 'Rollback Image Links\nย้อนกลับ Col 15-19 ของ Sheet 2 เป็น Backup ล่าสุด');
+}
+</script>
+</body>
+</html>

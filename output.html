@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LINE Archive Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07070d;--surf:#0f0f1a;--card:#16162280;--border:#2a2a3a;--accent:#7c6fff;--green:#22c55e;--red:#ef4444;--yellow:#eab308;--blue:#38bdf8;--text:#e8e8f0;--muted:#6b6b80;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans Thai',sans-serif;min-height:100vh;}
+header{background:linear-gradient(135deg,#0f0f1a,#1a1030);border-bottom:1px solid var(--border);padding:20px 32px;display:flex;align-items:center;gap:16px;backdrop-filter:blur(20px);}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:700;background:linear-gradient(135deg,var(--accent),#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.subtitle{font-size:0.8rem;color:var(--muted);}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;padding:28px 32px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;backdrop-filter:blur(12px);}
+.card-title{font-family:'Space Grotesk',sans-serif;font-size:0.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px;display:flex;align-items:center;gap:8px;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:8px;}
+.stat{background:#ffffff08;border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;}
+.stat-val{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;line-height:1;}
+.stat-lbl{font-size:0.72rem;color:var(--muted);margin-top:6px;}
+.green{color:var(--green);}.red{color:var(--red);}.yellow{color:var(--yellow);}.blue{color:var(--blue);}
+
+.btn{width:100%;padding:14px 20px;border:none;border-radius:14px;font-family:'IBM Plex Sans Thai',sans-serif;font-size:0.95rem;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .2s;position:relative;overflow:hidden;}
+.btn::after{content:'';position:absolute;inset:0;background:white;opacity:0;transition:opacity .15s;}
+.btn:hover::after{opacity:.05;}
+.btn:active{transform:scale(.98);}
+.btn-sync{background:rgba(56,189,248,.15);color:var(--blue);border:1px solid rgba(56,189,248,.3);}
+.btn-classify{background:rgba(124,111,255,.15);color:var(--accent);border:1px solid rgba(124,111,255,.3);}
+.btn-finalize{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);}
+.btn-review{background:rgba(234,179,8,.15);color:var(--yellow);border:1px solid rgba(234,179,8,.3);}
+.btn-danger{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3);}
+.btn-secondary{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--border);}
+.btn:disabled{opacity:.45;cursor:not-allowed;}
+
+.pipeline-flow{display:flex;flex-direction:column;gap:16px;position:relative;}
+.step-line{position:absolute;left:28px;top:20px;bottom:20px;width:2px;background:var(--border);z-index:1;}
+.step-btn{position:relative;z-index:2;justify-content:flex-start;text-align:left;padding:16px 20px;box-shadow:0 8px 16px rgba(0,0,0,0.2);}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--surf);border:2px solid currentColor;display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:700;flex-shrink:0;font-size:1.1rem;}
+.step-text{display:flex;flex-direction:column;}
+.step-text strong{font-size:1.05rem;line-height:1.2;margin-bottom:2px;}
+.step-text span{font-size:0.8rem;opacity:0.8;font-weight:400;}
+
+.tools-col{display:flex;flex-direction:column;gap:24px;}
+.danger-zone{border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.02);}
+
+.log-box{background:#050510;border:1px solid var(--border);border-radius:14px;height:220px;overflow-y:auto;padding:14px 16px;font-family:monospace;font-size:.8rem;color:#a0a0c0;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+.log-line{padding:1px 0;line-height:1.6;}
+.log-done{color:var(--green);}
+.log-err{color:var(--red);}
+
+.review-link{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:#ffffff08;border:1px solid var(--border);border-radius:12px;color:var(--accent);text-decoration:none;font-size:.9rem;transition:background .2s;margin-top:12px;}
+.review-link:hover{background:rgba(124,111,255,.15);}
+.progress-track{background:var(--border);border-radius:100px;height:6px;margin-top:16px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),#a78bfa);border-radius:100px;transition:width .5s ease;}
+
+/* Modal Styles */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;pointer-events:none;transition:all 0.2s;}
+.modal.active{opacity:1;pointer-events:auto;}
+.modal-content{background:var(--surf);border:1px solid var(--border);border-radius:24px;padding:32px;width:420px;max-width:90%;text-align:center;transform:translateY(20px);transition:all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);box-shadow:0 24px 48px rgba(0,0,0,0.4);}
+.modal.active .modal-content{transform:translateY(0);}
+.modal-icon{font-size:3.5rem;margin-bottom:12px;}
+.modal-title{font-family:'Space Grotesk',sans-serif;font-size:1.3rem;font-weight:600;margin-bottom:12px;color:var(--text);}
+.modal-message{font-size:0.95rem;color:var(--muted);margin-bottom:28px;line-height:1.6;white-space:pre-line;}
+.modal-actions{display:flex;gap:12px;}
+
+@media(max-width:900px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header style="justify-content: space-between;">
+  <div style="display:flex; align-items:center; gap:16px;">
+    <div class="logo">🏛 LINE Archive Dashboard</div>
+    <div class="subtitle">Central Control Panel</div>
+  </div>
+  <button class="btn btn-secondary" style="width:auto; padding:10px 18px; font-size:0.85rem; border-radius:10px;" onclick="openWebsite()">
+    🌐 เปิดดูหน้าเว็บไซต์ 
+  </button>
+</header>
+<div class="grid">
+  <!-- Stats Review -->
+  <div class="card">
+    <div class="card-title">📊 สถิติการ Review (AI Classification)</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val green" id="s-approved">—</div><div class="stat-lbl">Approved</div></div>
+      <div class="stat"><div class="stat-val red" id="s-rejected">—</div><div class="stat-lbl">Rejected</div></div>
+      <div class="stat"><div class="stat-val yellow" id="s-pending">—</div><div class="stat-lbl">Pending</div></div>
+      <div class="stat"><div class="stat-val" id="s-total">—</div><div class="stat-lbl">ทั้งหมด</div></div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-review" style="width:0%"></div></div>
+    <a class="review-link" href="#" onclick="confirmLink('http://localhost:5555')">🖼 เปิดหน้า Review UI เพื่อตรวจสอบ →</a>
+  </div>
+
+  <!-- Stats Asset Map -->
+  <div class="card">
+    <div class="card-title">📁 สถิติ Asset Map (Database)</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val green" id="a-complete">—</div><div class="stat-lbl">Complete</div></div>
+      <div class="stat"><div class="stat-val red" id="a-missing">—</div><div class="stat-lbl">Missing</div></div>
+      <div class="stat"><div class="stat-val blue" id="a-new">—</div><div class="stat-lbl">New</div></div>
+      <div class="stat"><div class="stat-val" id="a-total">—</div><div class="stat-lbl">ลายทั้งหมด</div></div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="prog-asset" style="width:0%"></div></div>
+  </div>
+
+  <!-- CORE PIPELINE -->
+  <div class="card">
+    <div class="card-title">⚙️ Core Pipeline (กระบวนการหลัก)</div>
+    <div class="pipeline-flow">
+      <div class="step-line"></div>
+      
+      <button class="btn btn-sync step-btn" id="btn-sync" onclick="confirmStep('sync', 'Sync Drive (ดึงไฟล์จาก LINE)')">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Sync Drive</strong><span>ดึงรูปและเอกสารใหม่ล่าสุดจาก Google Drive</span></div>
+      </button>
+
+      <button class="btn btn-classify step-btn" id="btn-classify" onclick="confirmStep('classify', 'Classify (วิเคราะห์ภาพด้วย AI)')">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Classify Images</strong><span>ส่งรูปให้ Claude Haiku วิเคราะห์หมวดหมู่</span></div>
+      </button>
+
+      <button class="btn btn-review step-btn" onclick="confirmLink('http://localhost:5555')">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Review Pending</strong><span>ตรวจสอบรูปที่ AI ไม่มั่นใจผ่านเว็บแอป</span></div>
+      </button>
+
+      <button class="btn btn-finalize step-btn" id="btn-finalize" onclick="confirmStep('finalize', 'Finalize (สรุปผลลง Asset Map)')">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Finalize Map</strong><span>นำรูปที่อนุมัติแล้วมาจับคู่กับ Database</span></div>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOOLS COLUMN -->
+  <div class="tools-col">
+    <!-- Web & Extractor -->
+    <div class="card">
+      <div class="card-title">📝 Data & Web Tools</div>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <button class="btn btn-classify" id="btn-extract" onclick="confirmStep('extract', 'Semiotic Extractor')">
+          ✍️ Semiotic Extractor <span style="font-size:0.8rem;opacity:0.7;margin-left:auto;">สกัดสัญญะจากแบบฟอร์ม</span>
+        </button>
+        <button class="btn btn-sync" id="btn-deploy" onclick="confirmStep('deploy', 'Deploy to Vercel')">
+          🚀 Deploy to Vercel <span style="font-size:0.8rem;opacity:0.7;margin-left:auto;">อัปเดตเว็บขึ้น Production</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Maintenance -->
+    <div class="card">
+      <div class="card-title">🔧 Maintenance</div>
+      <div style="display:flex; gap:12px;">
+          <button class="btn btn-secondary" id="btn-backup" onclick="confirmStep('backup', 'Backup DB (สำรองข้อมูล)')" style="flex:1">💾 Backup DB</button>
+          <button class="btn btn-secondary" id="btn-fix_links" onclick="confirmStep('fix_links', 'Fix Links (ซ่อมลิงก์เว็บ)')" style="flex:1">🔗 Fix Links</button>
+      </div>
+    </div>
+
+    <!-- Danger Zone -->
+    <div class="card danger-zone">
+      <div class="card-title" style="color:var(--red)">🚨 Danger Zone</div>
+      <button class="btn btn-danger" id="btn-clear" onclick="confirmClear()">
+        🗑️ Reset TSPL Archive <span style="font-size:0.8rem;opacity:0.8;margin-left:auto;">ล้างข้อมูลหลักทั้งหมด</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Live Log -->
+  <div class="card" style="grid-column: 1 / -1;">
+    <div class="card-title">📟 Live Log Output</div>
+    <div class="log-box" id="logBox"><div class="log-line" style="color:var(--muted)">ระบบพร้อมทำงาน...</div></div>
+  </div>
+</div>
+
+<!-- Modal Overlay -->
+<div id="confirmModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-icon" id="modalIcon">⚙️</div>
+    <div class="modal-title" id="modalTitle">ยืนยันการทำงาน</div>
+    <div class="modal-message" id="modalMessage">คุณแน่ใจหรือไม่?</div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">ยกเลิก</button>
+      <button class="btn" id="modalConfirmBtn" onclick="executeConfirm()">ยืนยัน</button>
+    </div>
+  </div>
+</div>
+
+<script>
+async function loadStats() {
+  try {
+    const r  = await fetch('/api/stats');
+    const d  = await r.json();
+    document.getElementById('s-approved').textContent = d.approved;
+    document.getElementById('s-rejected').textContent = d.rejected;
+    document.getElementById('s-pending').textContent  = d.pending;
+    document.getElementById('s-total').textContent    = d.total;
+    const pct = d.total ? Math.round((d.approved+d.rejected)/d.total*100) : 0;
+    document.getElementById('prog-review').style.width = pct + '%';
+  } catch(e){}
+}
+async function loadAsset() {
+  try {
+    const r = await fetch('/api/asset_stats');
+    const d = await r.json();
+    document.getElementById('a-complete').textContent = d.complete;
+    document.getElementById('a-missing').textContent  = d.missing;
+    document.getElementById('a-new').textContent      = d.new;
+    document.getElementById('a-total').textContent    = d.total;
+    const pct = d.total ? Math.round(d.complete/d.total*100) : 0;
+    document.getElementById('prog-asset').style.width = pct + '%';
+  } catch(e){}
+}
+
+// Modal Logic
+let pendingAction = null;
+function confirmStep(step, name) {
+  document.getElementById('modalTitle').textContent = "รันกระบวนการ";
+  document.getElementById('modalMessage').textContent = `คุณต้องการรัน:
+${name}
+ใช่หรือไม่?`;
+  document.getElementById('modalIcon').textContent = '⚙️';
+  document.getElementById('modalConfirmBtn').className = 'btn btn-classify';
+  pendingAction = () => doRunStep(step);
+  document.getElementById('confirmModal').classList.add('active');
+}
+function confirmClear() {
+  document.getElementById('modalTitle').textContent = "⚠️ ล้างข้อมูลทั้งหมด";
+  document.getElementById('modalMessage').textContent = "คุณกำลังจะล้างข้อมูลทั้งหมดใน Google Sheets TSPL Archive!
+
+ข้อมูลจะหายทั้งหมดและระบบจะใส่แค่ Header กลับคืนมา
+ยืนยันการทำลายข้อมูลหรือไม่?";
+  document.getElementById('modalIcon').textContent = '🚨';
+  document.getElementById('modalConfirmBtn').className = 'btn btn-danger';
+  pendingAction = () => doClearSheet();
+  document.getElementById('confirmModal').classList.add('active');
+}
+function confirmLink(url) {
+  document.getElementById('modalTitle').textContent = "เปิดหน้าต่างใหม่";
+  document.getElementById('modalMessage').textContent = "คุณกำลังจะเปิดหน้า Review UI เพื่อตรวจสอบรูปภาพ";
+  document.getElementById('modalIcon').textContent = '🖼️';
+  document.getElementById('modalConfirmBtn').className = 'btn btn-review';
+  pendingAction = () => window.open(url, '_blank');
+  document.getElementById('confirmModal').classList.add('active');
+}
+function closeModal() {
+  document.getElementById('confirmModal').classList.remove('active');
+  pendingAction = null;
+}
+function executeConfirm() {
+  if(pendingAction) pendingAction();
+  closeModal();
+}
+
+async function doRunStep(step) {
+  const btn = document.getElementById('btn-'+step);
+  if(btn) { btn.disabled = true; const orig = btn.innerHTML; btn.innerHTML = '⏳ กำลังทำงาน...'; btn.dataset.orig = orig; }
+  try {
+    const res = await fetch('/api/run/'+step, {method:'POST'});
+    const data = await res.json();
+    if(!data.ok) {
+      if(btn) { btn.innerHTML = '❌ ' + (data.error || 'Error'); }
+      setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+    }
+  } catch(e) {
+    if(btn) { btn.innerHTML = '❌ Connection Error'; }
+    setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+  }
+}
+async function doClearSheet() {
+  const btn = document.getElementById('btn-clear');
+  if(btn) { btn.disabled = true; const orig = btn.innerHTML; btn.innerHTML = '⏳ กำลังล้างข้อมูล...'; btn.dataset.orig = orig; }
+  try {
+    const res = await fetch('/api/clear_sheet', {method:'POST'});
+    const data = await res.json();
+    if(!data.ok) {
+      if(btn) { btn.innerHTML = '❌ ' + (data.error || 'Error'); }
+      setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+    }
+  } catch(e) {
+    if(btn) { btn.innerHTML = '❌ Connection Error'; }
+    setTimeout(() => { if(btn) { btn.innerHTML = btn.dataset.orig; btn.disabled = false; } }, 3000);
+  }
+}
+async function openWebsite() {
+  await fetch('/api/open_web', {method:'POST'});
+}
+
+// SSE log stream
+const es = new EventSource('/api/logs');
+const box = document.getElementById('logBox');
+es.onmessage = e => {
+  const d = JSON.parse(e.data);
+  const line = document.createElement('div');
+  line.className = 'log-line' + (d.done ? ' log-done' : d.line.includes('❌')||d.line.includes('Error') ? ' log-err' : '');
+  line.textContent = d.line;
+  box.appendChild(line);
+  box.scrollTop = box.scrollHeight;
+  if(d.done) {
+    const btn = document.getElementById('btn-'+d.name);
+    if(btn && btn.dataset.orig) { btn.disabled = false; btn.innerHTML = btn.dataset.orig; }
+    loadStats(); loadAsset();
+  }
+};
+loadStats(); loadAsset();
+setInterval(()=>{ loadStats(); loadAsset(); }, 20000);
+</script>
+</body>
+</html>

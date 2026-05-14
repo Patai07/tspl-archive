@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Icon Gallery</title>
+    <style>
+        body { font-family: sans-serif; display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; background: #f8fafc; }
+        .icon-card { background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; text-align: center; width: 120px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .icon-card svg, .icon-card img { width: 48px; height: 48px; margin-bottom: 8px; }
+        .icon-name { font-size: 10px; color: #64748b; word-break: break-all; }
+    </style>
+</head>
+<body>
+    <script>
+        const icons = [
+            "arrow-right-bold.svg", "arrow-right.svg", "arrow-up-bold.svg", "arrow-up-right-bold.svg", "arrow-up-right.svg",
+            "article-bold.svg", "article-fill.svg", "article.svg", "bezier-curve-bold.svg", "bezier-curve.svg",
+            "book-open-fill.svg", "books-fill.svg", "books.svg", "camera-bold.svg", "camera.svg",
+            "caret-down-bold.svg", "caret-down.svg", "caret-left-bold.svg", "caret-right-bold.svg", "caret-right.svg",
+            "chart-pie-bold.svg", "chart-pie-fill.svg", "chart-pie.svg", "check-circle-fill.svg", "clock-countdown-fill.svg",
+            "clock-countdown.svg", "cloud-arrow-up-fill.svg", "cloud-arrow-up.svg", "database-bold.svg", "database-fill.svg",
+            "database.svg", "download-simple-bold.svg", "download-simple.svg", "envelope-simple-fill.svg", "facebook-logo-fill.svg",
+            "facebook-logo.svg", "faders-horizontal-bold.svg", "faders-horizontal.svg", "fingerprint-bold.svg", "fingerprint-fill.svg",
+            "fingerprint.svg", "flask-bold.svg", "flask-fill.svg", "flask.svg", "flower-lotus-bold.svg",
+            "flower-lotus.svg", "globe-fill.svg", "globe-hemisphere-east-bold.svg", "globe-hemisphere-east.svg", "identification-badge-fill.svg",
+            "info-fill.svg", "info.svg", "instagram-logo-fill.svg", "instagram-logo.svg", "intersect-bold.svg",
+            "intersect-three-bold.svg", "intersect-three-fill.svg", "intersect-three.svg", "leaf-bold.svg", "list-bold.svg",
+            "list.svg", "magnifying-glass-fill.svg", "map-pin-fill.svg", "microscope-bold.svg", "microscope-fill.svg",
+            "microscope.svg", "paint-brush-bold.svg", "palette-bold.svg", "pencil-line-bold.svg", "prohibit-fill.svg",
+            "prohibit.svg", "scroll-bold.svg", "scroll-fill.svg", "scroll.svg", "seal-check-fill.svg",
+            "seal-check.svg", "selection-all-bold.svg", "selection-all.svg", "share-network-bold.svg", "share-network.svg",
+            "shield-check-bold.svg", "sketch-logo.svg", "sparkle-bold.svg", "sparkle.svg", "stack-bold.svg",
+            "stack.svg", "warning-circle-fill.svg", "x-bold.svg", "x-circle-fill.svg", "x-circle.svg", "x.svg"
+        ];
+        
+        icons.forEach(icon => {
+            const card = document.createElement('div');
+            card.className = 'icon-card';
+            card.innerHTML = `
+                <img src="${icon}" alt="${icon}">
+                <div class="icon-name">${icon.replace('.svg', '')}</div>
+            `;
+            document.body.appendChild(card);
+        });
+    </script>
+</body>
+</html>
