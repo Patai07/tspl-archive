@@ -192,8 +192,8 @@ def get_all_docs_in_asset_root(drive_service, root_id):
     return items
 
 def main():
-    if ANTHROPIC_API_KEY == "YOUR_ANTHROPIC_API_KEY_HERE":
-        print("❌ กรุณาใส่ ANTHROPIC_API_KEY ในไฟล์ semiotic_extractor.py ก่อนรัน!")
+    if not ANTHROPIC_API_KEY:
+        print("❌ ไม่พบ ANTHROPIC_API_KEY ใน config.json! กรุณาเพิ่มค่า ANTHROPIC_API_KEY ก่อนรัน")
         print("   สมัครได้ที่: https://console.anthropic.com")
         return
     print(f"ระบบเริ่มทำงาน (Claude {CLAUDE_MODEL} | Delay 2s/file)...", flush=True)
@@ -233,15 +233,23 @@ def main():
         worksheet.append_row(clean_headers)
 
         
+    # all_rows สำหรับ Haiku_Scan Sheet (ใช้ตรวจซ้ำและ append)
     all_rows = worksheet.get_all_values()
+
+    # BUG FIX #1: รวม rows จาก Sheet 1 ด้วย เพื่อให้ get_next_symbol_id() นับต่อได้ถูกต้อง
+    # ไม่งั้นทุก batch จะเริ่ม TSP-LST-XXX-001 ใหม่เสมอ
+    all_rows_for_id = old_data_rows + all_rows
     
     processed_filenames = set()
     processed_titles = set()
     
-    for row in all_rows:
+    # BUG FIX: ข้าม row แรก (header) ด้วย [1:] ไม่งั้น "source_filename" จะถูกนับเป็น processed
+    for row in all_rows[1:]:
         if len(row) > 17 and row[17]:
             processed_filenames.add(row[17])
-            processed_titles.add(get_normalized_title(row[17]))
+            # BUG FIX #2: ใช้ _norm() แทน get_normalized_title() สำหรับชื่อโฟลเดอร์
+            processed_titles.add(_norm(row[17]))
+
     
     # โหลดรายชื่อไฟล์ที่ข้ามแล้ว (Ignored) เพื่อจะได้ไม่สแกนซ้ำ
     try:
@@ -250,7 +258,7 @@ def main():
         for r in ignored_rows[1:]:
             if r and r[0]: 
                 processed_filenames.add(r[0])
-                processed_titles.add(get_normalized_title(r[0]))
+                processed_titles.add(_norm(r[0]))
     except:
         pass
 
@@ -277,7 +285,8 @@ def main():
             continue
             
         # ใช้ชื่อโฟลเดอร์มาเช็คความซ้ำของลาย (เพราะชื่อไฟล์อาจจะกว้างไป)
-        norm_title = get_normalized_title(p_name)
+        # BUG FIX #2: ใช้ _norm() ซึ่งเหมาะกับชื่อโฟลเดอร์ ไม่ใช่ get_normalized_title() ที่ออกแบบสำหรับชื่อไฟล์
+        norm_title = _norm(p_name)
         if norm_title in processed_titles:
             print(f"⏩ ข้าม (ชื่อลายซ้ำกับไฟล์อื่นที่มีแล้ว): {p_name} ({f_name})", flush=True)
             continue
@@ -305,7 +314,8 @@ def main():
 
         try:
             cat = data.get('category', 'Nature & Botany')
-            sid = get_next_symbol_id(all_rows, cat)
+            # BUG FIX #1: ใช้ all_rows_for_id (Sheet1 + Haiku_Scan) เพื่อนับ ID ต่อ
+            sid = get_next_symbol_id(all_rows_for_id, cat)
             folder = CATEGORY_MAP.get(cat, '01_Nature')
             base_path = f"assets/images/database/{folder}/{sid}"
             # ── Fallback จาก Sheet 1 เมื่อ AI ไม่พบข้อมูล ──
@@ -348,6 +358,7 @@ def main():
             all_rows.append(row)  # อัปเดตข้อมูลในเมมโมรี่เพื่อรันเลขถัดไปไม่ให้ซ้ำ
             processed_filenames.add(context_name)
             processed_titles.add(norm_title)
+            all_rows_for_id.append(row)  # อัปเดต ID pool ด้วย เพื่อให้เลขถัดไปไม่ซ้ำ
             print(f"✅ สำเร็จ: {sid}", flush=True)
         except Exception as e:
             print(f"❌ บันทึกผิดพลาด: {str(e)[:60]}", flush=True)

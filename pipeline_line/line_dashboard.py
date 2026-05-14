@@ -48,20 +48,8 @@ def get_cached(key, ttl, fetch_func):
 
 @app.route('/api/stats')
 def stats():
-    def fetch():
-        try:
-            ws   = sh.worksheet('LINE_Review')
-            rows = ws.get_all_values()
-            if len(rows) < 2: return dict(approved=0, rejected=0, pending=0, total=0)
-            data = rows[1:]
-            return dict(
-                approved=sum(1 for r in data if r and r[0]=='APPROVED'),
-                rejected=sum(1 for r in data if r and r[0]=='REJECTED'),
-                pending =sum(1 for r in data if r and r[0]=='PENDING'),
-                total   =len(data)
-            )
-        except: return dict(approved=0, rejected=0, pending=0, total=0)
-    return jsonify(get_cached('stats', 15, fetch))
+    # BUG FIX #3: LINE_Review sheet ไม่มีแล้ว — คืนค่า placeholder ไม่ให้ crash
+    return jsonify(dict(approved=0, rejected=0, pending=0, total=0))
 
 @app.route('/api/asset_stats')
 def asset_stats():
@@ -107,16 +95,24 @@ def db_stats():
             scanned = len(scanned_files)
             pending = 0
             try:
+                # BUG FIX #1: ใช้ DRIVE_ASSET_ROOT และดูโฟลเดอร์ย่อย (ลาย) ไม่กรองด้วย TSPL/2025/2026
                 drive_creds = Credentials.from_service_account_file('service-account.json', scopes=['https://www.googleapis.com/auth/drive.readonly'])
                 drive_service = build('drive', 'v3', credentials=drive_creds)
-                drive_folder_id = config.get('LINE_DOC_FOLDER_ID') or config.get('DRIVE_FOLDER_ID')
-                q = (f"'{drive_folder_id}' in parents and trashed = false "
-                     "and mimeType != 'application/pdf' "
-                     "and mimeType != 'image/jpeg' and mimeType != 'image/png' "
-                     "and not name contains '.ai' "
-                     "and (name contains 'TSPL' or name contains '2025_' or name contains '2026_')")
-                items = drive_service.files().list(q=q, fields="files(id)").execute().get('files', [])
-                pending = max(0, len(items) - scanned)
+                drive_folder_id = config.get('DRIVE_ASSET_ROOT')
+                if drive_folder_id:
+                    # นับโฟลเดอร์ลาย (ระดับ cat > pattern_folder) ที่มีเอกสาร .docx อยู่
+                    cat_q = f"'{drive_folder_id}' in parents and trashed=false and mimeType='application/vnd.google-apps.folder'"
+                    cats = drive_service.files().list(q=cat_q, fields="files(id)").execute().get('files', [])
+                    total_docs = 0
+                    for cat in cats:
+                        sub_q = f"'{cat['id']}' in parents and trashed=false and mimeType='application/vnd.google-apps.folder'"
+                        subs = drive_service.files().list(q=sub_q, fields="files(id)").execute().get('files', [])
+                        for sub in subs:
+                            doc_q = (f"'{sub['id']}' in parents and trashed=false "
+                                     "and mimeType='application/vnd.openxmlformats-officedocument.wordprocessingml.document'")
+                            docs = drive_service.files().list(q=doc_q, fields="files(id)").execute().get('files', [])
+                            if docs: total_docs += 1  # นับ 1 ต่อ 1 โฟลเดอร์ลาย ไม่ใช่ต่อไฟล์
+                    pending = max(0, total_docs - scanned)
             except: pass
             return dict(total=len(data), nature=nature, fauna=fauna, geo=geo, sacred=sacred, scanned=scanned, pending=pending)
         except: return dict(total=0, nature=0, fauna=0, geo=0, sacred=0, scanned=0, pending=0)
@@ -159,16 +155,16 @@ def scan_duplicates():
 def delete_row():
     data = request.json
     sid = data.get('symbol_id')
-    ts = data.get('timestamp')
     try:
         ws = sh.get_worksheet(0)
         rows = ws.get_all_values()
+        # BUG FIX #2: จับคู่ด้วย symbol_id เพียงอย่างเดียว (ไม่ใช้ timestamp เพราะ col อาจผิด)
         for idx, r in enumerate(rows, start=1):
-            if len(r) > 18 and r[0] == sid and r[18] == ts:
+            if r and r[0].strip() == sid.strip():
                 ws.delete_rows(idx)
                 api_cache.clear()
                 return jsonify(ok=True)
-        return jsonify(ok=False, error="ไม่พบรายการที่ต้องการลบ")
+        return jsonify(ok=False, error=f"ไม่พบรายการ {sid}")
     except Exception as e:
         return jsonify(ok=False, error=str(e))
 

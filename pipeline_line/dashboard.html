@@ -172,10 +172,55 @@ header {
 .modal-actions { display: flex; gap: 16px; }
 .modal-actions .btn-compact { flex: 1; padding: 16px; border-radius: 16px; }
 
+/* ─── Toast Notification ─────────────────────────────── */
+#toast-container {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9999;
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: #141414;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 16px 20px;
+  width: 320px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.5);
+  backdrop-filter: blur(16px);
+  pointer-events: auto;
+  transform: translateX(120%);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275), opacity 0.4s ease;
+}
+.toast.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+.toast.hide {
+  transform: translateX(120%);
+  opacity: 0;
+}
+.toast-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
+.toast-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.toast-title { font-size: 0.8rem; font-weight: 700; color: #fff; font-family: var(--font-mono); letter-spacing: 0.03em; }
+.toast-msg   { font-size: 0.78rem; color: var(--muted); line-height: 1.4; word-break: break-word; }
+.toast-bar   { height: 3px; border-radius: 99px; margin-top: 10px; animation: toast-progress 5s linear forwards; }
+@keyframes toast-progress { from { width: 100%; } to { width: 0%; } }
+
 @media(max-width: 1024px) { .main-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
 
 <div class="ambient-bg"></div>
 
@@ -473,6 +518,69 @@ header {
 
 <script>
 let globalMissingList = [];
+
+// ─── Notification & Toast System ────────────────────────────────────────────
+const STEP_LABELS = {
+  extract:         { label: 'Semiotic Extractor', icon: '🧠' },
+  link_assets:     { label: 'Link Drive Images',  icon: '🔗' },
+  download_assets: { label: 'Download Assets',    icon: '📥' },
+  optimize_images: { label: 'Optimize Images',    icon: '📉' },
+  deploy:          { label: 'Deploy to Production', icon: '🚀' },
+  backup:          { label: 'Backup DB',           icon: '💾' },
+  fix_links:       { label: 'Fix Links',           icon: '🔧' },
+  rollback_assets: { label: 'Rollback Assets',     icon: '↩️' },
+  confirm_assets:  { label: 'Confirm Assets',      icon: '✅' },
+};
+
+// ขอสิทธิ์ Notification ตอนเปิดหน้า
+if ('Notification' in window && Notification.permission === 'default') {
+  Notification.requestPermission();
+}
+
+function showToast(title, message, type = 'success') {
+  const colors = { success: '#10b981', error: '#ef4444', warn: '#f59e0b', info: '#60a5fa' };
+  const icons  = { success: '✅', error: '❌', warn: '⚠️', info: 'ℹ️' };
+  const color = colors[type] || colors.success;
+  const icon  = icons[type]  || icons.success;
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <div class="toast-icon">${icon}</div>
+    <div class="toast-body">
+      <div class="toast-title">${title}</div>
+      <div class="toast-msg">${message}</div>
+      <div class="toast-bar" style="background:${color}"></div>
+    </div>`;
+
+  document.getElementById('toast-container').appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('show'));
+
+  // Auto dismiss after 5s
+  setTimeout(() => {
+    toast.classList.add('hide');
+    toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+  }, 5000);
+}
+
+function sendNotification(stepName, exitCode) {
+  const info = STEP_LABELS[stepName] || { label: stepName, icon: '⚡' };
+  const success = exitCode === 0 || exitCode === null;
+  const title   = success ? `${info.icon} เสร็จแล้ว!` : `❌ มีข้อผิดพลาด`;
+  const body    = success
+    ? `${info.label} ทำงานสำเร็จ`
+    : `${info.label} หยุดทำงาน (exit ${exitCode})`;
+  const type    = success ? 'success' : 'error';
+
+  // In-app Toast
+  showToast(title, body, type);
+
+  // Browser Notification (ถ้าได้รับสิทธิ์)
+  if ('Notification' in window && Notification.permission === 'granted') {
+    new Notification(`TSPL Dashboard — ${title}`, { body, icon: '/favicon.ico', silent: false });
+  }
+}
+
 async function loadStats() {
   // Empty since we removed the review stats UI
 }
@@ -609,6 +717,11 @@ es.onmessage = e => {
   box.appendChild(line);
   box.scrollTop = box.scrollHeight;
   if(d.done) {
+    // ดึง exit code จากข้อความ log เช่น "(exit 0)"
+    const exitMatch = d.line.match(/exit (\d+)/);
+    const exitCode  = exitMatch ? parseInt(exitMatch[1]) : 0;
+    sendNotification(d.name, exitCode);
+
     const btn = document.getElementById('btn-'+d.name);
     if(btn && btn.dataset.orig) { btn.disabled = false; btn.innerHTML = btn.dataset.orig; }
     if(d.name === currentRunningStep) {
