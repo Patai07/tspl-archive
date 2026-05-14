@@ -466,23 +466,40 @@ function updateModalDisplay() {
     }
 }
 
-function downloadVector() {
+async function downloadVector() {
     if (!activeRecord) return;
     const vector = activeRecord.images.find(img => img.type === 'vector');
     if (!vector) return;
 
-    // Build metadata-rich filename
+    // ตั้งชื่อไฟล์ตามภาษาปัจจุบันของเว็บ (ไทย หรือ อังกฤษ)
     const id = activeRecord.id;
-    const titleTH = activeRecord.title.th.replace(/\s+/g, '_').replace(/[\/\\:*?"<>|]/g, '');
-    const titleEN = activeRecord.title.en.replace(/\s+/g, '_').replace(/[\/\\:*?"<>|]/g, '');
-    const filename = `TSPL_${id}_${titleTH}_${titleEN}.svg`;
+    const title = (activeRecord.title[currentLang] || activeRecord.title.th || "").replace(/\s+/g, '_').replace(/[\/\\:*?"<>|]/g, '');
+    const filename = `TSPL_${id}_${title}.svg`;
 
-    const link = document.createElement('a');
-    link.href = vector.url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    try {
+        // ใช้ fetch แปลงเป็น Blob URL เพื่อบังคับให้เบราว์เซอร์ใช้ชื่อไฟล์ใหม่ตามแอตทริบิวต์ download 100%
+        const response = await fetch(vector.url);
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        setTimeout(() => window.URL.revokeObjectURL(blobUrl), 100);
+    } catch (err) {
+        console.warn("Blob download failed, using fallback direct link:", err);
+        const link = document.createElement('a');
+        link.href = vector.url;
+        link.download = filename;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 }
 
 
