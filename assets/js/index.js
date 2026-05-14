@@ -237,6 +237,17 @@ function renderGrid(filterText = "") {
         let statusText = currentLang === 'th' ? statusInfo.th : statusInfo.en;
         let statusColor = statusInfo.color;
 
+        const hasVector = record.images.some(img => img.type === 'vector');
+        const vectorBadge = hasVector ? `
+                        <!-- Vector Ready Badge -->
+                        <div class="absolute top-5 right-5 z-10 flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[7px] font-black uppercase tracking-widest text-white">
+                            <span class="relative flex h-1.5 w-1.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4E45] opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FF4E45]"></span>
+                            </span>
+                            <span>VECTOR</span>
+                        </div>` : '';
+
         item.innerHTML = `
                     <div class="relative aspect-[4/3] overflow-hidden">
                         <img src="${record.images[0].url}" alt="${record.title[currentLang]}" 
@@ -250,6 +261,7 @@ function renderGrid(filterText = "") {
                                 <span class="opacity-80">${statusText}</span>
                             </span>
                         </div>
+                        ${vectorBadge}
                             <div class="bg-white/15 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[8px] font-bold uppercase tracking-[0.3em] flex items-center gap-2 border border-white/20">
                                 ${currentLang === "th" ? "วิเคราะห์" : "Analysis"} <i class="ph ph-arrow-right text-[#FF4E45]"></i>
                             </div>
