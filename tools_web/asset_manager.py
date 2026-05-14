@@ -96,13 +96,15 @@ def cmd_rollback():
     ws = sh.worksheet('tspl_database')
     rows = backup['rows']
 
-    # Batch restore col O:S (15-19)
+    # Batch restore col O:U (15-21)
     batch_data = []
     for i, row in enumerate(rows[1:], start=2):
         if len(row) >= 19:
+            ex1 = row[19] if len(row) > 19 else ''
+            ex2 = row[20] if len(row) > 20 else ''
             batch_data.append({
-                'range': f'O{i}:S{i}',
-                'values': [[row[14], row[15], row[16], row[17], row[18]]]
+                'range': f'O{i}:U{i}',
+                'values': [[row[14], row[15], row[16], row[17], row[18], ex1, ex2]]
             })
     if batch_data:
         ws.batch_update(batch_data)
@@ -112,7 +114,7 @@ def cmd_rollback():
 # ─── CMD: link ───────────────────────────────────────────────────────────────
 
 def cmd_link():
-    print("🔗 เริ่มซิงค์และอัปเดตเส้นทางรูปภาพทั้งหมด (O:S) → Sheet 2 (tspl_database)...", flush=True)
+    print("🔗 เริ่มซิงค์และอัปเดตเส้นทางรูปภาพทั้งหมด (O:U) → Sheet 2 (tspl_database)...", flush=True)
     drive_svc, gc = get_services()
     sh = gc.open_by_key(PROD_SHEET_ID)
     ws = sh.worksheet('tspl_database')
@@ -147,24 +149,30 @@ def cmd_link():
             return ''
 
         # หาพาธจริงที่อยู่ในเครื่อง
-        img_main = find_slot('main')
-        img_vec  = find_slot('vector', 'vectors')
-        img_ctx  = find_slot('context')
-        img_mid  = find_slot('img_mid')
-        img_det  = find_slot('img_detail')
+        img_main   = find_slot('main')
+        img_vec    = find_slot('vector', 'vectors')
+        img_ctx    = find_slot('context')
+        img_mid    = find_slot('img_mid')
+        img_det    = find_slot('img_detail')
+        img_extra1 = find_slot('img_extra1')
+        img_extra2 = find_slot('img_extra2')
 
         # Fallback กรณีที่ยังไม่ได้ดาวน์โหลด แต่มีข้อมูลใน row เดิมอยู่แล้ว
-        old_main = row[14].strip() if len(row) > 14 else ''
-        old_vec  = row[15].strip() if len(row) > 15 else ''
-        old_ctx  = row[16].strip() if len(row) > 16 else ''
-        old_mid  = row[17].strip() if len(row) > 17 else ''
-        old_det  = row[18].strip() if len(row) > 18 else ''
+        old_main   = row[14].strip() if len(row) > 14 else ''
+        old_vec    = row[15].strip() if len(row) > 15 else ''
+        old_ctx    = row[16].strip() if len(row) > 16 else ''
+        old_mid    = row[17].strip() if len(row) > 17 else ''
+        old_det    = row[18].strip() if len(row) > 18 else ''
+        old_ex1    = row[19].strip() if len(row) > 19 else ''
+        old_ex2    = row[20].strip() if len(row) > 20 else ''
 
-        if not img_main: img_main = old_main or (f"{ASSETS_BASE}/{cat_folder_name(cat)}/{sid}/main.jpg" if norm in pattern_map else '')
-        if not img_vec:  img_vec  = old_vec
-        if not img_ctx:  img_ctx  = old_ctx
-        if not img_mid:  img_mid  = old_mid
-        if not img_det:  img_det  = old_det
+        if not img_main:   img_main   = old_main or (f"{ASSETS_BASE}/{cat_folder_name(cat)}/{sid}/main.jpg" if norm in pattern_map else '')
+        if not img_vec:    img_vec    = old_vec
+        if not img_ctx:    img_ctx    = old_ctx
+        if not img_mid:    img_mid    = old_mid
+        if not img_det:    img_det    = old_det
+        if not img_extra1: img_extra1 = old_ex1
+        if not img_extra2: img_extra2 = old_ex2
 
         # ถ้าพบใน Drive หรือมีโฟลเดอร์ในเครื่อง ให้นับว่า match เพื่อรายงานผล
         if norm in pattern_map or os.path.exists(local_dir):
@@ -175,8 +183,8 @@ def cmd_link():
             print(f"⚠️  ไม่พบข้อมูล: {sid} — {title_th}", flush=True)
 
         batch_data.append({
-            'range': f'O{i}:S{i}',
-            'values': [[img_main, img_vec, img_ctx, img_mid, img_det]]
+            'range': f'O{i}:U{i}',
+            'values': [[img_main, img_vec, img_ctx, img_mid, img_det, img_extra1, img_extra2]]
         })
 
     print(f"\n📊 เตรียมอัปเดตข้อมูล {len(batch_data)} แถว...", flush=True)

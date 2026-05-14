@@ -24,9 +24,11 @@ async function loadData() {
                     const images = [];
                     if (row['Image Main']) images.push({ url: row['Image Main'], type: 'original' });
                     if (row['Image Vector']) images.push({ url: row['Image Vector'], type: 'vector' });
-                    if (row['Image Context']) images.push({ url: row['Image Context'], type: 'original' }); // Default to original for display
+                    // Image Context removed — not used in current workflow
                     if (row['Image Mid']) images.push({ url: row['Image Mid'], type: 'original' });
                     if (row['Image Detail']) images.push({ url: row['Image Detail'], type: 'original' });
+                    if (row['Image Extra1']) images.push({ url: row['Image Extra1'], type: 'original' });
+                    if (row['Image Extra2']) images.push({ url: row['Image Extra2'], type: 'original' });
 
                     return {
                         id: row['Symbol ID'] || Object.values(row)[0] || "Unknown ID",
