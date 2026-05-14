@@ -22,8 +22,11 @@ def process_image(path):
         needs_ratio_fix = abs(orig_ratio - TARGET_RATIO) > 0.05
         
         if not needs_resize and not needs_ratio_fix and os.path.getsize(path) < 500000:
-            print(f"✅ [Already Optimized] {path} ({os.path.getsize(path)/1024:.1f}KB)")
-            return False # already optimized enough
+            if path.lower().endswith('.png') and img.format == 'JPEG':
+                print(f"⚠️ [Format Mismatch] Repairing PNG container for {path}")
+            else:
+                print(f"✅ [Already Optimized] {path} ({os.path.getsize(path)/1024:.1f}KB)")
+                return False # already optimized enough
             
         print(f"Processing {path} (Size: {os.path.getsize(path)/1024/1024:.2f}MB, {orig_w}x{orig_h})")
         
@@ -68,7 +71,10 @@ def process_image(path):
             img = img.resize((TARGET_WIDTH, TARGET_HEIGHT), Image.Resampling.LANCZOS)
             
         # Save compressed
-        img.save(path, 'JPEG', quality=80, optimize=True)
+        if path.lower().endswith('.png'):
+            img.save(path, 'PNG', optimize=True)
+        else:
+            img.save(path, 'JPEG', quality=80, optimize=True)
         print(f" -> Optimized to {os.path.getsize(path)/1024:.2f}KB")
         return True
     except Exception as e:
