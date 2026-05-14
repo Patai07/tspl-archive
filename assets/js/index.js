@@ -239,13 +239,13 @@ function renderGrid(filterText = "") {
 
         const hasVector = record.images.some(img => img.type === 'vector');
         const vectorBadge = hasVector ? `
-                        <!-- Vector Ready Badge -->
-                        <div class="absolute top-5 right-5 z-10 flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/20 text-[7px] font-black uppercase tracking-widest text-white">
-                            <span class="relative flex h-1.5 w-1.5">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4E45] opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#FF4E45]"></span>
+                        <!-- Vector Ready Premium Badge -->
+                        <div class="absolute top-4 right-4 z-10 flex items-center gap-2 bg-[#0F172A]/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#FF4E45]/50 shadow-[0_4px_15px_rgba(0,0,0,0.6)] text-[8px] font-black uppercase tracking-[0.25em] text-white">
+                            <span class="relative flex h-2.5 w-2.5">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4E45] opacity-90"></span>
+                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#FF4E45] shadow-[0_0_8px_#FF4E45]"></span>
                             </span>
-                            <span>VECTOR</span>
+                            <span class="text-[#FF4E45] font-extrabold">VECTOR</span>
                         </div>` : '';
 
         item.innerHTML = `
