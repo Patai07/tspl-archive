@@ -180,6 +180,7 @@ def get_all_docs_in_asset_root(drive_service, root_id):
                             print(f"   ⏭️  ข้ามไฟล์ระบบ/temp: {f['name']}", flush=True)
                             continue
                         f['parent_name'] = p['name']
+                        f['category_folder'] = cat['name']
                         items.append(f)
                     
                     file_token = files_resp.get('nextPageToken')
@@ -236,9 +237,8 @@ def main():
     # all_rows สำหรับ Haiku_Scan Sheet (ใช้ตรวจซ้ำและ append)
     all_rows = worksheet.get_all_values()
 
-    # BUG FIX #1: รวม rows จาก Sheet 1 ด้วย เพื่อให้ get_next_symbol_id() นับต่อได้ถูกต้อง
-    # ไม่งั้นทุก batch จะเริ่ม TSP-LST-XXX-001 ใหม่เสมอ
-    all_rows_for_id = old_data_rows + all_rows
+    # เพื่อให้สอดคล้องกับโฟลเดอร์ Drive แบบ 1:1 ให้เริ่มนับ ID สดใหม่ในชีตสแกนเสมอ
+    all_rows_for_id = list(all_rows)
     
     processed_filenames = set()
     processed_titles = set()
@@ -247,8 +247,9 @@ def main():
     for row in all_rows[1:]:
         if len(row) > 17 and row[17]:
             processed_filenames.add(row[17])
-            # BUG FIX #2: ใช้ _norm() แทน get_normalized_title() สำหรับชื่อโฟลเดอร์
-            processed_titles.add(_norm(row[17]))
+            if '_' in row[17]:
+                p_folder = row[17].split('_')[0].strip().lower()
+                processed_titles.add(p_folder)
 
     
     # โหลดรายชื่อไฟล์ที่ข้ามแล้ว (Ignored) เพื่อจะได้ไม่สแกนซ้ำ
@@ -284,11 +285,10 @@ def main():
             print(f"⏩ ข้าม (ประมวลผลไฟล์นี้แล้ว): {context_name}", flush=True)
             continue
             
-        # ใช้ชื่อโฟลเดอร์มาเช็คความซ้ำของลาย (เพราะชื่อไฟล์อาจจะกว้างไป)
-        # BUG FIX #2: ใช้ _norm() ซึ่งเหมาะกับชื่อโฟลเดอร์ ไม่ใช่ get_normalized_title() ที่ออกแบบสำหรับชื่อไฟล์
-        norm_title = _norm(p_name)
-        if norm_title in processed_titles:
-            print(f"⏩ ข้าม (ชื่อลายซ้ำกับไฟล์อื่นที่มีแล้ว): {p_name} ({f_name})", flush=True)
+        # ใช้ชื่อโฟลเดอร์แบบเป๊ะๆ เป็นตัวระบุเอกลักษณ์ของลาย เพื่อไม่ให้โฟลเดอร์ชื่อคล้ายกันถูกตัดทิ้ง
+        folder_key = p_name.strip().lower()
+        if folder_key in processed_titles:
+            print(f"⏩ ข้าม (ประมวลผลเอกสารในโฟลเดอร์นี้ไปแล้ว): {p_name} ({f_name})", flush=True)
             continue
             
         print(f"ประมวลผล: {p_name} / {f_name}...", end=" ", flush=True)
@@ -313,8 +313,20 @@ def main():
             continue
 
         try:
-            cat = data.get('category', 'Nature & Botany')
-            # BUG FIX #1: ใช้ all_rows_for_id (Sheet1 + Haiku_Scan) เพื่อนับ ID ต่อ
+            cat_folder = file.get('category_folder', '')
+            cat_folder_lower = cat_folder.lower()
+            if 'nature' in cat_folder_lower or 'พฤกษา' in cat_folder or '01' in cat_folder:
+                cat = 'Nature & Botany'
+            elif 'fauna' in cat_folder_lower or 'สัตว์' in cat_folder or '02' in cat_folder:
+                cat = 'Fauna & Mythical'
+            elif 'geometric' in cat_folder_lower or 'เรขา' in cat_folder or '03' in cat_folder:
+                cat = 'Geometric & Synthetic'
+            elif 'sacred' in cat_folder_lower or 'ความเชื่อ' in cat_folder or '04' in cat_folder:
+                cat = 'Sacred & Belief'
+            else:
+                cat = data.get('category', 'Nature & Botany')
+            
+            data['category'] = cat  # บังคับเขียนทับ JSON category ให้ตรงกับโฟลเดอร์จริงเสมอ
             sid = get_next_symbol_id(all_rows_for_id, cat)
             folder = CATEGORY_MAP.get(cat, '01_Nature')
             base_path = f"assets/images/database/{folder}/{sid}"
@@ -357,7 +369,7 @@ def main():
             worksheet.append_row(row)
             all_rows.append(row)  # อัปเดตข้อมูลในเมมโมรี่เพื่อรันเลขถัดไปไม่ให้ซ้ำ
             processed_filenames.add(context_name)
-            processed_titles.add(norm_title)
+            processed_titles.add(folder_key)
             all_rows_for_id.append(row)  # อัปเดต ID pool ด้วย เพื่อให้เลขถัดไปไม่ซ้ำ
             print(f"✅ สำเร็จ: {sid}", flush=True)
         except Exception as e:

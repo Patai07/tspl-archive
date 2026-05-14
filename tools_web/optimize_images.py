@@ -22,6 +22,7 @@ def process_image(path):
         needs_ratio_fix = abs(orig_ratio - TARGET_RATIO) > 0.05
         
         if not needs_resize and not needs_ratio_fix and os.path.getsize(path) < 500000:
+            print(f"✅ [Already Optimized] {path} ({os.path.getsize(path)/1024:.1f}KB)")
             return False # already optimized enough
             
         print(f"Processing {path} (Size: {os.path.getsize(path)/1024/1024:.2f}MB, {orig_w}x{orig_h})")
