@@ -30,8 +30,10 @@ def get_services():
 
 def normalize(name):
     """Normalize pattern folder/title name for fuzzy matching."""
-    n = re.sub(r'^\d+[-.\s]+', '', name.strip())   # Remove "1-", "01." prefixes
+    n = re.sub(r'^\d+', '', name.strip())            # Remove ANY leading digits unconditionally
+    n = re.sub(r'^[-.\s]+', '', n)                   # Remove dangling punctuation/spaces
     n = re.sub(r'^ลาย', '', n)                       # Remove leading ลาย
+    n = re.sub(r'กระหนก', 'กนก', n)                    # Normalize spelling variations
     n = re.sub(r'\s*\(.*?\)', '', n)                 # Remove (English subtitle)
     return re.sub(r'\s+', '', n).lower()
 
