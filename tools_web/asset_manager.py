@@ -94,11 +94,14 @@ def cmd_rollback():
     ws = sh.worksheet('tspl_database')
     rows = backup['rows']
 
-    # Batch restore col R:S (18-19)
+    # Batch restore col O:S (15-19)
     batch_data = []
     for i, row in enumerate(rows[1:], start=2):
         if len(row) >= 19:
-            batch_data.append({'range': f'R{i}:S{i}', 'values': [[row[17], row[18]]]})
+            batch_data.append({
+                'range': f'O{i}:S{i}',
+                'values': [[row[14], row[15], row[16], row[17], row[18]]]
+            })
     if batch_data:
         ws.batch_update(batch_data)
     print(f"✅ Rollback สำเร็จ ({len(batch_data)} แถว) จาก Backup: {latest}", flush=True)
@@ -107,7 +110,7 @@ def cmd_rollback():
 # ─── CMD: link ───────────────────────────────────────────────────────────────
 
 def cmd_link():
-    print("🔗 เริ่มจับคู่รูปภาพ Drive → Sheet 2 (tspl_database)...", flush=True)
+    print("🔗 เริ่มซิงค์และอัปเดตเส้นทางรูปภาพทั้งหมด (O:S) → Sheet 2 (tspl_database)...", flush=True)
     drive_svc, gc = get_services()
     sh = gc.open_by_key(PROD_SHEET_ID)
     ws = sh.worksheet('tspl_database')
@@ -115,35 +118,70 @@ def cmd_link():
     backup_path = save_backup(ws)
     print(f"💾 Backup บันทึกแล้ว: {backup_path}", flush=True)
 
-    print("📂 กำลังสแกนโครงสร้างโฟลเดอร์ Drive...", flush=True)
+    print("📂 กำลังตรวจสอบไฟล์รูปภาพในเครื่อง (assets/images/database)...", flush=True)
     pattern_map = list_pattern_folders(drive_svc)
-    print(f"   พบโฟลเดอร์ลายทั้งหมด {len(pattern_map)} รายการ", flush=True)
-
+    
     rows = ws.get_all_values()
     matched = 0; no_match = 0
-
     batch_data = []
 
     for i, row in enumerate(rows[1:], start=2):
         if not row or not row[0].strip() or row[0].strip().startswith('#'):
             continue
+        sid = row[0].strip()
         title_th = row[1] if len(row) > 1 else ''
+        cat = row[3] if len(row) > 3 else ''
         norm = normalize(title_th)
 
-        if norm in pattern_map:
-            pd   = pattern_map[norm]
-            imgs = pd['images']
-            mid    = thumb_url(imgs[1]['id']) if len(imgs) > 1 else ''
-            detail = thumb_url(imgs[2]['id']) if len(imgs) > 2 else ''
-            batch_data.append({'range': f'R{i}:S{i}', 'values': [[mid, detail]]})
-            print(f"✅ {row[0]} — {title_th} ({len(imgs)} รูป)", flush=True)
-            matched += 1
-        else:
-            print(f"⚠️  ไม่พบโฟลเดอร์: {row[0]} — {title_th}", flush=True)
-            no_match += 1
+        local_dir = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid)
+        
+        def find_slot(prefix, subfolder=''):
+            tdir = os.path.join(local_dir, subfolder) if subfolder else local_dir
+            if not os.path.exists(tdir): return ''
+            for f in os.listdir(tdir):
+                if f.lower().startswith(prefix.lower() + '.') and re.search(r'\.(jpg|jpeg|png|svg)$', f, re.I):
+                    rel = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid, subfolder, f) if subfolder else os.path.join(ASSETS_BASE, cat_folder_name(cat), sid, f)
+                    return rel.replace('\\', '/')
+            return ''
 
-    print(f"\n📊 จับคู่ได้ {matched} ลาย | ไม่พบโฟลเดอร์ {no_match} ลาย", flush=True)
-    print("✅ เสร็จสิ้น! กด Rollback หากต้องการย้อนกลับ", flush=True)
+        # หาพาธจริงที่อยู่ในเครื่อง
+        img_main = find_slot('main')
+        img_vec  = find_slot('vector', 'vectors')
+        img_ctx  = find_slot('context')
+        img_mid  = find_slot('img_mid')
+        img_det  = find_slot('img_detail')
+
+        # Fallback กรณีที่ยังไม่ได้ดาวน์โหลด แต่มีข้อมูลใน row เดิมอยู่แล้ว
+        old_main = row[14].strip() if len(row) > 14 else ''
+        old_vec  = row[15].strip() if len(row) > 15 else ''
+        old_ctx  = row[16].strip() if len(row) > 16 else ''
+        old_mid  = row[17].strip() if len(row) > 17 else ''
+        old_det  = row[18].strip() if len(row) > 18 else ''
+
+        if not img_main: img_main = old_main or (f"{ASSETS_BASE}/{cat_folder_name(cat)}/{sid}/main.jpg" if norm in pattern_map else '')
+        if not img_vec:  img_vec  = old_vec
+        if not img_ctx:  img_ctx  = old_ctx
+        if not img_mid:  img_mid  = old_mid
+        if not img_det:  img_det  = old_det
+
+        # ถ้าพบใน Drive หรือมีโฟลเดอร์ในเครื่อง ให้นับว่า match เพื่อรายงานผล
+        if norm in pattern_map or os.path.exists(local_dir):
+            matched += 1
+            print(f"✅ {sid} — {title_th} (Main: {img_main.rsplit('/',1)[-1].upper() if img_main else 'NONE'})", flush=True)
+        else:
+            no_match += 1
+            print(f"⚠️  ไม่พบข้อมูล: {sid} — {title_th}", flush=True)
+
+        batch_data.append({
+            'range': f'O{i}:S{i}',
+            'values': [[img_main, img_vec, img_ctx, img_mid, img_det]]
+        })
+
+    print(f"\n📊 เตรียมอัปเดตข้อมูล {len(batch_data)} แถว...", flush=True)
+    if batch_data:
+        ws.batch_update(batch_data)
+    print(f"🎉 อัปเดตเส้นทางรูปภาพสำเร็จ! (พบไฟล์/โฟลเดอร์ {matched} ลาย | ไม่พบ {no_match} ลาย)", flush=True)
+    print("✅ เสร็จสิ้น! สามารถกด Deploy ขึ้น Vercel ได้เลยครับ", flush=True)
 
 # ─── CMD: download ───────────────────────────────────────────────────────────
 
