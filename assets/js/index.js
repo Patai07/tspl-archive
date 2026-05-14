@@ -48,7 +48,7 @@ async function loadData() {
                     };
                 });
                 // 🚨 [TEMPORARY FILTER] แสดงเฉพาะลายที่ทำ Vector เสร็จแล้ว (หากเสร็จหมดแล้วให้เปลี่ยนค่าเป็น false ได้เลยครับ)
-                const TEMP_FILTER_ONLY_VECTOR = true; 
+                const TEMP_FILTER_ONLY_VECTOR = false; 
                 RECORDS = mappedData.filter(item => {
                     const isValid = item.id !== "Unknown ID" && item.id.trim() !== "" && !item.id.trim().startsWith('#');
                     if (!isValid) return false;
