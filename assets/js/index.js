@@ -394,26 +394,9 @@ function changeSlide(dir) {
 }
 
 function toggleModalView(mode) {
-    currentViewMode = mode; currentSlideIndex = 0;
+    currentViewMode = mode; 
+    currentSlideIndex = 0;
     updateModalDisplay();
-
-    const btnOrig = document.getElementById('btn-view-original');
-    const btnVec = document.getElementById('btn-view-vector');
-    const btnApp = document.getElementById('btn-view-application');
-
-    [btnOrig, btnVec, btnApp].forEach(btn => {
-        if (btn) btn.className = "flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl text-gray-500 hover:text-[#0F172A] hover:bg-white/50 transition-all duration-300 whitespace-nowrap";
-    });
-
-    const activeClass = "flex-1 lg:flex-none px-4 lg:px-10 py-3.5 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F172A] transition-all duration-300 whitespace-nowrap shadow-[0_2px_10px_rgba(0,0,0,0.1)] border border-gray-100";
-
-    if (mode === 'original' && btnOrig) {
-        btnOrig.className = activeClass;
-    } else if (mode === 'vector' && btnVec) {
-        btnVec.className = activeClass;
-    } else if (mode === 'application' && btnApp) {
-        btnApp.className = activeClass;
-    }
 }
 
 function updateModalDisplay() {
@@ -464,6 +447,18 @@ function updateModalDisplay() {
             }
         }
     }
+
+    // Sync View Switcher Buttons
+    const btnOrig = document.getElementById('btn-view-original');
+    const btnVec = document.getElementById('btn-view-vector');
+    const btnApp = document.getElementById('btn-view-application');
+    
+    const inactiveClass = "flex-1 lg:flex-none px-4 lg:px-10 py-3 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl text-gray-500 hover:text-[#0F172A] hover:bg-white/50 transition-all duration-300 whitespace-nowrap";
+    const activeClass = "flex-1 lg:flex-none px-4 lg:px-10 py-3 lg:py-3 text-[9px] lg:text-[10px] font-black uppercase tracking-[0.2em] rounded-xl bg-white text-[#0F172A] transition-all duration-300 whitespace-nowrap shadow-[0_2px_10px_rgba(0,0,0,0.1)] border border-gray-100";
+
+    if (btnOrig) btnOrig.className = (currentViewMode === 'original') ? activeClass : inactiveClass;
+    if (btnVec) btnVec.className = (currentViewMode === 'vector') ? activeClass : inactiveClass;
+    if (btnApp) btnApp.className = (currentViewMode === 'application') ? activeClass : inactiveClass;
 
     // Toggle Download Button
     const downloadBtn = document.getElementById('modal-download-vector');
