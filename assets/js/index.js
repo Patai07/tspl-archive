@@ -777,6 +777,23 @@ window.addEventListener('pageshow', function (event) {
     }
 });
 
+// Keyboard Navigation for Modal
+document.addEventListener('keydown', (e) => {
+    const modal = document.getElementById('modal');
+    if (!modal || modal.classList.contains('hidden')) return;
+
+    if (e.key === 'Escape') {
+        closeModal();
+    }
+    
+    // Support Arrow keys for slide navigation
+    if (e.key === 'ArrowLeft') {
+        changeSlide(-1);
+    } else if (e.key === 'ArrowRight') {
+        changeSlide(1);
+    }
+});
+
 // Start the application
 document.addEventListener('DOMContentLoaded', () => {
     // Only init if we are on a page that needs data
