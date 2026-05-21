@@ -20,10 +20,12 @@
     <style>
         /* Product card glow on hover */
         .product-card {
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .product-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6);
         }
 
         /* Gold accent line */
@@ -34,7 +36,7 @@
         /* Product badge pulse */
         @keyframes badge-pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(255,78,69,0.4); }
-            50% { box-shadow: 0 0 0 8px rgba(255,78,69,0); }
+            50% { box-shadow: 0 0 0 6px rgba(255,78,69,0); }
         }
         .badge-live {
             animation: badge-pulse 2s ease infinite;
@@ -42,7 +44,7 @@
 
         /* Section number counter */
         .section-num {
-            -webkit-text-stroke: 1px rgba(77, 142, 255, 0.25);
+            -webkit-text-stroke: 1px rgba(77, 142, 255, 0.15);
             color: transparent;
             font-size: clamp(6rem, 12vw, 10rem);
             line-height: 1;
@@ -57,62 +59,112 @@
 
         /* Floating tag shimmer */
         @keyframes shimmer-float {
-            0%, 100% { opacity: 0.7; transform: translateY(0px); }
-            50% { opacity: 1; transform: translateY(-4px); }
+            0%, 100% { opacity: 0.8; transform: translateY(0px); }
+            50% { opacity: 1; transform: translateY(-5px); }
         }
         .float-tag {
-            animation: shimmer-float 3s ease-in-out infinite;
+            animation: shimmer-float 4s ease-in-out infinite;
         }
 
         /* Tag stagger delays */
-        .float-tag:nth-child(2) { animation-delay: 0.5s; }
-        .float-tag:nth-child(3) { animation-delay: 1s; }
-        .float-tag:nth-child(4) { animation-delay: 1.5s; }
+        .float-tag:nth-child(2) { animation-delay: 0.7s; }
+        .float-tag:nth-child(3) { animation-delay: 1.4s; }
+        .float-tag:nth-child(4) { animation-delay: 2.1s; }
 
         /* Image overlay shimmer on hover */
         .img-shimmer::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, transparent 30%, rgba(212,175,55,0.08) 50%, transparent 70%);
+            background: linear-gradient(135deg, transparent 30%, rgba(212,175,55,0.06) 50%, transparent 70%);
             transform: translateX(-100%);
-            transition: transform 0.8s ease;
+            transition: transform 1s ease;
         }
         .product-card:hover .img-shimmer::after {
             transform: translateX(100%);
         }
 
         /* Corner brackets for product images */
-        .corner-tl { top: 12px; left: 12px; border-top: 2px solid rgba(212,175,55,0.5); border-left: 2px solid rgba(212,175,55,0.5); width: 20px; height: 20px; }
-        .corner-br { bottom: 12px; right: 12px; border-bottom: 2px solid rgba(212,175,55,0.5); border-right: 2px solid rgba(212,175,55,0.5); width: 20px; height: 20px; }
+        .corner-tl { top: 16px; left: 16px; border-top: 1.5px solid rgba(212,175,55,0.4); border-left: 1.5px solid rgba(212,175,55,0.4); width: 24px; height: 24px; }
+        .corner-br { bottom: 16px; right: 16px; border-bottom: 1.5px solid rgba(212,175,55,0.4); border-right: 1.5px solid rgba(212,175,55,0.4); width: 24px; height: 24px; }
 
         /* Rubric sensitivity dots */
-        .rubric-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-        /* Divider scan line animation */
-        @keyframes scanDivide {
-            0% { transform: scaleX(0); opacity: 0; }
-            50% { transform: scaleX(1); opacity: 1; }
-            100% { transform: scaleX(0); opacity: 0; }
-        }
+        .rubric-dot { width: 7px; height: 7px; border-radius: 50%; }
 
         /* Product tag chip */
         .prod-chip {
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
 
         /* Hero scroll indicator */
         @keyframes heroScrollBounce {
-            0%, 100% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(6px); opacity: 0.5; }
+            0%, 100% { transform: translateY(0); opacity: 0.8; }
+            50% { transform: translateY(8px); opacity: 0.3; }
         }
-        .scroll-indicator { animation: heroScrollBounce 2s ease-in-out infinite; }
+        .scroll-indicator { animation: heroScrollBounce 2.5s ease-in-out infinite; }
 
-        /* Concept badge */
-        .concept-ribbon {
-            background: linear-gradient(135deg, rgba(77,142,255,0.15), rgba(77,142,255,0.05));
-            border: 1px solid rgba(77,142,255,0.3);
+        /* Apple-style bento card styling */
+        .bento-card {
+            background: linear-gradient(135deg, rgba(13, 27, 49, 0.4) 0%, rgba(5, 12, 23, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 2rem;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .bento-card:hover {
+            border-color: rgba(212, 175, 55, 0.25);
+            background: linear-gradient(135deg, rgba(18, 38, 69, 0.55) 0%, rgba(7, 18, 36, 0.75) 100%);
+            box-shadow: 0 40px 80px -25px rgba(0, 0, 0, 0.7);
+            transform: translateY(-5px);
+        }
+
+        /* Specular hover shine for Bento cards */
+        .has-specular::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle 220px at var(--mx, 50%) var(--my, 50%),
+                    rgba(212, 175, 55, 0.12),
+                    rgba(212, 175, 55, 0.02) 40%,
+                    transparent 75%);
+            pointer-events: none;
+            border-radius: inherit;
+            transition: opacity 0.5s ease;
+            z-index: 5;
+            opacity: 0;
+        }
+        .has-specular:hover::after {
+            opacity: 1;
+        }
+
+        /* SVG Vector Grid Lines */
+        .bg-grid-pattern {
+            background-size: 24px 24px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+        }
+
+        /* Progress meter layout */
+        .progress-track {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 9999px;
+            overflow: hidden;
+            height: 10px;
+            position: relative;
+        }
+        
+        .progress-bar-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #b8922c 0%, #D4AF37 50%, #f7df8f 100%);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.4);
+            transition: width 1.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
     </style>
 </head>
@@ -293,22 +345,22 @@
     <main class="flex-1">
 
         <!-- ─── PRODUCT NAV PILLS ─── -->
-        <div class="sticky top-16 z-[90] border-b border-[#1a3a6e]/30 bg-[#060F22]/95 backdrop-blur-md">
+        <div class="sticky top-16 z-[90] border-b border-white/[0.05] bg-[#060F22]/80 backdrop-blur-xl">
             <div class="max-w-[1440px] mx-auto px-6 py-4">
-                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
-                    <a href="#section-digital" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[10px] font-extrabold uppercase tracking-wider text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-all">
+                <div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar justify-start md:justify-center">
+                    <a href="#section-digital" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[10px] font-black uppercase tracking-wider text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-all">
                         <i class="ph-bold ph-files"></i>สินทรัพย์ดิจิทัล
                     </a>
-                    <a href="#section-arttoy" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-extrabold uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
+                    <a href="#section-arttoy" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
                         <i class="ph-bold ph-cube"></i>อาร์ตทอย & 3D
                     </a>
-                    <a href="#section-lifestyle" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-extrabold uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
+                    <a href="#section-lifestyle" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
                         <i class="ph-bold ph-flower"></i>Lifestyle & Spa
                     </a>
-                    <a href="#section-fashion" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-extrabold uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
+                    <a href="#section-fashion" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
                         <i class="ph-bold ph-coat-hanger"></i>แฟชั่น & เครื่องประดับ
                     </a>
-                    <a href="#section-souvenirs" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-extrabold uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
+                    <a href="#section-souvenirs" class="flex-shrink-0 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-[10px] font-black uppercase tracking-wider text-gray-400 hover:border-white/20 hover:text-white transition-all">
                         <i class="ph-bold ph-gift"></i>ของที่ระลึก
                     </a>
                 </div>
@@ -318,199 +370,224 @@
         <!-- ================================================================ -->
         <!-- SECTION 1: DIGITAL ASSETS & LICENSING -->
         <!-- ================================================================ -->
-        <section id="section-digital" class="py-24 border-b border-[#1a3a6e]/30">
-            <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <section id="section-digital" class="py-32 border-b border-white/[0.05]">
+            <div class="max-w-[1440px] mx-auto px-6 lg:px-16">
 
                 <!-- Section header -->
-                <div class="flex flex-col lg:flex-row items-start lg:items-end gap-8 mb-16">
+                <div class="flex flex-col lg:flex-row items-start lg:items-end gap-10 mb-20">
                     <div class="flex-1">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-8 h-8 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xl flex items-center justify-center">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-8 h-8 bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-xl flex items-center justify-center">
                                 <i class="ph-bold ph-files text-[#D4AF37] text-sm"></i>
                             </div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Product Category 01</span>
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FF4E45]/15 border border-[#FF4E45]/30 rounded-full text-[9px] font-black uppercase tracking-wider text-[#FF4E45] badge-live">
-                                <span class="w-1.5 h-1.5 bg-[#FF4E45] rounded-full"></span>ขายได้จริง
+                            <span class="text-[10px] font-black uppercase tracking-[0.25em] text-[#D4AF37]">Product Category 01</span>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-[9px] font-black uppercase tracking-wider text-green-400">
+                                <span class="w-1.5 h-1.5 bg-green-400 rounded-full"></span>Commercial License
                             </span>
                         </div>
-                        <h2 class="text-4xl md:text-5xl font-black text-white mb-4 tracking-tight">
+                        <h2 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight leading-none text-balance">
                             สินทรัพย์ดิจิทัล<br>
-                            <span class="text-[#D4AF37]">&amp; สิทธิ์การใช้งาน</span>
+                            <span class="bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] bg-clip-text text-transparent">&amp; สิทธิ์การใช้งาน</span>
                         </h2>
-                        <p class="text-gray-400 leading-relaxed max-w-xl lang-th">
-                            ฐานข้อมูล e-Lexicon กว่า 180 ระเบียน พร้อมไฟล์เวกเตอร์และลวดลายต่อเนื่อง (Seamless Pattern) ที่ออกแบบมาเพื่ออุตสาหกรรมร่วมสมัย จัดหมวดหมู่ตาม TSPL Pattern Taxonomy
+                        <p class="text-gray-400 leading-relaxed max-w-xl text-md lang-th">
+                            ฐานข้อมูลวิชาการดิจิทัลลวดลายไทย e-Lexicon รวมกว่า 180 ระเบียน พร้อมด้วยไฟล์เวกเตอร์และลวดลายต่อเนื่องความละเอียดสูง จัดระบบตาม TSPL Taxonomy เพื่อนักออกแบบและผู้ประกอบการยุคดิจิทัล
                         </p>
                     </div>
-                    <div class="flex flex-col items-start lg:items-end gap-3">
+                    <div class="flex flex-col items-start lg:items-end gap-4 shrink-0">
                         <div class="flex flex-wrap gap-2">
-                            <span class="float-tag px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] font-bold text-blue-400">.SVG</span>
-                            <span class="float-tag px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] font-bold text-blue-400">.AI</span>
-                            <span class="float-tag px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] font-bold text-blue-400">.DXF</span>
-                            <span class="float-tag px-3 py-1.5 bg-blue-500/10 border border-blue-500/20 rounded-lg text-[10px] font-bold text-blue-400">.EPS</span>
+                            <span class="float-tag px-3.5 py-1.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-[10px] font-mono text-gray-300">.SVG</span>
+                            <span class="float-tag px-3.5 py-1.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-[10px] font-mono text-gray-300">.AI</span>
+                            <span class="float-tag px-3.5 py-1.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-[10px] font-mono text-gray-300">.DXF</span>
+                            <span class="float-tag px-3.5 py-1.5 bg-white/[0.03] border border-white/[0.08] rounded-xl text-[10px] font-mono text-gray-300">.EPS</span>
                         </div>
-                        <a href="archive.html" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-all">
-                            <i class="ph-bold ph-arrow-square-out text-xs"></i>
-                            เปิดคลังลวดลาย
+                        <a href="archive.html" class="inline-flex items-center gap-2 px-6 py-3 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] transition-all">
+                            <i class="ph-bold ph-magnifying-glass text-xs"></i>
+                            สำรวจคลังลวดลายทั้งหมด
                         </a>
                     </div>
                 </div>
 
-                <!-- Product cards grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Product cards grid: Balanced 2 Columns (Prompt Lab removed) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 
                     <!-- Card: e-Lexicon Database -->
-                    <div class="product-card relative bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-3xl overflow-hidden backdrop-blur-sm group">
-                        <div class="relative h-52 overflow-hidden img-shimmer bg-gradient-to-br from-[#0D2035] to-[#060F22] flex items-center justify-center">
+                    <div class="bento-card has-specular overflow-hidden group flex flex-col h-full">
+                        <div class="relative h-64 overflow-hidden bg-gradient-to-br from-[#0c1524] to-[#040810] border-b border-white/[0.04] flex items-center justify-center">
                             <!-- Decorative grid pattern UI -->
-                            <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
-                            <div class="relative z-10 flex flex-col items-center gap-3">
-                                <div class="w-20 h-20 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-2xl flex items-center justify-center">
-                                    <i class="ph-fill ph-database text-[#D4AF37] text-4xl"></i>
-                                </div>
-                                <div class="flex gap-2">
-                                    <span class="px-2 py-1 bg-[#D4AF37]/20 rounded text-[8px] font-black text-[#D4AF37] font-mono">NAT</span>
-                                    <span class="px-2 py-1 bg-[#D4AF37]/20 rounded text-[8px] font-black text-[#D4AF37] font-mono">FAU</span>
-                                    <span class="px-2 py-1 bg-[#D4AF37]/20 rounded text-[8px] font-black text-[#D4AF37] font-mono">GEO</span>
-                                    <span class="px-2 py-1 bg-[#D4AF37]/20 rounded text-[8px] font-black text-[#D4AF37] font-mono">SAC</span>
-                                </div>
-                                <div class="text-center">
-                                    <span class="text-3xl font-black text-white font-mono">180</span>
-                                    <span class="text-gray-500 text-xs ml-1">ระเบียน</span>
+                            <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+                            
+                            <!-- Premium SVG representation of e-Lexicon Database -->
+                            <div class="relative z-10 flex flex-col items-center">
+                                <svg class="w-40 h-28 text-[#D4AF37] mb-2 drop-shadow-[0_0_15px_rgba(212,175,55,0.25)]" viewBox="0 0 200 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Database Cylinder 1 (Back/Left) -->
+                                    <path d="M50 45C50 51.6274 72.3858 57 100 57C127.614 57 150 51.6274 150 45" stroke="#D4AF37" stroke-width="1.5" stroke-dasharray="4 2"/>
+                                    <path d="M50 45V85C50 91.6274 72.3858 97 100 97C127.614 97 150 91.6274 150 85V45" stroke="#D4AF37" stroke-width="1.5" opacity="0.6"/>
+                                    
+                                    <!-- Database Cylinder 2 (Main/Front) -->
+                                    <g filter="url(#glow)">
+                                        <ellipse cx="100" cy="35" rx="55" ry="14" fill="#0A1424" stroke="#D4AF37" stroke-width="2"/>
+                                        <path d="M45 35V75C45 82.732 69.6274 89 100 89C130.373 89 155 82.732 155 75V35" fill="none" stroke="#D4AF37" stroke-width="2"/>
+                                        <ellipse cx="100" cy="55" rx="55" ry="14" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.8"/>
+                                        <ellipse cx="100" cy="75" rx="55" ry="14" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.8"/>
+                                    </g>
+                                    
+                                    <!-- Tech HUD Elements -->
+                                    <circle cx="100" cy="35" r="28" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                                    <path d="M100 15V22M100 48V55M80 35H87M113 35H120" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                    <circle cx="100" cy="35" r="3" fill="#FF4E45"/>
+                                    
+                                    <!-- Connection Lines -->
+                                    <path d="M30 65H45M155 65H170" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/>
+                                    <circle cx="27" cy="65" r="3" fill="rgba(255,255,255,0.3)"/>
+                                    <circle cx="173" cy="65" r="3" fill="rgba(255,255,255,0.3)"/>
+                                    
+                                    <defs>
+                                        <filter id="glow" x="30" y="10" width="140" height="100" filterUnits="userSpaceOnUse">
+                                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                                            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                                        </filter>
+                                    </defs>
+                                </svg>
+                                
+                                <div class="flex gap-1.5 mt-1.5">
+                                    <span class="px-2.5 py-1 bg-white/[0.04] border border-white/[0.06] rounded-md text-[9px] font-black text-gray-400 font-mono tracking-wider">NAT</span>
+                                    <span class="px-2.5 py-1 bg-white/[0.04] border border-white/[0.06] rounded-md text-[9px] font-black text-gray-400 font-mono tracking-wider">FAU</span>
+                                    <span class="px-2.5 py-1 bg-white/[0.04] border border-white/[0.06] rounded-md text-[9px] font-black text-gray-400 font-mono tracking-wider">GEO</span>
+                                    <span class="px-2.5 py-1 bg-white/[0.04] border border-white/[0.06] rounded-md text-[9px] font-black text-gray-400 font-mono tracking-wider">SAC</span>
                                 </div>
                             </div>
+                            
+                            <!-- Corner brackets -->
                             <div class="corner-tl absolute pointer-events-none"></div>
                             <div class="corner-br absolute pointer-events-none"></div>
+                            
+                            <!-- Subtle lighting gradient -->
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#040810] to-transparent pointer-events-none"></div>
                         </div>
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="font-black text-white text-lg">e-Lexicon Database</h3>
-                                <span class="px-2 py-1 bg-green-500/15 border border-green-500/25 rounded-lg text-[9px] font-black text-green-400 uppercase tracking-wider">Available</span>
-                            </div>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-5 lang-th">
-                                ฐานข้อมูลดิจิทัลลวดลายไทยวิชาการ ครบ 4 หมวดหลัก พร้อมระบบประเมิน TSPL Rubric ควบคุมความอ่อนไหวทางวัฒนธรรม
-                            </p>
-                            <!-- Sensitivity rubric -->
-                            <div class="flex items-center gap-2 mb-5 p-3 bg-[#0F172A]/60 rounded-xl border border-white/5">
-                                <span class="text-[9px] text-gray-500 font-bold uppercase tracking-wider">TSPL Rubric:</span>
-                                <div class="flex gap-1">
-                                    <span class="rubric-dot bg-green-500"></span>
-                                    <span class="rubric-dot bg-green-500"></span>
-                                    <span class="rubric-dot bg-yellow-500"></span>
-                                    <span class="rubric-dot bg-gray-600"></span>
-                                    <span class="rubric-dot bg-gray-600"></span>
+                        <div class="p-8 flex-1 flex flex-col justify-between relative z-10">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-black text-white text-xl tracking-tight">e-Lexicon Database</h3>
+                                    <span class="px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-[9px] font-black text-green-400 uppercase tracking-wider flex items-center gap-1">
+                                        <span class="w-1 h-1 bg-green-400 rounded-full animate-ping"></span>Verified Access
+                                    </span>
                                 </div>
-                                <span class="text-[9px] text-green-400 font-bold ml-1">Low sensitivity</span>
+                                <p class="text-gray-400 text-sm leading-relaxed mb-6 lang-th">
+                                    ฐานข้อมูลดิจิทัลทางวิชาการที่รวมประวัติ ความหมาย และรายละเอียดทางเทคนิคของลวดลายไทยดั้งเดิม ครบทั้ง 4 หมวดหลัก พร้อมผลประเมินตามเกณฑ์ TSPL Rubric เพื่อควบคุมความอ่อนไหวทางวัฒนธรรมในการแปรรูปสินค้า
+                                </p>
+                                <!-- Sensitivity rubric -->
+                                <div class="flex items-center justify-between mb-8 p-4 bg-white/[0.02] rounded-2xl border border-white/[0.05]">
+                                    <span class="text-[10px] text-gray-500 font-extrabold uppercase tracking-wider font-mono">TSPL Rubric:</span>
+                                    <div class="flex items-center gap-3">
+                                        <div class="flex gap-1.5">
+                                            <span class="rubric-dot bg-green-500 shadow-sm shadow-green-500/70"></span>
+                                            <span class="rubric-dot bg-green-500 shadow-sm shadow-green-500/70"></span>
+                                            <span class="rubric-dot bg-yellow-500 shadow-sm shadow-yellow-500/50"></span>
+                                            <span class="rubric-dot bg-white/10"></span>
+                                            <span class="rubric-dot bg-white/10"></span>
+                                        </div>
+                                        <span class="text-[10px] text-green-400 font-bold uppercase tracking-wide">Low Sensitivity</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500 text-xs">สอบถามราคาตามแพ็กเกจ</span>
-                                <a href="mailto:Samaporn.kob@gmail.com" class="flex items-center gap-1.5 text-[#D4AF37] text-xs font-extrabold hover:underline">
-                                    ติดต่อ <i class="ph-bold ph-arrow-right text-xs"></i>
+                            <div class="flex items-center justify-between pt-5 border-t border-white/[0.04]">
+                                <span class="text-gray-500 text-xs font-bold font-mono">180+ Patterns Listed</span>
+                                <a href="mailto:Samaporn.kob@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 hover:border-white/20 text-[#D4AF37] hover:text-white text-xs font-extrabold transition-all duration-300">
+                                    ขอใบเสนอราคา <i class="ph-bold ph-arrow-right text-xs"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Card: Vector Library -->
-                    <div class="product-card relative bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-3xl overflow-hidden backdrop-blur-sm group">
-                        <div class="relative h-52 overflow-hidden img-shimmer bg-gradient-to-br from-[#0D2035] to-[#060F22] flex items-center justify-center">
-                            <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
-                            <div class="relative z-10 grid grid-cols-3 gap-3 p-6">
-                                <!-- Mini pattern cards -->
-                                <div class="bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-xl p-2 flex items-center justify-center aspect-square">
-                                    <i class="ph-bold ph-flower text-[#D4AF37] text-2xl"></i>
-                                </div>
-                                <div class="bg-[#FF4E45]/10 border border-[#FF4E45]/20 rounded-xl p-2 flex items-center justify-center aspect-square">
-                                    <i class="ph-bold ph-bird text-[#FF4E45] text-2xl"></i>
-                                </div>
-                                <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-2 flex items-center justify-center aspect-square">
-                                    <i class="ph-bold ph-hexagon text-blue-400 text-2xl"></i>
-                                </div>
-                                <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl p-2 flex items-center justify-center aspect-square">
-                                    <i class="ph-bold ph-spiral text-purple-400 text-2xl"></i>
-                                </div>
-                                <div class="bg-emerald-500/10 border border-emerald-500/20 rounded-xl p-2 flex items-center justify-center aspect-square">
-                                    <i class="ph-bold ph-tree text-emerald-400 text-2xl"></i>
-                                </div>
-                                <div class="bg-white/5 border border-white/10 rounded-xl p-2 flex items-center justify-center aspect-square text-gray-500 text-[10px] font-black">+175</div>
+                    <div class="bento-card has-specular overflow-hidden group flex flex-col h-full">
+                        <div class="relative h-64 overflow-hidden bg-gradient-to-br from-[#0c1524] to-[#040810] border-b border-white/[0.04] flex items-center justify-center">
+                            <!-- Decorative grid pattern UI -->
+                            <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
+                            
+                            <!-- Premium SVG representation of Vector Curves and Anchor Points -->
+                            <div class="relative z-10 w-full h-full flex items-center justify-center p-6">
+                                <svg class="w-full max-w-[280px] h-40 text-[#D4AF37]" viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Grid Coordinates & Axes -->
+                                    <line x1="20" y1="80" x2="260" y2="80" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                                    <line x1="140" y1="10" x2="140" y2="150" stroke="rgba(255,255,255,0.06)" stroke-width="1.5" stroke-dasharray="4 4"/>
+                                    
+                                    <!-- Bezier Curve 1 (Decorative Wave) -->
+                                    <path d="M30 110 C 80 110, 80 40, 140 40 C 200 40, 200 110, 250 110" stroke="rgba(212,175,55,0.3)" stroke-width="1.5"/>
+                                    
+                                    <!-- Bezier Curve 2 (Highlighted Flowing Curve) -->
+                                    <path d="M40 120 C 90 120, 100 20, 140 20 C 180 20, 190 120, 240 120" stroke="#D4AF37" stroke-width="3" stroke-linecap="round" class="draw-path"/>
+                                    
+                                    <!-- Vector Anchor Points & Handles -->
+                                    <!-- Anchor 1 (Left) -->
+                                    <circle cx="40" cy="120" r="4" fill="#0A1424" stroke="#D4AF37" stroke-width="2"/>
+                                    
+                                    <!-- Anchor 2 (Center Node) -->
+                                    <circle cx="140" cy="20" r="5" fill="#FF4E45" stroke="#FFF" stroke-width="2"/>
+                                    <!-- Handles for Center Node -->
+                                    <line x1="100" y1="20" x2="180" y2="20" stroke="#FF4E45" stroke-width="1.5"/>
+                                    <circle cx="100" cy="20" r="3" fill="#FF4E45"/>
+                                    <circle cx="180" cy="20" r="3" fill="#FF4E45"/>
+                                    
+                                    <!-- Anchor 3 (Right) -->
+                                    <circle cx="240" cy="120" r="4" fill="#0A1424" stroke="#D4AF37" stroke-width="2"/>
+                                    
+                                    <!-- Decorative HUD circles -->
+                                    <circle cx="140" cy="20" r="25" stroke="rgba(255,78,69,0.2)" stroke-width="1" stroke-dasharray="2 2"/>
+                                    
+                                    <!-- Coordinates Text -->
+                                    <text x="150" y="32" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="8">P1: (140, 20)</text>
+                                    <text x="50" y="130" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="8">P0: (40, 120)</text>
+                                    <text x="195" y="130" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="8">P2: (240, 120)</text>
+                                </svg>
                             </div>
+                            
+                            <!-- Corner brackets -->
                             <div class="corner-tl absolute pointer-events-none"></div>
                             <div class="corner-br absolute pointer-events-none"></div>
+                            
+                            <!-- Subtle lighting gradient -->
+                            <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#040810] to-transparent pointer-events-none"></div>
                         </div>
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="font-black text-white text-lg">Vector Library</h3>
-                                <span class="px-2 py-1 bg-green-500/15 border border-green-500/25 rounded-lg text-[9px] font-black text-green-400 uppercase tracking-wider">Available</span>
+                        <div class="p-8 flex-1 flex flex-col justify-between relative z-10">
+                            <div>
+                                <div class="flex items-center justify-between mb-4">
+                                    <h3 class="font-black text-white text-xl tracking-tight">Vector Library</h3>
+                                    <span class="px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-[9px] font-black text-green-400 uppercase tracking-wider flex items-center gap-1">
+                                        <span class="w-1 h-1 bg-green-400 rounded-full animate-ping"></span>Ready to Use
+                                    </span>
+                                </div>
+                                <p class="text-gray-400 text-sm leading-relaxed mb-6 lang-th">
+                                    ไฟล์เวกเตอร์ต้นแบบความละเอียดสูง เหมาะอย่างยิ่งสำหรับกระบวนการทอผ้าพิมพ์ลายสิ่งทอ การผลิตวัสดุก่อสร้าง ลายวอลเปเปอร์ และสื่อประชาสัมพันธ์แบรนด์สินค้าเชิงพาณิชย์ร่วมสมัย
+                                </p>
+                                <div class="grid grid-cols-2 gap-3.5 mb-8">
+                                    <div class="flex items-center gap-2.5 text-gray-300 text-xs">
+                                        <i class="ph-bold ph-check text-green-400 text-sm shrink-0"></i>
+                                        ลายดอกพิกุล (สิ่งทอ)
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-gray-300 text-xs">
+                                        <i class="ph-bold ph-check text-green-400 text-sm shrink-0"></i>
+                                        ลายก้านขด (วอลเปเปอร์)
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-gray-300 text-xs">
+                                        <i class="ph-bold ph-check text-green-400 text-sm shrink-0"></i>
+                                        ลายฟันปลา (เซรามิก)
+                                    </div>
+                                    <div class="flex items-center gap-2.5 text-gray-300 text-xs">
+                                        <i class="ph-bold ph-check text-green-400 text-sm shrink-0"></i>
+                                        Seamless Patterns
+                                    </div>
+                                </div>
                             </div>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-5 lang-th">
-                                ไฟล์เวกเตอร์ความละเอียดสูงสำหรับอุตสาหกรรมสิ่งทอ วัสดุก่อสร้าง วอลเปเปอร์ และงานกราฟิกเชิงพาณิชย์
-                            </p>
-                            <div class="grid grid-cols-2 gap-2 mb-5">
-                                <div class="flex items-center gap-2 text-gray-400 text-xs">
-                                    <i class="ph-bold ph-check-circle text-green-400 text-sm"></i>
-                                    ลายดอกพิกุล (สิ่งทอ)
-                                </div>
-                                <div class="flex items-center gap-2 text-gray-400 text-xs">
-                                    <i class="ph-bold ph-check-circle text-green-400 text-sm"></i>
-                                    ลายก้านขด (วอลเปเปอร์)
-                                </div>
-                                <div class="flex items-center gap-2 text-gray-400 text-xs">
-                                    <i class="ph-bold ph-check-circle text-green-400 text-sm"></i>
-                                    ลายฟันปลา (กราฟิก)
-                                </div>
-                                <div class="flex items-center gap-2 text-gray-400 text-xs">
-                                    <i class="ph-bold ph-check-circle text-green-400 text-sm"></i>
-                                    Seamless Patterns
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-gray-500 text-xs">ใบอนุญาตเชิงพาณิชย์</span>
-                                <a href="mailto:Samaporn.kob@gmail.com" class="flex items-center gap-1.5 text-[#D4AF37] text-xs font-extrabold hover:underline">
-                                    ติดต่อ <i class="ph-bold ph-arrow-right text-xs"></i>
+                            <div class="flex items-center justify-between pt-5 border-t border-white/[0.04]">
+                                <span class="text-gray-500 text-xs font-bold font-mono">SVG, AI, DXF, EPS</span>
+                                <a href="mailto:Samaporn.kob@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 hover:border-white/20 text-[#D4AF37] hover:text-white text-xs font-extrabold transition-all duration-300">
+                                    ขอใบเสนอราคา <i class="ph-bold ph-arrow-right text-xs"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card: Prompt Lab (AI Generation Service) -->
-                    <div class="product-card relative bg-[#0A1628]/60 border border-[#FF4E45]/20 rounded-3xl overflow-hidden backdrop-blur-sm group">
-                        <div class="absolute top-4 right-4 z-20">
-                            <span class="px-2.5 py-1 bg-[#FF4E45] rounded-full text-[9px] font-black text-white uppercase tracking-wider">New</span>
-                        </div>
-                        <div class="relative h-52 overflow-hidden img-shimmer bg-gradient-to-br from-[#1a0a0a] to-[#060F22] flex items-center justify-center">
-                            <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
-                            <div class="relative z-10 flex flex-col items-center gap-4">
-                                <div class="w-20 h-20 bg-[#FF4E45]/10 border border-[#FF4E45]/30 rounded-2xl flex items-center justify-center">
-                                    <i class="ph-fill ph-robot text-[#FF4E45] text-4xl"></i>
-                                </div>
-                                <div class="text-center">
-                                    <div class="font-mono text-[9px] text-[#FF4E45]/70 mb-1">PROMPT ENGINE v2.0</div>
-                                    <div class="text-xs text-gray-400">AI Image Generator</div>
-                                </div>
-                            </div>
-                            <div class="corner-tl absolute pointer-events-none" style="border-color: rgba(255,78,69,0.4)"></div>
-                            <div class="corner-br absolute pointer-events-none" style="border-color: rgba(255,78,69,0.4)"></div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="font-black text-white text-lg">AI Prompt Lab</h3>
-                                <span class="px-2 py-1 bg-blue-500/15 border border-blue-500/25 rounded-lg text-[9px] font-black text-blue-400 uppercase tracking-wider">Beta</span>
-                            </div>
-                            <p class="text-gray-400 text-sm leading-relaxed mb-5 lang-th">
-                                เครื่องมือสร้าง AI Prompt เฉพาะทางสำหรับลวดลายไทย รองรับ Midjourney, Stable Diffusion และโหมด Stencil สำหรับการลอกลายเวกเตอร์
-                            </p>
-                            <div class="flex items-center gap-2 mb-5">
-                                <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] font-bold text-gray-400">100 สไตล์</span>
-                                <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] font-bold text-gray-400">10 หมวด</span>
-                                <span class="px-2 py-1 bg-white/5 border border-white/10 rounded-lg text-[9px] font-bold text-gray-400">Stencil Mode</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-green-400 text-xs font-bold">ใช้งานฟรี</span>
-                                <a href="prompt-generator.html" class="flex items-center gap-1.5 text-[#FF4E45] text-xs font-extrabold hover:underline">
-                                    เปิดใช้งาน <i class="ph-bold ph-arrow-right text-xs"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
@@ -518,89 +595,98 @@
         <!-- ================================================================ -->
         <!-- SECTION 2: ART TOYS & 3D MODELS -->
         <!-- ================================================================ -->
-        <section id="section-arttoy" class="py-24 border-b border-[#1a3a6e]/30">
-            <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <section id="section-arttoy" class="py-32 border-b border-white/[0.05]">
+            <div class="max-w-[1440px] mx-auto px-6 lg:px-16">
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <!-- Image side -->
-                    <div class="relative reveal">
-                        <div class="relative rounded-3xl overflow-hidden border border-[#1a3a6e]/40 group product-card">
-                            <img src="assets/product_art_toy_swan.png" alt="Sacred Resonance Art Toy — หงส์-สังข์" class="w-full aspect-[4/5] object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22]/80 via-transparent to-transparent"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                    <!-- Image side (5 cols) -->
+                    <div class="lg:col-span-5 relative reveal">
+                        <div class="bento-card has-specular product-card aspect-[4/5] relative rounded-[2rem] overflow-hidden border border-white/[0.08] bg-[#0A1628]/40 group">
+                            <img src="assets/product_art_toy_swan.png" alt="Sacred Resonance Art Toy — หงส์-สังข์" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22] via-transparent to-transparent"></div>
                             <div class="corner-tl absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                             <div class="corner-br absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                             <!-- Product name overlay -->
-                            <div class="absolute bottom-0 left-0 right-0 p-8">
-                                <div class="font-mono text-[9px] text-[#D4AF37]/70 mb-1 uppercase tracking-widest">TSPL-ART-001</div>
-                                <div class="text-white font-black text-2xl leading-tight">"Sacred Resonance"</div>
-                                <div class="text-[#D4AF37] text-sm font-bold mt-1">หงส์-สังข์ Art Toy Collection</div>
+                            <div class="absolute bottom-0 left-0 right-0 p-8 z-10">
+                                <div class="font-mono text-[9px] text-[#D4AF37] mb-1 uppercase tracking-widest font-black">TSPL-ART-001</div>
+                                <div class="text-white font-black text-3xl leading-tight font-sans">"Sacred Resonance"</div>
+                                <div class="text-[#D4AF37] text-sm font-bold mt-1">ประติมากรรมสะสม หงส์-สังข์</div>
                             </div>
-                        </div>
-                        <!-- Floating spec badges -->
-                        <div class="absolute -top-4 -right-4 bg-[#0A1628] border border-[#D4AF37]/30 rounded-2xl p-4 shadow-xl">
-                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">วัสดุ</div>
-                            <div class="text-sm text-white font-black">Premium Resin</div>
-                            <div class="text-xs text-[#D4AF37]">+ Gold Leaf</div>
-                        </div>
-                        <div class="absolute -bottom-4 -left-4 bg-[#0A1628] border border-[#1a3a6e]/50 rounded-2xl p-4 shadow-xl">
-                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">ฉบับ Limited</div>
-                            <div class="text-sm text-white font-black">99 ชิ้น</div>
                         </div>
                     </div>
 
-                    <!-- Content side -->
-                    <div class="reveal" data-reveal-delay="1">
+                    <!-- Content & Bento Spec side (7 cols) -->
+                    <div class="lg:col-span-7 reveal" data-reveal-delay="1">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="w-8 h-8 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xl flex items-center justify-center">
+                            <div class="w-8 h-8 bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-xl flex items-center justify-center">
                                 <i class="ph-bold ph-cube text-[#D4AF37] text-sm"></i>
                             </div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Product Category 02</span>
-                            <span class="concept-ribbon px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider text-blue-400">Concept</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.25em] text-[#D4AF37]">Product Category 02</span>
+                            <span class="px-3.5 py-1 bg-[#D4AF37]/15 rounded-full text-[9px] font-black uppercase tracking-wider text-[#D4AF37]">Limited Concept</span>
                         </div>
 
-                        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-none text-balance">
                             ประติมากรรม<br>
-                            <span class="text-[#D4AF37]">& อาร์ตทอย</span>
+                            <span class="bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] bg-clip-text text-transparent">&amp; อาร์ตทอยสร้างสรรค์</span>
                         </h2>
 
-                        <p class="text-gray-400 leading-relaxed mb-8 lang-th">
-                            การแปลงศิลปะสองมิติสู่มิติที่สาม คือนวัตกรรมที่สร้างมูลค่าเพิ่มสูงสุด โมเดล Art Toy คาแรกเตอร์ "หงส์-สังข์" (The Sacred Resonance) ผสานรูปทรงเกลียวสังข์เข้ากับลำตัวหงส์ ผลิตจากเรซินเกรดพรีเมียมหรือเซรามิกคอมโพสิต ประดับทองคำเปลว
+                        <p class="text-gray-400 leading-relaxed mb-8 text-md lang-th">
+                            การนำลวดลายไทยโบราณมาต่อยอดในเชิงมิติที่สาม ถือเป็นนวัตกรรมที่สร้างมูลค่าเพิ่มสูงสุด คาแรกเตอร์ "หงส์-สังข์" (The Sacred Resonance) ผสานแนวคิดเกลียวสังข์ทางวิทยาศาสตร์เข้ากับความสง่างามของหงส์
                         </p>
 
-                        <!-- Product lines -->
-                        <div class="space-y-4 mb-10">
-                            <div class="flex items-start gap-4 p-4 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/30 transition-all">
+                        <!-- Bento Specs Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                            <div class="p-5 bg-white/[0.015] border border-white/[0.05] rounded-2xl bento-card has-specular">
+                                <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-2 font-mono font-bold">วัสดุพรีเมียม</div>
+                                <div class="text-md text-white font-black leading-tight">Resin / Composite</div>
+                                <div class="text-xs text-[#D4AF37] mt-0.5 font-bold">+ ลงรักปิดทองคำเปลว</div>
+                            </div>
+                            <div class="p-5 bg-white/[0.015] border border-white/[0.05] rounded-2xl bento-card has-specular">
+                                <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-2 font-mono font-bold">จํานวนการผลิต</div>
+                                <div class="text-md text-white font-black leading-tight">Limited Edition</div>
+                                <div class="text-xs text-[#D4AF37] mt-0.5 font-bold">ผลิตเพียง 99 ชิ้นทั่วโลก</div>
+                            </div>
+                            <div class="p-5 bg-white/[0.015] border border-white/[0.05] rounded-2xl bento-card has-specular">
+                                <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-2 font-mono font-bold">สเกล / ขนาด</div>
+                                <div class="text-md text-white font-black leading-tight">Height 25 cm.</div>
+                                <div class="text-xs text-gray-400 mt-0.5 font-bold">พร้อมหมายเลขประทับ</div>
+                            </div>
+                        </div>
+
+                        <!-- Product List in Bento Style -->
+                        <div class="space-y-3 mb-10">
+                            <div class="flex items-start gap-4 p-4 bg-white/[0.015] border border-white/[0.04] rounded-2xl hover:border-[#D4AF37]/30 hover:bg-white/[0.03] transition-all group duration-300">
                                 <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <i class="ph-bold ph-crown text-[#D4AF37]"></i>
+                                    <i class="ph-bold ph-crown text-[#D4AF37] text-lg"></i>
                                 </div>
                                 <div>
-                                    <div class="font-black text-white text-sm mb-1">หงส์-สังข์ "Sacred Resonance"</div>
-                                    <div class="text-gray-400 text-xs lang-th">เรซินพรีเมียม + ทองคำเปลว · Limited 99 ชิ้น · ขนาด 25 ซม.</div>
+                                    <div class="font-black text-white text-sm group-hover:text-[#D4AF37] transition-colors">หงส์-สังข์ "Sacred Resonance"</div>
+                                    <div class="text-gray-400 text-xs lang-th mt-0.5 font-medium">เรซินคุณภาพสูงปิดทองคำเปลวแท้ · ขนาด 25 ซม. · พร้อมกล่องบรรจุระดับหรู</div>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-4 p-4 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/30 transition-all">
+                            <div class="flex items-start gap-4 p-4 bg-white/[0.015] border border-white/[0.04] rounded-2xl hover:border-[#D4AF37]/30 hover:bg-white/[0.03] transition-all group duration-300">
                                 <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <i class="ph-bold ph-lamp text-gray-400"></i>
+                                    <i class="ph-bold ph-lamp text-gray-400 text-lg"></i>
                                 </div>
                                 <div>
-                                    <div class="font-black text-white text-sm mb-1">โคมไฟลาย "บัวโถ"</div>
-                                    <div class="text-gray-400 text-xs lang-th">เซรามิกกึ่งโปร่งแสง · ลวดลายบัวโถดั้งเดิม · สำหรับตกแต่งบ้าน</div>
+                                    <div class="font-black text-white text-sm group-hover:text-[#D4AF37] transition-colors">โคมไฟประดับลาย "บัวโถ"</div>
+                                    <div class="text-gray-400 text-xs lang-th mt-0.5 font-medium">เซรามิกชนิดพิเศษโปร่งแสงขับเน้นลวดลายบัวโถแบบดั้งเดิมให้สวยงามเด่นชัด</div>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-4 p-4 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/30 transition-all">
+                            <div class="flex items-start gap-4 p-4 bg-white/[0.015] border border-white/[0.04] rounded-2xl hover:border-[#D4AF37]/30 hover:bg-white/[0.03] transition-all group duration-300">
                                 <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
-                                    <i class="ph-bold ph-shield-star text-gray-400"></i>
+                                    <i class="ph-bold ph-shield-star text-gray-400 text-lg"></i>
                                 </div>
                                 <div>
-                                    <div class="font-black text-white text-sm mb-1">ประติมากรรม "ยักษ์แบกกลองอินทเภรี"</div>
-                                    <div class="text-gray-400 text-xs lang-th">สำหรับตกแต่งบ้าน · สื่อถึงการพิทักษ์รักษา</div>
+                                    <div class="font-black text-white text-sm group-hover:text-[#D4AF37] transition-colors">ประติมากรรม "ยักษ์แบกกลองอินทเภรี"</div>
+                                    <div class="text-gray-400 text-xs lang-th mt-0.5 font-medium">งานประติมากรรมจัดวางขนาดกลาง ถ่ายทอดความทรงพลังเชิงการพิทักษ์รักษา</div>
                                 </div>
                             </div>
                         </div>
 
-                        <a href="mailto:Samaporn.kob@gmail.com?subject=สอบถาม Art Toy Collection" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-all">
-                            <i class="ph-bold ph-envelope"></i>
-                            สอบถามข้อมูล Pre-order
+                        <a href="mailto:Samaporn.kob@gmail.com?subject=สอบถาม Art Toy Collection" class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] transition-all duration-300">
+                            <i class="ph-bold ph-envelope text-xs"></i>
+                            สอบถามข้อมูลสั่งจอง (Pre-Order)
                         </a>
                     </div>
                 </div>
@@ -610,83 +696,102 @@
         <!-- ================================================================ -->
         <!-- SECTION 3: LUXURY LIFESTYLE & SPA -->
         <!-- ================================================================ -->
-        <section id="section-lifestyle" class="py-24 border-b border-[#1a3a6e]/30">
-            <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <section id="section-lifestyle" class="py-32 border-b border-white/[0.05]">
+            <div class="max-w-[1440px] mx-auto px-6 lg:px-16">
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <!-- Content side -->
-                    <div class="reveal order-2 lg:order-1">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                    <!-- Content side (7 cols) -->
+                    <div class="lg:col-span-7 reveal order-2 lg:order-1">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="w-8 h-8 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xl flex items-center justify-center">
+                            <div class="w-8 h-8 bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-xl flex items-center justify-center">
                                 <i class="ph-bold ph-flower text-[#D4AF37] text-sm"></i>
                             </div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Product Category 03</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.25em] text-[#D4AF37]">Product Category 03</span>
+                            <span class="px-3.5 py-1 bg-[#D4AF37]/15 rounded-full text-[9px] font-black uppercase tracking-wider text-[#D4AF37]">High Demand</span>
                         </div>
 
-                        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">
-                            สินค้าวิถีชีวิต<br>
-                            <span class="text-[#D4AF37]">& เครื่องหอมพรีเมียม</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-none text-balance">
+                            สินค้าไลฟ์สไตล์<br>
+                            <span class="bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] bg-clip-text text-transparent">&amp; เครื่องหอมตกแต่งสปา</span>
                         </h2>
 
-                        <p class="text-gray-400 leading-relaxed mb-8 lang-th">
-                            จากสถิติโครงการ สินค้ากลุ่มของตกแต่งบ้านและสปามีสัดส่วนความต้องการสูงถึง 40% และ 30% — ชุดเครื่องหอมบรรจุในกล่องพิมพ์ลาย "สังข์ทักษิณาวรรต" ด้วยเทคนิค Spot UV และปั๊มฟอยล์ทอง
+                        <p class="text-gray-400 leading-relaxed mb-8 text-md lang-th">
+                            จากข้อมูลวิจัยทางการตลาด สินค้าตกแต่งบ้านและสปามีความต้องการรวมกันมากถึง 70% ผลผลิตชุดผลิตภัณฑ์เครื่องหอมและสปาพรีเมียม ออกแบบบรรจุภัณฑ์ Spot UV ผสานลาย "สังข์ทักษิณาวรรต" เพื่อสื่อสัญลักษณ์สิริมงคลและความผ่อนคลาย
                         </p>
 
-                        <!-- Market data widget -->
-                        <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="p-5 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl">
-                                <div class="text-3xl font-black text-[#D4AF37] font-mono mb-1">40%</div>
-                                <div class="text-xs text-gray-400">ความต้องการสินค้าตกแต่งบ้าน</div>
+                        <!-- Market Demand Dynamic Progress Meters -->
+                        <div class="space-y-6 mb-10">
+                            <div>
+                                <div class="flex justify-between items-center mb-2.5">
+                                    <span class="text-xs font-extrabold text-gray-300 uppercase tracking-wider font-mono">ความต้องการกลุ่มสินค้าตกแต่งบ้าน (Home Decor)</span>
+                                    <span class="text-sm font-black text-[#D4AF37] font-mono">40%</span>
+                                </div>
+                                <div class="progress-track w-full">
+                                    <div class="progress-bar-fill" data-percentage="40"></div>
+                                </div>
                             </div>
-                            <div class="p-5 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl">
-                                <div class="text-3xl font-black text-[#D4AF37] font-mono mb-1">30%</div>
-                                <div class="text-xs text-gray-400">ความต้องการสินค้ากลุ่มสปา</div>
-                            </div>
-                        </div>
-
-                        <!-- Product list -->
-                        <div class="space-y-3 mb-10">
-                            <div class="flex items-center gap-3 py-3 border-b border-[#1a3a6e]/30">
-                                <i class="ph-bold ph-candle text-[#D4AF37]"></i>
-                                <span class="text-white text-sm font-bold">เทียนหอมและน้ำมันหอมระเหย</span>
-                                <span class="ml-auto text-[9px] text-gray-500 font-mono">SPU-SPA-001</span>
-                            </div>
-                            <div class="flex items-center gap-3 py-3 border-b border-[#1a3a6e]/30">
-                                <i class="ph-bold ph-bowl-food text-[#D4AF37]"></i>
-                                <span class="text-white text-sm font-bold">ชุดเซรามิกลาย "เป็ดท่ามกลางสระบัว"</span>
-                                <span class="ml-auto text-[9px] text-gray-500 font-mono">SPU-HOM-002</span>
-                            </div>
-                            <div class="flex items-center gap-3 py-3 border-b border-[#1a3a6e]/30">
-                                <i class="ph-bold ph-squares-four text-[#D4AF37]"></i>
-                                <span class="text-white text-sm font-bold">ผ้าม่าน/ปลอกหมอน ลาย "นกเกาะกิ่ง"</span>
-                                <span class="ml-auto text-[9px] text-gray-500 font-mono">SPU-TEX-003</span>
-                            </div>
-                            <div class="flex items-center gap-3 py-3">
-                                <i class="ph-bold ph-package text-[#D4AF37]"></i>
-                                <span class="text-white text-sm font-bold">กล่องของขวัญ Spot UV + ฟอยล์ทอง</span>
-                                <span class="ml-auto text-[9px] text-gray-500 font-mono">SPU-PKG-004</span>
+                            <div>
+                                <div class="flex justify-between items-center mb-2.5">
+                                    <span class="text-xs font-extrabold text-gray-300 uppercase tracking-wider font-mono">ความต้องการกลุ่มผลิตภัณฑ์สปา (Spa & Aromatherapy)</span>
+                                    <span class="text-sm font-black text-[#D4AF37] font-mono">30%</span>
+                                </div>
+                                <div class="progress-track w-full">
+                                    <div class="progress-bar-fill" data-percentage="30"></div>
+                                </div>
                             </div>
                         </div>
 
-                        <a href="mailto:Samaporn.kob@gmail.com?subject=Lifestyle Products Inquiry" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-all">
-                            <i class="ph-bold ph-envelope"></i>
-                            ติดต่อขอใบเสนอราคา
+                        <!-- Product list with premium dividers -->
+                        <div class="space-y-1 mb-10">
+                            <div class="flex items-center justify-between py-4 border-b border-white/[0.04] hover:bg-white/[0.02] px-3.5 rounded-2xl transition-all duration-300 group">
+                                <div class="flex items-center gap-3">
+                                    <i class="ph-bold ph-candle text-[#D4AF37] text-md group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-white text-sm font-black group-hover:text-[#D4AF37] transition-colors">เทียนหอมอโรมาและน้ำมันหอมระเหยสกัดเข้มข้น</span>
+                                </div>
+                                <span class="text-[9px] text-gray-500 font-mono font-bold">SPU-SPA-001</span>
+                            </div>
+                            <div class="flex items-center justify-between py-4 border-b border-white/[0.04] hover:bg-white/[0.02] px-3.5 rounded-2xl transition-all duration-300 group">
+                                <div class="flex items-center gap-3">
+                                    <i class="ph-bold ph-bowl-food text-[#D4AF37] text-md group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-white text-sm font-black group-hover:text-[#D4AF37] transition-colors">ชุดจานรองเซรามิกเคลือบใส "เป็ดท่ามกลางสระบัว"</span>
+                                </div>
+                                <span class="text-[9px] text-gray-500 font-mono font-bold">SPU-HOM-002</span>
+                            </div>
+                            <div class="flex items-center justify-between py-4 border-b border-white/[0.04] hover:bg-white/[0.02] px-3.5 rounded-2xl transition-all duration-300 group">
+                                <div class="flex items-center gap-3">
+                                    <i class="ph-bold ph-squares-four text-[#D4AF37] text-md group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-white text-sm font-black group-hover:text-[#D4AF37] transition-colors">ผ้าม่านเนื้อไหมและปลอกหมอนพิมพ์ลาย "นกเกาะกิ่งไม้มงคล"</span>
+                                </div>
+                                <span class="text-[9px] text-gray-500 font-mono font-bold">SPU-TEX-003</span>
+                            </div>
+                            <div class="flex items-center justify-between py-4 hover:bg-white/[0.02] px-3.5 rounded-2xl transition-all duration-300 group">
+                                <div class="flex items-center gap-3">
+                                    <i class="ph-bold ph-package text-[#D4AF37] text-md group-hover:scale-110 transition-transform"></i>
+                                    <span class="text-white text-sm font-black group-hover:text-[#D4AF37] transition-colors">กล่องผลิตภัณฑ์กระดาษคราฟต์หนาปั๊ม Spot UV ลายดั้งเดิม</span>
+                                </div>
+                                <span class="text-[9px] text-gray-500 font-mono font-bold">SPU-PKG-004</span>
+                            </div>
+                        </div>
+
+                        <a href="mailto:Samaporn.kob@gmail.com?subject=Lifestyle Products Inquiry" class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] transition-all duration-300">
+                            <i class="ph-bold ph-envelope text-xs"></i>
+                            ติดต่อสอบถามรายละเอียดและผลิตภัณฑ์ทดสอบ
                         </a>
                     </div>
 
-                    <!-- Image side -->
-                    <div class="relative reveal order-1 lg:order-2" data-reveal-delay="1">
-                        <div class="relative rounded-3xl overflow-hidden border border-[#1a3a6e]/40 group product-card">
-                            <img src="assets/product_luxury_spa.png" alt="Luxury Lifestyle & Spa Products" class="w-full aspect-square object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22]/60 via-transparent to-transparent"></div>
+                    <!-- Image side (5 cols) -->
+                    <div class="lg:col-span-5 relative reveal order-1 lg:order-2" data-reveal-delay="1">
+                        <div class="bento-card has-specular product-card aspect-square relative rounded-[2rem] overflow-hidden border border-white/[0.08] bg-[#0A1628]/40 group">
+                            <img src="assets/product_luxury_spa.png" alt="Luxury Lifestyle & Spa Products" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22]/70 via-transparent to-transparent"></div>
                             <div class="corner-tl absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                             <div class="corner-br absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                         </div>
-                        <!-- Floating label -->
-                        <div class="absolute -bottom-4 -right-4 bg-[#0A1628] border border-[#D4AF37]/30 rounded-2xl p-4 shadow-xl max-w-[180px]">
-                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">เทคนิคพิมพ์</div>
-                            <div class="text-sm text-white font-black">Spot UV</div>
-                            <div class="text-xs text-[#D4AF37]">+ Gold Foil Stamp</div>
+                        <!-- Spec Overlay Card -->
+                        <div class="absolute -bottom-4 -left-4 bg-[#0E1B2E]/90 border border-white/10 rounded-2xl p-4 shadow-xl backdrop-blur-md max-w-[200px] z-10">
+                            <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider mb-1 font-mono font-bold">เทคนิคบรรจุภัณฑ์</div>
+                            <div class="text-md text-white font-black leading-tight">Spot UV</div>
+                            <div class="text-xs text-[#D4AF37] mt-0.5 font-bold">+ ปั๊มฟอยล์ทองพรีเมียม</div>
                         </div>
                     </div>
                 </div>
@@ -696,78 +801,107 @@
         <!-- ================================================================ -->
         <!-- SECTION 4: FASHION & JEWELRY -->
         <!-- ================================================================ -->
-        <section id="section-fashion" class="py-24 border-b border-[#1a3a6e]/30">
-            <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <section id="section-fashion" class="py-32 border-b border-white/[0.05]">
+            <div class="max-w-[1440px] mx-auto px-6 lg:px-16">
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <!-- Image side -->
-                    <div class="relative reveal">
-                        <div class="relative rounded-3xl overflow-hidden border border-[#1a3a6e]/40 group product-card">
-                            <img src="assets/product_fashion_jewelry.png" alt="Premium Fashion & Jewelry — ผ้าไหม เครื่องประดับ" class="w-full aspect-square object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22]/60 via-transparent to-transparent"></div>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                    <!-- Image side (5 cols) -->
+                    <div class="lg:col-span-5 relative reveal">
+                        <div class="bento-card has-specular product-card aspect-square relative rounded-[2rem] overflow-hidden border border-white/[0.08] bg-[#0A1628]/40 group">
+                            <img src="assets/product_fashion_jewelry.png" alt="Premium Fashion & Jewelry — ผ้าไหม เครื่องประดับ" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22]/70 via-transparent to-transparent"></div>
                             <div class="corner-tl absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                             <div class="corner-br absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                             <!-- Overlay badge -->
-                            <div class="absolute top-6 left-6 px-3 py-1.5 bg-[#0A1628]/80 border border-[#D4AF37]/30 rounded-lg backdrop-blur-sm">
-                                <span class="text-[9px] text-[#D4AF37] font-black uppercase tracking-wider">งานช่างหลวง</span>
+                            <div class="absolute top-6 left-6 px-3.5 py-1.5 bg-[#060F22]/85 border border-[#D4AF37]/30 rounded-xl backdrop-blur-md shadow-md z-10">
+                                <span class="text-[9px] text-[#D4AF37] font-black uppercase tracking-widest">ประณีตศิลป์ช่างหลวง</span>
                             </div>
                         </div>
-                        <div class="absolute -top-4 -right-4 bg-[#0A1628] border border-[#1a3a6e]/50 rounded-2xl p-4 shadow-xl">
-                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">สัดส่วนตลาด</div>
+                        <div class="absolute -top-4 -right-4 bg-[#0E1B2E]/90 border border-white/10 rounded-2xl p-4 shadow-xl backdrop-blur-md z-10">
+                            <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider mb-1 font-mono font-bold">สัดส่วนในอุตสาหกรรม</div>
                             <div class="text-2xl text-white font-black font-mono">30%</div>
-                            <div class="text-xs text-[#D4AF37]">Fashion Sector</div>
+                            <div class="text-xs text-[#D4AF37] mt-0.5 font-bold">ของความต้องการตลาดแฟชั่น</div>
                         </div>
                     </div>
 
-                    <!-- Content side -->
-                    <div class="reveal" data-reveal-delay="1">
+                    <!-- Content side (7 cols) -->
+                    <div class="lg:col-span-7 reveal" data-reveal-delay="1">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="w-8 h-8 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xl flex items-center justify-center">
+                            <div class="w-8 h-8 bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-xl flex items-center justify-center">
                                 <i class="ph-bold ph-coat-hanger text-[#D4AF37] text-sm"></i>
                             </div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Product Category 04</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.25em] text-[#D4AF37]">Product Category 04</span>
                         </div>
 
-                        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">
-                            แฟชั่น<br>
-                            <span class="text-[#D4AF37]">& เครื่องประดับพรีเมียม</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-none text-balance">
+                            เครื่องแต่งกายแฟชั่น<br>
+                            <span class="bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] bg-clip-text text-transparent">&amp; เครื่องประดับชั้นสูง</span>
                         </h2>
 
-                        <p class="text-gray-400 leading-relaxed mb-8 lang-th">
-                            ลวดลายที่มีความหมายเชิงสถาบันและสัตว์มงคลเพื่อยกระดับสินค้าแฟชั่น — ผ้าไหมพิมพ์ลายและเครื่องประดับเงิน/ทองที่ใช้ลาย "หงส์" สะท้อนความประณีตระดับงานช่างหลวง
+                        <p class="text-gray-400 leading-relaxed mb-8 text-md lang-th">
+                            การสืบทอดลวดลายที่ผูกพันกับคติความเชื่อเรื่องความยิ่งใหญ่และความสง่างาม สู่เสื้อผ้าเครื่องนุ่งห่มร่วมสมัย ผ้าไหมไทยพิมพ์ลาย "หงส์ประดิษฐ์" และการนำลาย "หงส์ก้านขด" มาแปลงเป็นเครื่องประดับทองเหลือง/เงินแท้ที่เรียบง่าย
                         </p>
 
-                        <!-- Product showcase tabs -->
-                        <div class="space-y-4 mb-10">
-                            <div class="p-5 bg-[#0A1628]/60 border border-[#D4AF37]/20 rounded-2xl">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <i class="ph-bold ph-thread text-[#D4AF37] text-lg"></i>
-                                    <span class="font-black text-white">ผ้าไหมพิมพ์ลาย "หงส์"</span>
-                                    <span class="ml-auto text-[9px] px-2 py-1 bg-[#D4AF37]/15 text-[#D4AF37] rounded-lg font-black uppercase">Silk</span>
+                        <!-- Bento-Style Asymmetric Grid for Fashion & Jewelry -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <!-- Card 1: Silk Scarf (Spans 2 columns) -->
+                            <div class="sm:col-span-2 p-6 bg-white/[0.015] border border-white/[0.04] rounded-2xl bento-card has-specular flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-[#D4AF37]/10 rounded-lg flex items-center justify-center">
+                                                <i class="ph-bold ph-thread text-[#D4AF37]"></i>
+                                            </div>
+                                            <span class="font-black text-white text-base">ผ้าคลุมไหล่และผ้าพันคอพิมพ์ลาย "หงส์ประยุกต์"</span>
+                                        </div>
+                                        <span class="text-[9px] px-2.5 py-1 bg-[#D4AF37]/10 text-[#D4AF37] border border-[#D4AF37]/20 rounded-md font-black uppercase tracking-wider font-mono">Premium Silk</span>
+                                    </div>
+                                    <p class="text-xs text-gray-400 lang-th leading-relaxed mt-2 font-medium">
+                                        พิมพ์ลงบนผ้าไหมไทยทอเกลียวคุณภาพสูง ผ่านการประเมินรูปร่างลวดลายให้สมมาตรร่วมสมัย เพื่อให้ความสวยงามของหงส์โบราณผสานกับการแต่งกายสมัยใหม่ได้อย่างกลมกลืน
+                                    </p>
                                 </div>
-                                <p class="text-xs text-gray-400 lang-th">สะท้อนความประณีตระดับงานช่างหลวง เหมาะสำหรับผ้าพันคอ ผ้าคลุมไหล่พรีเมียม</p>
                             </div>
-                            <div class="p-5 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/20 transition-all">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <i class="ph-bold ph-diamond text-[#D4AF37] text-lg"></i>
-                                    <span class="font-black text-white">เครื่องประดับเงิน/ทอง ลาย "หงส์"</span>
-                                    <span class="ml-auto text-[9px] px-2 py-1 bg-white/5 text-gray-400 rounded-lg font-black uppercase">Jewelry</span>
+                            
+                            <!-- Card 2: Jewelry -->
+                            <div class="p-6 bg-white/[0.015] border border-white/[0.04] rounded-2xl bento-card has-specular flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center">
+                                                <i class="ph-bold ph-diamond text-[#D4AF37]"></i>
+                                            </div>
+                                            <span class="font-black text-white text-sm">เครื่องประดับโลหะร่วมสมัย</span>
+                                        </div>
+                                    </div>
+                                    <span class="inline-block text-[9px] px-2.5 py-1 bg-white/5 text-gray-400 border border-white/10 rounded-md font-black uppercase tracking-wider font-mono mb-3">Sterling Silver</span>
+                                    <p class="text-xs text-gray-400 lang-th leading-relaxed font-medium">
+                                        ถอดรูปทรงลาย "หงส์ก้านขด" ให้กลายเป็นสร้อยข้อมือและเข็มกลัดชิ้นงานมินิมอล มีมิติแสงและเงาสะดุดตา
+                                    </p>
                                 </div>
-                                <p class="text-xs text-gray-400 lang-th">เครื่องประดับที่ผสมผสานความงามดั้งเดิมเข้ากับการออกแบบร่วมสมัย</p>
                             </div>
-                            <div class="p-5 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/20 transition-all">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <i class="ph-bold ph-sewing-needle text-[#D4AF37] text-lg"></i>
-                                    <span class="font-black text-white">งานปักลาย "กินรี"</span>
-                                    <span class="ml-auto text-[9px] px-2 py-1 bg-white/5 text-gray-400 rounded-lg font-black uppercase">Embroidery</span>
+                            
+                            <!-- Card 3: Embroidery -->
+                            <div class="p-6 bg-white/[0.015] border border-white/[0.04] rounded-2xl bento-card has-specular flex flex-col justify-between">
+                                <div>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center">
+                                                <i class="ph-bold ph-sewing-needle text-[#D4AF37]"></i>
+                                            </div>
+                                            <span class="font-black text-white text-sm">งานปักประณีตบนเสื้อผ้า</span>
+                                        </div>
+                                    </div>
+                                    <span class="inline-block text-[9px] px-2.5 py-1 bg-white/5 text-gray-400 border border-white/10 rounded-md font-black uppercase tracking-wider font-mono mb-3">Embroidery</span>
+                                    <p class="text-xs text-gray-400 lang-th leading-relaxed font-medium">
+                                        งานฝีมือปักลายกล้วยไม้ประณีตผสมผสานเทคนิคร่วมสมัยเพื่อเอกลักษณ์ขั้นสูง เหมาะสำหรับงานแฟชั่นโชว์และการจัดแสดงระดับนานาชาติ
+                                    </p>
                                 </div>
-                                <p class="text-xs text-gray-400 lang-th">งานปักบนเสื้อผ้าท่อนบนระดับพรีเมียม · ลาย "กล้วยไม้" บนผ้าพิมพ์ร่วมสมัย</p>
                             </div>
                         </div>
 
-                        <a href="mailto:Samaporn.kob@gmail.com?subject=Fashion & Jewelry Collaboration" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-all">
-                            <i class="ph-bold ph-handshake"></i>
-                            สอบถามความร่วมมือ
+                        <a href="mailto:Samaporn.kob@gmail.com?subject=Fashion & Jewelry Collaboration" class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] transition-all duration-300">
+                            <i class="ph-bold ph-handshake text-xs"></i>
+                            สอบถามรายละเอียดความร่วมมือและแบรนด์ร่วม (Co-Branding)
                         </a>
                     </div>
                 </div>
@@ -777,78 +911,94 @@
         <!-- ================================================================ -->
         <!-- SECTION 5: CULTURAL GIFTS & SOUVENIRS -->
         <!-- ================================================================ -->
-        <section id="section-souvenirs" class="py-24">
-            <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
+        <section id="section-souvenirs" class="py-32">
+            <div class="max-w-[1440px] mx-auto px-6 lg:px-16">
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <!-- Content side -->
-                    <div class="reveal order-2 lg:order-1">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+                    <!-- Content side (7 cols) -->
+                    <div class="lg:col-span-7 reveal order-2 lg:order-1">
                         <div class="flex items-center gap-3 mb-6">
-                            <div class="w-8 h-8 bg-[#D4AF37]/15 border border-[#D4AF37]/30 rounded-xl flex items-center justify-center">
+                            <div class="w-8 h-8 bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-xl flex items-center justify-center">
                                 <i class="ph-bold ph-gift text-[#D4AF37] text-sm"></i>
                             </div>
-                            <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Product Category 05</span>
+                            <span class="text-[10px] font-black uppercase tracking-[0.25em] text-[#D4AF37]">Product Category 05</span>
                         </div>
 
-                        <h2 class="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-none text-balance">
                             ของที่ระลึก<br>
-                            <span class="text-[#D4AF37]">ทางวัฒนธรรม</span>
+                            <span class="bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] bg-clip-text text-transparent">และของกำนัลทางวัฒนธรรม</span>
                         </h2>
 
-                        <p class="text-gray-400 leading-relaxed mb-8 lang-th">
-                            ผลิตภัณฑ์ที่เน้นการเล่าเรื่อง (Storytelling) เชิงสัญลักษณ์ ตั้งแต่ชุดของขวัญแต่งงาน โลโก้แบรนด์ ไปจนถึงบรรจุภัณฑ์สินค้าออร์แกนิกที่ใช้ "ลายปลา" ศิลปะสังคโลก
+                        <p class="text-gray-400 leading-relaxed mb-8 text-md lang-th">
+                            มุ่งเน้นการบอกเล่าเรื่องราวในอดีต (Storytelling) ด้วยงานดีไซน์เชิงสัญลักษณ์ที่สอดแทรกความหมายอันเป็นมงคล สร้างจุดขายทางสากลให้สินค้าท้องถิ่นหรือออร์แกนิกไทย
                         </p>
 
-                        <!-- Storytelling cards -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
-                            <div class="p-4 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/30 transition-all group">
-                                <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-[#D4AF37]/20 transition-all">
-                                    <i class="ph-bold ph-heart text-[#D4AF37]"></i>
+                        <!-- Storytelling Bento Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="p-6 bg-white/[0.015] border border-white/[0.04] rounded-2xl bento-card has-specular flex flex-col justify-between group duration-300">
+                                <div>
+                                    <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-all duration-300">
+                                        <i class="ph-bold ph-heart text-[#D4AF37] text-xl"></i>
+                                    </div>
+                                    <div class="font-black text-white text-base mb-1.5 group-hover:text-[#D4AF37] transition-colors">ชุดของขวัญมงคลพิธี</div>
+                                    <div class="text-xs text-gray-400 leading-relaxed lang-th font-medium">
+                                        ลาย "นกเป็ดน้ำคู่" สัญลักษณ์ความซื่อสัตย์ ปรองดอง ปรากฏบนชุดของกำนัลในงานวิวาห์ระดับไฮเอนด์
+                                    </div>
                                 </div>
-                                <div class="font-black text-white text-sm mb-1">ชุดของขวัญแต่งงาน</div>
-                                <div class="text-xs text-gray-400 lang-th">ลาย "นกเป็ดน้ำคู่" · ความซื่อสัตย์และการปฏิสัมพันธ์อันดี</div>
                             </div>
-                            <div class="p-4 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/30 transition-all group">
-                                <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-[#D4AF37]/20 transition-all">
-                                    <i class="ph-bold ph-seal text-[#D4AF37]"></i>
+                            <div class="p-6 bg-white/[0.015] border border-white/[0.04] rounded-2xl bento-card has-specular flex flex-col justify-between group duration-300">
+                                <div>
+                                    <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-all duration-300">
+                                        <i class="ph-bold ph-seal text-[#D4AF37] text-xl"></i>
+                                    </div>
+                                    <div class="font-black text-white text-base mb-1.5 group-hover:text-[#D4AF37] transition-colors">ตราประทับองค์กร & แบรนด์</div>
+                                    <div class="text-xs text-gray-400 leading-relaxed lang-th font-medium">
+                                        ใช้รูปโครงสร้างลาย "มกร" (สัตว์หิมพานต์เปี่ยมบารมี) เสริมสร้างอำนาจและความน่าเชื่อถือแก่แบรนด์
+                                    </div>
                                 </div>
-                                <div class="font-black text-white text-sm mb-1">โลโก้ & ตราประทับแบรนด์</div>
-                                <div class="text-xs text-gray-400 lang-th">ส่วนหัวลาย "มกร" · สร้างความน่าเกรงขาม</div>
                             </div>
-                            <div class="p-4 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/30 transition-all group">
-                                <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-[#D4AF37]/20 transition-all">
-                                    <i class="ph-bold ph-fish text-[#D4AF37]"></i>
+                            <div class="p-6 bg-white/[0.015] border border-white/[0.04] rounded-2xl bento-card has-specular flex flex-col justify-between group duration-300">
+                                <div>
+                                    <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-all duration-300">
+                                        <i class="ph-bold ph-fish text-[#D4AF37] text-xl"></i>
+                                    </div>
+                                    <div class="font-black text-white text-base mb-1.5 group-hover:text-[#D4AF37] transition-colors">บรรจุภัณฑ์ออร์แกนิกไทย</div>
+                                    <div class="text-xs text-gray-400 leading-relaxed lang-th font-medium">
+                                        นำเสนอเรื่องราว "ลายปลา" ยุคสังคโลก สัญลักษณ์แห่งความอุดมสมบูรณ์พูนสุข เหมาะสำหรับบรรจุภัณฑ์ข้าวกล้องและชาสมุนไพร
+                                    </div>
                                 </div>
-                                <div class="font-black text-white text-sm mb-1">บรรจุภัณฑ์ออร์แกนิก</div>
-                                <div class="text-xs text-gray-400 lang-th">"ลายปลา" สังคโลก · สัญลักษณ์ความอุดมสมบูรณ์</div>
                             </div>
-                            <div class="p-4 bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-2xl hover:border-[#D4AF37]/30 transition-all group">
-                                <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-[#D4AF37]/20 transition-all">
-                                    <i class="ph-bold ph-star text-[#D4AF37]"></i>
+                            <div class="p-6 bg-white/[0.015] border border-white/[0.04] rounded-2xl bento-card has-specular flex flex-col justify-between group duration-300">
+                                <div>
+                                    <div class="w-10 h-10 bg-[#D4AF37]/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-[#D4AF37]/20 transition-all duration-300">
+                                        <i class="ph-bold ph-globe-hemisphere-east text-[#D4AF37] text-xl"></i>
+                                    </div>
+                                    <div class="font-black text-white text-base mb-1.5 group-hover:text-[#D4AF37] transition-colors">ของที่ระลึกมรดกโลก</div>
+                                    <div class="text-xs text-gray-400 leading-relaxed lang-th font-medium">
+                                        กระเป๋าโท้ทและสมุดไดอารี่พิมพ์ลายไทยประยุกต์ เจาะกลุ่มความประทับใจของชาวต่างชาติในการเดินทางท่องเที่ยวเมืองมรดกทางวัฒนธรรม
+                                    </div>
                                 </div>
-                                <div class="font-black text-white text-sm mb-1">ของที่ระลึกส่งออก</div>
-                                <div class="text-xs text-gray-400 lang-th">เล่าเรื่องมรดกวัฒนธรรมไทยสู่ตลาดโลก</div>
                             </div>
                         </div>
 
-                        <a href="mailto:Samaporn.kob@gmail.com?subject=Cultural Souvenirs Inquiry" class="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] hover:bg-[#D4AF37]/20 transition-all">
-                            <i class="ph-bold ph-envelope"></i>
-                            สอบถามข้อมูลเพิ่มเติม
+                        <a href="mailto:Samaporn.kob@gmail.com?subject=Cultural Souvenirs Inquiry" class="inline-flex items-center gap-2 px-7 py-3.5 bg-[#D4AF37]/10 hover:bg-[#D4AF37]/20 border border-[#D4AF37]/30 hover:border-[#D4AF37] rounded-full text-[11px] font-extrabold uppercase tracking-wider text-[#D4AF37] transition-all duration-300">
+                            <i class="ph-bold ph-envelope text-xs"></i>
+                            สอบถามข้อมูลสั่งผลิตและตราสินค้า
                         </a>
                     </div>
 
-                    <!-- Image side -->
-                    <div class="relative reveal order-1 lg:order-2" data-reveal-delay="1">
-                        <div class="relative rounded-3xl overflow-hidden border border-[#1a3a6e]/40 group product-card">
-                            <img src="assets/product_cultural_gifts.png" alt="Cultural Gifts & Souvenirs" class="w-full aspect-square object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22]/60 via-transparent to-transparent"></div>
+                    <!-- Image side (5 cols) -->
+                    <div class="lg:col-span-5 relative reveal order-1 lg:order-2" data-reveal-delay="1">
+                        <div class="bento-card has-specular product-card aspect-square relative rounded-[2rem] overflow-hidden border border-white/[0.08] bg-[#0A1628]/40 group">
+                            <img src="assets/product_cultural_gifts.png" alt="Cultural Gifts & Souvenirs" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#060F22]/70 via-transparent to-transparent"></div>
                             <div class="corner-tl absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                             <div class="corner-br absolute pointer-events-none" style="border-color: rgba(212,175,55,0.6)"></div>
                         </div>
-                        <div class="absolute -top-4 -left-4 bg-[#0A1628] border border-[#D4AF37]/30 rounded-2xl p-4 shadow-xl">
-                            <div class="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">แนวคิด</div>
-                            <div class="text-sm text-white font-black">Storytelling</div>
-                            <div class="text-xs text-[#D4AF37]">เชิงสัญลักษณ์</div>
+                        <div class="absolute -top-4 left-6 bg-[#0E1B2E]/90 border border-white/10 rounded-2xl p-4 shadow-xl backdrop-blur-md z-10">
+                            <div class="text-[9px] text-gray-500 font-bold uppercase tracking-wider mb-1 font-mono font-bold">จุดเน้นนวัตกรรม</div>
+                            <div class="text-md text-white font-black leading-tight">Storytelling</div>
+                            <div class="text-xs text-[#D4AF37] mt-0.5 font-bold">เชื่อมโยงมรดกท้องถิ่นสู่สากล</div>
                         </div>
                     </div>
                 </div>
@@ -858,31 +1008,34 @@
         <!-- ================================================================ -->
         <!-- CTA SECTION -->
         <!-- ================================================================ -->
-        <section class="py-24 border-t border-[#1a3a6e]/30">
-            <div class="max-w-[1440px] mx-auto px-6 lg:px-12 text-center">
+        <section class="py-32 border-t border-white/[0.05] relative overflow-hidden bg-gradient-to-b from-[#060F22] to-[#040A15]">
+            <!-- Radial glow in the background -->
+            <div class="absolute -bottom-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-[1440px] mx-auto px-6 lg:px-12 text-center relative z-10">
                 <div class="max-w-3xl mx-auto">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-[#D4AF37]/10 border border-[#D4AF37]/30 rounded-full mb-8">
-                        <i class="ph-bold ph-handshake text-[#D4AF37] text-xs"></i>
-                        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#D4AF37]">Partnership & Licensing</span>
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 bg-[#D4AF37]/10 border border-[#D4AF37]/25 rounded-full mb-8">
+                        <i class="ph-bold ph-handshake text-[#D4AF37] text-xs animate-pulse"></i>
+                        <span class="text-[10px] font-black uppercase tracking-[0.25em] text-[#D4AF37]">Partnership & Licensing</span>
                     </div>
 
-                    <h2 class="text-5xl md:text-6xl font-black text-white mb-6 tracking-tight">
-                        ร่วมสร้าง<br>
-                        <span class="text-[#D4AF37]">มรดกวัฒนธรรม</span>
+                    <h2 class="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight leading-none">
+                        ร่วมขับเคลื่อน<br>
+                        <span class="bg-gradient-to-r from-[#D4AF37] via-[#FFF] to-[#D4AF37] bg-clip-text text-transparent">เศรษฐกิจสร้างสรรค์</span>
                     </h2>
 
-                    <p class="text-gray-400 text-xl leading-relaxed mb-12 lang-th">
-                        ไม่ว่าจะเป็นการซื้อสิทธิ์ใช้งาน ความร่วมมือในการออกแบบ หรือการพัฒนาผลิตภัณฑ์ร่วมกัน — ทีม TSPL พร้อมสนับสนุนธุรกิจของคุณด้วยลวดลายที่มีคุณค่าทางวัฒนธรรม
+                    <p class="text-gray-400 text-lg leading-relaxed mb-12 max-w-2xl mx-auto lang-th">
+                        ยินดีต้อนรับความร่วมมือเชิงพาณิชย์ในทุกรูปแบบ ไม่ว่าจะเป็นการเช่าซื้อสิทธิ์การใช้ลวดลายเวกเตอร์เพื่ออุตสาหกรรม การพัฒนาผลิตภัณฑ์จัดจำหน่ายร่วม หรือการต่อยอดโครงการวิจัยเพื่อสิ่งทอและงานดีไซน์
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="mailto:Samaporn.kob@gmail.com" class="inline-flex items-center gap-2.5 px-8 py-4 bg-[#D4AF37] text-[#060F22] font-extrabold text-sm uppercase tracking-wider rounded-full hover:bg-[#D4AF37]/90 transition-all shadow-lg shadow-[#D4AF37]/20">
-                            <i class="ph-bold ph-envelope"></i>
-                            ติดต่อทีมวิจัย
+                    <div class="flex flex-col sm:flex-row gap-4.5 justify-center items-center">
+                        <a href="mailto:Samaporn.kob@gmail.com" class="inline-flex items-center gap-2.5 px-9 py-4.5 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#060F22] font-black text-sm uppercase tracking-wider rounded-full transition-all shadow-lg shadow-[#D4AF37]/10 hover:shadow-[#D4AF37]/20">
+                            <i class="ph-bold ph-envelope text-sm"></i>
+                            ติดต่อทีมผู้วิจัยและขอสิทธิ์
                         </a>
-                        <a href="archive.html" class="inline-flex items-center gap-2.5 px-8 py-4 bg-white/5 border border-white/15 text-white font-extrabold text-sm uppercase tracking-wider rounded-full hover:bg-white/10 transition-all">
-                            <i class="ph-bold ph-magnifying-glass"></i>
-                            สำรวจคลังลวดลาย
+                        <a href="archive.html" class="inline-flex items-center gap-2.5 px-9 py-4.5 bg-white/5 border border-white/10 text-white font-black text-sm uppercase tracking-wider rounded-full hover:bg-white/10 transition-all backdrop-blur-sm">
+                            <i class="ph-bold ph-magnifying-glass text-sm"></i>
+                            เปิดสำรวจคลังลวดลายไทย
                         </a>
                     </div>
                 </div>
@@ -980,6 +1133,31 @@
             const el = document.getElementById(id);
             if (el) sectionObserver.observe(el);
         });
+
+        // Specular mouse-tracking effect for Bento cards
+        document.querySelectorAll('.has-specular').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mx', `${x}px`);
+                card.style.setProperty('--my', `${y}px`);
+            });
+        });
+
+        // Scroll-triggered Progress Bars
+        const progressBars = document.querySelectorAll('.progress-bar-fill');
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const pct = entry.target.dataset.percentage || '0';
+                    const pctString = pct.endsWith('%') ? pct : `${pct}%`;
+                    entry.target.style.width = pctString;
+                    progressObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        progressBars.forEach(bar => progressObserver.observe(bar));
     </script>
 
     <!-- ===== CONTACT MODAL ===== -->
