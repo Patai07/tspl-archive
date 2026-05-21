@@ -262,6 +262,8 @@ function renderGrid(filterText = "") {
                             </span>
                         </div>
                         ${vectorBadge}
+                        <!-- Hover Analysis Overlay -->
+                        <div class="absolute inset-0 bg-[#0F172A]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <div class="bg-white/15 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[8px] font-bold uppercase tracking-[0.3em] flex items-center gap-2 border border-white/20">
                                 ${currentLang === "th" ? "วิเคราะห์" : "Analysis"} <i class="ph ph-arrow-right text-[#FF4E45]"></i>
                             </div>

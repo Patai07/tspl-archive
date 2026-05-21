@@ -23,7 +23,7 @@
 <body class="min-h-screen flex flex-col relative overflow-x-hidden blueprint-grid">
     <!-- Tech Background Gimmicks - Constrained to Hero Area -->
     <div class="absolute inset-x-0 top-0 pointer-events-none z-0 overflow-hidden h-[800px]">
-        <div id="tech-dots-container" class="absolute inset-0"></div>
+        <!-- <div id="tech-dots-container" class="absolute inset-0"></div> -->
         <div class="scan-line"></div>
     </div>
 
@@ -161,13 +161,6 @@
                         <img src="assets/Profile_Pic.jpg"
                             alt="Samaporn Klayvichien"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    </div>
-                    <!-- Decorative Corners -->
-                    <div
-                        class="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-[#FF4E45]/40 rounded-tl-xl pointer-events-none z-20 hidden lg:block">
-                    </div>
-                    <div
-                        class="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-[#0F172A]/40 rounded-br-xl pointer-events-none z-20 hidden lg:block">
                     </div>
                 </div>
 
@@ -587,7 +580,7 @@
     </main>
 
       <footer class="bg-sila-jaruek text-gray-400 pt-8 pb-6 relative overflow-hidden mt-12">
-    <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none"></div>
     <div class="max-w-[1440px] mx-auto px-6 lg:px-12 relative z-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-6 pb-6 border-b border-white/5">
         <!-- Mission column -->
@@ -668,7 +661,8 @@
 
     <script src="assets/js/index.js?v=6.11"></script>
     <script>
-        // Random Tech-Dots at Grid Intersections
+        // Random Tech-Dots at Grid Intersections [Disabled for clean UI]
+        /*
         function createTechDots() {
             const container = document.getElementById('tech-dots-container');
             if (!container) return;
@@ -692,6 +686,7 @@
             }
         }
         createTechDots();
+        */
 
         // Mobile menu toggle
         const mobBtn = document.getElementById('mobile-menu-btn');

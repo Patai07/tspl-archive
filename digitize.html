@@ -127,7 +127,7 @@
   <main class="flex-grow pt-8 pb-32 relative overflow-hidden">
     <!-- Tech Background Gimmicks - Constrained to Hero Area -->
     <div class="absolute inset-x-0 top-0 pointer-events-none z-0 overflow-hidden h-[900px]">
-      <div id="tech-dots-container" class="absolute inset-0"></div>
+      <!-- <div id="tech-dots-container" class="absolute inset-0"></div> -->
       <div class="scan-line"></div>
     </div>
     <div class="max-w-[1440px] mx-auto px-6 lg:px-12">
@@ -376,7 +376,8 @@
 
   <script src="assets/js/index.js?v=6.11"></script>
   <script>
-    // Random Tech-Dots at Grid Intersections (Sync with index.html)
+    // Random Tech-Dots at Grid Intersections (Sync with index.html) [Disabled for clean UI]
+    /*
     function createTechDots() {
       const container = document.getElementById('tech-dots-container');
       if (!container) return;
@@ -400,6 +401,7 @@
       }
     }
     createTechDots();
+    */
 
     // Mobile menu toggle
     const mobBtn = document.getElementById('mobile-menu-btn');
