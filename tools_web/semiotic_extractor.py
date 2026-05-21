@@ -203,30 +203,77 @@ def main():
     gc = gspread.authorize(creds)
     sh = gc.open_by_key(SPREADSHEET_ID)
     
+    # Try to open Master, create if missing
+    MASTER_NAME = "Haiku_Scan_Master"
+    try:
+        worksheet = sh.worksheet(MASTER_NAME)
+    except gspread.exceptions.WorksheetNotFound:
+        print(f"⚡ ไม่พบ Tab '{MASTER_NAME}' — กำลังสร้างให้ใหม่...", flush=True)
+        worksheet = sh.add_worksheet(title=MASTER_NAME, rows="1000", cols="20")
+        headers = [
+            "Symbol ID", "Title TH", "Title EN", "Category", "Location", "Confidence", "Ethics",
+            "Connotation TH", "Connotation EN", "Preservation", "Restriction",
+            "Morphemes TH", "Morphemes EN", "Tags", "Main Img", "Vector Path", "Context Img",
+            "Doc Name", "Timestamp", "Drive Link"
+        ]
+        worksheet.append_row(headers)
+        time.sleep(1)
+
+    # Try to open Ignored, create if missing
+    try:
+        ws_ignored = sh.worksheet("Ignored_Docs")
+    except gspread.exceptions.WorksheetNotFound:
+        ws_ignored = sh.add_worksheet(title="Ignored_Docs", rows="1000", cols="5")
+        ws_ignored.append_row(["Filename", "Reason", "Timestamp"])
+        time.sleep(1)
+    
     # ── โหลด Sheet 1 (ข้อมูลเก่าที่ Approve แล้ว) เพื่อ fallback ──
     master_ws = sh.get_worksheet(0)
     master_headers = master_ws.row_values(1)
     old_data_rows = master_ws.get_all_values()
     
-    # สร้าง dict: normalized_title → row  เพื่อ lookup เร็วๆ
+    # ── ระบบล้างชื่อและ Manual Mapping เพื่อป้องกันการแสกนซ้ำ ──
     def _norm(s):
+        if not s: return ""
+        import unicodedata
+        s = unicodedata.normalize('NFC', str(s))
+        s = re.sub(r'\(.*?\)', '', s)
         s = re.sub(r'^\d+[-\s.]+', '', s.strip())
-        s = re.sub(r'^ลาย', '', s)
-        s = re.sub(r'\s*\(.*?\)', '', s)
-        return re.sub(r'\s+', '', s).lower()
+        s = re.sub(r'^(ลวดลาย|ลาย)', '', s)
+        s = re.sub(r'\.(jpg|jpeg|png|webp|tiff|tif|heic|heif)$', '', s, flags=re.I)
+        return re.sub(r'[^a-zA-Z0-9\u0E00-\u0E7F]', '', s).lower().strip()
+
+    manual_map = {
+        "ลวดลายดอกไม้ประดับอัญมณี": "สังวาลพระพุทธชินราช",
+        "010หน้าบันลูกฟักหน้าพรหม": "จั่วภัควัมหน้าพรหม",
+        "1-กระหนกสามตัว": "กนกสามตัว",
+        "ธรรมาสน์ วัดราชบูรณะ จังหวัดพิษณุโลก.jpg": "ลายก้านขดธรรมาสน์ไม้จำหลัก",
+        "ธรรมาสน์ วัดราชบูรณะ จังหวัดพิษณุโลก": "ลายก้านขดธรรมาสน์ไม้จำหลัก",
+        "มกร": "องค์มกรคายนาค",
+        "ครุฑ": "ครุฑไม้จำหลัก",
+        "ปลา": "ลายปลา"
+    }
 
     old_data_map = {}
     for r in old_data_rows[1:]:
         if len(r) > 1 and r[1].strip():
-            old_data_map[_norm(r[1])] = r
-    print(f"📚 โหลดข้อมูลเก่าจาก Sheet 1 แล้ว ({len(old_data_map)} ลาย) เพื่อ fallback Location ฯลฯ", flush=True)
+            clean_name = _norm(r[1])
+            old_data_map[clean_name] = r
+            
+    # เพิ่มรายการจาก Manual Map เข้าไปในฐานข้อมูลตรวจซ้ำด้วย
+    for drive_name, sheet_name in manual_map.items():
+        clean_drive = _norm(drive_name)
+        if _norm(sheet_name) in old_data_map:
+            old_data_map[clean_drive] = old_data_map[_norm(sheet_name)]
+            
+    print(f"📚 โหลดข้อมูลเก่าจาก Sheet 1 แล้ว ({len(old_data_map)} รายการ) เพื่อป้องกันการแสกนซ้ำ", flush=True)
 
     # กรอง Header ที่ไม่ควรเอาไปใส่ Scan Sheet ใหม่
     SKIP_HEADERS = {'drive_confirmed', 'drive confirmed', 'confirmed', 'note', 'remark', 'หมายเหตุ'}
     clean_headers = [h for h in master_headers if h.strip().lower() not in SKIP_HEADERS]
     
     # ── สร้าง / เปิด Scan Sheet ใหม่ โดยอิงโครงสร้างจาก Sheet 1 ──
-    sheet_name = f"Haiku_Scan_{datetime.now().strftime('%Y%m%d')}"
+    sheet_name = "Haiku_Scan_Master"
     try:
         worksheet = sh.worksheet(sheet_name)
     except gspread.exceptions.WorksheetNotFound:
@@ -240,16 +287,27 @@ def main():
     # เพื่อให้สอดคล้องกับโฟลเดอร์ Drive แบบ 1:1 ให้เริ่มนับ ID สดใหม่ในชีตสแกนเสมอ
     all_rows_for_id = list(all_rows)
     
+    # ── 3. ไล่เช็คไฟล์ที่เคยแสกนไปแล้ว "จากทุก Tab" เพื่อประหยัด API และป้องกัน ID ซ้ำ ──
+    print("🔍 กำลังตรวจสอบประวัติการแสกนและรหัส ID จากทุก Tab...", flush=True)
     processed_filenames = set()
     processed_titles = set()
+    all_rows_for_id_global = [] # เก็บทุกแถวจากทุก Tab เพื่อเช็คเลข ID สูงสุด
     
-    # BUG FIX: ข้าม row แรก (header) ด้วย [1:] ไม่งั้น "source_filename" จะถูกนับเป็น processed
-    for row in all_rows[1:]:
-        if len(row) > 17 and row[17]:
-            processed_filenames.add(row[17])
-            if '_' in row[17]:
-                p_folder = row[17].split('_')[0].strip().lower()
-                processed_titles.add(p_folder)
+    for ws in sh.worksheets():
+        if ws.title.startswith("Haiku_Scan") or ws.index == 0:
+            rows = ws.get_all_values()
+            if len(rows) > 1:
+                all_rows_for_id_global.extend(rows[1:])
+                for r in rows[1:]:
+                    if len(r) > 17 and r[17].strip():
+                        fn = r[17].strip()
+                        processed_filenames.add(fn)
+                        if '_' in fn:
+                            p_folder = fn.split('_')[0].strip().lower()
+                            processed_titles.add(p_folder)
+    
+    print(f"🎯 พบประวัติการแสกนแล้วทั้งหมด {len(processed_filenames)} ไฟล์", flush=True)
+    print(f"📊 รวบรวมข้อมูล ID เดิมเพื่อป้องกันการออกเลขซ้ำแล้ว", flush=True)
 
     
     # โหลดรายชื่อไฟล์ที่ข้ามแล้ว (Ignored) เพื่อจะได้ไม่สแกนซ้ำ
@@ -327,7 +385,7 @@ def main():
                 cat = data.get('category', 'Nature & Botany')
             
             data['category'] = cat  # บังคับเขียนทับ JSON category ให้ตรงกับโฟลเดอร์จริงเสมอ
-            sid = get_next_symbol_id(all_rows_for_id, cat)
+            sid = get_next_symbol_id(all_rows_for_id_global, cat)
             folder = CATEGORY_MAP.get(cat, '01_Nature')
             base_path = f"assets/images/database/{folder}/{sid}"
             # ── Fallback จาก Sheet 1 เมื่อ AI ไม่พบข้อมูล ──
@@ -370,7 +428,7 @@ def main():
             all_rows.append(row)  # อัปเดตข้อมูลในเมมโมรี่เพื่อรันเลขถัดไปไม่ให้ซ้ำ
             processed_filenames.add(context_name)
             processed_titles.add(folder_key)
-            all_rows_for_id.append(row)  # อัปเดต ID pool ด้วย เพื่อให้เลขถัดไปไม่ซ้ำ
+            all_rows_for_id_global.append(row)  # อัปเดต ID pool รวมด้วย เพื่อให้เลขถัดไปไม่ซ้ำ
             print(f"✅ สำเร็จ: {sid}", flush=True)
         except Exception as e:
             print(f"❌ บันทึกผิดพลาด: {str(e)[:60]}", flush=True)

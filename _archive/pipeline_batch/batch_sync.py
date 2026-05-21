@@ -1,18 +1,14 @@
 """
-line_sync.py — LINE Auto-Upload Drive Sync
+batch_sync.py — Asset Drive Sync
 ==========================================
-อ่าน 2 โฟลเดอร์ใน Google Drive (ภาพ + เอกสาร) ที่ LINE auto-upload
-จับคู่ไฟล์ตาม timestamp prefix ที่ LINE ใส่มา
+อ่าน 2 โฟลเดอร์ใน Google Drive (ภาพ + เอกสาร) ที่ sync มา
+จับคู่ไฟล์ตาม timestamp prefix
 แล้ว sync directory listing เข้า Google Sheet
 
-ชื่อไฟล์ที่ LINE ใส่มาจะเป็นแบบ:
-  YYYY_MMDD_HHMMSS_mmm_XXXXXXX_ชื่อไฟล์จริง.ext
-
 Config ใน config.json:
-  LINE_IMAGE_FOLDER_ID   - Folder ID ของโฟลเดอร์ภาพจาก LINE
-  LINE_DOC_FOLDER_ID     - Folder ID ของโฟลเดอร์เอกสารจาก LINE
-  LINE_SYNC_SHEET_ID     - Spreadsheet ID สำหรับ sync (ใช้ SPREADSHEET_ID ตัวเดิมได้)
-  LINE_SYNC_SHEET_TAB    - ชื่อ tab ใน Sheet (default: "LINE_Sync")
+  BATCH_IMAGE_FOLDER_ID   - Folder ID ของโฟลเดอร์ภาพ
+  BATCH_DOC_FOLDER_ID     - Folder ID ของโฟลเดอร์เอกสาร
+  BATCH_SYNC_SHEET_TAB    - ชื่อ tab ใน Sheet (default: "Batch_Sync")
 """
 
 import json
@@ -32,12 +28,12 @@ SERVICE_ACCOUNT_FILE = 'service-account.json'
 ANTHROPIC_API_KEY    = config.get('ANTHROPIC_API_KEY')
 CLAUDE_MODEL         = "claude-haiku-4-5-20251001"
 
-# โฟลเดอร์ทั้งสองจาก LINE (ต้อง set ใน config.json)
-IMAGE_FOLDER_ID = config.get('LINE_IMAGE_FOLDER_ID', '')
-DOC_FOLDER_ID   = config.get('LINE_DOC_FOLDER_ID', '')
+# โฟลเดอร์ทั้งสอง (ต้อง set ใน config.json)
+IMAGE_FOLDER_ID = config.get('BATCH_IMAGE_FOLDER_ID', '')
+DOC_FOLDER_ID   = config.get('BATCH_DOC_FOLDER_ID', '')
 
 SPREADSHEET_ID  = config.get('SPREADSHEET_ID')
-SHEET_TAB       = config.get('LINE_SYNC_SHEET_TAB', 'LINE_Sync')
+SHEET_TAB       = config.get('BATCH_SYNC_SHEET_TAB', 'Batch_Sync')
 
 SCOPES = [
     'https://www.googleapis.com/auth/drive.readonly',
@@ -45,16 +41,16 @@ SCOPES = [
 ]
 
 # ─── 2. TIMESTAMP PARSER ──────────────────────────────────────────────────────
-# LINE ใส่ชื่อไฟล์ในรูปแบบ: YYYY_MMDD_HHMMSS_mmm_RANDOM_ชื่อ.ext
-LINE_TS_PATTERN = re.compile(
+# รูปแบบชื่อไฟล์: YYYY_MMDD_HHMMSS_mmm_RANDOM_ชื่อ.ext
+BATCH_TS_PATTERN = re.compile(
     r'^(\d{4})_(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})_(\d{3})_(\d+)_(.+)$'
 )
 
-def parse_line_filename(name: str) -> dict:
-    """แยก timestamp และชื่อจริงออกจากชื่อไฟล์ที่ LINE ตั้ง"""
+def parse_sync_filename(name: str) -> dict:
+    """แยก timestamp และชื่อจริงออกจากชื่อไฟล์"""
     stem = name.rsplit('.', 1)[0]  # ตัด extension
     ext  = name.rsplit('.', 1)[-1].lower() if '.' in name else ''
-    m    = LINE_TS_PATTERN.match(stem)
+    m    = BATCH_TS_PATTERN.match(stem)
     if m:
         year, mon, day, hh, mm, ss, ms, rand, real_name = m.groups()
         ts_str = f"{year}-{mon}-{day} {hh}:{mm}:{ss}.{ms}"
@@ -107,7 +103,7 @@ def list_folder(drive_service, folder_id: str, label: str) -> list:
 
 def enrich_file(f: dict, folder_label: str) -> dict:
     """เพิ่มข้อมูล parsed จากชื่อไฟล์"""
-    parsed = parse_line_filename(f['name'])
+    parsed = parse_sync_filename(f['name'])
     return {**f, **parsed, 'folder_type': folder_label}
 
 # ─── 4. CLAUDE MATCHER (optional) ────────────────────────────────────────────
@@ -133,12 +129,12 @@ def haiku_describe_file(name: str, mime: str) -> str:
 # ─── 5. SHEET HELPERS ─────────────────────────────────────────────────────────
 SHEET_HEADERS = [
     "folder_type",       # A: IMAGE / DOC
-    "original_name",     # B: ชื่อไฟล์เต็มจาก LINE
+    "original_name",     # B: ชื่อไฟล์เต็ม
     "real_name",         # C: ชื่อจริง (ตัด timestamp prefix ออก)
     "extension",         # D: นามสกุล
     "ts_str",            # E: timestamp (YYYY-MM-DD HH:MM:SS.mmm)
     "ts_key",            # F: key 17 หลัก สำหรับจับคู่
-    "random_id",         # G: random ID จาก LINE
+    "random_id",         # G: random ID
     "mime_type",         # H: MIME type
     "size_bytes",        # I: ขนาดไฟล์
     "drive_created",     # J: createdTime ใน Drive
@@ -183,13 +179,13 @@ def build_ts_map(files: list) -> dict:
 # ─── 7. MAIN ──────────────────────────────────────────────────────────────────
 def main():
     print("=" * 60)
-    print("  LINE Drive Sync — by Claude Haiku + Google Drive API")
+    print("  Asset Drive Sync — by Claude Haiku + Google Drive API")
     print("=" * 60)
 
     # ตรวจ config
     missing = []
-    if not IMAGE_FOLDER_ID: missing.append('LINE_IMAGE_FOLDER_ID')
-    if not DOC_FOLDER_ID:   missing.append('LINE_DOC_FOLDER_ID')
+    if not IMAGE_FOLDER_ID: missing.append('BATCH_IMAGE_FOLDER_ID')
+    if not DOC_FOLDER_ID:   missing.append('BATCH_DOC_FOLDER_ID')
     if missing:
         print(f"\n⚠️  ยังไม่ได้ตั้งค่า config: {', '.join(missing)}")
         print("   กรุณาเพิ่มใน config.json แล้วรันใหม่")

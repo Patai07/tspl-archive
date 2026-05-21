@@ -1,6 +1,6 @@
-# 📦 pipeline_line — ระบบ LINE Image Archive
+# 📦 pipeline_batch — ระบบ Asset Archive Pipeline
 
-โฟลเดอร์นี้เก็บ Pipeline ทั้งหมดสำหรับดึง จัดระเบียบ และ Archive ภาพลวดลายที่พี่กบส่งมาทาง LINE
+โฟลเดอร์นี้เก็บ Pipeline ทั้งหมดสำหรับดึง จัดระเบียบ และ Archive ภาพลวดลายที่ sync มาจาก Drive
 
 ---
 
@@ -17,7 +17,7 @@
 
 ### ขั้นตอนที่ 2 — รีวิวรูปที่ AI ไม่มั่นใจ
 ```
-ดับเบิ้ลคลิก: line_review.command
+ดับเบิ้ลคลิก: batch_review.command
 ```
 เปิดหน้าเว็บ http://localhost:5555 (จอสีดำ) แสดงรูปที่สถานะ PENDING
 - **A** = Approve (ผ่าน)
@@ -29,10 +29,10 @@
 
 ### ขั้นตอนที่ 3 — สร้าง Asset_Map สรุปผลทั้งหมด
 ```
-ดับเบิ้ลคลิก: line_finalize.command
+ดับเบิ้ลคลิก: batch_finalize.command
 ```
 นำรูปที่ APPROVED ทั้งหมดไปเทียบกับ tspl_database แล้วสร้างตาราง **Asset_Map** ใน Spreadsheet
-ระบบจะใช้ทั้ง **ชื่อที่ Haiku อ่านได้** + **Timestamp การส่งไฟล์** เพื่อจับคู่ให้แม่นยำที่สุด
+ระบบจะใช้ทั้ง **ชื่อที่ AI อ่านได้** + **Timestamp การส่งไฟล์** เพื่อจับคู่ให้แม่นยำที่สุด
 
 ---
 
@@ -41,11 +41,10 @@
 | ไฟล์ | หน้าที่ |
 |------|---------|
 | `run_pipeline.command` | **ปุ่มหลัก** รัน sync + classify รวดเดียวจบ |
-| `line_sync.py` / `.command` | ดึงไฟล์รูปและเอกสารจาก Google Drive มาใส่ LINE_Sync sheet |
-| `line_classify.py` / `.command` | ส่งรูปให้ Claude Haiku Vision วิเคราะห์และเขียนผลลง LINE_Review |
-| `line_review.py` / `.command` | เปิด web UI สำหรับ Human-in-the-loop review |
-| `line_finalize.py` / `.command` | สร้าง Asset_Map โดย match รูปเข้า tspl_database |
-| `line_match.py` / `.command` | *(เวอร์ชันเก่า ก่อนใช้ AI — ไม่จำเป็นต้องใช้แล้ว)* |
+| `batch_sync.py` / `.command` | ดึงไฟล์รูปและเอกสารจาก Google Drive มาใส่ Batch_Sync sheet |
+| `batch_classify.py` / `.command` | ส่งรูปให้ Claude Haiku Vision วิเคราะห์และเขียนผลลง Batch_Review |
+| `batch_review.py` / `.command` | เปิด web UI สำหรับ Human-in-the-loop review |
+| `batch_finalize.py` / `.command` | สร้าง Asset_Map โดย match รูปเข้า tspl_database |
 
 ---
 

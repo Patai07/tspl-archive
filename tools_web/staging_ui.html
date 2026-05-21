@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TSPL Staging Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --surf: #111;
+  --text: #e0e0e0;
+  --muted: #666;
+  --accent: #f59e0b; /* Orange for Staging */
+  --border: rgba(245, 158, 11, 0.1);
+  --font-sans: 'Space Grotesk', -apple-system, sans-serif;
+}
+body { background: var(--bg); color: var(--text); font-family: var(--font-sans); margin: 0; padding: 0; }
+header { padding: 24px 40px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.02em; color: var(--accent); }
+.container { padding: 40px; max-width: 1200px; margin: 0 auto; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 40px; }
+.stat-card { background: var(--surf); border: 1px solid var(--border); padding: 24px; border-radius: 16px; text-align: center; }
+.stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+.stat-value { font-size: 2rem; font-weight: 700; color: #fff; }
+.btn-back { display: inline-block; padding: 12px 24px; background: rgba(255,255,255,0.05); color: #fff; text-decoration: none; border-radius: 8px; font-size: 0.9rem; transition: all 0.2s; }
+.btn-back:hover { background: rgba(255,255,255,0.1); }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">TSPL STAGING CENTER</div>
+  <a href="/" class="btn-back">← BACK TO PRODUCTION</a>
+</header>
+<div class="container">
+  <div style="margin-bottom: 32px;">
+    <h1 style="font-size: 1.5rem; margin-bottom: 8px;">Staging Overview (Sheet 1)</h1>
+    <p style="color: var(--muted); font-size: 0.9rem;">เปรียบเทียบข้อมูลดิบที่ได้จาก Haiku Scan ก่อนส่งเข้าฐานข้อมูลจริง</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Total in Staging</div>
+      <div class="stat-value" id="s-total">--</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Haiku Scanned</div>
+      <div class="stat-value" style="color: var(--accent);" id="s-scanned">--</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Pending Scan</div>
+      <div class="stat-value" id="s-pending">--</div>
+    </div>
+  </div>
+  <div class="stats-grid" style="grid-template-columns: repeat(4, 1fr);">
+    <div class="stat-card">
+      <div class="stat-label">Nature</div>
+      <div class="stat-value" id="s-nature">--</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Fauna</div>
+      <div class="stat-value" id="s-fauna">--</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Geometric</div>
+      <div class="stat-value" id="s-geo">--</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Sacred</div>
+      <div class="stat-value" id="s-sacred">--</div>
+    </div>
+  </div>
+</div>
+<script>
+async function loadStagingStats() {
+  try {
+    const res = await fetch('/api/db_stats_staging');
+    const data = await res.json();
+    document.getElementById('s-total').innerText = data.total || 0;
+    document.getElementById('s-scanned').innerText = data.scanned || 0;
+    document.getElementById('s-pending').innerText = data.pending || 0;
+    document.getElementById('s-nature').innerText = data.nature || 0;
+    document.getElementById('s-fauna').innerText = data.fauna || 0;
+    document.getElementById('s-geo').innerText = data.geo || 0;
+    document.getElementById('s-sacred').innerText = data.sacred || 0;
+  } catch(e) {}
+}
+loadStagingStats();
+setInterval(loadStagingStats, 30000);
+</script>
+</body>
+</html>

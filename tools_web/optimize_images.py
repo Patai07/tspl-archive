@@ -89,7 +89,7 @@ def main():
     count = 0
     for root, dirs, files in os.walk(ASSETS_DIR):
         for file in files:
-            if file.lower().endswith(('.jpg', '.jpeg', '.png')):
+            if file.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff')):
                 path = os.path.join(root, file)
                 if process_image(path):
                     count += 1

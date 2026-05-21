@@ -126,66 +126,87 @@ def cmd_link():
     pattern_map = list_pattern_folders(drive_svc)
     
     rows = ws.get_all_values()
-    matched = 0; no_match = 0
-    batch_data = []
-
+    data_rows = []
     for i, row in enumerate(rows[1:], start=2):
         if not row or not row[0].strip() or row[0].strip().startswith('#'):
             continue
-        sid = row[0].strip()
-        title_th = row[1] if len(row) > 1 else ''
-        cat = row[3] if len(row) > 3 else ''
-        norm = normalize(title_th)
+        data_rows.append({'row_idx': i, 'data': row})
 
-        local_dir = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid)
+    # Group by category folder name
+    categories = ['01_Nature', '02_Fauna', '03_Geometric', '04_Sacred']
+    grouped = {cat: [] for cat in categories}
+    for item in data_rows:
+        cat_val = item['data'][3] if len(item['data']) > 3 else ''
+        folder = cat_folder_name(cat_val)
+        if folder in grouped: grouped[folder].append(item)
+        else: grouped['01_Nature'].append(item) # Default
+
+    matched = 0; no_match = 0
+    batch_data = []
+
+    for cat_folder in categories:
+        items = grouped[cat_folder]
+        if not items: continue
         
-        def find_slot(prefix, subfolder=''):
-            tdir = os.path.join(local_dir, subfolder) if subfolder else local_dir
-            if not os.path.exists(tdir): return ''
-            for f in os.listdir(tdir):
-                if f.lower().startswith(prefix.lower() + '.') and re.search(r'\.(jpg|jpeg|png|svg)$', f, re.I):
-                    rel = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid, subfolder, f) if subfolder else os.path.join(ASSETS_BASE, cat_folder_name(cat), sid, f)
-                    return rel.replace('\\', '/')
-            return ''
+        cat_display = cat_folder.split('_')[-1]
+        print(f"\n📁 หมวด {cat_display}: กำลังตรวจสอบ {len(items)} รายการ...", flush=True)
+        
+        for item in items:
+            i = item['row_idx']
+            row = item['data']
+            sid = row[0].strip()
+            title_th = row[1] if len(row) > 1 else ''
+            cat = row[3] if len(row) > 3 else ''
+            norm = normalize(title_th)
+            local_dir = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid)
+            
+            def find_slot(prefix, subfolder=''):
+                tdir = os.path.join(local_dir, subfolder) if subfolder else local_dir
+                if not os.path.exists(tdir): return ''
+                for f in os.listdir(tdir):
+                    # รองรับไฟล์หลากหลายนามสกุล: jpg, jpeg, png, svg, webp, heic, heif, tif, tiff
+                    if f.lower().startswith(prefix.lower() + '.') and re.search(r'\.(jpg|jpeg|png|svg|webp|heic|heif|tif|tiff)$', f, re.I):
+                        rel = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid, subfolder, f) if subfolder else os.path.join(ASSETS_BASE, cat_folder_name(cat), sid, f)
+                        return rel.replace('\\', '/')
+                return ''
 
-        # หาพาธจริงที่อยู่ในเครื่อง
-        img_main   = find_slot('main')
-        img_vec    = find_slot('vector', 'vectors')
-        img_ctx    = find_slot('context')
-        img_mid    = find_slot('img_mid')
-        img_det    = find_slot('img_detail')
-        img_extra1 = find_slot('img_extra1')
-        img_extra2 = find_slot('img_extra2')
+            # หาพาธจริงที่อยู่ในเครื่อง
+            img_main   = find_slot('main')
+            img_vec    = find_slot('vector', 'vectors')
+            img_ctx    = find_slot('context')
+            img_mid    = find_slot('img_mid')
+            img_det    = find_slot('img_detail')
+            img_extra1 = find_slot('img_extra1')
+            img_extra2 = find_slot('img_extra2')
 
-        # Fallback กรณีที่ยังไม่ได้ดาวน์โหลด แต่มีข้อมูลใน row เดิมอยู่แล้ว
-        old_main   = row[14].strip() if len(row) > 14 else ''
-        old_vec    = row[15].strip() if len(row) > 15 else ''
-        old_ctx    = row[16].strip() if len(row) > 16 else ''
-        old_mid    = row[17].strip() if len(row) > 17 else ''
-        old_det    = row[18].strip() if len(row) > 18 else ''
-        old_ex1    = row[19].strip() if len(row) > 19 else ''
-        old_ex2    = row[20].strip() if len(row) > 20 else ''
+            # Fallback
+            old_main = row[14].strip() if len(row) > 14 else ''
+            old_vec  = row[15].strip() if len(row) > 15 else ''
+            old_ctx  = row[16].strip() if len(row) > 16 else ''
+            old_mid  = row[17].strip() if len(row) > 17 else ''
+            old_det  = row[18].strip() if len(row) > 18 else ''
+            old_ex1  = row[19].strip() if len(row) > 19 else ''
+            old_ex2  = row[20].strip() if len(row) > 20 else ''
 
-        if not img_main:   img_main   = old_main or (f"{ASSETS_BASE}/{cat_folder_name(cat)}/{sid}/main.jpg" if norm in pattern_map else '')
-        if not img_vec:    img_vec    = old_vec
-        if not img_ctx:    img_ctx    = old_ctx
-        if not img_mid:    img_mid    = old_mid
-        if not img_det:    img_det    = old_det
-        if not img_extra1: img_extra1 = old_ex1
-        if not img_extra2: img_extra2 = old_ex2
+            if not img_main:   img_main   = old_main or (f"{ASSETS_BASE}/{cat_folder_name(cat)}/{sid}/main.jpg" if norm in pattern_map else '')
+            if not img_vec:    img_vec    = old_vec
+            if not img_ctx:    img_ctx    = old_ctx
+            if not img_mid:    img_mid    = old_mid
+            if not img_det:    img_det    = old_det
+            if not img_extra1: img_extra1 = old_ex1
+            if not img_extra2: img_extra2 = old_ex2
 
-        # ถ้าพบใน Drive หรือมีโฟลเดอร์ในเครื่อง ให้นับว่า match เพื่อรายงานผล
-        if norm in pattern_map or os.path.exists(local_dir):
-            matched += 1
-            print(f"✅ {sid} — {title_th} (Main: {img_main.rsplit('/',1)[-1].upper() if img_main else 'NONE'})", flush=True)
-        else:
-            no_match += 1
-            print(f"⚠️  ไม่พบข้อมูล: {sid} — {title_th}", flush=True)
+            if norm in pattern_map or os.path.exists(local_dir):
+                matched += 1
+                # print(f"✅ {sid} — {title_th}", flush=True)
+            else:
+                no_match += 1
+                # print(f"⚠️  ไม่พบข้อมูล: {sid}", flush=True)
 
-        batch_data.append({
-            'range': f'O{i}:U{i}',
-            'values': [[img_main, img_vec, img_ctx, img_mid, img_det, img_extra1, img_extra2]]
-        })
+            batch_data.append({
+                'range': f'O{i}:U{i}',
+                'values': [[img_main, img_vec, img_ctx, img_mid, img_det, img_extra1, img_extra2]]
+            })
 
     print(f"\n📊 เตรียมอัปเดตข้อมูล {len(batch_data)} แถว...", flush=True)
     if batch_data:
@@ -236,10 +257,18 @@ def cmd_download():
         os.makedirs(local_dir, exist_ok=True)
 
         for j, img in enumerate(imgs[:5]):
+            slot_name = IMG_SLOTS[j]
+            # ตรวจสอบว่าในเครื่องมีไฟล์ที่ขึ้นต้นด้วยชื่อ Slot นี้อยู่แล้วหรือไม่ (เช่น main.png, main.jpg)
+            existing = [f for f in os.listdir(local_dir) if f.lower().startswith(slot_name + '.')] if os.path.exists(local_dir) else []
+            
+            if existing:
+                # ถ้ามีอยู่แล้ว ไม่ว่าจะนามสกุลอะไร ให้ข้ามการดาวน์โหลด
+                skipped += 1
+                continue
+
             ext = img['name'].rsplit('.', 1)[-1].lower() if '.' in img['name'] else 'jpg'
-            local_path = os.path.join(local_dir, f"{IMG_SLOTS[j]}.{ext}")
-            if os.path.exists(local_path):
-                skipped += 1; continue
+            local_path = os.path.join(local_dir, f"{slot_name}.{ext}")
+            
             try:
                 req = drive_svc.files().get_media(fileId=img['id'])
                 buf = io.BytesIO()
@@ -273,7 +302,7 @@ def cmd_check():
         cat      = row[3] if len(row) > 3 else ''
         norm     = normalize(title_th)
         local_dir = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid)
-        local_imgs = [f for f in os.listdir(local_dir) if re.search(r'\.(jpg|jpeg|png)$', f, re.I)] if os.path.exists(local_dir) else []
+        local_imgs = [f for f in os.listdir(local_dir) if re.search(r'\.(jpg|jpeg|png|webp|heic|heif|tif|tiff)$', f, re.I)] if os.path.exists(local_dir) else []
         results.append({
             'symbol_id':        sid,
             'title_th':         title_th,

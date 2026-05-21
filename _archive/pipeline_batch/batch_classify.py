@@ -1,9 +1,9 @@
 """
-line_classify.py — Haiku Vision Image Classifier
+batch_classify.py — Haiku Vision Image Classifier
 ==================================================
-Download ภาพทุกรูปจาก LINE_Sync → Haiku Vision วิเคราะห์
-เขียนผลลัพธ์พร้อม status PENDING ลง 'LINE_Review' tab
-รัน line_review.py หลังจากนี้เพื่อ review ผล
+Download ภาพทุกรูปจาก Batch_Sync → Haiku Vision วิเคราะห์
+เขียนผลลัพธ์พร้อม status PENDING ลง 'Batch_Review' tab
+รัน batch_review.py หลังจากนี้เพื่อ review ผล
 """
 
 import json
@@ -32,8 +32,8 @@ SERVICE_ACCOUNT_FILE = 'service-account.json'
 ANTHROPIC_API_KEY    = config.get('ANTHROPIC_API_KEY')
 CLAUDE_MODEL         = "claude-haiku-4-5-20251001"
 SPREADSHEET_ID       = config['SPREADSHEET_ID']
-SOURCE_TAB           = config.get('LINE_SYNC_SHEET_TAB', 'LINE_Sync')
-REVIEW_TAB           = 'LINE_Review'
+SOURCE_TAB           = config.get('BATCH_SYNC_SHEET_TAB', 'Batch_Sync')
+REVIEW_TAB           = 'Batch_Review'
 
 SCOPES = [
     'https://www.googleapis.com/auth/drive.readonly',
@@ -160,7 +160,7 @@ def classify_image(client, image_bytes: bytes, filename: str,
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 def main():
     print("=" * 58)
-    print("  LINE Image Classifier — Claude Haiku Vision")
+    print("  Image Classifier — Claude Haiku Vision")
     print("=" * 58)
     if not HAS_PIL:
         print("  ⚠️  PIL ไม่ได้ติดตั้ง (pip install Pillow) — ส่งรูปขนาดเต็ม")
@@ -172,7 +172,7 @@ def main():
     gc = gspread.authorize(creds)
     sh = gc.open_by_key(SPREADSHEET_ID)
 
-    # ── อ่าน LINE_Sync ───────────────────────────────────────────────────────
+    # ── อ่าน Batch_Sync ───────────────────────────────────────────────────────
     print(f"\n📖 อ่านจาก '{SOURCE_TAB}'...")
     src_ws   = sh.worksheet(SOURCE_TAB)
     all_rows = src_ws.get_all_values()
@@ -216,7 +216,7 @@ def main():
     doc_symbol_set = {s: s for s in symbol_candidates}
     print(f"   Symbol candidates: {len(symbol_candidates)} รายการ")
 
-    # ── เปิด/สร้าง LINE_Review tab ───────────────────────────────────────────
+    # ── เปิด/สร้าง Batch_Review tab ───────────────────────────────────────────
     REVIEW_HEADERS = [
         'STATUS',           # A: PENDING / APPROVED / REJECTED
         'haiku_symbol',     # B: Haiku's guess
@@ -306,7 +306,7 @@ def main():
     print(f"   ❌ REJECTED (auto): {rejected} รูป  (ไม่ใช่ลวดลาย)")
     print(f"   ⏳ PENDING (review): {pending} รูป  ← ต้องดูเพิ่มเติม")
     if pending > 0:
-        print(f"\n   → รัน: python3 line_review.py เพื่อ review {pending} รูปที่เหลือ")
+        print(f"\n   → รัน: python3 batch_review.py เพื่อ review {pending} รูปที่เหลือ")
     else:
         print(f"\n   ✨ ไม่มีรูปที่ต้อง review เพิ่มเติม!")
 

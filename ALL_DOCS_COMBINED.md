@@ -6,7 +6,7 @@
 | CI/CI_Guidelines.md | Corporate Identity guidelines — fonts, colors, logos, icons, motion rules, and responsive layout strategy | Links to Graphics_Toolkit.md for full token details |
 | CI/Graphics_Toolkit.md | Design token reference — full color palette, typography scale, spacing, grid system, UI components, animation rules, and technical SVG assets | Single source of truth for design tokens |
 | CI/tspl-icons-sprite.md | SVG icon sprite usage guide and full index of all 91 icons in the TSPL icon set | References icons stored in CI/icons/ |
-| pipeline_line/README.md | LINE image archive pipeline — step-by-step usage, file descriptions, API cost estimates, and output format | Updated พ.ค. 2569 |
+| pipeline_batch/README.md | LINE image archive pipeline — step-by-step usage, file descriptions, API cost estimates, and output format | Updated พ.ค. 2569 |
 | tools_debug/README.md | Debug scripts reference — purpose of each debug tool and when to use them | Not part of main pipeline — diagnostic use only |
 | tools_web/README.md | Web tools and database management scripts — deploy, clear sheet, extractor, mirror, optimizer descriptions and warnings | Updated พ.ค. 2569 |
 
@@ -436,9 +436,9 @@ Assets are available in `CI/patterns/scan_effects.svg`.
 | ![x-circle](icons/x-circle.svg) | `x-circle` |
 | ![x](icons/x.svg) | `x` |
 
-===== FILE: pipeline_line/README.md =====
+===== FILE: pipeline_batch/README.md =====
 
-# 📦 pipeline_line — ระบบ LINE Image Archive
+# 📦 pipeline_batch — ระบบ Asset Image Archive
 
 โฟลเดอร์นี้เก็บ Pipeline ทั้งหมดสำหรับดึง จัดระเบียบ และ Archive ภาพลวดลายที่พี่กบส่งมาทาง LINE
 
@@ -457,7 +457,7 @@ Assets are available in `CI/patterns/scan_effects.svg`.
 
 ### ขั้นตอนที่ 2 — รีวิวรูปที่ AI ไม่มั่นใจ
 ```
-ดับเบิ้ลคลิก: line_review.command
+ดับเบิ้ลคลิก: batch_review.command
 ```
 เปิดหน้าเว็บ http://localhost:5555 (จอสีดำ) แสดงรูปที่สถานะ PENDING
 - **A** = Approve (ผ่าน)
@@ -469,7 +469,7 @@ Assets are available in `CI/patterns/scan_effects.svg`.
 
 ### ขั้นตอนที่ 3 — สร้าง Asset_Map สรุปผลทั้งหมด
 ```
-ดับเบิ้ลคลิก: line_finalize.command
+ดับเบิ้ลคลิก: batch_finalize.command
 ```
 นำรูปที่ APPROVED ทั้งหมดไปเทียบกับ tspl_database แล้วสร้างตาราง **Asset_Map** ใน Spreadsheet
 ระบบจะใช้ทั้ง **ชื่อที่ Haiku อ่านได้** + **Timestamp การส่งไฟล์** เพื่อจับคู่ให้แม่นยำที่สุด
@@ -481,10 +481,10 @@ Assets are available in `CI/patterns/scan_effects.svg`.
 | ไฟล์ | หน้าที่ |
 |------|---------|
 | `run_pipeline.command` | **ปุ่มหลัก** รัน sync + classify รวดเดียวจบ |
-| `line_sync.py` / `.command` | ดึงไฟล์รูปและเอกสารจาก Google Drive มาใส่ LINE_Sync sheet |
-| `line_classify.py` / `.command` | ส่งรูปให้ Claude Haiku Vision วิเคราะห์และเขียนผลลง LINE_Review |
-| `line_review.py` / `.command` | เปิด web UI สำหรับ Human-in-the-loop review |
-| `line_finalize.py` / `.command` | สร้าง Asset_Map โดย match รูปเข้า tspl_database |
+| `batch_sync.py` / `.command` | ดึงไฟล์รูปและเอกสารจาก Google Drive มาใส่ Batch_Sync sheet |
+| `batch_classify.py` / `.command` | ส่งรูปให้ Claude Haiku Vision วิเคราะห์และเขียนผลลง Batch_Review |
+| `batch_review.py` / `.command` | เปิด web UI สำหรับ Human-in-the-loop review |
+| `batch_finalize.py` / `.command` | สร้าง Asset_Map โดย match รูปเข้า tspl_database |
 | `line_match.py` / `.command` | *(เวอร์ชันเก่า ก่อนใช้ AI — ไม่จำเป็นต้องใช้แล้ว)* |
 
 ---
@@ -525,7 +525,7 @@ Assets are available in `CI/patterns/scan_effects.svg`.
 | ไฟล์ | หน้าที่ |
 |------|---------|
 | `debug_match.py` | ตรวจสอบว่าชื่อลายจาก LINE match กับ Database ได้ดีแค่ไหน แสดงรายการที่ match ไม่ได้ |
-| `debug_time.py` | ตรวจสอบ Timestamp ของไฟล์ใน LINE_Sync ว่า format ถูกต้องและ parse ได้ไหม |
+| `debug_time.py` | ตรวจสอบ Timestamp ของไฟล์ใน Batch_Sync ว่า format ถูกต้องและ parse ได้ไหม |
 
 ---
 

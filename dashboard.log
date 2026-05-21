@@ -1,0 +1,17 @@
+TSPL Control Center running at http://localhost:5556
+ * Serving Flask app 'dashboard'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5556
+ * Running on http://172.20.10.3:5556
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [17/May/2026 03:53:17] "GET /api/db_stats HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:53:23] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:53:23] "GET /api/db_stats HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:53:23] "GET /api/logs HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:53:42] "POST /api/run/link_assets HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:53:53] "GET /api/db_stats HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:54:26] "GET /api/db_stats HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:54:28] "GET /api/db_stats HTTP/1.1" 200 -
+127.0.0.1 - - [17/May/2026 03:54:53] "GET /api/db_stats HTTP/1.1" 200 -

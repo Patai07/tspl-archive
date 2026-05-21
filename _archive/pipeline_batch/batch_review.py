@@ -1,9 +1,9 @@
 """
-line_review.py — Local Review Server
+batch_review.py — Local Review Server
 =====================================
 เปิด http://localhost:5555 เพื่อ review ผลการ classify
 ใช้ keyboard กด A=Approve, R=Reject, E=Edit name
-บันทึกผลลัพธ์กลับเข้า LINE_Review tab โดยอัตโนมัติ
+บันทึกผลลัพธ์กลับเข้า Batch_Review tab โดยอัตโนมัติ
 """
 
 import json
@@ -21,7 +21,7 @@ with open('config.json', 'r') as f:
 
 SERVICE_ACCOUNT_FILE = 'service-account.json'
 SPREADSHEET_ID       = config['SPREADSHEET_ID']
-REVIEW_TAB           = 'LINE_Review'
+REVIEW_TAB           = 'Batch_Review'
 PORT                 = 5555
 
 SCOPES = [
@@ -123,7 +123,7 @@ REVIEW_HTML = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LINE Image Review</title>
+<title>Asset Image Review</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -456,7 +456,7 @@ REVIEW_HTML = """<!DOCTYPE html>
 <body>
 
 <header>
-  <h1>🖼️ LINE Image Review</h1>
+  <h1>🖼️ Asset Image Review</h1>
   <div class="stats">
     <div class="stat"><div class="stat-dot dot-green"></div><span id="count-approved">0 approved</span></div>
     <div class="stat"><div class="stat-dot dot-red"></div><span id="count-rejected">0 rejected</span></div>
@@ -692,7 +692,7 @@ setInterval(updateStats, 30000);
 
 if __name__ == '__main__':
     print("=" * 50)
-    print("  LINE Review Server")
+    print("  Asset Review Server")
     print("=" * 50)
     print(f"\n  ✅ เปิด http://localhost:{PORT} ในเบราว์เซอร์")
     print(f"  🎹 Keyboard: A=Approve  R=Reject  Space/→=Next  ←=Prev")

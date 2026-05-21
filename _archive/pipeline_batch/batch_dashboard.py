@@ -1,5 +1,5 @@
 """
-line_dashboard.py — Unified Control Panel
+batch_dashboard.py — Unified Control Panel
 เปิด http://localhost:5556 เพื่อจัดการ pipeline ทั้งหมดในที่เดียว
 """
 import json, subprocess, threading, queue, os, socket, signal, time, re
@@ -48,7 +48,7 @@ def get_cached(key, ttl, fetch_func):
 
 @app.route('/api/stats')
 def stats():
-    # BUG FIX #3: LINE_Review sheet ไม่มีแล้ว — คืนค่า placeholder ไม่ให้ crash
+    # BUG FIX #3: Batch_Review sheet ไม่มีแล้ว — คืนค่า placeholder ไม่ให้ crash
     return jsonify(dict(approved=0, rejected=0, pending=0, total=0))
 
 @app.route('/api/asset_stats')
@@ -190,9 +190,9 @@ def list_backups():
 @app.route('/api/run/<step>', methods=['POST'])
 def run_step(step):
     cmds = {
-        'sync':           ['python3', 'pipeline_line/line_sync.py'],
-        'classify':       ['python3', 'pipeline_line/line_classify.py'],
-        'finalize':       ['python3', 'pipeline_line/line_finalize.py'],
+        'sync':           ['python3', 'pipeline_batch/batch_sync.py'],
+        'classify':       ['python3', 'pipeline_batch/batch_classify.py'],
+        'finalize':       ['python3', 'pipeline_batch/batch_finalize.py'],
         'extract':        ['python3', 'tools_web/semiotic_extractor.py'],
         'backup':         ['python3', 'tools_web/db_mirror.py'],
         'deploy':         ['bash',    'tools_web/deploy.command'],
@@ -228,7 +228,7 @@ def start_review():
             return jsonify(ok=True, message="Review Server is already running")
     
     env = os.environ.copy()
-    subprocess.Popen(['python3', 'pipeline_line/line_review.py'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(['python3', 'pipeline_batch/batch_review.py'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     return jsonify(ok=True, message="Started Review Server on port 5555")
 
 @app.route('/api/clear_sheet', methods=['POST'])
@@ -272,14 +272,14 @@ def logs():
 @app.route('/')
 def index():
     try:
-        with open('pipeline_line/dashboard.html', 'r', encoding='utf-8') as f:
+        with open('pipeline_batch/dashboard.html', 'r', encoding='utf-8') as f:
             return f.read()
     except Exception as e:
         return f"Error loading template: {e}"
 
 if __name__ == '__main__':
     print("=" * 50)
-    print("  LINE Archive Dashboard")
+    print("  Asset Archive Dashboard")
     print("=" * 50)
     print(f"\n  ✅ เปิด http://localhost:5556")
     print(f"  Ctrl+C เพื่อปิด\n")

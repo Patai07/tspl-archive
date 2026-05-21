@@ -9,14 +9,14 @@
 4. **ความตระหนักรู้ด้านจริยธรรม (Cultural Ethics):** ระบุระดับความเหมาะสมในการนำไปใช้งาน (เช่น ลายทั่วไป, ลายพิธีกรรม, ลายศักดิ์สิทธิ์) และข้อควรระวัง (Protocol)
 
 ## ⚙️ สถาปัตยกรรมระบบ (System Architecture)
-- **Frontend / UI:** พัฒนาด้วย HTML, CSS (Tailwind CSS) และ Vanilla JavaScript เน้นดีไซน์พรีเมียมแบบ Cinematic, สไตล์ Blueprint/Technical Interface ผสมผสานกลิ่นอายแบบ Sila Jaruek (ศิลาจารึก)
+- **Frontend / UI:** พัฒนาด้วย HTML, CSS และ Vanilla JavaScript เน้นดีไซน์พรีเมียมแบบ Cinematic / Technical Interface
 - **Database:** ใช้ Google Sheets เป็น Headless CMS / Database (ดึงข้อมูลผ่าน CSV ให้อัปเดตแบบ Real-time)
-- **Data Attributes:** ระดับความน่าเชื่อถือของลาย (Verified, Reconstructed, Fragment, Hypothetical), สถานที่พบ, บริบทแวดล้อม และชุดคำค้นหา (Tags)
+- **Data Attributes:** ระดับความน่าเชื่อถือของลาย (Verified, Reconstructed, Fragment, Hypothetical), สถานที่พบ และบริบทแวดล้อม
 
 ---
 
 ## 📌 มาตรฐานหมวดหมู่ (Master Categories)
-เพื่อให้ข้อมูลสอดคล้องกับงานวิจัยล่าสุด ระบบได้แบ่งหมวดหมู่ลวดลายออกเป็น 4 กลุ่มหลัก:
+ระบบได้แบ่งหมวดหมู่ลวดลายออกเป็น 4 กลุ่มหลัก:
 1.  **Nature & Botany** (พรรณพฤกษาและธรรมชาติ) - รหัสย่อ: `NAT`
 2.  **Fauna & Mythical** (สรรพสัตว์และสัตว์หิมพานต์) - รหัสย่อ: `FAU`
 3.  **Geometric & Synthetic** (เรขาคณิตและลวดลายประดิษฐ์) - รหัสย่อ: `GEO`
@@ -24,67 +24,40 @@
 
 ---
 
-## 📂 การจัดเก็บไฟล์ (Asset Organization)
-ทุกลวดลายจะมีโฟลเดอร์รหัสส่วนตัวอยู่ใน `assets/images/database/` โดยจะแยกตามโฟลเดอร์หมวดหมู่หลักดังนี้:
+## ⚡ วิธีการอัปเดตข้อมูลแบบใหม่ (New Workflow)
 
+### 🟢 TSPL Control Center
+ศูนย์บัญชาการหลักสำหรับจัดการทุกอย่างในที่เดียว:
+- **Launcher:** ดับเบิลคลิก `TSPL_CONTROL_CENTER.command` ในโฟลเดอร์หลัก
+- **URL:** [http://localhost:5556](http://localhost:5556)
+
+### ขั้นตอนการทำงาน:
+1. **สแกนข้อมูล (Haiku Scan):** ใน Dashboard กดปุ่ม **RUN** เพื่อให้ AI อ่านเอกสารจาก Drive ลงชีต `Haiku_Scan_Master` อัตโนมัติ (ระบบจะสแกนเฉพาะไฟล์ใหม่)
+2. **จัดการรูปภาพ (Assets):** 
+   - กดปุ่ม **SYNC** (Link Assets) เพื่อจับคู่รูปกับฐานข้อมูล
+   - กดปุ่ม **OPT** (Optimize) เพื่อบีบอัดรูปภาพ (ไฟล์ PNG จะขึ้นตัวหนังสือสีเหลืองเตือนใน Console)
+3. **สำรองข้อมูล (Backup):** กดปุ่ม **SAVE** เพื่อเซฟข้อมูลจาก Google Sheets ลงเครื่อง (Local JSON)
+4. **อัปเดตเว็บ (Deploy):** กดปุ่ม **LIVE** เพื่อส่งข้อมูลและรูปภาพทั้งหมดขึ้น Vercel
+
+---
+
+## 📂 การจัดเก็บไฟล์ (Asset Organization)
+ทุกลวดลายจะมีโฟลเดอร์รหัสส่วนตัวอยู่ใน `assets/images/database/` แยกตามหมวดหมู่:
 ```text
 /assets/images/database/[Category_Folder]/[Pattern-ID]/
-├── main.jpg        # รูปภาพหลักสำหรับแสดงผลหน้าตาราง
-├── context.jpg     # รูปภาพบริบท/สถานที่จริง
+├── main.jpg        # รูปภาพหลัก
+├── context.jpg     # รูปภาพบริบท
 ├── detail.jpg      # รูปภาพซูมรายละเอียด
 └── vectors/
-    └── vector.svg  # ไฟล์ลายเส้นเวกเตอร์ (แสดงลายนิ่งและให้ดาวน์โหลด)
-
-ตัวอย่างพาธ: assets/images/database/01_Nature/TSP-LST-NAT-001/main.jpg
+    └── vector.svg  # ไฟล์เวกเตอร์
 ```
 
 ---
 
-## ⚡ วิธีการอัปเดตข้อมูลแบบใหม่ (New Workflow)
-
-### 1. จัดเตรียมข้อมูลต้นทาง (Google Drive)
-- ข้อมูลทั้งหมดจะถูกจัดการที่โฟลเดอร์ Google Drive หลักที่ถูกจัดเรียงตามหมวดหมู่ (ไม่ต้องผ่าน LINE Bot)
-- ในโฟลเดอร์ของทุกลาย จะประกอบด้วยรูปภาพและเอกสารคำอธิบายลาย (เช่น `.docx`)
-
-### 2. การสกัดข้อมูล (Semiotic Extraction)
-- เปิดหน้า **System Control Dashboard**
-- กดรันเครื่องมือ **✍️ Semiotic Extractor** หรือรันไฟล์ `tools_web/run_extractor.command`
-- ระบบ AI (Claude) จะเข้าไปอ่านเอกสารใน Drive และสกัดข้อมูลลง Google Sheets ให้อัตโนมัติ
-
-### 3. การดึงรูปภาพและปรับขนาด (Asset Sync & Optimization)
-- ใน Dashboard กดปุ่ม **📥 Download Assets** เพื่อดึงรูปใหม่ลงมายังโฟลเดอร์โปรเจกต์ (`assets/images/database/`)
-- **ข้อควรระวังเรื่องขนาดไฟล์:** ก่อน Deploy ขึ้นระบบ ให้ใช้คำสั่งรันสคริปต์เพิ่มลดขนาดภาพ:
-  `python3 tools_web/optimize_images.py`
-  *(สคริปต์จะทำการบีบอัดรูปภาพให้เล็กกว่า 500KB และแปลงภาพแนวตั้งให้เป็นสัดส่วน 4:3 พร้อมพื้นหลังเบลอ เพื่อไม่ให้เปลืองพื้นที่ Vercel)*
-
-### 4. การอัปเดตขึ้น Server (Deployment)
-- กด **🚀 Deploy to Production** ในหน้า Dashboard หรือดับเบิลคลิกไฟล์ `deploy.command`
-- ระบบจะส่งไฟล์ทั้งหมดขึ้น Vercel และเปิดให้ใช้งานจริงภายใน 1-2 นาที
+## 🛡️ กฎการพัฒนา (Stability Guidelines)
+- **ห้ามเปลี่ยนชื่อคอลัมน์ใน Google Sheets:** เพราะโค้ดผูกกับชื่อคอลัมน์อย่างตายตัว
+- **เครื่องหมายแบ่งข้อมูล:** Morphemes ใช้ `|` และ Tags ใช้ `,` เสมอ
+- **Console Interface:** ระบบ Console จะใช้สีเขียว Technical และเน้นสีเหลืองสำหรับไฟล์ PNG เพื่อให้ง่ายต่อการตรวจสอบ
 
 ---
-
-## 🎨 มาตรฐานเชิงเทคนิค
-- **Image Aspect Ratio:** 4:3 (แนะนำ)
-- **Vector Format:** .svg (ต้องวางในโฟลเดอร์ `/vectors/`)
-- **Download System:** หน้าเว็บจะทำการ Rename ไฟล์เวกเตอร์ตอนดาวน์โหลดให้อัตโนมัติเป็น `TSPL_[ID]_[Title].svg`
-
----
-
-## 🛡️ กฎการพัฒนาเพื่อให้ระบบเสถียร (Development & Stability Guidelines)
-เพื่อให้การทำงานหลังจากนี้ (รวมถึงเมื่อให้ AI ช่วยเขียนโค้ด) มีความราบรื่นและไม่กระทบโครงสร้างเดิม กรุณายึดหลักการดังนี้:
-
-### 1. การจัดการข้อมูล (Data Integrity & Database)
-- **ห้ามเปลี่ยนชื่อคอลัมน์ (Column Headers) ใน Google Sheets เด็ดขาด:** โค้ดใน `index.js` ผูกกับชื่อคอลัมน์อย่างตายตัว (เช่น `Symbol ID`, `Title (TH)`, `Morphemes (TH)`) หากเปลี่ยน จะทำให้หน้าเว็บพังหรือข้อมูลว่างเปล่า
-- **เครื่องหมายแบ่งข้อมูล:** ในช่อง Morphemes และ Tags หากมีหลายคำ ให้ใช้เครื่องหมาย `|` (Pipe) สำหรับ Morphemes และ `,` (Comma) สำหรับ Tags เสมอ
-- **อัปเดตแบบ Real-time:** ระบบดึงข้อมูลจาก Published CSV Link ตอนที่ User เปิดหน้าเว็บ ดังนั้นหากแก้ Sheet แล้ว ให้รอ Google อัปเดตแคชประมาณ 5 นาที
-
-### 2. การจัดการหน้าเว็บ (Frontend & UI Stability)
-- **ระบบ Transition & Preloader:** ห้ามลบหรือแก้ไข Logic ของ `#preloader` และ `initPageTransitions()` ใน `index.js` เพราะมันทำหน้าที่สร้างความสมูทในการเปลี่ยนหน้า (Cinematic Fade)
-- **การเพิ่มหน้าใหม่ (New Pages):** หากสร้างไฟล์ `.html` ใหม่ ต้องลิงก์ไฟล์ `assets/css/index.css` และ `assets/js/index.js` เสมอ เพื่อให้แถบ Nav, Preloader และ Grid system ทำงานต่อเนื่อง
-- **ฟอนต์และ Typography:** ระบบใช้ฟอนต์ไทย `IBM Plex Sans Thai` สลับกับ `Space Grotesk` ห้ามลบ Class `.lang-th` เพราะมี CSS ป้องกันปัญหา "สระลอย" (Diacritic clipping) จัดการไว้อยู่
-
-### 3. การใช้ Script ภายใน (Scripts & Automation)
-- หากมี Script อย่าง `run_extractor.command` หรือ `.py` ในโฟลเดอร์ ให้ทราบว่ามันคือเครื่องมือสำหรับ Export/Backup ข้อมูล (Local Processing) แต่ตัวเว็บ **Production** จะวิ่งตรงไปหา Google Sheets เสมอ
-
----
-*บันทึกโดย: Phu Thongyan +66 62 635 5629
+*บันทึกโดย: Phu Thongyan +66 62 635 5629 | อัปเดตล่าสุด: 17 พฤษภาคม 2026*

@@ -1,8 +1,8 @@
 """
-line_finalize.py — Asset Map Generator
+batch_finalize.py — Asset Map Generator
 ========================================
 รันหลังจาก review เสร็จแล้ว
-อ่าน APPROVED จาก LINE_Review + ชื่อลายจาก tspl_database (Master)
+อ่าน APPROVED จาก Batch_Review + ชื่อลายจาก tspl_database (Master)
 สร้าง 'Asset_Map' tab ใน Spreadsheet หลัก
 
 Output columns:
@@ -23,8 +23,8 @@ with open('config.json', 'r') as f:
 SERVICE_ACCOUNT_FILE   = 'service-account.json'
 DEST_SPREADSHEET_ID    = config['SPREADSHEET_ID']           # งานหลัก (เขียน)
 DB_SPREADSHEET_ID      = config['DB_SOURCE_SPREADSHEET_ID'] # tspl_database (อ่าน)
-LINE_SYNC_TAB          = config.get('LINE_SYNC_SHEET_TAB', 'LINE_Sync')
-REVIEW_TAB             = 'LINE_Review'
+LINE_SYNC_TAB          = config.get('BATCH_SYNC_SHEET_TAB', 'Batch_Sync')
+REVIEW_TAB             = 'Batch_Review'
 ASSET_MAP_TAB          = 'Asset_Map'
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
@@ -60,7 +60,7 @@ def best_match(name: str, candidates: list, threshold=0.5) -> tuple:
 # ─── MAIN ─────────────────────────────────────────────────────────────────────
 def main():
     print("=" * 55)
-    print("  Asset Map Generator — LINE × Database")
+    print("  Asset Map Generator — Batch × Database")
     print("=" * 55)
 
     creds = service_account.Credentials.from_service_account_file(
@@ -101,14 +101,14 @@ def main():
     db_symbols = [item[0] for item in db_data]
     print(f"   พบ {len(db_data)} รายการใน database")
 
-    # ── 2. อ่าน LINE_Review APPROVED ─────────────────────────────────────────
-    print(f"\n📋 อ่าน APPROVED จาก LINE_Review...")
+    # ── 2. อ่าน Batch_Review APPROVED ─────────────────────────────────────────
+    print(f"\n📋 อ่าน APPROVED จาก Batch_Review...")
     dest_sh  = gc.open_by_key(DEST_SPREADSHEET_ID)
     rev_ws   = dest_sh.worksheet(REVIEW_TAB)
     rev_rows = rev_ws.get_all_values()
 
     if len(rev_rows) < 2:
-        print("⚠️  LINE_Review ว่าง — รัน line_classify.py ก่อน")
+        print(f"⚠️  {REVIEW_TAB} ว่าง — รัน batch_classify.py ก่อน")
         return
 
     rev_headers = rev_rows[0]
@@ -132,8 +132,8 @@ def main():
 
     print(f"   APPROVED: {len(approved_imgs)} รูป")
 
-    # ── 3. อ่าน LINE_Sync DOC และ Timestamps ──────────────────────────────────
-    print(f"\n📄 อ่าน doc links และวิเคราะห์บริบทเวลาจาก LINE_Sync...")
+    # ── 3. อ่าน Batch_Sync DOC และ Timestamps ──────────────────────────────────
+    print(f"\n📄 อ่าน doc links และวิเคราะห์บริบทเวลาจาก {LINE_SYNC_TAB}...")
     sync_ws   = dest_sh.worksheet(LINE_SYNC_TAB)
     sync_rows = sync_ws.get_all_values()
     sync_headers = sync_rows[0] if sync_rows else []
