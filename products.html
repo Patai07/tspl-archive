@@ -31,15 +31,18 @@
             background: linear-gradient(90deg, transparent, #D4AF37, transparent);
         }
 
-        /* Product badge - simplified flat style */
+        /* Product badge pulse */
+        @keyframes badge-pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,78,69,0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(255,78,69,0); }
+        }
         .badge-live {
-            animation: none !important;
-            box-shadow: none !important;
+            animation: badge-pulse 2s ease infinite;
         }
 
         /* Section number counter */
         .section-num {
-            -webkit-text-stroke: 1px rgba(77, 142, 255, 0.12);
+            -webkit-text-stroke: 1px rgba(77, 142, 255, 0.25);
             color: transparent;
             font-size: clamp(6rem, 12vw, 10rem);
             line-height: 1;
@@ -50,22 +53,28 @@
             pointer-events: none;
             user-select: none;
             letter-spacing: -0.05em;
-            opacity: 0.4;
         }
 
-        /* Floating tag - simplified & static */
-        .float-tag {
-            animation: none !important;
-            opacity: 0.8 !important;
-            transform: none !important;
+        /* Floating tag shimmer */
+        @keyframes shimmer-float {
+            0%, 100% { opacity: 0.7; transform: translateY(0px); }
+            50% { opacity: 1; transform: translateY(-4px); }
         }
+        .float-tag {
+            animation: shimmer-float 3s ease-in-out infinite;
+        }
+
+        /* Tag stagger delays */
+        .float-tag:nth-child(2) { animation-delay: 0.5s; }
+        .float-tag:nth-child(3) { animation-delay: 1s; }
+        .float-tag:nth-child(4) { animation-delay: 1.5s; }
 
         /* Image overlay shimmer on hover */
         .img-shimmer::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, transparent 30%, rgba(212,175,55,0.04) 50%, transparent 70%);
+            background: linear-gradient(135deg, transparent 30%, rgba(212,175,55,0.08) 50%, transparent 70%);
             transform: translateX(-100%);
             transition: transform 0.8s ease;
         }
@@ -73,9 +82,9 @@
             transform: translateX(100%);
         }
 
-        /* Corner brackets hidden globally */
-        .corner-tl { display: none !important; }
-        .corner-br { display: none !important; }
+        /* Corner brackets for product images */
+        .corner-tl { top: 12px; left: 12px; border-top: 2px solid rgba(212,175,55,0.5); border-left: 2px solid rgba(212,175,55,0.5); width: 20px; height: 20px; }
+        .corner-br { bottom: 12px; right: 12px; border-bottom: 2px solid rgba(212,175,55,0.5); border-right: 2px solid rgba(212,175,55,0.5); width: 20px; height: 20px; }
 
         /* Rubric sensitivity dots */
         .rubric-dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -104,31 +113,6 @@
         .concept-ribbon {
             background: linear-gradient(135deg, rgba(77,142,255,0.15), rgba(77,142,255,0.05));
             border: 1px solid rgba(77,142,255,0.3);
-        }
-
-        /* Minimal premium styling overrides */
-        .product-card {
-            background-color: rgba(7, 15, 33, 0.85) !important;
-            border-color: rgba(77, 142, 255, 0.12) !important;
-            backdrop-filter: blur(12px) !important;
-            -webkit-backdrop-filter: blur(12px) !important;
-        }
-
-        /* Soften all spec boxes and list items */
-        .bg-\[\#0A1628\] {
-            background-color: rgba(7, 15, 33, 0.8) !important;
-        }
-        .bg-\[\#0A1628\]\/60 {
-            background-color: rgba(7, 15, 33, 0.6) !important;
-        }
-        .border-\[\#1a3a6e\]\/40,
-        .border-\[\#1a3a6e\]\/50,
-        .border-\[\#1a3a6e\]\/30,
-        .border-\[\#D4AF37\]\/30,
-        .border-\[\#D4AF37\]\/20,
-        .border-\[\#FF4E45\]\/30,
-        .border-\[\#FF4E45\]\/20 {
-            border-color: rgba(77, 142, 255, 0.12) !important;
         }
     </style>
 </head>
@@ -372,13 +356,13 @@
                 </div>
 
                 <!-- Product cards grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                     <!-- Card: e-Lexicon Database -->
                     <div class="product-card relative bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-3xl overflow-hidden backdrop-blur-sm group">
                         <div class="relative h-52 overflow-hidden img-shimmer bg-gradient-to-br from-[#0D2035] to-[#060F22] flex items-center justify-center">
                             <!-- Decorative grid pattern UI -->
-                            <div class="absolute inset-0 bg-grid-pattern opacity-[0.06]"></div>
+                            <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
                             <div class="relative z-10 flex flex-col items-center gap-3">
                                 <div class="w-20 h-20 bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-2xl flex items-center justify-center">
                                     <i class="ph-fill ph-database text-[#D4AF37] text-4xl"></i>
@@ -429,7 +413,7 @@
                     <!-- Card: Vector Library -->
                     <div class="product-card relative bg-[#0A1628]/60 border border-[#1a3a6e]/40 rounded-3xl overflow-hidden backdrop-blur-sm group">
                         <div class="relative h-52 overflow-hidden img-shimmer bg-gradient-to-br from-[#0D2035] to-[#060F22] flex items-center justify-center">
-                            <div class="absolute inset-0 bg-grid-pattern opacity-[0.06]"></div>
+                            <div class="absolute inset-0 bg-grid-pattern opacity-30"></div>
                             <div class="relative z-10 grid grid-cols-3 gap-3 p-6">
                                 <!-- Mini pattern cards -->
                                 <div class="bg-[#D4AF37]/10 border border-[#D4AF37]/20 rounded-xl p-2 flex items-center justify-center aspect-square">
@@ -487,8 +471,7 @@
                         </div>
                     </div>
 
-                    <!-- Card: Prompt Lab (AI Generation Service) [Commented out temporarily] -->
-                    <!--
+                    <!-- Card: Prompt Lab (AI Generation Service) -->
                     <div class="product-card relative bg-[#0A1628]/60 border border-[#FF4E45]/20 rounded-3xl overflow-hidden backdrop-blur-sm group">
                         <div class="absolute top-4 right-4 z-20">
                             <span class="px-2.5 py-1 bg-[#FF4E45] rounded-full text-[9px] font-black text-white uppercase tracking-wider">New</span>
@@ -528,7 +511,6 @@
                             </div>
                         </div>
                     </div>
-                    -->
                 </div>
             </div>
         </section>
