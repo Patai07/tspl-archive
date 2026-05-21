@@ -742,8 +742,8 @@ function initPageTransitions() {
         link.addEventListener('click', e => {
             const href = link.getAttribute('href');
 
-            // Allow default for target blank or anchor links
-            if (!href || href.startsWith('#') || link.target === '_blank') return;
+            // Allow default for target blank, anchor, mailto, tel, or javascript links
+            if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:') || link.target === '_blank') return;
 
             // If it's a relative html link or root
             if (href.endsWith('.html') || !href.startsWith('http')) {
