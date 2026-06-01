@@ -51,17 +51,38 @@ def scan_duplicates():
         ws = sh.get_worksheet(0)
         rows = ws.get_all_values()
         if len(rows) < 2: return jsonify(groups=[])
+
+        # หาตำแหน่งคอลัมน์ Drive Folder แบบ dynamic
+        headers = rows[0] if rows else []
+        drive_folder_idx = -1
+        for i, h in enumerate(headers):
+            if h.strip().lower() == 'drive folder':
+                drive_folder_idx = i
+                break
+
         groups = {}
         for idx, r in enumerate(rows[1:], start=2):
             if not r or not r[0].strip() or r[0].strip().startswith('#'): continue
             title = r[1] if len(r) > 1 else ''
-            ct = re.sub(r'^ลาย', '', title.strip()).lower()
+
+            # ถ้ามีคอลัมน์ Drive Folder และมีค่า ให้ใช้เป็น canonical key แทน
+            # เพราะชื่อโฟลเดอร์จาก Drive คือชื่อจริง ไม่ใช่ชื่อที่ Haiku ตั้ง
+            drive_folder = ''
+            if drive_folder_idx != -1 and len(r) > drive_folder_idx:
+                drive_folder = r[drive_folder_idx].strip()
+
+            if drive_folder:
+                ct = re.sub(r'^ลาย', '', drive_folder).lower()
+            else:
+                ct = re.sub(r'^ลาย', '', title.strip()).lower()
             ct = re.sub(r'\s+', '', ct)
             if not ct: continue
             if ct not in groups: groups[ct] = []
             groups[ct].append({
                 'row_index': idx, 'symbol_id': r[0],
-                'title_th': title, 'timestamp': r[18] if len(r) > 18 else ''
+                'title_th': title,
+                'drive_folder': drive_folder,
+                'timestamp': r[18] if len(r) > 18 else ''
             })
         dup_groups = [g for g in groups.values() if len(g) > 1]
         return jsonify(groups=dup_groups)
@@ -174,13 +195,14 @@ def staging_dashboard():
 def run_step(step):
     cmds = {
         'extract':        ['python3', 'tools_web/semiotic_extractor.py'],
-        'backup':         ['python3', 'tools_web/db_mirror.py'],
-        'deploy':         ['bash',    'tools_web/deploy.command'],
-        'link_assets':    ['python3', 'tools_web/asset_manager.py', 'link'],
+        'merge_haiku':    ['python3', 'tools_web/merge_haiku_to_db.py'],
         'download_assets':['python3', 'tools_web/asset_manager.py', 'download'],
+        'link_assets':    ['python3', 'tools_web/asset_manager.py', 'link'],
         'optimize_images':['python3', 'tools_web/optimize_images.py'],
-        'open_folder':    ['open',    'assets/images/database'],
+        'mirror_db':      ['python3', 'tools_web/db_mirror.py'],
         'scan_duplicates':['python3', 'tools_web/scan_duplicates.py'],
+        'deploy':         ['bash',    'tools_web/deploy.command'],
+        'open_folder':    ['open',    'assets/images/database'],
     }
     if step not in cmds: return jsonify(ok=False, error='Unknown command'), 400
     if step in running_proc: return jsonify(ok=False, error='กำลังทำงานอยู่...')

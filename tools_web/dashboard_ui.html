@@ -199,49 +199,64 @@ header {
 <div class="main-container">
   
   <div class="actions-grid">
-    <div style="font-size: 0.6rem; color: var(--muted); font-family: var(--font-mono); margin-bottom: 16px; opacity: 0.5;">PIPELINE ACTIONS</div>
-    
-    <div class="card" id="card-extract" onclick="handleAction('extract', 'Haiku Scan', 'สแกนข้อมูลจาก Drive เข้าสู่ Sheet 1 (Staging)')">
-      <div class="card-icon" style="color: var(--accent);">🧠</div>
+    <div style="font-size: 0.6rem; color: var(--muted); font-family: var(--font-mono); margin-bottom: 8px; opacity: 0.5; letter-spacing: 0.08em;">PIPELINE</div>
+
+    <!-- PHASE 1: SCAN & ANALYZE -->
+    <div style="font-size: 0.55rem; color: rgba(167,139,250,0.6); font-family: var(--font-mono); margin: 4px 0 4px 4px; letter-spacing: 0.06em;">① SCAN & ANALYZE</div>
+
+    <div class="card" id="card-extract" onclick="handleAction('extract', 'Haiku Scan', 'สแกนเอกสารจาก Drive แล้ววิเคราะห์ด้วย AI → บันทึกลง Sheet Staging')">
+      <div class="card-icon" style="color: #a78bfa;">🧠</div>
       <div class="card-title">Haiku Scan</div>
       <div class="btn-run-mini" id="btn-extract">RUN</div>
     </div>
 
-    <div class="card" id="card-download_assets" onclick="handleAction('download_assets', 'Download Assets', 'ดาวน์โหลดรูปภาพจาก Drive มาเก็บไว้ในเครื่อง')">
-      <div class="card-icon" style="color: #60a5fa;">☁️</div>
+    <div class="card" id="card-merge_haiku" onclick="handleAction('merge_haiku', 'Merge to Production', 'สวมข้อมูลจาก Haiku Staging เข้าสู่ Sheet 2 (Production Database)')">
+      <div class="card-icon" style="color: #60a5fa;">⚡</div>
+      <div class="card-title">Merge to Production</div>
+      <div class="btn-run-mini" id="btn-merge_haiku">MERGE</div>
+    </div>
+
+    <!-- PHASE 2: ASSETS -->
+    <div style="font-size: 0.55rem; color: rgba(96,165,250,0.6); font-family: var(--font-mono); margin: 12px 0 4px 4px; letter-spacing: 0.06em;">② ASSETS</div>
+
+    <div class="card" id="card-download_assets" onclick="handleAction('download_assets', 'Download Assets', 'ดาวน์โหลดรูปภาพจาก Google Drive มาเก็บไว้ในเครื่อง')">
+      <div class="card-icon" style="color: #38bdf8;">☁️</div>
       <div class="card-title">Download Assets</div>
       <div class="btn-run-mini" id="btn-download_assets">DL</div>
     </div>
 
-    <div class="card" id="card-link_assets" onclick="handleAction('link_assets', 'Link Assets', 'เชื่อมโยงไฟล์ในเครื่องกับ Sheet 2 (Production)')">
+    <div class="card" id="card-link_assets" onclick="handleAction('link_assets', 'Link Assets', 'เชื่อมโยง path รูปภาพในเครื่องกับ Sheet 2 (Production)')">
       <div class="card-icon" style="color: var(--blue);">🔗</div>
       <div class="card-title">Link Assets</div>
       <div class="btn-run-mini" id="btn-link_assets">SYNC</div>
     </div>
 
-    <div class="card" id="card-optimize_images" onclick="handleAction('optimize_images', 'Optimize', 'บีบอัดรูป')">
+    <div class="card" id="card-optimize_images" onclick="handleAction('optimize_images', 'Optimize Images', 'บีบอัดและปรับขนาดรูปภาพทั้งหมดให้เหมาะกับเว็บ')">
       <div class="card-icon" style="color: var(--yellow);">📉</div>
-      <div class="card-title">Optimize</div>
+      <div class="card-title">Optimize Images</div>
       <div class="btn-run-mini" id="btn-optimize_images">OPT</div>
     </div>
 
-    <div class="card" id="card-deploy" onclick="handleAction('deploy', 'Deploy', 'อัปเดตข้อมูลและรูปภาพทั้งหมดขึ้นหน้าเว็บจริง (Vercel)')" 
-         style="margin-top: 12px; border: 1px solid rgba(0, 255, 65, 0.4); background: linear-gradient(to right, rgba(0, 255, 65, 0.05), transparent); box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);">
-      <div class="card-icon" style="color: var(--green); font-size: 1.2rem; filter: drop-shadow(0 0 5px var(--green));">🚀</div>
-      <div class="card-title" style="color: #fff; font-weight: 700; letter-spacing: 0.02em;">Deploy Website</div>
-      <div class="btn-run-mini" id="btn-deploy" style="opacity: 1; color: var(--green);">LIVE</div>
+    <!-- PHASE 3: QA & DEPLOY -->
+    <div style="font-size: 0.55rem; color: rgba(0,255,65,0.6); font-family: var(--font-mono); margin: 12px 0 4px 4px; letter-spacing: 0.06em;">③ QA & DEPLOY</div>
+
+    <div class="card" id="card-mirror_db" onclick="handleAction('mirror_db', 'Mirror DB', 'Sync ข้อมูลจาก Sheet 2 Production กลับมาที่ Sheet 1 (DB_Mirror tab)')">
+      <div class="card-icon" style="color: var(--muted);">🔄</div>
+      <div class="card-title">Mirror DB → Sheet 1</div>
+      <div class="btn-run-mini" id="btn-mirror_db">SYNC</div>
     </div>
 
-    <div class="card" id="card-backup" onclick="handleAction('backup', 'Backup', 'สำรองข้อมูล')">
-      <div class="card-icon" style="color: var(--muted);">💾</div>
-      <div class="card-title">Backup DB</div>
-      <div class="btn-run-mini" id="btn-backup">SAVE</div>
-    </div>
-
-    <div class="card" id="card-scan_duplicates" onclick="handleAction('scan_duplicates', 'Duplicates', 'เช็คซ้ำ')">
+    <div class="card" id="card-scan_duplicates" onclick="handleAction('scan_duplicates', 'Duplicate Scan', 'ตรวจหาลายที่ถูกวิเคราะห์ซ้ำในฐานข้อมูล')">
       <div class="card-icon" style="color: var(--red);">🔍</div>
       <div class="card-title">Duplicate Scan</div>
       <div class="btn-run-mini" id="btn-scan_duplicates">SCAN</div>
+    </div>
+
+    <div class="card" id="card-deploy" onclick="handleAction('deploy', 'Deploy Website', 'อัปเดตข้อมูลและรูปภาพทั้งหมดขึ้นหน้าเว็บจริง (Vercel)')"
+         style="margin-top: 4px; border: 1px solid rgba(0, 255, 65, 0.4); background: linear-gradient(to right, rgba(0, 255, 65, 0.05), transparent); box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);">
+      <div class="card-icon" style="color: var(--green); font-size: 1.2rem; filter: drop-shadow(0 0 5px var(--green));">🚀</div>
+      <div class="card-title" style="color: #fff; font-weight: 700; letter-spacing: 0.02em;">Deploy Website</div>
+      <div class="btn-run-mini" id="btn-deploy" style="opacity: 1; color: var(--green);">LIVE</div>
     </div>
 
     <div style="margin-top: auto; padding-top: 24px; border-top: 1px solid var(--border);">
@@ -438,9 +453,10 @@ function setTaskRunning(step, isRunning) {
 
   if (btn) {
     const originalTexts = {
-        'extract': 'RUN', 'download_assets': 'DL', 'link_assets': 'SYNC',
-        'optimize_images': 'OPT', 'deploy': 'LIVE',
-        'backup': 'SAVE', 'scan_duplicates': 'SCAN'
+        'extract': 'RUN', 'merge_haiku': 'MERGE',
+        'download_assets': 'DL', 'link_assets': 'SYNC',
+        'optimize_images': 'OPT', 'mirror_db': 'SYNC',
+        'scan_duplicates': 'SCAN', 'deploy': 'LIVE'
     };
     
     if (isRunning) {
