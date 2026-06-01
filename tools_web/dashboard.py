@@ -195,7 +195,6 @@ def staging_dashboard():
 def run_step(step):
     cmds = {
         'extract':        ['python3', 'tools_web/semiotic_extractor.py'],
-        'merge_haiku':    ['python3', 'tools_web/merge_haiku_to_db.py'],
         'download_assets':['python3', 'tools_web/asset_manager.py', 'download'],
         'link_assets':    ['python3', 'tools_web/asset_manager.py', 'link'],
         'optimize_images':['python3', 'tools_web/optimize_images.py'],
@@ -204,6 +203,30 @@ def run_step(step):
         'deploy':         ['bash',    'tools_web/deploy.command'],
         'open_folder':    ['open',    'assets/images/database'],
     }
+    if step == 'quick_sync':
+        # รัน link_assets แล้วตาม mirror_db ในลำดับเดียวกัน
+        if 'quick_sync' in running_proc:
+            return jsonify(ok=False, error='กำลังทำงานอยู่...')
+        def run_quick_sync():
+            root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+            env = os.environ.copy(); env['PYTHONUNBUFFERED'] = '1'
+            for label, cmd in [('link_assets', ['python3', 'tools_web/asset_manager.py', 'link']),
+                                ('mirror_db',   ['python3', 'tools_web/db_mirror.py'])]:
+                log_queue.put({'name': 'quick_sync', 'line': f'▶ เริ่ม {label}...'})
+                proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                        text=True, bufsize=1, cwd=root_dir, env=env)
+                running_proc['quick_sync'] = proc
+                for line in proc.stdout:
+                    log_queue.put({'name': 'quick_sync', 'line': line.rstrip()})
+                proc.wait()
+                if proc.returncode != 0:
+                    log_queue.put({'name': 'quick_sync', 'line': f'❌ {label} ล้มเหลว (exit {proc.returncode})', 'done': True})
+                    running_proc.pop('quick_sync', None)
+                    return
+            log_queue.put({'name': 'quick_sync', 'line': '✅ Quick Sync เสร็จสิ้น — Sheet 2 และ Sheet 1 ตรงกันแล้ว!', 'done': True})
+            running_proc.pop('quick_sync', None)
+        threading.Thread(target=run_quick_sync, daemon=True).start()
+        return jsonify(ok=True)
     if step not in cmds: return jsonify(ok=False, error='Unknown command'), 400
     if step in running_proc: return jsonify(ok=False, error='กำลังทำงานอยู่...')
     stream_script(step, cmds[step])
