@@ -37,6 +37,36 @@ def normalize(name):
     n = re.sub(r'\s*\(.*?\)', '', n)                 # Remove (English subtitle)
     return re.sub(r'\s+', '', n).lower()
 
+TITLE_TO_FOLDER_MAP = {
+    normalize('ใบไม้สามแฉกก้านคดกับกากบาทรูปใบกลาง'): normalize('ลายกระเบื้องวัดใหญ่ 3'),
+    normalize('ใบไม้สามแฉกบนกระเบื้องโบราณ'): normalize('ลายกระเบื้องวัดใหญ่ 1'),
+    normalize('ดอกจันกากบาทกลีบพัด'): normalize('ดาวสี่แฉกหลักไขว้ซ้อน'),
+    normalize('ดอกจันกังหันเวียนสลับสี'): normalize('ลายกังหันดอกจันหมุนสลับสี'),
+    normalize('ขิดดอกพิกุล'): normalize('ลายดอกแก้วแปดกลีบ'),
+    normalize('แตงโม'): normalize('ลายแตงโม-ผ้า'),
+    normalize('ครุฑปูนปั้น'): normalize('ครุฑ'),
+    normalize('องค์มกรคายนาค'): normalize('มกร'),
+    normalize('มังกรนูนต่ำ'): normalize('มังกร'),
+    normalize('ขิดนาคและโคมเรขาคณิต'): normalize('ลายขิดนาค'),
+    normalize('ม้า'): normalize('ม้า-ลายผ้า'),
+    normalize('ขิดมกรและโคมเรขาคณิต'): normalize('ลายขิดมกร'),
+    normalize('ขิดคชลักษณ์และโคมเรขาคณิต'): normalize('ลายขิดช้าง'),
+    normalize('นกคุ้ม'): normalize('ลายผ้านกคุ้ม'),
+    normalize('ขิดกนกสัตวลักษณ์เรขาคณิต'): normalize('ผ้าทอมือลายขิดนกยูง'),
+    normalize('ขิดก้างปลาและโคมเรขาคณิต'): normalize('ลายขิดก้างปลา'),
+    normalize('ช้าง'): normalize('ช้าง-ลายผ้า'),
+    normalize('คลื่นและลายก้านขดบนเครื่องปั้นดินเผา'): normalize('เครื่องปั้นดินเผา'),
+    normalize('แถบสามเหลี่ยมปะสลับสี'): normalize('ลายฟันปลาขอบหมอนไทดำ'),
+    normalize('หน้าหมอนขิดไทพวน'): normalize('หมอนไทพวน'),
+    normalize('สามเหลี่ยมฟันปลา'): normalize('ลายสามเหลี่ยม:ฟันปลา'),
+    normalize('หน้าหมอนดอกแก้วไทพวน'): normalize('ลายดอกแก้ว'),
+    normalize('ขิดสร้อยสา'): normalize('ลายสร้อยสา'),
+    normalize('ขิดดอกในตารางสี่เหลี่ยม'): normalize('ผ้าทอขิดตารางสี่เหลี่ยมสลับลายขิดดอก'),
+    normalize('ดาวเพดานไม้แกะสลักประดับกระจก'): normalize('ดาวเพดาน วัดใหญ่'),
+    normalize('จั่วภควัมหน้าพรหม'): normalize('010หน้าบันลูกฟักหน้าพรหม '),
+    normalize('เม็ดสร้อยสังวาลพระพุทธชินราช'): normalize('สังวาลพระพุทธชินราช')
+}
+
 def thumb_url(file_id, size='w1200'):
     return f"https://drive.google.com/thumbnail?id={file_id}&sz={size}"
 
@@ -126,6 +156,8 @@ def cmd_link():
     pattern_map = list_pattern_folders(drive_svc)
     
     rows = ws.get_all_values()
+    headers = rows[0]
+    drive_col_idx = headers.index('Drive Folder') if 'Drive Folder' in headers else -1
     data_rows = []
     for i, row in enumerate(rows[1:], start=2):
         if not row or not row[0].strip() or row[0].strip().startswith('#'):
@@ -157,7 +189,13 @@ def cmd_link():
             sid = row[0].strip()
             title_th = row[1] if len(row) > 1 else ''
             cat = row[3] if len(row) > 3 else ''
-            norm = normalize(title_th)
+            drive_folder_val = row[drive_col_idx].strip() if drive_col_idx != -1 and len(row) > drive_col_idx else ''
+            if drive_folder_val:
+                norm = normalize(drive_folder_val)
+            else:
+                norm = normalize(title_th)
+                if norm in TITLE_TO_FOLDER_MAP:
+                    norm = TITLE_TO_FOLDER_MAP[norm]
             local_dir = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid)
             
             def find_slot(prefix, subfolder=''):
@@ -232,6 +270,8 @@ def cmd_download():
     pattern_map = list_pattern_folders(drive_svc)
 
     rows = ws.get_all_values()
+    headers = rows[0]
+    drive_col_idx = headers.index('Drive Folder') if 'Drive Folder' in headers else -1
     downloaded = 0; skipped = 0; errors = 0
 
     IMG_SLOTS = ['main', 'img_mid', 'img_detail', 'img_extra1', 'img_extra2']
@@ -242,7 +282,13 @@ def cmd_download():
         sid      = row[0].lstrip('#').strip()
         title_th = row[1] if len(row) > 1 else ''
         cat      = row[3] if len(row) > 3 else 'Nature & Botany'
-        norm     = normalize(title_th)
+        drive_folder_val = row[drive_col_idx].strip() if drive_col_idx != -1 and len(row) > drive_col_idx else ''
+        if drive_folder_val:
+            norm = normalize(drive_folder_val)
+        else:
+            norm = normalize(title_th)
+            if norm in TITLE_TO_FOLDER_MAP:
+                norm = TITLE_TO_FOLDER_MAP[norm]
         local_dir = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid)
 
         if norm not in pattern_map:
@@ -294,13 +340,21 @@ def cmd_check():
     ws = sh.worksheet('tspl_database')
     pattern_map = list_pattern_folders(drive_svc)
     rows = ws.get_all_values()
+    headers = rows[0]
+    drive_col_idx = headers.index('Drive Folder') if 'Drive Folder' in headers else -1
     results = []
     for row in rows[1:]:
         if not row or not row[0].strip() or row[0].strip().startswith('#'): continue
         sid      = row[0].strip()
         title_th = row[1] if len(row) > 1 else ''
         cat      = row[3] if len(row) > 3 else ''
-        norm     = normalize(title_th)
+        drive_folder_val = row[drive_col_idx].strip() if drive_col_idx != -1 and len(row) > drive_col_idx else ''
+        if drive_folder_val:
+            norm = normalize(drive_folder_val)
+        else:
+            norm = normalize(title_th)
+            if norm in TITLE_TO_FOLDER_MAP:
+                norm = TITLE_TO_FOLDER_MAP[norm]
         local_dir = os.path.join(ASSETS_BASE, cat_folder_name(cat), sid)
         local_imgs = [f for f in os.listdir(local_dir) if re.search(r'\.(jpg|jpeg|png|webp|heic|heif|tif|tiff)$', f, re.I)] if os.path.exists(local_dir) else []
         results.append({
@@ -331,6 +385,8 @@ def cmd_confirm_sheet1():
     sh1 = gc.open_by_key(STAGING_SHEET_ID)
     ws1 = sh1.get_worksheet(0)   # 'Sheet1' tab
     rows = ws1.get_all_values()
+    headers = rows[0]
+    drive_col_idx = headers.index('Drive Folder') if 'Drive Folder' in headers else -1
 
     if not rows:
         print("❌ ไม่พบข้อมูลใน Sheet 1", flush=True); return
@@ -353,7 +409,13 @@ def cmd_confirm_sheet1():
 
         sid      = row[0].strip()
         title_th = row[1] if len(row) > 1 else ''
-        norm     = normalize(title_th)
+        drive_folder_val = row[drive_col_idx].strip() if drive_col_idx != -1 and len(row) > drive_col_idx else ''
+        if drive_folder_val:
+            norm = normalize(drive_folder_val)
+        else:
+            norm = normalize(title_th)
+            if norm in TITLE_TO_FOLDER_MAP:
+                norm = TITLE_TO_FOLDER_MAP[norm]
 
         if norm in pattern_map:
             folder   = pattern_map[norm]

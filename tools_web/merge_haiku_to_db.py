@@ -70,6 +70,21 @@ def main():
     p_rows = prod_ws.get_all_values()
     headers = p_rows[0] if p_rows else []
 
+    haiku_headers = h_rows[0] if h_rows else []
+    
+    # ค้นหาตำแหน่งคอลัมน์ Drive Folder ในทั้งสองชีตแบบ dynamic
+    h_drive_folder_idx = -1
+    for i, h in enumerate(haiku_headers):
+        if h.strip().lower() == 'drive folder':
+            h_drive_folder_idx = i
+            break
+
+    p_drive_folder_idx = -1
+    for i, h in enumerate(headers):
+        if h.strip().lower() == 'drive folder':
+            p_drive_folder_idx = i
+            break
+
     updated_count = 0
     for idx, row in enumerate(p_rows[1:], start=1):
         if not row or not row[0].strip() or row[0].strip().startswith('#'): continue
@@ -91,6 +106,14 @@ def main():
                     val = h_r[c_idx].strip()
                     if val and val != 'NONE':
                         row[c_idx] = val
+                        merged_fields += 1
+                
+                # สวมคอลัมน์ Drive Folder (ถ้าเจอในทั้งสองชีต)
+                if h_drive_folder_idx != -1 and p_drive_folder_idx != -1:
+                    if len(h_r) > h_drive_folder_idx and h_r[h_drive_folder_idx].strip():
+                        while len(row) <= p_drive_folder_idx:
+                            row.append('')
+                        row[p_drive_folder_idx] = h_r[h_drive_folder_idx].strip()
                         merged_fields += 1
                 
                 if merged_fields > 0:

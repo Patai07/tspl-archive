@@ -209,12 +209,12 @@ def main():
         worksheet = sh.worksheet(MASTER_NAME)
     except gspread.exceptions.WorksheetNotFound:
         print(f"⚡ ไม่พบ Tab '{MASTER_NAME}' — กำลังสร้างให้ใหม่...", flush=True)
-        worksheet = sh.add_worksheet(title=MASTER_NAME, rows="1000", cols="20")
+        worksheet = sh.add_worksheet(title=MASTER_NAME, rows="1000", cols="21")
         headers = [
             "Symbol ID", "Title TH", "Title EN", "Category", "Location", "Confidence", "Ethics",
             "Connotation TH", "Connotation EN", "Preservation", "Restriction",
             "Morphemes TH", "Morphemes EN", "Tags", "Main Img", "Vector Path", "Context Img",
-            "Doc Name", "Timestamp", "Drive Link"
+            "Doc Name", "Timestamp", "Drive Link", "Drive Folder"
         ]
         worksheet.append_row(headers)
         time.sleep(1)
@@ -283,6 +283,14 @@ def main():
         
     # all_rows สำหรับ Haiku_Scan Sheet (ใช้ตรวจซ้ำและ append)
     all_rows = worksheet.get_all_values()
+    if all_rows:
+        headers_row = all_rows[0]
+        if "Drive Folder" not in [h.strip() for h in headers_row]:
+            # Add header to the last column
+            headers_row.append("Drive Folder")
+            worksheet.update('1:1', [headers_row])
+            print("📝 Added 'Drive Folder' to Haiku_Scan_Master headers.", flush=True)
+            all_rows = worksheet.get_all_values()
 
     # เพื่อให้สอดคล้องกับโฟลเดอร์ Drive แบบ 1:1 ให้เริ่มนับ ID สดใหม่ในชีตสแกนเสมอ
     all_rows_for_id = list(all_rows)
@@ -422,7 +430,8 @@ def main():
                 f"{base_path}/main.jpg", f"{base_path}/vectors/vector.svg", f"{base_path}/context.jpg",
                 context_name,
                 datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                file.get('webViewLink', 'N/A')
+                file.get('webViewLink', 'N/A'),
+                p_name
             ]
             worksheet.append_row(row)
             all_rows.append(row)  # อัปเดตข้อมูลในเมมโมรี่เพื่อรันเลขถัดไปไม่ให้ซ้ำ
