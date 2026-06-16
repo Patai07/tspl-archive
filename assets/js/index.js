@@ -253,34 +253,45 @@ function renderGrid(filterText = "") {
         const hasVector = record.images.some(img => img.type === 'vector');
         const vectorBadge = hasVector ? `
                         <!-- Vector Ready Premium Badge -->
-                        <div class="absolute top-4 right-4 z-10 flex items-center gap-2 bg-[#0F172A]/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#10B981]/50 shadow-[0_4px_15px_rgba(0,0,0,0.6)] text-[8px] font-black uppercase tracking-[0.25em] text-white">
-                            <span class="relative flex h-2.5 w-2.5">
-                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-90"></span>
-                                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#10B981] shadow-[0_0_8px_#10B981]"></span>
+                        <div class="absolute top-4 right-4 z-30 flex items-center gap-2 bg-[#0F172A]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#10B981]/40 shadow-sm text-[8px] font-black uppercase tracking-[0.25em] text-white">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
                             </span>
                             <span class="text-[#10B981] font-extrabold">VECTOR</span>
                         </div>` : '';
 
         item.innerHTML = `
-                    <div class="relative aspect-[4/3] overflow-hidden">
+                    <div class="relative aspect-[4/3] overflow-hidden bg-slate-50 flex items-center justify-center">
+                        <!-- Blurred Background for aesthetics -->
+                        <img src="${record.images[0].url}" alt="" 
+                             class="absolute inset-0 w-full h-full object-cover opacity-20 blur-md scale-110 select-none pointer-events-none">
+                        
+                        <!-- Main Image (Contained) -->
                         <img src="${record.images[0].url}" alt="${record.title[currentLang]}" 
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent opacity-60"></div>
+                             class="relative z-10 max-h-[90%] max-w-[90%] object-contain group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                        
+                        <!-- Subtle Gradient Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/10 via-transparent to-transparent opacity-40 z-10 pointer-events-none"></div>
+                        
+                        <!-- Hover Action Overlay -->
+                        <div class="absolute inset-0 bg-[#0F172A]/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300 z-20">
+                            <div class="bg-white/95 text-[#0F172A] px-4 py-2 rounded-xl text-[8px] font-black uppercase tracking-[0.25em] flex items-center gap-2 shadow-lg scale-90 group-hover:scale-100 transition-transform duration-300">
+                                ${currentLang === "th" ? "ดูรายละเอียด" : "View Details"} <i class="ph ph-arrow-right text-[#FF4E45] font-bold"></i>
+                            </div>
+                        </div>
                         
                         <!-- Confidence Marker -->
-                        <div class="absolute top-5 left-5">
-                            <span class="px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 text-[7px] font-black uppercase tracking-[0.2em] text-white flex items-center gap-2">
+                        <div class="absolute top-4 left-4 z-30">
+                            <span class="px-2.5 py-1 bg-[#0F172A]/85 backdrop-blur-md rounded-lg border border-white/10 text-[7px] font-black uppercase tracking-[0.2em] text-white flex items-center gap-1.5 shadow-sm">
                                 <span class="w-1.5 h-1.5 rounded-full ${statusColor} shadow-[0_0_8px_currentColor]"></span>
-                                <span class="opacity-80">${statusText}</span>
+                                <span class="opacity-90">${statusText}</span>
                             </span>
                         </div>
                         ${vectorBadge}
-                            <div class="bg-white/15 backdrop-blur-md text-white px-4 py-2 rounded-xl text-[8px] font-bold uppercase tracking-[0.3em] flex items-center gap-2 border border-white/20">
-                                ${currentLang === "th" ? "วิเคราะห์" : "Analysis"} <i class="ph ph-arrow-right text-[#FF4E45]"></i>
-                            </div>
-                        </div>
+                        
                         <!-- ID Watermark -->
-                        <div class="absolute bottom-5 left-5 text-[7px] font-mono tracking-widest opacity-30 text-white">${record.id}</div>
+                        <div class="absolute bottom-3 left-4 text-[7px] font-mono tracking-widest opacity-40 text-gray-500 z-30">${record.id}</div>
                     </div>
                     <div class="p-6 md:p-8">
                         <div class="text-[9px] text-gray-400 font-mono mb-2 uppercase tracking-[0.2em] font-bold"><span class="scramble-hover" data-text="${record.id}">${record.id}</span></div>

@@ -183,35 +183,32 @@
         </div>
 
         <!-- Unified Search + Filter + Legend Control Bar -->
-        <div
-            class="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center mb-8 p-3 bg-white border border-gray-100 rounded-2xl shadow-sm">
+        <div class="flex flex-col gap-4 mb-8 p-4 bg-white border border-gray-100 rounded-3xl shadow-sm">
+            <!-- Row 1: Search (Left) & Legend (Right) -->
+            <div class="flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-4 pb-4 border-b border-gray-100">
+                <!-- Search -->
+                <div class="relative w-full lg:max-w-md group">
+                    <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#0F172A] transition-colors text-sm"></i>
+                    <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาระเบียน..."
+                        class="w-full pl-10 pr-9 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#0F172A]/20 focus:border-[#0F172A]/30 transition-all text-xs font-medium placeholder-gray-400">
+                    <button id="clear-search" onclick="clearSearch()"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden transition-colors">
+                        <i class="ph ph-x text-sm"></i>
+                    </button>
+                </div>
 
-            <!-- Search -->
-            <div class="relative w-full sm:w-72 md:w-80 shrink-0 group">
-                <i
-                    class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#0F172A] transition-colors text-sm"></i>
-                <input type="text" id="search-input" oninput="handleSearch()" placeholder="ค้นหาระเบียน..."
-                    class="w-full pl-10 pr-9 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#0F172A]/20 focus:border-[#0F172A]/30 transition-all text-xs font-medium placeholder-gray-400">
-                <button id="clear-search" onclick="clearSearch()"
-                    class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 hidden transition-colors">
-                    <i class="ph ph-x text-sm"></i>
-                </button>
+                <!-- Legend Indicators -->
+                <div id="status-legend" class="flex flex-wrap items-center gap-2 lg:justify-end">
+                    <!-- Legend JS -->
+                </div>
             </div>
 
-            <!-- Divider -->
-            <div class="hidden sm:block w-px h-8 bg-gray-200 shrink-0"></div>
-
-
-            <!-- Category Filter -->
-            <div class="flex-grow min-w-0 relative">
-                <div id="categories-container"
-                    class="flex flex-nowrap gap-3 items-center overflow-x-auto no-scrollbar mask-fade-right py-1"></div>
+            <!-- Row 2: Category Filter -->
+            <div class="flex items-center gap-3">
+                <div id="categories-container" class="flex flex-nowrap gap-3 items-center overflow-x-auto no-scrollbar mask-fade-right py-1 w-full">
+                    <!-- Categories JS -->
+                </div>
             </div>
-        </div>
-
-        <!-- Legend Indicators (Moved out of control bar to give breathing room) -->
-        <div id="status-legend" class="flex flex-wrap items-center justify-center sm:justify-end gap-3 text-[8px] font-bold uppercase tracking-widest text-gray-500 mb-8 px-2">
-            <!-- Legend JS -->
         </div>
 
         <div id="grid-container"
@@ -412,7 +409,7 @@
         </div>
     </div>
 
-    <script src="assets/js/index.js?v=6.15"></script>
+    <script src="assets/js/index.js?v=6.16"></script>
     <script>
         // Mobile menu toggle
         const mobBtn = document.getElementById('mobile-menu-btn');
