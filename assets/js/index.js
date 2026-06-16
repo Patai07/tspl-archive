@@ -77,14 +77,16 @@ const CATEGORIES = [
     "Nature & Botany", 
     "Fauna & Mythical", 
     "Geometric & Synthetic", 
-    "Sacred & Belief"
+    "Sacred & Belief",
+    "Vector Ready"
 ];
 const CATEGORY_LABEL = {
     "All": { th: "ทั้งหมด", en: "All Patterns" },
     "Nature & Botany": { th: "พรรณพฤกษาและธรรมชาติ", en: "Nature & Botany" },
     "Fauna & Mythical": { th: "สรรพสัตว์และสัตว์หิมพานต์", en: "Fauna & Mythical" },
     "Geometric & Synthetic": { th: "เรขาคณิตและลวดลายประดิษฐ์", en: "Geometric & Synthetic" },
-    "Sacred & Belief": { th: "ความเชื่อและสิ่งศักดิ์สิทธิ์", en: "Sacred & Belief" }
+    "Sacred & Belief": { th: "ความเชื่อและสิ่งศักดิ์สิทธิ์", en: "Sacred & Belief" },
+    "Vector Ready": { th: "เวกเตอร์พร้อมใช้ 🟢", en: "Vector Ready 🟢" }
 };
 let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentViewMode = "original";
 
@@ -176,7 +178,11 @@ function renderCategories() {
     CATEGORIES.forEach(cat => {
         const btn = document.createElement('button');
         const isActive = cat === activeCategory;
-        btn.className = `px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all border ${isActive ? 'bg-[#0F2C59] text-white border-[#0F2C59] shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:border-[#0F2C59]/30 hover:text-[#0F2C59]'}`;
+        if (cat === "Vector Ready") {
+            btn.className = `px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all border ${isActive ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-600/20' : 'bg-white text-emerald-600 border-emerald-200 hover:border-emerald-500 hover:text-emerald-700'}`;
+        } else {
+            btn.className = `px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all border ${isActive ? 'bg-[#0F2C59] text-white border-[#0F2C59] shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:border-[#0F2C59]/30 hover:text-[#0F2C59]'}`;
+        }
         btn.innerText = (CATEGORY_LABEL[cat] ? CATEGORY_LABEL[cat][currentLang] : cat);
         btn.onclick = () => { activeCategory = cat; renderCategories(); renderGrid(); };
         container.appendChild(btn);
@@ -193,7 +199,14 @@ function renderGrid(filterText = "") {
     container.innerHTML = '';
 
     let filtered = RECORDS.filter(r => {
-        const matchesCat = activeCategory === "All" || r.category === activeCategory;
+        let matchesCat = false;
+        if (activeCategory === "All") {
+            matchesCat = true;
+        } else if (activeCategory === "Vector Ready") {
+            matchesCat = r.images.some(img => img.type === 'vector');
+        } else {
+            matchesCat = r.category === activeCategory;
+        }
         const titleText = ((r.title.th || "") + (r.title.en || "")).toLowerCase();
         const idText = (r.id || "").toLowerCase();
         const locationText = (r.location || "").toLowerCase();
