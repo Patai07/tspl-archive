@@ -301,10 +301,10 @@ function renderGrid(filterText = "") {
         const hasVector = record.images.some(img => img.type === 'vector');
         const vectorBadge = hasVector ? `
                         <!-- Vector Ready Premium Badge -->
-                        <div class="absolute top-4 right-4 z-30 flex items-center gap-2 bg-[#0F172A]/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#10B981]/40 shadow-sm text-[8px] font-black uppercase tracking-[0.25em] text-white">
-                            <span class="relative flex h-2 w-2">
+                        <div class="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 z-30 flex items-center gap-1.5 sm:gap-2 bg-[#0F172A]/90 backdrop-blur-md px-2 py-0.5 sm:px-3 sm:py-1 rounded-full border border-[#10B981]/40 shadow-sm text-[7px] sm:text-[8px] font-black uppercase tracking-[0.25em] text-white">
+                            <span class="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
+                                <span class="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
                             </span>
                             <span class="text-[#10B981] font-extrabold">VECTOR</span>
                         </div>` : '';
@@ -320,27 +320,27 @@ function renderGrid(filterText = "") {
                         
                         <!-- Hover Action Overlay -->
                         <div class="absolute inset-0 bg-[#0F172A]/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300 z-20">
-                            <div class="bg-white/95 text-[#0F172A] px-4 py-2 rounded-xl text-[8px] font-black uppercase tracking-[0.25em] flex items-center gap-2 shadow-lg scale-90 group-hover:scale-100 transition-transform duration-300">
+                            <div class="bg-white/95 text-[#0F172A] px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl text-[7px] sm:text-[8px] font-black uppercase tracking-[0.25em] flex items-center gap-1.5 sm:gap-2 shadow-lg scale-90 group-hover:scale-100 transition-transform duration-300">
                                 ${currentLang === "th" ? "ดูรายละเอียด" : "View Details"} <i class="ph ph-arrow-right text-[#FF4E45] font-bold"></i>
                             </div>
                         </div>
                         
                         <!-- Confidence Marker -->
-                        <div class="absolute top-4 left-4 z-30">
-                            <span class="px-2.5 py-1 bg-white/80 backdrop-blur-md rounded-full border border-white/20 text-[7px] font-black uppercase tracking-[0.2em] text-[#0F172A] flex items-center gap-1.5 shadow-sm">
-                                <span class="w-1.5 h-1.5 rounded-full ${statusInfo.dot} shadow-[0_0_6px_currentColor]"></span>
+                        <div class="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-30">
+                            <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-white/80 backdrop-blur-md rounded-full border border-white/20 text-[6px] sm:text-[7px] font-black uppercase tracking-[0.2em] text-[#0F172A] flex items-center gap-1 sm:gap-1.5 shadow-sm">
+                                <span class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full ${statusInfo.dot} shadow-[0_0_6px_currentColor]"></span>
                                 <span class="font-extrabold">${statusText}</span>
                             </span>
                         </div>
                         ${vectorBadge}
                         
                         <!-- ID Watermark -->
-                        <div class="absolute bottom-3 left-4 text-[7px] font-mono tracking-widest opacity-60 text-white z-30">${record.id}</div>
+                        <div class="absolute bottom-2.5 left-3 sm:bottom-3 sm:left-4 text-[6px] sm:text-[7px] font-mono tracking-widest opacity-60 text-white z-30">${record.id}</div>
                     </div>
-                    <div class="p-6 md:p-8">
-                        <div class="text-[9px] text-gray-400 font-mono mb-2 uppercase tracking-[0.2em] font-bold"><span class="scramble-hover" data-text="${record.id}">${record.id}</span></div>
-                        <h3 class="text-base font-bold text-[#0F2C59] mb-3 leading-[1.25] tracking-tight uppercase">${record.title[currentLang]}</h3>
-                        <div class="flex items-center gap-2 text-[8px] text-gray-400 font-bold mt-2 pt-4 border-t border-gray-50 group-hover:text-[#FF4E45] transition-colors">
+                    <div class="p-4 sm:p-6 md:p-8">
+                        <div class="text-[8px] sm:text-[9px] text-gray-400 font-mono mb-1.5 sm:mb-2 uppercase tracking-[0.2em] font-bold"><span class="scramble-hover" data-text="${record.id}">${record.id}</span></div>
+                        <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#0F2C59] mb-2 sm:mb-3 leading-[1.25] tracking-tight uppercase">${record.title[currentLang]}</h3>
+                        <div class="flex items-center gap-1.5 sm:gap-2 text-[7px] sm:text-[8px] text-gray-400 font-bold mt-1.5 sm:mt-2 pt-3 sm:pt-4 border-t border-gray-50 group-hover:text-[#FF4E45] transition-colors">
                             <i class="ph-fill ph-map-pin text-[#FF4E45] shrink-0"></i>
                             <span class="truncate uppercase tracking-wider">${record.location}</span>
                         </div>
