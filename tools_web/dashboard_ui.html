@@ -225,6 +225,12 @@ header {
       <div class="btn-run-mini" id="btn-link_assets">SYNC</div>
     </div>
 
+    <div class="card" id="card-map_ids" onclick="handleAction('map_ids', 'Map Folder IDs', 'เขียน Drive Folder ID ลง Sheet คอลัมน์ W — ทำครั้งเดียว แก้ matching ถาวร')" style="border: 1px solid rgba(245,158,11,0.2); background: linear-gradient(to right, rgba(245,158,11,0.03), transparent);">
+      <div class="card-icon" style="color: #f59e0b;">🗺️</div>
+      <div class="card-title" style="color: #fbbf24;">Map Folder IDs <span style="font-size:0.6rem; color: var(--muted); font-weight:400;">(once)</span></div>
+      <div class="btn-run-mini" id="btn-map_ids" style="color: #f59e0b;">MAP</div>
+    </div>
+
     <div class="card" id="card-quick_sync" onclick="handleAction('quick_sync', 'Quick Sync', 'เชื่อมไฟล์ในเครื่อง และอัปเดต Sheet 1 ให้ตรงกันเลย')" style="border: 1px solid rgba(96,165,250,0.3); background: linear-gradient(to right, rgba(96,165,250,0.05), transparent);">
       <div class="card-icon" style="color: #60a5fa;">⚡</div>
       <div class="card-title" style="color: #93c5fd;">Quick Sync <span style="font-size:0.6rem; color: var(--muted); font-weight:400;">(Link + Mirror)</span></div>
@@ -455,6 +461,7 @@ function setTaskRunning(step, isRunning) {
     const originalTexts = {
         'extract': 'RUN',
         'download_assets': 'DL', 'link_assets': 'SYNC', 'quick_sync': 'GO',
+        'map_ids': 'MAP',
         'optimize_images': 'OPT', 'mirror_db': 'SYNC',
         'scan_duplicates': 'SCAN', 'deploy': 'LIVE'
     };

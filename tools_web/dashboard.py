@@ -197,6 +197,7 @@ def run_step(step):
         'extract':        ['python3', 'tools_web/semiotic_extractor.py'],
         'download_assets':['python3', 'tools_web/asset_manager.py', 'download'],
         'link_assets':    ['python3', 'tools_web/asset_manager.py', 'link'],
+        'map_ids':        ['python3', 'tools_web/asset_manager.py', 'map_ids'],
         'optimize_images':['python3', 'tools_web/optimize_images.py'],
         'mirror_db':      ['python3', 'tools_web/db_mirror.py'],
         'scan_duplicates':['python3', 'tools_web/scan_duplicates.py'],
