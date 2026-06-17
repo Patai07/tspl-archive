@@ -89,6 +89,8 @@ const CATEGORY_LABEL = {
     "Vector Ready": { th: "เวกเตอร์", en: "Vector" }
 };
 let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentViewMode = "original";
+let visibleCount = 16;
+const ITEMS_PER_PAGE = 16;
 
 async function init() {
     initParticles();
@@ -225,7 +227,7 @@ function renderCategories() {
                 `;
             }
         }
-        btn.onclick = () => { activeCategory = cat; renderCategories(); renderGrid(); };
+        btn.onclick = () => { activeCategory = cat; visibleCount = ITEMS_PER_PAGE; renderCategories(); renderGrid(); };
         container.appendChild(btn);
     });
 }
@@ -257,10 +259,14 @@ function renderGrid(filterText = "") {
         return matchesCat && searchTarget.includes(filterText.toLowerCase());
     });
 
-    // Limit to 8 items on index.html
+    // Limit items based on page
     const isArchivePage = window.location.pathname.includes('archive.html');
+    const totalMatches = filtered.length;
+    
     if (!isArchivePage) {
         filtered = filtered.slice(0, 8);
+    } else {
+        filtered = filtered.slice(0, visibleCount);
     }
 
     if (filtered.length === 0) {
@@ -340,6 +346,23 @@ function renderGrid(filterText = "") {
                     </div>`;
         container.appendChild(item);
     });
+
+    // Handle Load More button visibility
+    const loadMoreContainer = document.getElementById('load-more-container');
+    if (loadMoreContainer) {
+        if (isArchivePage && totalMatches > visibleCount) {
+            loadMoreContainer.innerHTML = `
+                <button onclick="handleLoadMore()" class="px-8 py-3.5 bg-[#0F172A] hover:bg-[#FF4E45] text-white rounded-full text-xs font-black uppercase tracking-[0.2em] transition-all shadow-lg hover:shadow-[#FF4E45]/20 hover:scale-105 active:scale-95 flex items-center gap-2">
+                    <span>${currentLang === 'th' ? 'โหลดเพิ่มเติม' : 'LOAD MORE'}</span>
+                    <i class="ph-bold ph-plus text-xs"></i>
+                </button>
+            `;
+            loadMoreContainer.classList.remove('hidden');
+        } else {
+            loadMoreContainer.innerHTML = '';
+            loadMoreContainer.classList.add('hidden');
+        }
+    }
 }
 
 function handleSearch() {
@@ -349,7 +372,14 @@ function handleSearch() {
         if (val.length > 0) clearBtn.classList.remove('hidden');
         else clearBtn.classList.add('hidden');
     }
+    visibleCount = ITEMS_PER_PAGE; // Reset visible count on search
     renderGrid(val);
+}
+
+function handleLoadMore() {
+    visibleCount += ITEMS_PER_PAGE;
+    const searchVal = (document.getElementById('search-input') || document.getElementById('search-input-nav') || {}).value || '';
+    renderGrid(searchVal);
 }
 
 function clearSearch() {
