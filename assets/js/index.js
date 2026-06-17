@@ -180,16 +180,27 @@ function renderCategories() {
         const isActive = cat === activeCategory;
         if (cat === "Vector Ready") {
             const vectorCount = RECORDS.filter(r => r.images.some(img => img.type === 'vector')).length;
-            const countStr = currentLang === 'th' ? toThaiDigits(vectorCount) : vectorCount;
-            btn.className = `flex items-center gap-2 px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all border whitespace-nowrap ${isActive ? 'bg-[#0F172A] text-white border-[#10B981] shadow-md shadow-emerald-600/20' : 'bg-white text-emerald-600 border-emerald-200 hover:border-emerald-500 hover:text-emerald-700'}`;
-            btn.innerHTML = `
-                <span>${currentLang === 'th' ? 'เวกเตอร์' : 'VECTOR'}</span>
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
-                </span>
-                <span class="opacity-75">(${countStr})</span>
-            `;
+            const countStr = vectorCount; // Always English digits
+            if (isActive) {
+                btn.className = `flex items-center gap-2 px-5 py-2 rounded-lg text-[9px] font-black uppercase tracking-[0.2em] transition-all border whitespace-nowrap bg-[#0F172A] text-[#10B981] border-[#10B981] shadow-lg shadow-emerald-500/10`;
+                btn.innerHTML = `
+                    <span>VECTOR</span>
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
+                    </span>
+                    <span class="opacity-80">(${countStr})</span>
+                `;
+            } else {
+                btn.className = `flex items-center gap-2 px-5 py-2 rounded-lg text-[9px] font-black uppercase tracking-[0.2em] transition-all border whitespace-nowrap bg-white text-gray-400 border-gray-200 hover:border-[#10B981]/40 hover:text-[#10B981]`;
+                btn.innerHTML = `
+                    <span>VECTOR</span>
+                    <span class="relative flex h-1.5 w-1.5">
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#10B981]/50"></span>
+                    </span>
+                    <span class="opacity-65">(${countStr})</span>
+                `;
+            }
         } else {
             btn.className = `px-5 py-2 rounded-lg text-[9px] font-bold uppercase tracking-widest transition-all border whitespace-nowrap ${isActive ? 'bg-[#0F2C59] text-white border-[#0F2C59] shadow-md' : 'bg-white text-gray-500 border-gray-200 hover:border-[#0F2C59]/30 hover:text-[#0F2C59]'}`;
             btn.innerText = (CATEGORY_LABEL[cat] ? CATEGORY_LABEL[cat][currentLang] : cat);
