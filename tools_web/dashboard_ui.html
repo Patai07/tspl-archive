@@ -201,8 +201,14 @@ header {
   <div class="actions-grid">
     <div style="font-size: 0.6rem; color: var(--muted); font-family: var(--font-mono); margin-bottom: 8px; opacity: 0.5; letter-spacing: 0.08em;">PIPELINE</div>
 
-    <!-- PHASE 1: SCAN -->
-    <div style="font-size: 0.55rem; color: rgba(167,139,250,0.6); font-family: var(--font-mono); margin: 4px 0 4px 4px; letter-spacing: 0.06em;">① AI SCAN</div>
+    <!-- PHASE 1: DATABASE & AI -->
+    <div style="font-size: 0.55rem; color: rgba(167,139,250,0.6); font-family: var(--font-mono); margin: 4px 0 4px 4px; letter-spacing: 0.06em;">① DATABASE & AI</div>
+
+    <div class="card" id="card-map_ids" onclick="handleAction('map_ids', 'Map Folder IDs', 'เขียน Drive Folder ID ลง Sheet คอลัมน์ W — ทำครั้งเดียว แก้ matching ถาวร')" style="border: 1px solid rgba(245,158,11,0.2); background: linear-gradient(to right, rgba(245,158,11,0.03), transparent);">
+      <div class="card-icon" style="color: #f59e0b;">🗺️</div>
+      <div class="card-title" style="color: #fbbf24;">Map Folder IDs <span style="font-size:0.6rem; color: var(--muted); font-weight:400;">(once)</span></div>
+      <div class="btn-run-mini" id="btn-map_ids" style="color: #f59e0b;">MAP</div>
+    </div>
 
     <div class="card" id="card-extract" onclick="handleAction('extract', 'Haiku Scan', 'สแกนเอกสารจาก Drive แล้ววิเคราะห์ด้วย AI → บันทึกลง Sheet Staging')">
       <div class="card-icon" style="color: #a78bfa;">🧠</div>
@@ -211,30 +217,12 @@ header {
     </div>
 
     <!-- PHASE 2: ASSETS -->
-    <div style="font-size: 0.55rem; color: rgba(96,165,250,0.6); font-family: var(--font-mono); margin: 12px 0 4px 4px; letter-spacing: 0.06em;">② ASSETS</div>
+    <div style="font-size: 0.55rem; color: rgba(96,165,250,0.6); font-family: var(--font-mono); margin: 12px 0 4px 4px; letter-spacing: 0.06em;">② ASSET MANAGEMENT</div>
 
     <div class="card" id="card-download_assets" onclick="handleAction('download_assets', 'Download Assets', 'ดาวน์โหลดรูปภาพจาก Google Drive มาเก็บไว้ในเครื่อง')">
       <div class="card-icon" style="color: #38bdf8;">☁️</div>
       <div class="card-title">Download Assets</div>
       <div class="btn-run-mini" id="btn-download_assets">DL</div>
-    </div>
-
-    <div class="card" id="card-link_assets" onclick="handleAction('link_assets', 'Link Assets', 'เชื่อมโยง path รูปภาพในเครื่องกับ Sheet 2 (Production)')">
-      <div class="card-icon" style="color: var(--blue);">🔗</div>
-      <div class="card-title">Link Assets</div>
-      <div class="btn-run-mini" id="btn-link_assets">SYNC</div>
-    </div>
-
-    <div class="card" id="card-map_ids" onclick="handleAction('map_ids', 'Map Folder IDs', 'เขียน Drive Folder ID ลง Sheet คอลัมน์ W — ทำครั้งเดียว แก้ matching ถาวร')" style="border: 1px solid rgba(245,158,11,0.2); background: linear-gradient(to right, rgba(245,158,11,0.03), transparent);">
-      <div class="card-icon" style="color: #f59e0b;">🗺️</div>
-      <div class="card-title" style="color: #fbbf24;">Map Folder IDs <span style="font-size:0.6rem; color: var(--muted); font-weight:400;">(once)</span></div>
-      <div class="btn-run-mini" id="btn-map_ids" style="color: #f59e0b;">MAP</div>
-    </div>
-
-    <div class="card" id="card-quick_sync" onclick="handleAction('quick_sync', 'Quick Sync', 'เชื่อมไฟล์ในเครื่อง และอัปเดต Sheet 1 ให้ตรงกันเลย')" style="border: 1px solid rgba(96,165,250,0.3); background: linear-gradient(to right, rgba(96,165,250,0.05), transparent);">
-      <div class="card-icon" style="color: #60a5fa;">⚡</div>
-      <div class="card-title" style="color: #93c5fd;">Quick Sync <span style="font-size:0.6rem; color: var(--muted); font-weight:400;">(Link + Mirror)</span></div>
-      <div class="btn-run-mini" id="btn-quick_sync" style="color: #60a5fa; opacity:1;">GO</div>
     </div>
 
     <div class="card" id="card-optimize_images" onclick="handleAction('optimize_images', 'Optimize Images', 'บีบอัดและปรับขนาดรูปภาพทั้งหมดให้เหมาะกับเว็บ')">
@@ -243,19 +231,25 @@ header {
       <div class="btn-run-mini" id="btn-optimize_images">OPT</div>
     </div>
 
-    <!-- PHASE 3: QA & DEPLOY -->
-    <div style="font-size: 0.55rem; color: rgba(0,255,65,0.6); font-family: var(--font-mono); margin: 12px 0 4px 4px; letter-spacing: 0.06em;">③ QA & DEPLOY</div>
-
-    <div class="card" id="card-mirror_db" onclick="handleAction('mirror_db', 'Mirror DB', 'Sync ข้อมูลจาก Sheet 2 Production กลับมาที่ Sheet 1 (DB_Mirror tab)')">
-      <div class="card-icon" style="color: var(--muted);">🔄</div>
-      <div class="card-title">Mirror DB → Sheet 1</div>
-      <div class="btn-run-mini" id="btn-mirror_db">SYNC</div>
+    <div class="card" id="card-link_assets" onclick="handleAction('link_assets', 'Link Assets', 'เชื่อมโยง path รูปภาพในเครื่องกับ Sheet 2 (Production)')">
+      <div class="card-icon" style="color: var(--blue);">🔗</div>
+      <div class="card-title">Link Assets</div>
+      <div class="btn-run-mini" id="btn-link_assets">SYNC</div>
     </div>
+
+    <!-- PHASE 3: QA & DEPLOY -->
+    <div style="font-size: 0.55rem; color: rgba(0,255,65,0.6); font-family: var(--font-mono); margin: 12px 0 4px 4px; letter-spacing: 0.06em;">③ QA & RELEASE</div>
 
     <div class="card" id="card-scan_duplicates" onclick="handleAction('scan_duplicates', 'Duplicate Scan', 'ตรวจหาลายที่ถูกวิเคราะห์ซ้ำในฐานข้อมูล')">
       <div class="card-icon" style="color: var(--red);">🔍</div>
       <div class="card-title">Duplicate Scan</div>
       <div class="btn-run-mini" id="btn-scan_duplicates">SCAN</div>
+    </div>
+
+    <div class="card" id="card-mirror_db" onclick="handleAction('mirror_db', 'Mirror DB', 'Sync ข้อมูลจาก Sheet 2 Production กลับมาที่ Sheet 1 (DB_Mirror tab)')">
+      <div class="card-icon" style="color: var(--muted);">🔄</div>
+      <div class="card-title">Mirror DB → Sheet 1</div>
+      <div class="btn-run-mini" id="btn-mirror_db">SYNC</div>
     </div>
 
     <div class="card" id="card-deploy" onclick="handleAction('deploy', 'Deploy Website', 'อัปเดตข้อมูลและรูปภาพทั้งหมดขึ้นหน้าเว็บจริง (Vercel)')"
