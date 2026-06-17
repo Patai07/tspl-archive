@@ -182,7 +182,7 @@ function renderCategories() {
             const vectorCount = RECORDS.filter(r => r.images.some(img => img.type === 'vector')).length;
             const countStr = vectorCount; // Always English digits
             if (isActive) {
-                btn.className = `flex items-center gap-2 px-5 py-2 rounded-lg text-[9px] font-black uppercase tracking-[0.2em] transition-all border whitespace-nowrap bg-[#0F172A] text-[#10B981] border-[#10B981] shadow-lg shadow-emerald-500/10`;
+                btn.className = `flex items-center gap-2 px-5 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all border whitespace-nowrap bg-[#0F172A] text-[#10B981] border-[#10B981] shadow-lg shadow-emerald-500/10`;
                 btn.innerHTML = `
                     <span>VECTOR</span>
                     <span class="relative flex h-2 w-2">
@@ -192,7 +192,7 @@ function renderCategories() {
                     <span class="text-white font-extrabold text-[10px] ml-0.5">(${countStr})</span>
                 `;
             } else {
-                btn.className = `flex items-center gap-2 px-5 py-2 rounded-lg text-[9px] font-black uppercase tracking-[0.2em] transition-all border whitespace-nowrap bg-white text-gray-400 border-gray-200 hover:border-[#10B981]/40 hover:text-[#10B981]`;
+                btn.className = `flex items-center gap-2 px-5 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all border whitespace-nowrap bg-white text-gray-400 border-gray-200 hover:border-[#10B981]/40 hover:text-[#10B981]`;
                 btn.innerHTML = `
                     <span>VECTOR</span>
                     <span class="relative flex h-1.5 w-1.5">
