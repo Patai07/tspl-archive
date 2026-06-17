@@ -101,6 +101,7 @@ async function init() {
     renderGrid();
     updateLegend();
     setupHeroGlow();
+    setupInfiniteScroll();
 
     // Preloader is handled in window.onload
 }
@@ -347,20 +348,13 @@ function renderGrid(filterText = "") {
         container.appendChild(item);
     });
 
-    // Handle Load More button visibility
-    const loadMoreContainer = document.getElementById('load-more-container');
-    if (loadMoreContainer) {
+    // Handle loading spinner visibility
+    const infiniteLoading = document.getElementById('infinite-loading');
+    if (infiniteLoading) {
         if (isArchivePage && totalMatches > visibleCount) {
-            loadMoreContainer.innerHTML = `
-                <button onclick="handleLoadMore()" class="px-8 py-3.5 bg-[#0F172A] hover:bg-[#FF4E45] text-white rounded-full text-xs font-black uppercase tracking-[0.2em] transition-all shadow-lg hover:shadow-[#FF4E45]/20 hover:scale-105 active:scale-95 flex items-center gap-2">
-                    <span>${currentLang === 'th' ? 'โหลดเพิ่มเติม' : 'LOAD MORE'}</span>
-                    <i class="ph-bold ph-plus text-xs"></i>
-                </button>
-            `;
-            loadMoreContainer.classList.remove('hidden');
+            infiniteLoading.classList.remove('hidden');
         } else {
-            loadMoreContainer.innerHTML = '';
-            loadMoreContainer.classList.add('hidden');
+            infiniteLoading.classList.add('hidden');
         }
     }
 }
@@ -376,10 +370,61 @@ function handleSearch() {
     renderGrid(val);
 }
 
-function handleLoadMore() {
-    visibleCount += ITEMS_PER_PAGE;
-    const searchVal = (document.getElementById('search-input') || document.getElementById('search-input-nav') || {}).value || '';
-    renderGrid(searchVal);
+let scrollObserver = null;
+
+function setupInfiniteScroll() {
+    const trigger = document.getElementById('infinite-scroll-trigger');
+    if (!trigger) return;
+
+    if (scrollObserver) {
+        scrollObserver.disconnect();
+    }
+
+    scrollObserver = new IntersectionObserver((entries) => {
+        const isArchivePage = window.location.pathname.includes('archive.html');
+        if (!isArchivePage) return;
+
+        if (entries[0].isIntersecting) {
+            const searchVal = (document.getElementById('search-input') || document.getElementById('search-input-nav') || {}).value || '';
+            const totalMatches = getFilteredCount(searchVal);
+
+            if (visibleCount < totalMatches) {
+                // Show loader immediately
+                const spinner = document.getElementById('infinite-loading');
+                if (spinner) spinner.classList.remove('hidden');
+
+                // Small delay to simulate fetch transition
+                setTimeout(() => {
+                    visibleCount += ITEMS_PER_PAGE;
+                    renderGrid(searchVal);
+                }, 300);
+            }
+        }
+    }, {
+        rootMargin: '200px' // Load 200px before reaching bottom
+    });
+
+    scrollObserver.observe(trigger);
+}
+
+function getFilteredCount(filterText = "") {
+    return RECORDS.filter(r => {
+        let matchesCat = false;
+        if (activeCategory === "All") {
+            matchesCat = true;
+        } else if (activeCategory === "Vector Ready") {
+            matchesCat = r.images.some(img => img.type === 'vector');
+        } else {
+            matchesCat = r.category === activeCategory;
+        }
+        const titleText = ((r.title.th || "") + (r.title.en || "")).toLowerCase();
+        const idText = (r.id || "").toLowerCase();
+        const locationText = (r.location || "").toLowerCase();
+        const tagsText = (r.tags || []).join(" ").toLowerCase();
+        
+        const searchTarget = `${titleText} ${idText} ${locationText} ${tagsText}`;
+        return matchesCat && searchTarget.includes(filterText.toLowerCase());
+    }).length;
 }
 
 function clearSearch() {

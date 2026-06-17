@@ -906,8 +906,14 @@
                 <!-- Cards JS -->
             </div>
 
-            <!-- Load More Action -->
-            <div id="load-more-container" class="flex justify-center mt-16 mb-4"></div>
+            <!-- Infinite Scroll Trigger -->
+            <div id="infinite-scroll-trigger" class="h-12 w-full flex items-center justify-center mt-8 mb-16">
+                <!-- Loading Indicator -->
+                <div id="infinite-loading" class="hidden flex items-center gap-2 text-xs font-bold text-gray-400 uppercase tracking-widest">
+                    <span class="animate-spin h-4 w-4 border-2 border-[#FF4E45] border-t-transparent rounded-full"></span>
+                    <span>กำลังโหลดข้อมูล...</span>
+                </div>
+            </div>
         </main>
     </section>
 
