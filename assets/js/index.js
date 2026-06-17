@@ -303,17 +303,13 @@ function renderGrid(filterText = "") {
                         </div>` : '';
 
         item.innerHTML = `
-                    <div class="relative aspect-[4/3] overflow-hidden bg-slate-50 flex items-center justify-center">
-                        <!-- Blurred Background for aesthetics -->
-                        <img src="${record.images[0].url}" alt="" 
-                             class="absolute inset-0 w-full h-full object-cover opacity-20 blur-md scale-110 select-none pointer-events-none">
-                        
-                        <!-- Main Image (Contained) -->
+                    <div class="relative aspect-[4/3] overflow-hidden">
+                        <!-- Main Image (Cover) -->
                         <img src="${record.images[0].url}" alt="${record.title[currentLang]}" 
-                             class="relative z-10 max-h-[90%] max-w-[90%] object-contain group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
                         
                         <!-- Subtle Gradient Overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/10 via-transparent to-transparent opacity-40 z-10 pointer-events-none"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/50 via-transparent to-transparent opacity-60 z-10 pointer-events-none"></div>
                         
                         <!-- Hover Action Overlay -->
                         <div class="absolute inset-0 bg-[#0F172A]/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300 z-20">
@@ -332,7 +328,7 @@ function renderGrid(filterText = "") {
                         ${vectorBadge}
                         
                         <!-- ID Watermark -->
-                        <div class="absolute bottom-3 left-4 text-[7px] font-mono tracking-widest opacity-40 text-gray-500 z-30">${record.id}</div>
+                        <div class="absolute bottom-3 left-4 text-[7px] font-mono tracking-widest opacity-60 text-white z-30">${record.id}</div>
                     </div>
                     <div class="p-6 md:p-8">
                         <div class="text-[9px] text-gray-400 font-mono mb-2 uppercase tracking-[0.2em] font-bold"><span class="scramble-hover" data-text="${record.id}">${record.id}</span></div>
