@@ -320,9 +320,9 @@ function renderGrid(filterText = "") {
                         
                         <!-- Confidence Marker -->
                         <div class="absolute top-4 left-4 z-30">
-                            <span class="px-2.5 py-1 bg-[#0F172A]/85 backdrop-blur-md rounded-lg border border-white/10 text-[7px] font-black uppercase tracking-[0.2em] text-white flex items-center gap-1.5 shadow-sm">
-                                <span class="w-1.5 h-1.5 rounded-full ${statusColor} shadow-[0_0_8px_currentColor]"></span>
-                                <span class="opacity-90">${statusText}</span>
+                            <span class="px-2.5 py-1 bg-white/80 backdrop-blur-md rounded-full border border-white/20 text-[7px] font-black uppercase tracking-[0.2em] text-[#0F172A] flex items-center gap-1.5 shadow-sm">
+                                <span class="w-1.5 h-1.5 rounded-full ${statusInfo.dot} shadow-[0_0_6px_currentColor]"></span>
+                                <span class="font-extrabold">${statusText}</span>
                             </span>
                         </div>
                         ${vectorBadge}
