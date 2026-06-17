@@ -89,8 +89,6 @@ const CATEGORY_LABEL = {
     "Vector Ready": { th: "เวกเตอร์", en: "Vector" }
 };
 let activeCategory = "All", activeRecord = null, currentSlideIndex = 0, currentViewMode = "original";
-let visibleCount = 16;
-const ITEMS_PER_PAGE = 16;
 
 async function init() {
     initParticles();
@@ -101,7 +99,6 @@ async function init() {
     renderGrid();
     updateLegend();
     setupHeroGlow();
-    setupInfiniteScroll();
 
     // Preloader is handled in window.onload
 }
@@ -228,7 +225,7 @@ function renderCategories() {
                 `;
             }
         }
-        btn.onclick = () => { activeCategory = cat; visibleCount = ITEMS_PER_PAGE; renderCategories(); renderGrid(); };
+        btn.onclick = () => { activeCategory = cat; renderCategories(); renderGrid(); };
         container.appendChild(btn);
     });
 }
@@ -260,14 +257,10 @@ function renderGrid(filterText = "") {
         return matchesCat && searchTarget.includes(filterText.toLowerCase());
     });
 
-    // Limit items based on page
+    // Limit to 8 items on index.html
     const isArchivePage = window.location.pathname.includes('archive.html');
-    const totalMatches = filtered.length;
-    
     if (!isArchivePage) {
         filtered = filtered.slice(0, 8);
-    } else {
-        filtered = filtered.slice(0, visibleCount);
     }
 
     if (filtered.length === 0) {
@@ -313,6 +306,7 @@ function renderGrid(filterText = "") {
                     <div class="relative aspect-[4/3] overflow-hidden">
                         <!-- Main Image (Cover) -->
                         <img src="${record.images[0].url}" alt="${record.title[currentLang]}" 
+                             loading="lazy" decoding="async"
                              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
                         
                         <!-- Subtle Gradient Overlay -->
@@ -348,15 +342,6 @@ function renderGrid(filterText = "") {
         container.appendChild(item);
     });
 
-    // Handle loading spinner visibility
-    const infiniteLoading = document.getElementById('infinite-loading');
-    if (infiniteLoading) {
-        if (isArchivePage && totalMatches > visibleCount) {
-            infiniteLoading.classList.remove('hidden');
-        } else {
-            infiniteLoading.classList.add('hidden');
-        }
-    }
 }
 
 function handleSearch() {
@@ -366,65 +351,7 @@ function handleSearch() {
         if (val.length > 0) clearBtn.classList.remove('hidden');
         else clearBtn.classList.add('hidden');
     }
-    visibleCount = ITEMS_PER_PAGE; // Reset visible count on search
     renderGrid(val);
-}
-
-let scrollObserver = null;
-
-function setupInfiniteScroll() {
-    const trigger = document.getElementById('infinite-scroll-trigger');
-    if (!trigger) return;
-
-    if (scrollObserver) {
-        scrollObserver.disconnect();
-    }
-
-    scrollObserver = new IntersectionObserver((entries) => {
-        const isArchivePage = window.location.pathname.includes('archive.html');
-        if (!isArchivePage) return;
-
-        if (entries[0].isIntersecting) {
-            const searchVal = (document.getElementById('search-input') || document.getElementById('search-input-nav') || {}).value || '';
-            const totalMatches = getFilteredCount(searchVal);
-
-            if (visibleCount < totalMatches) {
-                // Show loader immediately
-                const spinner = document.getElementById('infinite-loading');
-                if (spinner) spinner.classList.remove('hidden');
-
-                // Small delay to simulate fetch transition
-                setTimeout(() => {
-                    visibleCount += ITEMS_PER_PAGE;
-                    renderGrid(searchVal);
-                }, 300);
-            }
-        }
-    }, {
-        rootMargin: '200px' // Load 200px before reaching bottom
-    });
-
-    scrollObserver.observe(trigger);
-}
-
-function getFilteredCount(filterText = "") {
-    return RECORDS.filter(r => {
-        let matchesCat = false;
-        if (activeCategory === "All") {
-            matchesCat = true;
-        } else if (activeCategory === "Vector Ready") {
-            matchesCat = r.images.some(img => img.type === 'vector');
-        } else {
-            matchesCat = r.category === activeCategory;
-        }
-        const titleText = ((r.title.th || "") + (r.title.en || "")).toLowerCase();
-        const idText = (r.id || "").toLowerCase();
-        const locationText = (r.location || "").toLowerCase();
-        const tagsText = (r.tags || []).join(" ").toLowerCase();
-        
-        const searchTarget = `${titleText} ${idText} ${locationText} ${tagsText}`;
-        return matchesCat && searchTarget.includes(filterText.toLowerCase());
-    }).length;
 }
 
 function clearSearch() {
