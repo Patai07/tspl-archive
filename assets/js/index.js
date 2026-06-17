@@ -189,7 +189,7 @@ function renderCategories() {
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-[#10B981] shadow-[0_0_6px_#10B981]"></span>
                     </span>
-                    <span class="opacity-80">(${countStr})</span>
+                    <span class="text-white font-extrabold text-[10px] ml-0.5">(${countStr})</span>
                 `;
             } else {
                 btn.className = `flex items-center gap-2 px-5 py-2 rounded-lg text-[9px] font-black uppercase tracking-[0.2em] transition-all border whitespace-nowrap bg-white text-gray-400 border-gray-200 hover:border-[#10B981]/40 hover:text-[#10B981]`;
@@ -198,7 +198,7 @@ function renderCategories() {
                     <span class="relative flex h-1.5 w-1.5">
                         <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#10B981]/50"></span>
                     </span>
-                    <span class="opacity-65">(${countStr})</span>
+                    <span class="text-gray-700 font-extrabold text-[10px] ml-0.5">(${countStr})</span>
                 `;
             }
         } else {
