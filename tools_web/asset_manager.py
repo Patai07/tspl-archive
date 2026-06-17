@@ -141,6 +141,10 @@ TITLE_TO_FOLDER_MAP = {
     normalize('เสือกำลังกัดกวาง'): normalize('เสือ'),
     # NAT-056: word order differs between Sheet and Drive
     normalize('ลายกลีบบัวบนภาชนะดินเผาสุโขทัย'): normalize('ภาชนะลายกลีบบัว'),
+    # NAT-051: Sheet has กลางกระเบื้อง, Drive has prefix ลายกระเบื้องวัดใหญ่ 2:
+    normalize('ลายดอกแปดกลีบกลางกระเบื้อง'): normalize('ลายกระเบื้องวัดใหญ่ 2: ลายกระเบื้องดอกแปดกลีบ'),
+    # FAU-039: Drive has typo 'ปลาย' instead of 'ปลา'
+    normalize('ลายกุ้ง ปู และปลา'): normalize('ปู กุ้ง ปลาย'),
 }
 
 def thumb_url(file_id, size='w1200'):
