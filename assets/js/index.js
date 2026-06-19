@@ -302,15 +302,31 @@ function renderGrid(filterText = "") {
                             <span class="text-[#10B981] font-extrabold">VECTOR</span>
                         </div>` : '';
 
+        const vectorImg = record.images.find(img => img.type === 'vector');
+        const isVectorView = activeCategory === "Vector Ready" && vectorImg;
+        const displayImgUrl = isVectorView ? vectorImg.url : record.images[0].url;
+        
+        const imgClass = isVectorView 
+            ? "w-full h-full object-contain p-6 bg-[#F8FAFC] group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]" 
+            : "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]";
+
+        const overlayHTML = isVectorView 
+            ? '' 
+            : '<div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/50 via-transparent to-transparent opacity-60 z-10 pointer-events-none"></div>';
+
+        const watermarkClass = isVectorView
+            ? "absolute bottom-2.5 left-3 sm:bottom-3 sm:left-4 text-[6px] sm:text-[7px] font-mono tracking-widest opacity-60 text-[#0F172A] z-30"
+            : "absolute bottom-2.5 left-3 sm:bottom-3 sm:left-4 text-[6px] sm:text-[7px] font-mono tracking-widest opacity-60 text-white z-30";
+
         item.innerHTML = `
                     <div class="relative aspect-[4/3] overflow-hidden">
                         <!-- Main Image (Cover) -->
-                        <img src="${record.images[0].url}" alt="${record.title[currentLang]}" 
+                        <img src="${displayImgUrl}" alt="${record.title[currentLang]}" 
                              loading="lazy" decoding="async"
-                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]">
+                             class="${imgClass}">
                         
                         <!-- Subtle Gradient Overlay -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A]/50 via-transparent to-transparent opacity-60 z-10 pointer-events-none"></div>
+                        ${overlayHTML}
                         
                         <!-- Hover Action Overlay -->
                         <div class="absolute inset-0 bg-[#0F172A]/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-300 z-20">
@@ -329,7 +345,7 @@ function renderGrid(filterText = "") {
                         ${vectorBadge}
                         
                         <!-- ID Watermark -->
-                        <div class="absolute bottom-2.5 left-3 sm:bottom-3 sm:left-4 text-[6px] sm:text-[7px] font-mono tracking-widest opacity-60 text-white z-30">${record.id}</div>
+                        <div class="${watermarkClass}">${record.id}</div>
                     </div>
                     <div class="p-4 sm:p-6 md:p-8">
                         <div class="text-[8px] sm:text-[9px] text-gray-400 font-mono mb-1.5 sm:mb-2 uppercase tracking-[0.2em] font-bold"><span class="scramble-hover" data-text="${record.id}">${record.id}</span></div>
@@ -364,7 +380,9 @@ function clearSearch() {
 }
 
 function openModal(record) {
-    activeRecord = record; currentSlideIndex = 0; currentViewMode = 'original';
+    activeRecord = record; 
+    currentSlideIndex = 0; 
+    currentViewMode = (activeCategory === 'Vector Ready' && record.images.some(img => img.type === 'vector')) ? 'vector' : 'original';
     const confidenceMap = {
         'Verified': { th: 'ตรวจสอบแล้ว', en: 'Verified', bg: 'bg-emerald-600' },
         'Reconstructed': { th: 'สันนิษฐานรูปแบบ', en: 'Reconstructed', bg: 'bg-blue-600' },
