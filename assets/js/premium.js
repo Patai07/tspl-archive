@@ -19,6 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 inViewElements.add(entry.target);
             } else {
                 inViewElements.delete(entry.target);
+                // Reset visual state when element leaves viewport so it's never
+                // stuck at opacity:0 or a stale transform when scrolling back up
+                const el = entry.target;
+                if (el.classList.contains('parallax-horizontal') ||
+                    el.classList.contains('parallax-vertical')) {
+                    el.style.opacity   = '1';
+                    el.style.transform = 'none';
+                }
             }
         });
     }, { threshold: 0, rootMargin: '100px' });

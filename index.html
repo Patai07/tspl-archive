@@ -67,7 +67,7 @@
             opacity: 0;
             transition: opacity 1.8s ease; /* crossfade controlled by JS, not keyframe */
         }
-        .hero-pimg.showing { opacity: 0.065; }
+        .hero-pimg.showing { opacity: 0.030; }
 
         /* 5 drift variants — transform only, no opacity manipulation */
         @keyframes pattern-drift-1 {
@@ -1235,13 +1235,17 @@
                 'pattern-drift-4', 'pattern-drift-5'
             ];
 
-            // 15 scatter positions across full hero (% of container)
-            const positions = [
-                { x: 2,  y: 8  }, { x: 12, y: 60 }, { x: 20, y: 30 },
-                { x: 5,  y: 78 }, { x: 30, y: 12 }, { x: 35, y: 75 },
-                { x: 47, y: 20 }, { x: 50, y: 65 }, { x: 42, y: 45 },
-                { x: 68, y: 5  }, { x: 75, y: 50 }, { x: 85, y: 75 },
-                { x: 93, y: 25 }, { x: 62, y: 80 }, { x: 88, y: 45 },
+            // Slots: 2 large anchors (Rule of Thirds) + 13 small supporting
+            const slots = [
+                // ── Hero anchors (large) — diagonal Rule-of-Thirds placement
+                { x: 8,  y: 12, large: true  }, // upper-left third
+                { x: 68, y: 52, large: true  }, // lower-right third
+                // ── Supporting slots (small)
+                { x: 2,  y: 65 }, { x: 18, y: 30 }, { x: 28, y: 78 },
+                { x: 38, y: 10 }, { x: 46, y: 62 }, { x: 54, y: 28 },
+                { x: 5,  y: 88 }, { x: 42, y: 44 }, { x: 60, y: 80 },
+                { x: 82, y: 18 }, { x: 88, y: 60 }, { x: 93, y: 36 },
+                { x: 72, y: 88 },
             ];
 
             // Pick a random URL guaranteed different from `exclude`
@@ -1254,12 +1258,19 @@
             }
 
             // ── 3. Build slots ────────────────────────────────────
-            positions.forEach((pos, i) => {
-                const size   = 80  + Math.random() * 130; // 80–210px
+            slots.forEach((pos, i) => {
+                // Large anchor: 260–330px  |  Small supporting: 55–120px
+                const size   = pos.large
+                    ? 260 + Math.random() * 70
+                    : 55  + Math.random() * 65;
                 const anim   = driftAnims[i % driftAnims.length];
-                const dur    = 20  + Math.random() * 22;  // 20–42s drift cycle
-                const del    = Math.random() * 15;         // 0–15s initial stagger
-                const swapMs = 10000 + Math.random() * 20000; // 10–30s per swap
+                const dur    = pos.large
+                    ? 28 + Math.random() * 18   // anchors drift slower (28–46s)
+                    : 18 + Math.random() * 20;  // smalls drift faster  (18–38s)
+                const del    = Math.random() * 15;
+                const swapMs = pos.large
+                    ? 14000 + Math.random() * 16000  // anchors swap less often (14–30s)
+                    : 8000  + Math.random() * 18000; // smalls swap more often  (8–26s)
 
                 // Outer wrapper = drift animation (transform only)
                 const slot = document.createElement('div');
