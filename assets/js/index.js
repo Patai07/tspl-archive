@@ -100,6 +100,12 @@ async function init() {
     updateLegend();
     setupHeroGlow();
 
+    // Feed live vector-ready records to the hero pattern crossfade engine
+    if (typeof initHeroPatterns === 'function') {
+        const vectorRecords = RECORDS.filter(r => r.images.some(img => img.type === 'vector'));
+        initHeroPatterns(vectorRecords);
+    }
+
     // Preloader is handled in window.onload
 }
 

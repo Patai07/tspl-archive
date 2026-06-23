@@ -39,7 +39,7 @@
             pointer-events: none;
         }
 
-        /* === Floating Thai Pattern Vectors === */
+        /* === Floating Thai Pattern Vectors — Live Crossfade System === */
         #hero-pattern-layer {
             position: absolute;
             inset: 0;
@@ -48,48 +48,50 @@
             overflow: hidden;
         }
 
-        .hero-pattern-item {
+        /* Slot wrapper: ONLY handles drift animation (transform, no opacity) */
+        .hero-pattern-slot {
             position: absolute;
-            filter: invert(1) brightness(2);
-            opacity: 0;
-            will-change: transform, opacity;
+            pointer-events: none;
+            will-change: transform;
             transform-origin: center center;
         }
 
+        /* Two stacked imgs per slot — crossfade A ↔ B independently */
+        .hero-pimg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: invert(1) brightness(2);
+            opacity: 0;
+            transition: opacity 1.8s ease; /* crossfade controlled by JS, not keyframe */
+        }
+        .hero-pimg.showing { opacity: 0.065; }
+
+        /* 5 drift variants — transform only, no opacity manipulation */
         @keyframes pattern-drift-1 {
-            0%   { transform: translate(0, 0)       rotate(0deg)   scale(1);    opacity: 0; }
-            8%   { opacity: 0.055; }
-            50%  { transform: translate(22px, -38px) rotate(12deg)  scale(1.05); opacity: 0.065; }
-            92%  { opacity: 0.055; }
-            100% { transform: translate(0, 0)       rotate(0deg)   scale(1);    opacity: 0; }
+            0%,100% { transform: translate(0px,0px) rotate(0deg) scale(1); }
+            33%     { transform: translate(20px,-30px) rotate(10deg) scale(1.05); }
+            66%     { transform: translate(-10px,15px) rotate(-4deg) scale(0.97); }
         }
         @keyframes pattern-drift-2 {
-            0%   { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
-            10%  { opacity: 0.05; }
-            50%  { transform: translate(-18px, 28px) rotate(-9deg)  scale(0.95); opacity: 0.06; }
-            90%  { opacity: 0.05; }
-            100% { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+            0%,100% { transform: translate(0px,0px) rotate(0deg) scale(1); }
+            40%     { transform: translate(-22px,25px) rotate(-12deg) scale(0.94); }
+            80%     { transform: translate(12px,-18px) rotate(6deg) scale(1.03); }
         }
         @keyframes pattern-drift-3 {
-            0%   { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
-            12%  { opacity: 0.045; }
-            50%  { transform: translate(30px, 20px)  rotate(18deg)  scale(1.08); opacity: 0.055; }
-            88%  { opacity: 0.045; }
-            100% { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+            0%,100% { transform: translate(0px,0px) rotate(0deg) scale(1); }
+            50%     { transform: translate(28px,18px) rotate(16deg) scale(1.07); }
         }
         @keyframes pattern-drift-4 {
-            0%   { transform: translate(0, 0)         rotate(0deg)   scale(1);    opacity: 0; }
-            6%   { opacity: 0.06; }
-            50%  { transform: translate(-28px, -22px) rotate(-14deg) scale(0.92); opacity: 0.07; }
-            94%  { opacity: 0.06; }
-            100% { transform: translate(0, 0)         rotate(0deg)   scale(1);    opacity: 0; }
+            0%,100% { transform: translate(0px,0px) rotate(0deg) scale(1); }
+            25%     { transform: translate(-18px,-20px) rotate(-8deg) scale(0.96); }
+            75%     { transform: translate(25px,12px) rotate(14deg) scale(1.04); }
         }
         @keyframes pattern-drift-5 {
-            0%   { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
-            9%   { opacity: 0.04; }
-            50%  { transform: translate(15px, 35px)  rotate(6deg)   scale(1.03); opacity: 0.05; }
-            91%  { opacity: 0.04; }
-            100% { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+            0%,100% { transform: translate(0px,0px) rotate(0deg) scale(1); }
+            60%     { transform: translate(15px,32px) rotate(5deg) scale(1.02); }
         }
     </style>
 </head>
@@ -1206,84 +1208,114 @@
         createTechDots();
 
         // =========================================================
-        // Floating Thai Pattern Vectors — Hero Banner Background
+        // Floating Thai Pattern Vectors — Live Crossfade System
+        // Called by index.js after CSV/RECORDS loads. Each slot
+        // independently crossfades to a new random SVG on its own
+        // staggered timer — making the arrangement impossible to
+        // reproduce by screenshot.
         // =========================================================
-        function initHeroPatterns() {
+        function initHeroPatterns(records) {
             const layer = document.getElementById('hero-pattern-layer');
             if (!layer) return;
+            layer.innerHTML = ''; // clear any previous render
 
-            // Curated list of TSPL vector paths — mix all 4 categories
-            const svgPaths = [
-                'assets/images/database/01_Nature/TSP-LST-NAT-001/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-002/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-007/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-009/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-015/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-019/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-022/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-030/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-036/vectors/vector.svg',
-                'assets/images/database/01_Nature/TSP-LST-NAT-040/vectors/vector.svg',
-                'assets/images/database/02_Fauna/TSP-LST-FAU-001/vectors/vector.svg',
-                'assets/images/database/02_Fauna/TSP-LST-FAU-002/vectors/vector.svg',
-                'assets/images/database/02_Fauna/TSP-LST-FAU-009/vectors/vector.svg',
-                'assets/images/database/02_Fauna/TSP-LST-FAU-010/vectors/vector.svg',
-                'assets/images/database/02_Fauna/TSP-LST-FAU-014/vectors/vector.svg',
-                'assets/images/database/04_Sacred/TSP-LST-SAC-001/vectors/vector.svg',
-                'assets/images/database/04_Sacred/TSP-LST-SAC-002/vectors/vector.svg',
-                'assets/images/database/04_Sacred/TSP-LST-SAC-008/vectors/vector.svg',
-                'assets/images/database/04_Sacred/TSP-LST-SAC-015/vectors/vector.svg',
-                'assets/images/database/04_Sacred/TSP-LST-SAC-017/vectors/vector.svg',
-                'assets/images/database/04_Sacred/TSP-LST-SAC-018/vectors/vector.svg',
-            ];
+            // ── 1. Extract vector URLs from live RECORDS ──────────
+            const vectorUrls = [];
+            if (records && records.length > 0) {
+                records.forEach(r => {
+                    const vec = r.images.find(img => img.type === 'vector');
+                    if (vec && vec.url) vectorUrls.push(vec.url);
+                });
+            }
+            if (vectorUrls.length === 0) return; // nothing ready yet
 
+            // ── 2. Config ─────────────────────────────────────────
             const driftAnims = [
                 'pattern-drift-1', 'pattern-drift-2', 'pattern-drift-3',
                 'pattern-drift-4', 'pattern-drift-5'
             ];
 
-            // Scatter positions — more concentrated left side (behind text) and edges
+            // 15 scatter positions across full hero (% of container)
             const positions = [
-                { x: 3,  y: 10 }, { x: 10, y: 55 }, { x: 18, y: 25 },
-                { x: 5,  y: 72 }, { x: 25, y: 80 }, { x: 38, y: 15 },
-                { x: 72, y: 8  }, { x: 80, y: 45 }, { x: 88, y: 70 },
-                { x: 92, y: 18 }, { x: 65, y: 82 }, { x: 48, y: 60 },
-                { x: 55, y: 30 }, { x: 15, y: 40 }, { x: 42, y: 88 },
+                { x: 2,  y: 8  }, { x: 12, y: 60 }, { x: 20, y: 30 },
+                { x: 5,  y: 78 }, { x: 30, y: 12 }, { x: 35, y: 75 },
+                { x: 47, y: 20 }, { x: 50, y: 65 }, { x: 42, y: 45 },
+                { x: 68, y: 5  }, { x: 75, y: 50 }, { x: 85, y: 75 },
+                { x: 93, y: 25 }, { x: 62, y: 80 }, { x: 88, y: 45 },
             ];
 
-            // Shuffle SVG list
-            const shuffled = [...svgPaths].sort(() => Math.random() - 0.5);
+            // Pick a random URL guaranteed different from `exclude`
+            function pickDiff(pool, exclude) {
+                if (pool.length <= 1) return pool[0];
+                let pick, tries = 0;
+                do { pick = pool[Math.floor(Math.random() * pool.length)]; tries++; }
+                while (pick === exclude && tries < 12);
+                return pick;
+            }
 
+            // ── 3. Build slots ────────────────────────────────────
             positions.forEach((pos, i) => {
-                const src = shuffled[i % shuffled.length];
-                const img = document.createElement('img');
-                img.className = 'hero-pattern-item';
-                img.src = src;
-                img.alt = '';
-                img.setAttribute('aria-hidden', 'true');
-                img.setAttribute('loading', 'lazy');
-                img.setAttribute('decoding', 'async');
+                const size   = 80  + Math.random() * 130; // 80–210px
+                const anim   = driftAnims[i % driftAnims.length];
+                const dur    = 20  + Math.random() * 22;  // 20–42s drift cycle
+                const del    = Math.random() * 15;         // 0–15s initial stagger
+                const swapMs = 10000 + Math.random() * 20000; // 10–30s per swap
 
-                // Random size: 80px–220px
-                const size = 80 + Math.random() * 140;
-                img.style.width = size + 'px';
-                img.style.height = size + 'px';
+                // Outer wrapper = drift animation (transform only)
+                const slot = document.createElement('div');
+                slot.className = 'hero-pattern-slot';
+                slot.style.cssText = [
+                    `left:${pos.x}%`, `top:${pos.y}%`,
+                    `width:${size}px`, `height:${size}px`,
+                    `animation:${anim} ${dur.toFixed(1)}s ${del.toFixed(1)}s infinite ease-in-out`
+                ].join(';');
 
-                // Position
-                img.style.left = pos.x + '%';
-                img.style.top  = pos.y + '%';
+                // Two stacked imgs — A is active, B is preloading next
+                const imgA = document.createElement('img');
+                const imgB = document.createElement('img');
+                [imgA, imgB].forEach(img => {
+                    img.className   = 'hero-pimg';
+                    img.alt         = '';
+                    img.setAttribute('aria-hidden', 'true');
+                    img.setAttribute('decoding', 'async');
+                });
+                slot.appendChild(imgA);
+                slot.appendChild(imgB);
+                layer.appendChild(slot);
 
-                // Pick animation
-                const anim = driftAnims[i % driftAnims.length];
-                const dur  = 18 + Math.random() * 20; // 18s–38s cycle
-                const del  = Math.random() * 12;       // 0–12s stagger
+                // Bootstrap: assign initial random URLs
+                let curUrl = vectorUrls[Math.floor(Math.random() * vectorUrls.length)];
+                imgA.src   = curUrl;
+                imgB.src   = pickDiff(vectorUrls, curUrl);
 
-                img.style.animation = `${anim} ${dur.toFixed(1)}s ${del.toFixed(1)}s infinite ease-in-out`;
+                // Staggered initial fade-in
+                setTimeout(() => imgA.classList.add('showing'), del * 1000 + 400);
 
-                layer.appendChild(img);
+                let activeImg   = imgA;
+                let inactiveImg = imgB;
+
+                // ── 4. Independent per-slot swap loop ─────────────
+                // Offset by del so slots are never in sync
+                setTimeout(() => {
+                    setInterval(() => {
+                        const nextUrl = pickDiff(vectorUrls, activeImg.src);
+                        inactiveImg.src = nextUrl;
+
+                        const doSwap = () => {
+                            if (inactiveImg.classList.contains('showing')) return; // guard
+                            inactiveImg.classList.add('showing');
+                            activeImg.classList.remove('showing');
+                            [activeImg, inactiveImg] = [inactiveImg, activeImg];
+                        };
+
+                        // Fire on load (best case) or fallback timeout (cached images)
+                        inactiveImg.onload = doSwap;
+                        setTimeout(doSwap, 2200);
+
+                    }, swapMs);
+                }, del * 1000 + swapMs); // first swap after initial delay + one full interval
             });
         }
-        initHeroPatterns();
     </script>
     <script src="assets/js/premium.js?v=6.12"></script>
 </body>
