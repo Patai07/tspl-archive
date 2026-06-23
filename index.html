@@ -38,6 +38,59 @@
             animation: tech-pulse 3s infinite ease-in-out;
             pointer-events: none;
         }
+
+        /* === Floating Thai Pattern Vectors === */
+        #hero-pattern-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .hero-pattern-item {
+            position: absolute;
+            filter: invert(1) brightness(2);
+            opacity: 0;
+            will-change: transform, opacity;
+            transform-origin: center center;
+        }
+
+        @keyframes pattern-drift-1 {
+            0%   { transform: translate(0, 0)       rotate(0deg)   scale(1);    opacity: 0; }
+            8%   { opacity: 0.055; }
+            50%  { transform: translate(22px, -38px) rotate(12deg)  scale(1.05); opacity: 0.065; }
+            92%  { opacity: 0.055; }
+            100% { transform: translate(0, 0)       rotate(0deg)   scale(1);    opacity: 0; }
+        }
+        @keyframes pattern-drift-2 {
+            0%   { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+            10%  { opacity: 0.05; }
+            50%  { transform: translate(-18px, 28px) rotate(-9deg)  scale(0.95); opacity: 0.06; }
+            90%  { opacity: 0.05; }
+            100% { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+        }
+        @keyframes pattern-drift-3 {
+            0%   { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+            12%  { opacity: 0.045; }
+            50%  { transform: translate(30px, 20px)  rotate(18deg)  scale(1.08); opacity: 0.055; }
+            88%  { opacity: 0.045; }
+            100% { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+        }
+        @keyframes pattern-drift-4 {
+            0%   { transform: translate(0, 0)         rotate(0deg)   scale(1);    opacity: 0; }
+            6%   { opacity: 0.06; }
+            50%  { transform: translate(-28px, -22px) rotate(-14deg) scale(0.92); opacity: 0.07; }
+            94%  { opacity: 0.06; }
+            100% { transform: translate(0, 0)         rotate(0deg)   scale(1);    opacity: 0; }
+        }
+        @keyframes pattern-drift-5 {
+            0%   { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+            9%   { opacity: 0.04; }
+            50%  { transform: translate(15px, 35px)  rotate(6deg)   scale(1.03); opacity: 0.05; }
+            91%  { opacity: 0.04; }
+            100% { transform: translate(0, 0)        rotate(0deg)   scale(1);    opacity: 0; }
+        }
     </style>
 </head>
 
@@ -204,6 +257,9 @@
 
         <!-- Random Grid Tech-Nodes -->
         <div id="tech-dots-container" class="absolute inset-0 pointer-events-none z-[4]"></div>
+
+        <!-- Floating Thai Pattern Vectors -->
+        <div id="hero-pattern-layer" aria-hidden="true"></div>
 
         <div class="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10 text-white w-full">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center lg:items-center">
@@ -1148,6 +1204,86 @@
             }
         }
         createTechDots();
+
+        // =========================================================
+        // Floating Thai Pattern Vectors — Hero Banner Background
+        // =========================================================
+        function initHeroPatterns() {
+            const layer = document.getElementById('hero-pattern-layer');
+            if (!layer) return;
+
+            // Curated list of TSPL vector paths — mix all 4 categories
+            const svgPaths = [
+                'assets/images/database/01_Nature/TSP-LST-NAT-001/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-002/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-007/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-009/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-015/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-019/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-022/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-030/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-036/vectors/vector.svg',
+                'assets/images/database/01_Nature/TSP-LST-NAT-040/vectors/vector.svg',
+                'assets/images/database/02_Fauna/TSP-LST-FAU-001/vectors/vector.svg',
+                'assets/images/database/02_Fauna/TSP-LST-FAU-002/vectors/vector.svg',
+                'assets/images/database/02_Fauna/TSP-LST-FAU-009/vectors/vector.svg',
+                'assets/images/database/02_Fauna/TSP-LST-FAU-010/vectors/vector.svg',
+                'assets/images/database/02_Fauna/TSP-LST-FAU-014/vectors/vector.svg',
+                'assets/images/database/04_Sacred/TSP-LST-SAC-001/vectors/vector.svg',
+                'assets/images/database/04_Sacred/TSP-LST-SAC-002/vectors/vector.svg',
+                'assets/images/database/04_Sacred/TSP-LST-SAC-008/vectors/vector.svg',
+                'assets/images/database/04_Sacred/TSP-LST-SAC-015/vectors/vector.svg',
+                'assets/images/database/04_Sacred/TSP-LST-SAC-017/vectors/vector.svg',
+                'assets/images/database/04_Sacred/TSP-LST-SAC-018/vectors/vector.svg',
+            ];
+
+            const driftAnims = [
+                'pattern-drift-1', 'pattern-drift-2', 'pattern-drift-3',
+                'pattern-drift-4', 'pattern-drift-5'
+            ];
+
+            // Scatter positions — more concentrated left side (behind text) and edges
+            const positions = [
+                { x: 3,  y: 10 }, { x: 10, y: 55 }, { x: 18, y: 25 },
+                { x: 5,  y: 72 }, { x: 25, y: 80 }, { x: 38, y: 15 },
+                { x: 72, y: 8  }, { x: 80, y: 45 }, { x: 88, y: 70 },
+                { x: 92, y: 18 }, { x: 65, y: 82 }, { x: 48, y: 60 },
+                { x: 55, y: 30 }, { x: 15, y: 40 }, { x: 42, y: 88 },
+            ];
+
+            // Shuffle SVG list
+            const shuffled = [...svgPaths].sort(() => Math.random() - 0.5);
+
+            positions.forEach((pos, i) => {
+                const src = shuffled[i % shuffled.length];
+                const img = document.createElement('img');
+                img.className = 'hero-pattern-item';
+                img.src = src;
+                img.alt = '';
+                img.setAttribute('aria-hidden', 'true');
+                img.setAttribute('loading', 'lazy');
+                img.setAttribute('decoding', 'async');
+
+                // Random size: 80px–220px
+                const size = 80 + Math.random() * 140;
+                img.style.width = size + 'px';
+                img.style.height = size + 'px';
+
+                // Position
+                img.style.left = pos.x + '%';
+                img.style.top  = pos.y + '%';
+
+                // Pick animation
+                const anim = driftAnims[i % driftAnims.length];
+                const dur  = 18 + Math.random() * 20; // 18s–38s cycle
+                const del  = Math.random() * 12;       // 0–12s stagger
+
+                img.style.animation = `${anim} ${dur.toFixed(1)}s ${del.toFixed(1)}s infinite ease-in-out`;
+
+                layer.appendChild(img);
+            });
+        }
+        initHeroPatterns();
     </script>
     <script src="assets/js/premium.js?v=6.12"></script>
 </body>
